@@ -10,7 +10,7 @@
 
 ## 🏗️ EPIC 01 — FOUNDATION
 
-*(Belum ada tugas yang selesai. Mulai tambahkan tugas di bawah ini setelah selesai di-merge).*
+- 01.01.01 — Initialize Laravel Project
 
 ---
 

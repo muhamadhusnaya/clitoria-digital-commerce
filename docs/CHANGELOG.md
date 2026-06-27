@@ -24,4 +24,19 @@ Date: YYYY-MM-DD
 
 -->
 
-*(Belum ada riwayat perubahan. Tulis entri perubahan pertama Anda di atas komentar ini).*
+## TASK 01.01.01 — Initialize Laravel Project
+
+Date: 2026-06-27
+
+### Added
+- Instalasi awal proyek Laravel (v13.17.0) di *root directory*.
+- Struktur folder dasar Laravel (`app`, `config`, `routes`, `public`, dsb).
+- Berkas konfigurasi bawaan Laravel (`composer.json`, `package.json`, `.env`).
+
+### Verified
+- Komponen dasar terinstal dengan `composer create-project`.
+- Perintah `php artisan --version` berjalan tanpa masalah.
+
+---
+
+*(Belum ada riwayat perubahan lainnya).*

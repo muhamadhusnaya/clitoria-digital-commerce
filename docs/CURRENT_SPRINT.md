@@ -13,39 +13,40 @@
 *   **Fase Proyek:** PHASE 0 — Project Foundation
 *   **Epic Aktif:** EPIC 01 — FOUNDATION
 *   **Fitur Aktif:** FEATURE 01.01 — Laravel Initialization
-*   **Tugas Aktif:** TASK 01.01.01 — Initialize Laravel Project
+*   **Tugas Aktif:** TASK 01.01.02 — Configure Environment
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Melakukan inisialisasi awal proyek Laravel di direktori kerja.
+Melakukan konfigurasi *environment* dasar untuk proyek Laravel.
 
 **Cakupan Pekerjaan:**
-- Mengunduh dan mengonfigurasi kerangka dasar Laravel.
-- Memastikan file konfigurasi dasar (`composer.json`, `package.json`, dsb.) terbuat dengan benar.
-- Menyiapkan halaman sambutan default Laravel agar dapat diakses secara lokal.
+- Menyesuaikan variabel environment di file `.env` (seperti `APP_NAME`, `APP_ENV`, `APP_URL`).
+- Mengkonfigurasi parameter database (menyesuaikan ke MySQL sesuai standar proyek, jika diperlukan).
+- Membersihkan atau menyesuaikan konfigurasi default lain agar sesuai dengan kebutuhan awal.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Framework Laravel berhasil diinisialisasi di folder workspace.
-- [ ] Jalur direktori Laravel standar (`app/`, `config/`, `public/`, `routes/`, dsb.) lengkap.
-- [ ] Halaman default welcome Laravel dapat dirender tanpa error di server lokal (`php artisan serve`).
+- [ ] File `.env` sudah memuat konfigurasi yang relevan (seperti `APP_NAME=Clitoria Digital Commerce`).
+- [ ] Kredensial database diatur di `.env` (walaupun tabel belum di-*migrate*).
+- [ ] Aplikasi berjalan tanpa error *environment*.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** None (Ini adalah tugas pertama proyek)
+*   **Tugas:** TASK 01.01.01 — Initialize Laravel Project
 *   **Hasil Kerja (Deliverables):**
-    - Proyek baru siap dimulai.
+    - Kerangka proyek Laravel (v13.x) telah diinstal di root direktori.
+    - Struktur folder standar Laravel tersedia.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 01.01.02 — Configure Environment
+*   **Tugas:** TASK 01.01.03 — Configure Database
 *   *(Catatan: Jangan dikerjakan dulu sebelum tugas aktif di atas selesai dan di-merge).*

@@ -24,6 +24,61 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 01.03.02 — Create Base Service Layer
+
+Date: 2026-06-27
+
+### Added
+- Membuat file `app/Services/BaseService.php` sebagai _abstract class_ fondasi. Kelas ini dipersiapkan untuk menyediakan pola standar (seperti format pelaporan log atau balasan standar) guna menginkapsulasi _core logic_ milik model/domain di masa mendatang.
+
+---
+
+## TASK 01.03.01 — Create Domain Structure
+
+Date: 2026-06-27
+
+### Added
+- Membuat folder arsitektur tingkat lanjut untuk *layered backend design* pada instalasi Laravel:
+  - `app/Services`
+  - `app/Repositories`
+  - `app/Contracts`
+- Memasukkan berkas proksi `.gitkeep` agar masing-masing folder terverifikasi oleh kontrol versi Git.
+
+---
+
+## TASK 01.02.03 — Configure Frontend Build Pipeline
+
+Date: 2026-06-27
+
+### Verified
+- Proses optimasi aset (*minification*, *chunking*, *brotli/gzip pre-computation*) oleh Vite berjalan sukses via `npm run build`.
+- Direktif `@vite` di *view* default Laravel berfungsi menautkan JavaScript (termasuk Alpine.js) dan CSS (beserta Tailwind v4) dengan benar.
+
+---
+
+## TASK 01.02.02 — Install AlpineJS
+
+Date: 2026-06-27
+
+### Added
+- Instalasi dependensi NPM `alpinejs`.
+- Inisialisasi _bootstrap_ objek global Alpine.js pada `resources/js/app.js`.
+
+### Fixed
+- Menghapus referensi `import './bootstrap';` dari `app.js` yang menyebabkan *build error* (karena modul *bootstrap* bawaan sudah dihilangkan pada skeleton Laravel 13 baru).
+
+---
+
+## TASK 01.02.01 — Install Tailwind CSS
+
+Date: 2026-06-27
+
+### Verified
+- Instalasi bawaan (pre-configured) Tailwind CSS versi 4 yang dibawa oleh Laravel 13.
+- Proses kompilasi Vite merender direktif Tailwind tanpa error.
+
+---
+
 ## TASK 01.01.05 — Configure Vite
 
 Date: 2026-06-27

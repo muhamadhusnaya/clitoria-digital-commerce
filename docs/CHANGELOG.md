@@ -24,6 +24,18 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 01.01.04 — Configure Storage
+
+Date: 2026-06-27
+
+### Changed
+- Konfigurasi `FILESYSTEM_DISK` di `.env` diubah dari `local` menjadi `public`.
+
+### Added
+- *Symbolic link* (symlink) dibuat melalui perintah `php artisan storage:link`, yang menghubungkan direktori `public/storage` ke `storage/app/public`.
+
+---
+
 ## TASK 01.01.03 — Configure Database
 
 Date: 2026-06-27

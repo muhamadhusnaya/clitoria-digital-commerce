@@ -17,6 +17,7 @@
 - 01.01.05 — Configure Vite
 - 01.02.01 — Install Tailwind CSS
 - 01.02.02 — Install AlpineJS
+- 01.02.03 — Configure Frontend Build Pipeline
 
 ---
 

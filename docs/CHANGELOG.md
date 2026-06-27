@@ -24,6 +24,16 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 01.02.03 — Configure Frontend Build Pipeline
+
+Date: 2026-06-27
+
+### Verified
+- Proses optimasi aset (*minification*, *chunking*, *brotli/gzip pre-computation*) oleh Vite berjalan sukses via `npm run build`.
+- Direktif `@vite` di *view* default Laravel berfungsi menautkan JavaScript (termasuk Alpine.js) dan CSS (beserta Tailwind v4) dengan benar.
+
+---
+
 ## TASK 01.02.02 — Install AlpineJS
 
 Date: 2026-06-27

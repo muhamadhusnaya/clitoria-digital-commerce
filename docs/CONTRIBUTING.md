@@ -6,16 +6,24 @@
 
 Gunakan siklus berulang (loop) ini setiap kali bekerja dengan AI Coding Agent (Cursor, Antigravity, Claude Code, dsb.):
 
+### Daftar Peran Tim (Team Roles Mapping):
+*   **Dev 1 (Husnaya):** Core Setup, Auth Backend, Testing, and Deployment.
+*   **Dev 2 (Tyas):** CMS Modules, Settings, and SEO Backend.
+*   **Dev 3 (Arum):** Products, Pricing, Session Cart, WA Checkout, and Analytics Backend.
+*   **Dev 4 (Alwi):** Design System, UI Components, and Admin Panel UI.
+*   **Dev 5 (Cynthia):** Public Layouts, Product Catalog UI, Cart & WA Checkout UI.
+
 ### Siklus Alur Kerja:
-1.  **Cek Status:** Lihat [docs/PROJECT_STATUS.md](file:///d:/Kuliah/StartupDigital/clitoria-digital-commerce/docs/PROJECT_STATUS.md) untuk memastikan tugas mana saja yang sudah selesai.
-2.  **Update Sprint:** Buka [docs/CURRENT_SPRINT.md](file:///d:/Kuliah/StartupDigital/clitoria-digital-commerce/docs/CURRENT_SPRINT.md), lalu perbarui isinya secara manual dengan tugas berikutnya yang tercantum di [docs/TASK_EXECUTION_PLAN.md](file:///d:/Kuliah/StartupDigital/clitoria-digital-commerce/docs/TASK_EXECUTION_PLAN.md).
-3.  **Prompt AI:** Mulai chat dengan AI Agent menggunakan template di bawah.
-4.  **Tinjau Rencana (Implementation Plan):** AI Agent akan membaca `docs/AI_EXECUTION_PROMPT.md`, memeriksa kesesuaian tugas aktif dengan `docs/TASK_EXECUTION_PLAN.md`, lalu membuat rencana implementasi (Implementation Plan). **Validasi rencana tersebut, lalu setujui (Proceed).**
-5.  **Pembaruan Status & Changelog:** Setelah AI selesai membuat kode dan lolos verifikasi, perbarui dokumen secara manual:
+1.  **Cari Tugas Anda:** Buka [docs/TASK_EXECUTION_PLAN.md](file:///d:/Kuliah/StartupDigital/clitoria-digital-commerce/docs/TASK_EXECUTION_PLAN.md) dan cari tugas berikutnya yang bertanda inisial Anda di kolom **`Assignee`** (`Dev 1` s.d. `Dev 5`).
+2.  **Cek Status:** Periksa [docs/PROJECT_STATUS.md](file:///d:/Kuliah/StartupDigital/clitoria-digital-commerce/docs/PROJECT_STATUS.md) untuk memastikan tugas-tugas prasyarat sebelum tugas Anda sudah selesai dideploy.
+3.  **Update Sprint:** Perbarui file [docs/CURRENT_SPRINT.md](file:///d:/Kuliah/StartupDigital/clitoria-digital-commerce/docs/CURRENT_SPRINT.md) secara manual dengan detail tugas aktif Anda.
+4.  **Prompt AI:** Mulai chat dengan AI Agent menggunakan template di bawah.
+5.  **Tinjau Rencana (Implementation Plan):** AI Agent akan membaca `docs/AI_EXECUTION_PROMPT.md`, memeriksa kesesuaian tugas aktif dengan `docs/TASK_EXECUTION_PLAN.md`, lalu membuat rencana implementasi (Implementation Plan). **Validasi rencana tersebut, lalu setujui (Proceed).**
+6.  **Pembaruan Status & Changelog:** Setelah AI selesai membuat kode dan lolos verifikasi, perbarui dokumen secara manual:
     *   Tandai tugas telah selesai di [docs/PROJECT_STATUS.md](file:///d:/Kuliah/StartupDigital/clitoria-digital-commerce/docs/PROJECT_STATUS.md).
     *   Tulis riwayat perubahan di [docs/CHANGELOG.md](file:///d:/Kuliah/StartupDigital/clitoria-digital-commerce/docs/CHANGELOG.md).
-6.  **Upload ke GitHub:** Jalankan alur kerja Git (lihat Bagian 2).
-7.  **Ulangi (Repeat):** Lanjut ke tugas berikutnya.
+7.  **Upload ke GitHub:** Jalankan alur kerja Git (lihat Bagian 2).
+8.  **Ulangi (Repeat):** Lanjut ke tugas berikutnya yang ditugaskan kepada Anda.
 
 ### 📝 Template Prompt untuk AI Agent:
 ```text
@@ -110,3 +118,19 @@ Tugas dianggap **SELESAI (DONE)** dan layak di-merge ke develop jika:
 - [ ] Semua tes lokal (`php artisan test`) berhasil dilalui tanpa error.
 - [ ] File status proyek (`CURRENT_SPRINT.md`, `PROJECT_STATUS.md`, `CHANGELOG.md`) telah diperbarui manual.
 - [ ] Bersih dari kode mati, tag debug, atau komentar sisa (`dd()`, `console.log`).
+
+---
+
+## 🔗 4. Aturan Ketergantungan Tugas (Dependency Rule)
+
+Ketika Anda ingin mengambil tugas baru, namun **tugas prasyarat sebelumnya belum selesai dikerjakan** oleh rekan tim Anda:
+
+### 🚫 Ketergantungan Keras (Hard Dependency)
+*   *Definisi:* Kode Anda 100% membutuhkan file/struktur dari tugas sebelumnya agar bisa berjalan (misal: butuh tabel database yang belum dibuat).
+*   *Aturan:* **JANGAN mengambil tugas tersebut.** Koordinasikan dengan rekan tim Anda, bantu selesaikan tugas prasyaratnya, atau ambil tugas lain yang mandiri.
+
+### ⚠️ Ketergantungan UI/Frontend (Bisa di-Mocking)
+*   *Definisi:* Anda membuat UI (Frontend) tapi logika Backend (API/Service) belum selesai dibuat.
+*   *Aturan:* **BOLEH dikerjakan dengan teknik Mocking.**
+*   *Cara:* Gunakan data tiruan (*fake data/hardcoded array*) di Controller untuk merender UI Blade. Pastikan struktur data tiruan Anda mengacu pada `docs/SCHEMA.md`. Setelah Backend selesai, segera ganti data tiruan tersebut dengan data dinamis asli dari database.
+

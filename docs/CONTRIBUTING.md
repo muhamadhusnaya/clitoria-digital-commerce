@@ -39,7 +39,7 @@ Periksa docs/CURRENT_SPRINT.md untuk detail tugas aktif saat ini, dan validasi k
 ### Aturan Branch:
 *   **`main`**: Kode stabil produksi (jangan lakukan commit langsung ke branch ini).
 *   **`develop`**: Pusat integrasi semua fitur sebelum naik ke `main`.
-*   **`task/ID_TUGAS-deskripsi`**: Branch temporer buatan developer dari `develop` untuk mengerjakan tugas aktif (contoh: `task/01.01.01-init-laravel`).
+*   **`feature/ID_FITUR-deskripsi`**: Branch temporer buatan developer dari `develop` untuk mengerjakan fitur aktif (contoh: `feature/01.01-laravel-initialization`).
 
 ---
 
@@ -77,33 +77,34 @@ Lakukan langkah-langkah ini jika Anda baru pertama kali bergabung ke dalam proye
 ---
 
 ### 🔨 Case B: Alur Kontribusi Fitur Baru (Harian)
-Lakukan langkah-langkah ini setiap kali Anda ingin mulai mengerjakan tugas/fitur baru:
+Lakukan langkah-langkah ini setiap kali Anda ingin mulai mengerjakan sebuah Fitur baru:
 
 1.  **Kembali ke develop & tarik update terbaru dari GitHub:**
     ```bash
     git checkout develop
     git pull origin develop
     ```
-2.  **Buat branch baru berdasarkan ID Tugas:**
+2.  **Buat branch baru berdasarkan ID Fitur:**
     ```bash
-    git checkout -b task/ID_TUGAS-deskripsi
+    git checkout -b feature/ID_FITUR-deskripsi
     ```
-3.  **Perbarui file Fokus Sprint:** Update file `docs/CURRENT_SPRINT.md` secara manual untuk menunjuk ke tugas baru Anda.
-4.  **Mulai coding & jalankan pengujian lokal:**
-    ```bash
-    php artisan test
-    ```
-5.  **Perbarui Status Dokumentasi (DoD):** Setelah fitur lolos tes, perbarui `docs/PROJECT_STATUS.md` dan `docs/CHANGELOG.md` secara manual di branch Anda.
-6.  **Simpan & Commit Perubahan:**
-    ```bash
-    git add .
-    git commit -m "feat(scope): deskripsi tugas selesai"
-    ```
-7.  **Push branch ke GitHub:**
-    ```bash
-    git push origin task/ID_TUGAS-deskripsi
-    ```
-8.  **Buat Pull Request (PR):** Buka GitHub dan buat PR dari branch Anda ke branch **`develop`**. Setelah di-review dan di-merge, Anda dapat menghapus branch tersebut.
+3.  **Siklus Kerja per Tugas (Task-level loop):**
+    Untuk setiap sub-tugas dalam Fitur tersebut:
+    *   Perbarui file Fokus Sprint (`docs/CURRENT_SPRINT.md`) secara manual dengan tugas aktif yang dikerjakan.
+    *   Mulai coding & jalankan pengujian lokal (`php artisan test`).
+    *   Perbarui `docs/PROJECT_STATUS.md` dan `docs/CHANGELOG.md` lokal setelah tugas selesai.
+    *   Commit perubahan lokal Anda:
+        ```bash
+        git add .
+        git commit -m "feat(scope): complete task XX.XX.XX deskripsi tugas"
+        ```
+4.  **Kirim & Gabungkan setelah SATU FITUR SELESAI PENUH:**
+    Jangan membuat PR untuk tugas setengah jadi. Setelah seluruh tugas dalam satu Fitur selesai:
+    *   Kirim branch ke GitHub:
+        ```bash
+        git push origin feature/ID_FITUR-deskripsi
+        ```
+    *   **Buat Pull Request (PR):** Buka GitHub dan buat PR ke branch **`develop`** untuk pengujian integrasi bersama. Setelah di-merge, Anda dapat menghapus branch lokal tersebut.
 
 ---
 

@@ -24,6 +24,19 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 01.01.05 — Configure Vite
+
+Date: 2026-06-27
+
+### Added
+- Alias `@` pada `vite.config.js` untuk direktori `resources/js`.
+
+### Verified
+- Dependensi Node.js diunduh dan dipasang secara penuh (`npm install`).
+- `npm run build` sukses me-*render* _asset build_ di `public/build`.
+
+---
+
 ## TASK 01.01.04 — Configure Storage
 
 Date: 2026-06-27

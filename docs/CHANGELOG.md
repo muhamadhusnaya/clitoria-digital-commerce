@@ -24,6 +24,16 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 01.02.01 — Install Tailwind CSS
+
+Date: 2026-06-27
+
+### Verified
+- Instalasi bawaan (pre-configured) Tailwind CSS versi 4 yang dibawa oleh Laravel 13.
+- Proses kompilasi Vite merender direktif Tailwind tanpa error.
+
+---
+
 ## TASK 01.01.05 — Configure Vite
 
 Date: 2026-06-27

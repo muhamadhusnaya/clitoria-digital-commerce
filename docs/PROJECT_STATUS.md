@@ -15,6 +15,7 @@
 - 01.01.03 — Configure Database
 - 01.01.04 — Configure Storage
 - 01.01.05 — Configure Vite
+- 01.02.01 — Install Tailwind CSS
 
 ---
 

@@ -13,38 +13,38 @@
 *   **Fase Proyek:** PHASE 0 — Project Foundation
 *   **Epic Aktif:** EPIC 01 — FOUNDATION
 *   **Fitur Aktif:** FEATURE 01.02 — Frontend Foundation
-*   **Tugas Aktif:** TASK 01.02.01 — Install Tailwind CSS
+*   **Tugas Aktif:** TASK 01.02.02 — Install AlpineJS
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Mengonfigurasi dan memastikan instalasi Tailwind CSS berjalan di dalam proyek Laravel.
+Mengeksekusi instalasi dan konfigurasi awal Alpine.js di dalam proyek Laravel.
 
 **Cakupan Pekerjaan:**
-- Memastikan instalasi dan konfigurasi Tailwind CSS (v4) telah *setup* dan berjalan normal.
-- Membuat _test component_ jika diperlukan untuk verifikasi rendering Tailwind.
+- Menginstal Alpine.js via NPM.
+- Menginisialisasi Alpine.js di file `resources/js/app.js` dan mendaftarkannya ke objek global `window`.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Class utilitas Tailwind CSS dapat digunakan dalam file blade (`resources/views`).
-- [ ] Perintah build (`npm run dev` atau `npm run build`) merender CSS dengan sukses.
+- [ ] Alpine.js ada dalam daftar `package.json`.
+- [ ] Script inisialisasi Alpine.js telah ditambahkan ke `resources/js/app.js`.
+- [ ] Kompilasi Vite berjalan sukses dan atribut `x-data` dapat dikenali di _view_.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 01.01.05 — Configure Vite
+*   **Tugas:** TASK 01.02.01 — Install Tailwind CSS
 *   **Hasil Kerja (Deliverables):**
-    - Dependensi NPM telah ter-install sempurna.
-    - Vite telah dikonfigurasi dengan *path alias* `@` dan sanggup me-compile aset.
+    - Tailwind CSS v4 telah tervalidasi berjalan sebagai bawaan dari struktur awal proyek Laravel 13.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 01.02.02 — Install AlpineJS
+*   **Tugas:** TASK 01.02.03 — Setup Livewire
 *   *(Catatan: Jangan dikerjakan dulu sebelum tugas aktif di atas selesai dan di-merge).*

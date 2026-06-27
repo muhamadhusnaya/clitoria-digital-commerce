@@ -12,6 +12,7 @@
 
 - 01.01.01 — Initialize Laravel Project
 - 01.01.02 — Configure Environment
+- 01.01.03 — Configure Database
 
 ---
 

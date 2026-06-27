@@ -24,6 +24,19 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 01.01.03 — Configure Database
+
+Date: 2026-06-27
+
+### Added
+- Database MySQL bernama `clitoria_digital_commerce`.
+- Tabel bawaan Laravel (`users`, `jobs`, `cache`, `sessions`) dengan mengeksekusi `php artisan migrate`.
+
+### Verified
+- Koneksi ke database dari sistem berjalan dengan normal.
+
+---
+
 ## TASK 01.01.02 — Configure Environment
 
 Date: 2026-06-27

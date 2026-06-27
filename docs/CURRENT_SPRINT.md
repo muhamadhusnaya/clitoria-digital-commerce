@@ -13,40 +13,41 @@
 *   **Fase Proyek:** PHASE 0 — Project Foundation
 *   **Epic Aktif:** EPIC 01 — FOUNDATION
 *   **Fitur Aktif:** FEATURE 01.01 — Laravel Initialization
-*   **Tugas Aktif:** TASK 01.01.02 — Configure Environment
+*   **Tugas Aktif:** TASK 01.01.03 — Configure Database
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Melakukan konfigurasi *environment* dasar untuk proyek Laravel.
+Mengonfigurasi database MySQL, memastikan koneksi berhasil, dan menjalankan migrasi awal untuk proyek Laravel.
 
 **Cakupan Pekerjaan:**
-- Menyesuaikan variabel environment di file `.env` (seperti `APP_NAME`, `APP_ENV`, `APP_URL`).
-- Mengkonfigurasi parameter database (menyesuaikan ke MySQL sesuai standar proyek, jika diperlukan).
-- Membersihkan atau menyesuaikan konfigurasi default lain agar sesuai dengan kebutuhan awal.
+- Memastikan server lokal (MySQL) siap menerima koneksi (tugas developer, AI asumsikan siap).
+- Membuat database MySQL bernama `clitoria_digital_commerce` (jika belum ada).
+- Menjalankan perintah `php artisan migrate` untuk menginisialisasi tabel default bawaan Laravel (seperti `users`, `jobs`, `cache`, dll).
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] File `.env` sudah memuat konfigurasi yang relevan (seperti `APP_NAME=Clitoria Digital Commerce`).
-- [ ] Kredensial database diatur di `.env` (walaupun tabel belum di-*migrate*).
-- [ ] Aplikasi berjalan tanpa error *environment*.
+- [ ] Database `clitoria_digital_commerce` berhasil dibuat di server MySQL.
+- [ ] Koneksi dari `.env` berhasil tersambung ke database.
+- [ ] Perintah `php artisan migrate` berjalan sukses tanpa error.
+- [ ] Tabel-tabel default Laravel (misal `users`, `sessions`) terbentuk di database.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 01.01.01 — Initialize Laravel Project
+*   **Tugas:** TASK 01.01.02 — Configure Environment
 *   **Hasil Kerja (Deliverables):**
-    - Kerangka proyek Laravel (v13.x) telah diinstal di root direktori.
-    - Struktur folder standar Laravel tersedia.
+    - File `.env` sudah dikonfigurasi (`APP_NAME`, `APP_URL`, `APP_LOCALE`).
+    - Kredensial database di-set ke MySQL dengan nama DB `clitoria_digital_commerce`.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 01.01.03 — Configure Database
+*   **Tugas:** TASK 01.01.04 — Configure Storage
 *   *(Catatan: Jangan dikerjakan dulu sebelum tugas aktif di atas selesai dan di-merge).*

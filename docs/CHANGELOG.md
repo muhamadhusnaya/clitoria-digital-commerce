@@ -24,6 +24,21 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 01.01.02 — Configure Environment
+
+Date: 2026-06-27
+
+### Changed
+- Konfigurasi nama aplikasi di `.env` menjadi `Clitoria Digital Commerce`.
+- Konfigurasi base URL menjadi `http://localhost:8000`.
+- Konfigurasi lokalisasi (`APP_LOCALE`, `APP_FALLBACK_LOCALE`, `APP_FAKER_LOCALE`) menjadi `id`.
+- Konfigurasi koneksi database dari default SQLite ke MySQL dengan nama database `clitoria_digital_commerce`.
+
+### Removed
+- _Comment_ (tanda pagar) pada konfigurasi `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`.
+
+---
+
 ## TASK 01.01.01 — Initialize Laravel Project
 
 Date: 2026-06-27

@@ -11,6 +11,7 @@
 ## 🏗️ EPIC 01 — FOUNDATION
 
 - 01.01.01 — Initialize Laravel Project
+- 01.01.02 — Configure Environment
 
 ---
 

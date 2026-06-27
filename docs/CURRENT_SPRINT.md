@@ -13,38 +13,46 @@
 *   **Fase Proyek:** PHASE 0 — Project Foundation
 *   **Epic Aktif:** EPIC 01 — FOUNDATION
 *   **Fitur Aktif:** FEATURE 01.02 — Frontend Foundation
-*   **Tugas Aktif:** TASK 01.02.02 — Install AlpineJS
+*   **Tugas Aktif:** TASK 01.02.03 — Configure Frontend Build Pipeline
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Mengeksekusi instalasi dan konfigurasi awal Alpine.js di dalam proyek Laravel.
+Memastikan pengaturan *frontend build pipeline* telah berjalan menyeluruh. 
 
 **Cakupan Pekerjaan:**
-- Menginstal Alpine.js via NPM.
-- Menginisialisasi Alpine.js di file `resources/js/app.js` dan mendaftarkannya ke objek global `window`.
+- Memverifikasi skrip build di package.json untuk mode pengembangan (npm run dev) dan produksi (npm run build).
+
+- Memastikan integrasi pemrosesan CSS (PostCSS/Autoprefixer) berjalan otomatis di dalam pipeline Vite bersama Tailwind v4.
+
+- Menguji pemuatan aset menggunakan direktif @vite di halaman welcome default Laravel untuk memastikan tidak ada broken links.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Alpine.js ada dalam daftar `package.json`.
-- [ ] Script inisialisasi Alpine.js telah ditambahkan ke `resources/js/app.js`.
-- [ ] Kompilasi Vite berjalan sukses dan atribut `x-data` dapat dikenali di _view_.
+- [ ] Perintah npm run dev dapat berjalan lancar untuk Hot Module Replacement (HMR) tanpa kegagalan pemuatan modul.
+
+- [ ] Perintah npm run build berhasil melakukan minifikasi aset tanpa memicu error pada kompilasi PostCSS atau Tailwind.
+
+- [ ] File Blade utama berhasil merender halaman dengan memuat aset melalui direktif @vite(['resources/css/app.css', 'resources/js/app.js']).
+
+- [ ] Konsol browser bersih dari error integrasi terkait pemuatan skrip Vite atau Alpine.js.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 01.02.01 — Install Tailwind CSS
+*   **Tugas:** TASK 01.02.02 — Install AlpineJS
 *   **Hasil Kerja (Deliverables):**
-    - Tailwind CSS v4 telah tervalidasi berjalan sebagai bawaan dari struktur awal proyek Laravel 13.
+    - Paket NPM Alpine.js ter-*install*.
+    - Alpine.js terinisialisasi di `app.js` dan ter-bundle oleh Vite.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 01.02.03 — Setup Livewire
+*   **Tugas:** TASK 01.03.01 — Create Domain Structure
 *   *(Catatan: Jangan dikerjakan dulu sebelum tugas aktif di atas selesai dan di-merge).*

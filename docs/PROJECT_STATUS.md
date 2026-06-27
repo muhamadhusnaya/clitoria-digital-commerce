@@ -16,6 +16,7 @@
 - 01.01.04 — Configure Storage
 - 01.01.05 — Configure Vite
 - 01.02.01 — Install Tailwind CSS
+- 01.02.02 — Install AlpineJS
 
 ---
 

@@ -24,6 +24,19 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 01.02.02 — Install AlpineJS
+
+Date: 2026-06-27
+
+### Added
+- Instalasi dependensi NPM `alpinejs`.
+- Inisialisasi _bootstrap_ objek global Alpine.js pada `resources/js/app.js`.
+
+### Fixed
+- Menghapus referensi `import './bootstrap';` dari `app.js` yang menyebabkan *build error* (karena modul *bootstrap* bawaan sudah dihilangkan pada skeleton Laravel 13 baru).
+
+---
+
 ## TASK 01.02.01 — Install Tailwind CSS
 
 Date: 2026-06-27

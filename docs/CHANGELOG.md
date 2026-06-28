@@ -24,6 +24,89 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 04.02.06 — Benefit Ordering
+
+Date: 2026-06-28
+
+### Added
+- Migrasi baru `add_order_number_to_benefits_table` untuk penambahan atribut urutan.
+- `updateOrder` fungsionalitas di `BenefitService` untuk reposisi hierarki.
+- Atribut `order_number` ke dalam list `$fillable` Model `Benefit`.
+
+## TASK 04.02.04 — Benefit Service
+
+Date: 2026-06-28
+
+### Added
+- Membuat `BenefitService` di `app/Services`.
+- Menghubungkan *Repository* `BenefitRepositoryInterface` ke dalam ekosistem servis.
+- Menurunkan karakteristik fungsional (CRUD) dari `BaseService`.
+
+## TASK 04.02.03 — Benefit Repository
+
+Date: 2026-06-28
+
+### Added
+- Membuat `BenefitRepositoryInterface` di `app/Repositories/Contracts`.
+- Mengimplementasikan `BenefitRepository` dengan metode *Dependency Injection* ke modul `Benefit`.
+- Mengonfigurasi `RepositoryServiceProvider` dengan *binding* interface-ke-implementasi (membuat ulang class Provider karena migrasi branch/lingkungan lokal).
+
+## TASK 04.02.02 — Benefit Model
+
+Date: 2026-06-28
+
+### Added
+- Membuat file *Model* `Benefit.php`.
+- Menentukan tipe perlindungan *mass-assignment* pada properti `$fillable` (`title`, `icon`, `status`) bersama penambahan pustaka/factory yang dibutuhkan.
+
+## TASK 04.02.01 — Benefit Migration
+
+Date: 2026-06-28
+
+### Added
+- Membuat file *migration* untuk inisialisasi tabel `benefits` (`2026_06_28_070838_create_benefits_table.php`).
+- Mendefinisikan kolom spesifik (`title`, `icon`, `status`) yang mematuhi rujukan skema *database*.
+
+## TASK 04.01.06 — Hero Image Upload
+
+Date: 2026-06-28
+
+### Added
+- Membuat *trait* reusabel `UploadTrait` untuk membantu pemrosesan simpan/hapus file.
+- Mengintegrasikan fungsi unggah dan hapus otomatis (pembersihan gambar usang/yatim) di `HeroService`.
+
+## TASK 04.01.04 — Hero Service
+
+Date: 2026-06-28
+
+### Added
+- Membuat `HeroService` yang mewarisi `BaseService`.
+- Mengimplementasikan logika operasional awal (CRUD) dengan menginjeksi antarmuka repositori pahlawan (Hero).
+
+## TASK 04.01.03 — Hero Repository
+
+Date: 2026-06-28
+
+### Added
+- Membuat `HeroRepositoryInterface` yang mengekstensi kontrak *BaseRepository*.
+- Membuat kelas `HeroRepository` yang mengimplementasikan manajemen data `Hero`.
+- Membuat dan mengonfigurasi `RepositoryServiceProvider` (dan mendaftarkannya di struktur Laravel 11) untuk menangani injeksi dependensi.
+
+## TASK 04.01.02 — Hero Model
+
+Date: 2026-06-28
+
+### Added
+- Membuat model Eloquent `Hero` (`app/Models/Hero.php`) dan mendeklarasikan atribut `$fillable` secara definitif sesuai skema yang telah dirancang.
+- Mengonfirmasi validitas sintaks *class* `Hero` melalui uji CLI `php -l`.
+
+## TASK 04.01.01 — Hero Migration
+
+Date: 2026-06-28
+
+### Added
+- Membuat *file migration* untuk tabel `heroes` dengan struktur yang mendefinisikan *primary key*, `title`, `subtitle`, `image`, `button_text`, `button_link`, dan `timestamps`.
+
 ## TASK 03.01.05 — Profile Management (Backend)
 
 Date: 2026-06-28

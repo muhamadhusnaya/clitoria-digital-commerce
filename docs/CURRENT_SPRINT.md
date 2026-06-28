@@ -10,17 +10,10 @@
 
 ## 📌 IDENTITAS TUGAS
 
-<<<<<<< HEAD
-*   **Fase Proyek:** PHASE 0 — Project Foundation
-*   **Epic Aktif:** EPIC 01 — FOUNDATION
-*   **Fitur Aktif:** FEATURE 01.03 — Architecture Foundation
-*   **Tugas Aktif:** TASK 01.03.01 — Create Domain Structure
-=======
 *   **Fase Proyek:** PHASE 1 — Core Domain Implementation
 *   **Epic Aktif:** EPIC 03 — AUTHENTICATION
 *   **Fitur Aktif:** FEATURE 03.01 — Admin Authentication
 *   **Tugas Aktif:** TASK 03.01.01 — Install & Configure Laravel Breeze (Backend)
->>>>>>> feature/01.03-architecture-foundation
 
 ---
 

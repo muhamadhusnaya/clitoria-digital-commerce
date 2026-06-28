@@ -12,39 +12,39 @@
 
 *   **Fase Proyek:** PHASE 0 — Project Foundation
 *   **Epic Aktif:** EPIC 01 — FOUNDATION
-*   **Fitur Aktif:** FEATURE 01.02 — Frontend Foundation
-*   **Tugas Aktif:** TASK 01.02.01 — Install Tailwind CSS
+*   **Fitur Aktif:** FEATURE 01.03 — Architecture Foundation
+*   **Tugas Aktif:** TASK 01.03.01 — Create Domain Structure
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Mengonfigurasi dan memastikan instalasi Tailwind CSS berjalan di dalam proyek Laravel.
+Membangun fondasi struktur direktori berlapis (*layered architecture*) di dalam aplikasi Laravel untuk memisahkan *domain logic* dari *framework infrastructure*.
 
 **Cakupan Pekerjaan:**
-- Memastikan instalasi dan konfigurasi Tailwind CSS (v4) telah *setup* dan berjalan normal.
-- Membuat _test component_ jika diperlukan untuk verifikasi rendering Tailwind.
+- Membuat struktur direktori kustom seperti `app/Domains`, `app/Repositories`, `app/Services`, dll.
+- Memastikan arsitektur ini terdaftar dan valid di *autoloader* Composer/Laravel.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Class utilitas Tailwind CSS dapat digunakan dalam file blade (`resources/views`).
-- [ ] Perintah build (`npm run dev` atau `npm run build`) merender CSS dengan sukses.
+- [ ] Folder-folder struktur arsitektur baru telah terbuat.
+- [ ] Aturan *namespace* PSR-4 untuk direktori baru tersebut sudah dipatuhi.
+- [ ] Aplikasi Laravel masih bisa di-*boot* tanpa error (perintah `php artisan serve` atau pengecekan *class map* sukses).
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 01.01.05 — Configure Vite
+*   **Tugas:** TASK 01.02.03 — Configure Frontend Build Pipeline
 *   **Hasil Kerja (Deliverables):**
-    - Dependensi NPM telah ter-install sempurna.
-    - Vite telah dikonfigurasi dengan *path alias* `@` dan sanggup me-compile aset.
+    - Proses build aset *frontend* Vite (JS & CSS) tervalidasi berjalan sukses tanpa error.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 01.02.02 — Install AlpineJS
+*   **Tugas:** TASK 01.03.02 — Create Base Service Layer
 *   *(Catatan: Jangan dikerjakan dulu sebelum tugas aktif di atas selesai dan di-merge).*

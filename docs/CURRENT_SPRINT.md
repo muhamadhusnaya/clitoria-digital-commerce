@@ -10,40 +10,41 @@
 
 ## 📌 IDENTITAS TUGAS
 
-*   **Fase Proyek:** PHASE 2 — CMS Module Development
-*   **Epic Aktif:** EPIC 04 — CMS
-*   **Fitur Aktif:** FEATURE 04.01 — Hero Management
-*   **Tugas Aktif:** TASK 04.01.01 — Hero Migration
+* **Fase Proyek:** PHASE 2 — CMS Module Development
+* **Epic Aktif:** EPIC 04 — CMS
+* **Fitur Aktif:** FEATURE 04.04 — Testimonial Management
+* **Tugas Aktif:** TASK 04.04.03 — Testimonial Repository
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini menandai dimulainya Epic CMS, khususnya pada fitur pengaturan Hero (komponen visual utama di halaman publik). Tugas pertama ini bertujuan untuk membuat skema database dan file migration.
+Tugas ini bertindak sebagai penjembatan kueri antara *Model* dan lapis aplikasi (Service/Controller). Kita akan menggunakan arsitektur *Repository Pattern* demi kebersihan kode.
 
 **Cakupan Pekerjaan:**
-- Membuat *migration* untuk tabel `heroes` sesuai definisi di `SCHEMA.md`.
-- Memastikan struktur kolom dan tipe data tepat.
+- Membangun `TestimonialRepositoryInterface` di `app/Repositories/Contracts`.
+- Membangun `TestimonialRepository` di `app/Repositories/Eloquent` yang mengimplementasikan *interface* tersebut.
+- Meregistrasikan kombinasi *Interface-Class* di dalam *Service Provider* aplikasi (e.g. `AppServiceProvider`).
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] File *migration* untuk tabel `heroes` berhasil dibuat.
-- [ ] Menjalankan `php artisan migrate` mengeksekusi migrasi tanpa *error*.
-- [ ] Struktur tabel database sesuai dengan referensi.
+- [ ] Terdapat `TestimonialRepositoryInterface` dan `TestimonialRepository`.
+- [ ] *Repository* menginduk pada *BaseRepository* yang sudah ada.
+- [ ] *Binding* di *Service Provider* sukses dipanggil tanpa insiden *binding error*.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 03.01.05 — Profile Management (Backend)
-*   **Hasil Kerja (Deliverables):**
-    - Menyelesaikan fungsionalitas manajemen profil admin dan menuntaskan EPIC 03.
+* **Tugas:** TASK 04.04.02 — Testimonial Model
+* **Hasil Kerja (Deliverables):**
+    - Entitas `Testimonial` telah mengudara dengan `$fillable` dan proteksi `SoftDeletes` aktif.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 04.01.02 — Hero Model
+* **Tugas:** TASK 04.04.04 — Testimonial Service

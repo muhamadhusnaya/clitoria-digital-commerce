@@ -24,6 +24,49 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 03.01.05 — Profile Management (Backend)
+
+Date: 2026-06-28
+
+### Verified
+- Memastikan logika pembaruan nama profil, email, *password*, dan penghapusan akun beroperasi dengan lancar melalui `ProfileTest`. Seluruh _logic_ bawaan Laravel Breeze berfungsi sempurna setelah _refactor namespace_ yang dilakukan pada TASK 03.01.01. EPIC 03 selesai.
+
+## TASK 03.01.04 — Configure Email Verification (Backend)
+
+Date: 2026-06-28
+
+### Added
+- Mengimplementasikan *interface* `MustVerifyEmail` pada `User` model.
+- Mengonfigurasi `VerifyEmail::createUrlUsing()` di `App\Providers\AppServiceProvider` agar URL verifikasi yang dikirimkan melalui email meresolve _temporary signed route_ `admin.verification.verify`.
+
+### Verified
+- Lulus ujian `EmailVerificationTest`.
+
+## TASK 03.01.03 — Configure Forgot Password (Backend)
+
+Date: 2026-06-28
+
+### Added
+- Mengimplementasikan `ResetPassword::createUrlUsing()` di `App\Providers\AppServiceProvider` untuk memodifikasi tautan reset password bawaan Laravel agar me-resolve URL kustom yang berada di bawah direktori `/admin`.
+
+### Verified
+- `PasswordResetTest` di suite pengujian `Tests\Feature\Auth` berjalan sukses. Tautan di email sudah menggunakan format route `admin.password.reset`.
+
+## TASK 03.01.01 — Install & Configure Laravel Breeze (Backend)
+
+Date: 2026-06-28
+
+### Added
+- Paket otentikasi `laravel/breeze` telah diinstal dengan pilihan Blade scaffold.
+
+### Changed
+- Konfigurasi file otentikasi (`routes/auth.php`) telah direlokasi agar berada di dalam *Route Group* `/admin` (`Route::prefix('admin')` dan `Route::name('admin.')`).
+- Memodifikasi seluruh *controller* autentikasi (`AuthenticatedSessionController`, `RegisteredUserController`, `PasswordController`, `VerifyEmailController`, dll.) serta seluruh _view file_ bawaan Breeze agar menggunakan skema nama `admin.` untuk me-*resolve* URI (`route('admin.login')`, `route('admin.dashboard')`).
+
+### Verified
+- Kompilasi ulang aset (`npm run build`) berjalan sukses tanpa merusak _rendering_ _view_ bawaan Breeze (menggunakan UI _default_ bawaan karena tugas *Customize Login UI* dilewati).
+- Unit *test* bawaan Laravel (khusus grup autentikasi dan profil, seperti `AuthenticationTest`, `PasswordResetTest`, dll) lulus seluruh uji skenario *HTTP Request* yang diarahkan ke struktur `/admin/*`.
+
 ## TASK 01.03.05 — Configure Shared Helpers
 
 Date: 2026-06-28

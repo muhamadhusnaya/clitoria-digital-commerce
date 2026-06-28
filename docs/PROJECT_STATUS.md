@@ -26,6 +26,15 @@
 
 ---
 
+## 🔒 EPIC 03 — AUTHENTICATION
+
+- 03.01.01 — Install & Configure Laravel Breeze (Backend)
+- 03.01.03 — Configure Forgot Password (Backend)
+- 03.01.04 — Configure Email Verification (Backend)
+- 03.01.05 — Profile Management (Backend)
+
+---
+
 <!-- 
 PANDUAN PENAMBAHAN EPIC BARU:
 Jika Anda menyelesaikan tugas untuk Epic baru yang belum ada di atas (misal Epic 02 atau Epic 03):

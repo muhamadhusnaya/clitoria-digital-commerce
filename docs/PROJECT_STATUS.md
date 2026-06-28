@@ -38,6 +38,7 @@
 ## 📝 EPIC 04 — CMS
 
 - 04.01.01 — Hero Migration
+- 04.01.02 — Hero Model
 
 ---
 

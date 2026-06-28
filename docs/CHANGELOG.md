@@ -24,6 +24,14 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 04.01.02 — Hero Model
+
+Date: 2026-06-28
+
+### Added
+- Membuat model Eloquent `Hero` (`app/Models/Hero.php`) dan mendeklarasikan atribut `$fillable` secara definitif sesuai skema yang telah dirancang.
+- Mengonfirmasi validitas sintaks *class* `Hero` melalui uji CLI `php -l`.
+
 ## TASK 04.01.01 — Hero Migration
 
 Date: 2026-06-28

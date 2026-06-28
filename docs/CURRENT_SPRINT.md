@@ -13,37 +13,36 @@
 *   **Fase Proyek:** PHASE 2 — CMS Module Development
 *   **Epic Aktif:** EPIC 04 — CMS
 *   **Fitur Aktif:** FEATURE 04.01 — Hero Management
-*   **Tugas Aktif:** TASK 04.01.01 — Hero Migration
+*   **Tugas Aktif:** TASK 04.01.02 — Hero Model
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini menandai dimulainya Epic CMS, khususnya pada fitur pengaturan Hero (komponen visual utama di halaman publik). Tugas pertama ini bertujuan untuk membuat skema database dan file migration.
+Tugas ini difokuskan untuk membuat dan mengonfigurasi Model Eloquent untuk entitas `Hero`. Model ini akan menjadi jembatan antara aplikasi dan tabel `heroes` yang skemanya telah dirancang pada tugas sebelumnya.
 
 **Cakupan Pekerjaan:**
-- Membuat *migration* untuk tabel `heroes` sesuai definisi di `SCHEMA.md`.
-- Memastikan struktur kolom dan tipe data tepat.
+- Membuat Model `Hero`.
+- Mendefinisikan *fillable properties* sesuai dengan spesifikasi kolom di `SCHEMA.md`.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] File *migration* untuk tabel `heroes` berhasil dibuat.
-- [ ] Menjalankan `php artisan migrate` mengeksekusi migrasi tanpa *error*.
-- [ ] Struktur tabel database sesuai dengan referensi.
+- [ ] Model `app/Models/Hero.php` berhasil dibuat.
+- [ ] Atribut `$fillable` dikonfigurasi dengan benar (termasuk `title`, `subtitle`, `image`, `button_text`, `button_link`).
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 03.01.05 — Profile Management (Backend)
+*   **Tugas:** TASK 04.01.01 — Hero Migration
 *   **Hasil Kerja (Deliverables):**
-    - Menyelesaikan fungsionalitas manajemen profil admin dan menuntaskan EPIC 03.
+    - File migration `create_heroes_table` telah berhasil di-*generate* dan didefinisikan dengan skema kolom yang tepat.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 04.01.02 — Hero Model
+*   **Tugas:** TASK 04.01.03 — Hero Repository

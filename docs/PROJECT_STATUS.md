@@ -35,6 +35,12 @@
 
 ---
 
+## 📝 EPIC 04 — CMS
+
+- 04.01.01 — Hero Migration
+
+---
+
 <!-- 
 PANDUAN PENAMBAHAN EPIC BARU:
 Jika Anda menyelesaikan tugas untuk Epic baru yang belum ada di atas (misal Epic 02 atau Epic 03):

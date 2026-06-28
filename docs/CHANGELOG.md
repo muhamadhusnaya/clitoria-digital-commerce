@@ -24,6 +24,13 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 04.01.01 — Hero Migration
+
+Date: 2026-06-28
+
+### Added
+- Membuat *file migration* untuk tabel `heroes` dengan struktur yang mendefinisikan *primary key*, `title`, `subtitle`, `image`, `button_text`, `button_link`, dan `timestamps`.
+
 ## TASK 03.01.05 — Profile Management (Backend)
 
 Date: 2026-06-28

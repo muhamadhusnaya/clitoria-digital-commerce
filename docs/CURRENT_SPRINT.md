@@ -22,18 +22,19 @@
 Tugas ini ditujukan untuk membangun lapisan _Service_ yang akan merangkum seluruh logika bisnis (seperti validasi khusus, manipulasi file *image*, dll.) dari fitur Hero.
 
 **Cakupan Pekerjaan:**
-- Membuat kelas `HeroService` di `app/Services`.
-- Menghubungkan (menginjeksi) `HeroRepositoryInterface` ke dalam layanan ini.
-- Merancang *method* pemrosesan data untuk `createHero`, `updateHero`, dan delegasi logika pengundian data.
+- Membuat kelas `app/Services/HeroService.php` yang mewarisi (*extend*) kelas `BaseService`.
+- Menghubungkan (*menginjeksi*) `HeroRepositoryInterface` ke dalam layanan ini melalui konstruktor.
+- Merancang method pemrosesan data untuk `createHero`, `updateHero`, `deleteHero`, dan pengambilan data.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] File `app/Services/HeroService.php` tercipta.
+- [ ] File `app/Services/HeroService.php` tercipta dan terhubung dengan `BaseService`.
 - [ ] Repositori diinjeksikan secara presisi lewat konstraktor (DI).
-- [ ] _Logic_ dasar CRUD disiapkan sebagai persiapan sebelum diakses _controller_.
+- [ ] _Logic_ dasar CRUD disiapkan di dalam service sebagai persiapan sebelum diakses oleh _controller_/_view_.
+- [ ] Validasi syntax PHP berjalan tanpa error.
 
 ---
 
@@ -48,4 +49,5 @@ Tugas ini dianggap selesai jika:
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 04.01.05 — Hero Controller
+*   **Tugas:** TASK 04.01.06 — Hero Image Upload
+*   *(Catatan: Sesuai roadmap, pengerjaan antarmuka task 04.01.05 ini merupakan porsi Dev 4, atau dikerjakan beriringan dengan Controller).*

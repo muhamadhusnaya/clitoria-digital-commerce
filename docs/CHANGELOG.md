@@ -24,6 +24,14 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 04.01.04 — Hero Service
+
+Date: 2026-06-28
+
+### Added
+- Membuat `HeroService` yang mewarisi `BaseService`.
+- Mengimplementasikan logika operasional awal (CRUD) dengan menginjeksi antarmuka repositori pahlawan (Hero).
+
 ## TASK 04.01.03 — Hero Repository
 
 Date: 2026-06-28

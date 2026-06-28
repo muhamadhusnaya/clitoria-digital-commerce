@@ -10,41 +10,42 @@
 
 ## 📌 IDENTITAS TUGAS
 
-*   **Fase Proyek:** PHASE 0 — Project Foundation
-*   **Epic Aktif:** EPIC 01 — FOUNDATION
-*   **Fitur Aktif:** FEATURE 01.03 — Architecture Foundation
-*   **Tugas Aktif:** TASK 01.03.03 — Create Base Repository Layer
+*   **Fase Proyek:** PHASE 1 — Core Domain Implementation
+*   **Epic Aktif:** EPIC 02 — USER MANAGEMENT & AUTHENTICATION
+*   **Fitur Aktif:** FEATURE 02.01 — Authentication System
+*   **Tugas Aktif:** TASK 02.01.01 — Configure User Authentication
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Menyiapkan fondasi untuk pola arsitektur repositori (*Repository Pattern*) dengan merumuskan kelas antar muka (*Interface*) maupun kelas abstrak dasarnya.
+Menerapkan sistem autentikasi pengguna secara utuh, mulai dari pendaftaran (register) hingga validasi akses (_login/logout_) berdasarkan arsitektur _Service-Repository_.
 
 **Cakupan Pekerjaan:**
-- Membuat file `app/Contracts/BaseRepositoryInterface.php` (opsional namun sangat disarankan untuk standarisasi kontrak).
-- Membuat file `app/Repositories/BaseRepository.php` yang mengimplementasikan _interface_ tersebut.
-- Menyediakan kerangka dasar *method* standar untuk interaksi *database* seperti `all()`, `find()`, `create()`, `update()`, dan `delete()`.
+- Mengonfigurasi tabel dan skema *database* untuk autentikasi jika belum tersinkronisasi.
+- Membuat _Controller_, _Service_, dan _Repository_ yang menangani fungsi Login/Register.
+- Merangkai *Routes* autentikasi di `web.php` (atau *endpoint* API jika diminta).
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Berkas `BaseRepository` atau kontrak *interface*-nya ada di dalam sistem.
-- [ ] *Syntax* PHP tervalidasi benar dan _namespace_ terdaftarkan.
+- [ ] Pengguna bisa mendepositkan data baru ke database (Register).
+- [ ] Pengguna terautentikasi dan sesi berhasil disimpan saat otorisasi valid (Login).
+- [ ] Implementasi tidak keluar dari jalur struktur arsitektur *Service/Repository*.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 01.03.02 — Create Base Service Layer
+*   **Tugas:** TASK 01.03.05 — Configure Shared Helpers
 *   **Hasil Kerja (Deliverables):**
-    - Kelas abstrak `BaseService.php` telah terbuat dan di-*assign* ke *namespace* `App\Services`.
+    - File *helper* global `app/Helpers/helpers.php` telah dirancang dan di-_load_ secara otomatis via Composer.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 01.03.04 — Configure Route Structure
+*   **Tugas:** TASK 02.01.02 — Implement Role & Permission Management
 *   *(Catatan: Jangan dikerjakan dulu sebelum tugas aktif di atas selesai dan di-merge).*

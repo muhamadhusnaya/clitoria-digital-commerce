@@ -24,6 +24,35 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 01.03.05 — Configure Shared Helpers
+
+Date: 2026-06-28
+
+### Added
+- Membuat file *helper global* di `app/Helpers/helpers.php` (dengan dukungan contoh fungsi `format_rupiah($angka)`).
+- Meregistrasikan `app/Helpers/helpers.php` secara permanen ke properti `"files"` di _autoloader_ `composer.json` sehingga dapat diakses praktis di seantero aplikasi.
+
+---
+
+## TASK 01.03.04 — Configure Route Structure
+
+Date: 2026-06-28
+
+### Added
+- Mengimplementasikan pengelompokan (_grouping_) rute di `routes/web.php`. Rute telah dipisahkan ke dalam seksi *Public Routes* (menggunakan _prefix name_ `public.`) dan *Admin Routes* (menggunakan _prefix path_ `admin` dan _prefix name_ `admin.`).
+
+---
+
+## TASK 01.03.03 — Create Base Repository Layer
+
+Date: 2026-06-28
+
+### Added
+- Membuat `app/Contracts/BaseRepositoryInterface.php` untuk mewajibkan standarisasi fungsi.
+- Membuat `app/Repositories/BaseRepository.php` sebagai implementasi dari interface di atas, yang berisi *method* dasar interaksi database menggunakan turunan kelas `Model` dari Eloquent.
+
+---
+
 ## TASK 01.03.02 — Create Base Service Layer
 
 Date: 2026-06-27

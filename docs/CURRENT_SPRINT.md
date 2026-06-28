@@ -13,40 +13,39 @@
 *   **Fase Proyek:** PHASE 2 — CMS Module Development
 *   **Epic Aktif:** EPIC 04 — CMS
 *   **Fitur Aktif:** FEATURE 04.01 — Hero Management
-*   **Tugas Aktif:** TASK 04.01.03 — Hero Repository
+*   **Tugas Aktif:** TASK 04.01.04 — Hero Service
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini bertujuan untuk membuat lapisan repositori bagi model `Hero` yang akan menengahi operasi database (*query*) dan mengisolasi logika data dari *controller* atau layanan (*service*).
+Tugas ini ditujukan untuk membangun lapisan _Service_ yang akan merangkum seluruh logika bisnis (seperti validasi khusus, manipulasi file *image*, dll.) dari fitur Hero.
 
 **Cakupan Pekerjaan:**
-- Membuat antarmuka (Interface) `HeroRepositoryInterface`yang meng-extend `BaseRepositoryInterface`.
-- Membuat kelas implementasi `HeroRepository`yang meng-extend `BaseRepository` dan mengimplementasikan `HeroRepositoryInterface`.
-- Menginjeksi model Hero ke dalam konstruktor repositori.
-- Mengonfigurasi `RepositoryServiceProvider` (atau *service provider* terkait) agar melakukan proses *binding* pada repositori ini.
+- Membuat kelas `HeroService` di `app/Services`.
+- Menghubungkan (menginjeksi) `HeroRepositoryInterface` ke dalam layanan ini.
+- Merancang *method* pemrosesan data untuk `createHero`, `updateHero`, dan delegasi logika pengundian data.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] `HeroRepositoryInterface` dan `HeroRepository` berhasil dibuat di direktori yang tepat dan mewarisi *Base Contract/Class*.
-- [ ] Model *Hero* terhubung dengan benar ke repositori melalui konstruktor.
-- [ ] Repositori telah terdaftar pada mekanisme *Dependency* Injection Laravel di dalam *Service Provider*.
-- [ ] Pengecekan sintaksis berhasil tanpa error.
+- [ ] File `app/Services/HeroService.php` tercipta.
+- [ ] Repositori diinjeksikan secara presisi lewat konstraktor (DI).
+- [ ] _Logic_ dasar CRUD disiapkan sebagai persiapan sebelum diakses _controller_.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 04.01.02 — Hero Model
+*   **Tugas:** TASK 04.01.03 — Hero Repository
 *   **Hasil Kerja (Deliverables):**
-    - File model `app/Models/Hero.php` dengan *fillable attributes* yang dipetakan sesuai struktur kolom pada skema dasar berhasil diciptakan.
+    - Mendefinisikan kontrak interface dan implementasi repositori untuk model `Hero`.
+    - Mendaftarkan *binding* di `RepositoryServiceProvider`.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 04.01.04 — Hero Service
+*   **Tugas:** TASK 04.01.05 — Hero Controller

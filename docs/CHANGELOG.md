@@ -24,6 +24,15 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 04.01.03 — Hero Repository
+
+Date: 2026-06-28
+
+### Added
+- Membuat `HeroRepositoryInterface` yang mengekstensi kontrak *BaseRepository*.
+- Membuat kelas `HeroRepository` yang mengimplementasikan manajemen data `Hero`.
+- Membuat dan mengonfigurasi `RepositoryServiceProvider` (dan mendaftarkannya di struktur Laravel 11) untuk menangani injeksi dependensi.
+
 ## TASK 04.01.02 — Hero Model
 
 Date: 2026-06-28

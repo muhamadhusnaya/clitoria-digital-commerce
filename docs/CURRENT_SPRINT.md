@@ -10,44 +10,39 @@
 
 ## 📌 IDENTITAS TUGAS
 
-*   **Fase Proyek:** PHASE 2 — CMS Module Development
-*   **Epic Aktif:** EPIC 04 — CMS
-*   **Fitur Aktif:** FEATURE 04.01 — Hero Management
-*   **Tugas Aktif:** TASK 04.01.04 — Hero Service
+* **Fase Proyek:** PHASE 2 — CMS Module Development
+* **Epic Aktif:** EPIC 04 — CMS
+* **Fitur Aktif:** FEATURE 04.02 — Benefit Management
+* **Tugas Aktif:** TASK 04.02.01 — Benefit Migration
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini ditujukan untuk membangun lapisan _Service_ yang akan merangkum seluruh logika bisnis (seperti validasi khusus, manipulasi file *image*, dll.) dari fitur Hero.
+Tugas ini menandai dimulainya modul *Benefit Management*. Tujuannya adalah merancang dan membuat skema tabel `benefits` di database.
 
 **Cakupan Pekerjaan:**
-- Membuat kelas `app/Services/HeroService.php` yang mewarisi (*extend*) kelas `BaseService`.
-- Menghubungkan (*menginjeksi*) `HeroRepositoryInterface` ke dalam layanan ini melalui konstruktor.
-- Merancang method pemrosesan data untuk `createHero`, `updateHero`, `deleteHero`, dan pengambilan data.
+- Menghasilkan *file migration* melalui perintah Artisan.
+- Mendefinisikan kolom-kolom yang diperlukan sesuai rancangan di `SCHEMA.md` (misalnya: ikon/gambar, judul benefit, deskripsi).
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] File `app/Services/HeroService.php` tercipta dan terhubung dengan `BaseService`.
-- [ ] Repositori diinjeksikan secara presisi lewat konstraktor (DI).
-- [ ] _Logic_ dasar CRUD disiapkan di dalam service sebagai persiapan sebelum diakses oleh _controller_/_view_.
-- [ ] Validasi syntax PHP berjalan tanpa error.
+- [ ] *File migration* untuk tabel `benefits` telah dibuat di direktori `database/migrations`.
+- [ ] Struktur kolom di dalam *migration* secara presisi mengikuti skema data yang telah disepakati.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 04.01.03 — Hero Repository
-*   **Hasil Kerja (Deliverables):**
-    - Mendefinisikan kontrak interface dan implementasi repositori untuk model `Hero`.
-    - Mendaftarkan *binding* di `RepositoryServiceProvider`.
+* **Tugas:** TASK 04.01.06 — Hero Image Upload
+* **Hasil Kerja (Deliverables):**
+    - `UploadTrait` sukses dibuat dan diintegrasikan ke `HeroService` untuk menangani logika manipulasi *file*.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 04.01.06 — Hero Image Upload
-*   *(Catatan: Sesuai roadmap, pengerjaan antarmuka task 04.01.05 ini merupakan porsi Dev 4, atau dikerjakan beriringan dengan Controller).*
+* **Tugas:** TASK 04.02.02 — Benefit Model

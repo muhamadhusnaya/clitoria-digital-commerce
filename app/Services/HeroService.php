@@ -3,9 +3,12 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\HeroRepositoryInterface;
+use App\Traits\UploadTrait;
 
 class HeroService extends BaseService
 {
+    use UploadTrait;
+
     /**
      * @var HeroRepositoryInterface
      */
@@ -42,7 +45,10 @@ class HeroService extends BaseService
      */
     public function createHero(array $data)
     {
-        // Business logic here, e.g., file upload handling
+        if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
+            $data['image'] = $this->uploadFile($data['image'], 'heroes');
+        }
+
         return $this->heroRepository->create($data);
     }
 
@@ -51,7 +57,15 @@ class HeroService extends BaseService
      */
     public function updateHero(int $id, array $data)
     {
-        // Business logic here, e.g., file upload handling and deleting old file
+        $hero = $this->heroRepository->find($id);
+
+        if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
+            if ($hero && $hero->image) {
+                $this->deleteFile($hero->image);
+            }
+            $data['image'] = $this->uploadFile($data['image'], 'heroes');
+        }
+
         return $this->heroRepository->update($id, $data);
     }
 
@@ -60,7 +74,12 @@ class HeroService extends BaseService
      */
     public function deleteHero(int $id)
     {
-        // Business logic here, e.g., deleting associated file
+        $hero = $this->heroRepository->find($id);
+
+        if ($hero && $hero->image) {
+            $this->deleteFile($hero->image);
+        }
+
         return $this->heroRepository->delete($id);
     }
 }

@@ -24,6 +24,14 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 04.01.06 — Hero Image Upload
+
+Date: 2026-06-28
+
+### Added
+- Membuat *trait* reusabel `UploadTrait` untuk membantu pemrosesan simpan/hapus file.
+- Mengintegrasikan fungsi unggah dan hapus otomatis (pembersihan gambar usang/yatim) di `HeroService`.
+
 ## TASK 04.01.04 — Hero Service
 
 Date: 2026-06-28

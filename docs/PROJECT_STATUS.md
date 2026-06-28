@@ -41,6 +41,7 @@
 - 04.01.02 — Hero Model
 - 04.01.03 — Hero Repository
 - 04.01.04 — Hero Service
+- 04.01.06 — Hero Image Upload
 
 ---
 

@@ -10,41 +10,51 @@
 
 ## 📌 IDENTITAS TUGAS
 
+<<<<<<< HEAD
 *   **Fase Proyek:** PHASE 0 — Project Foundation
 *   **Epic Aktif:** EPIC 01 — FOUNDATION
 *   **Fitur Aktif:** FEATURE 01.03 — Architecture Foundation
 *   **Tugas Aktif:** TASK 01.03.01 — Create Domain Structure
+=======
+*   **Fase Proyek:** PHASE 1 — Core Domain Implementation
+*   **Epic Aktif:** EPIC 03 — AUTHENTICATION
+*   **Fitur Aktif:** FEATURE 03.01 — Admin Authentication
+*   **Tugas Aktif:** TASK 03.01.01 — Install & Configure Laravel Breeze (Backend)
+>>>>>>> feature/01.03-architecture-foundation
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Membangun fondasi struktur direktori berlapis (*layered architecture*) di dalam aplikasi Laravel untuk memisahkan *domain logic* dari *framework infrastructure*.
+Menginstalasi dan mengonfigurasi Laravel Breeze di sisi backend untuk mengamankan akses halaman administrator.
 
 **Cakupan Pekerjaan:**
-- Membuat struktur direktori kustom seperti `app/Domains`, `app/Repositories`, `app/Services`, dll.
-- Memastikan arsitektur ini terdaftar dan valid di *autoloader* Composer/Laravel.
+- Menginstal paket Laravel Breeze via Composer.
+- Menjalankan instalasi Breeze (menggunakan opsi Blade).
+- Mengonfigurasi rute login dan logout di bawah prefix `/admin`.
+- Menyiapkan middleware auth dan session protection untuk rute-rute admin.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Folder-folder struktur arsitektur baru telah terbuat.
-- [ ] Aturan *namespace* PSR-4 untuk direktori baru tersebut sudah dipatuhi.
-- [ ] Aplikasi Laravel masih bisa di-*boot* tanpa error (perintah `php artisan serve` atau pengecekan *class map* sukses).
+- [ ] Laravel Breeze berhasil terpasang di sistem.
+- [ ] Rute otentikasi login/logout terproteksi dan diarahkan di bawah prefix `/admin`.
+- [ ] Middleware auth berhasil memblokir akses ke dashboard admin jika user belum login.
+- [ ] Unit test autentikasi bawaan Laravel Breeze berjalan sukses tanpa kegagalan.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 01.02.03 — Configure Frontend Build Pipeline
+*   **Tugas:** TASK 01.03.05 — Configure Shared Helpers
 *   **Hasil Kerja (Deliverables):**
-    - Proses build aset *frontend* Vite (JS & CSS) tervalidasi berjalan sukses tanpa error.
+    - File helper global `app/Helpers/helpers.php` telah dirancang dan di-autoload secara otomatis via Composer.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 01.03.02 — Create Base Service Layer
-*   *(Catatan: Jangan dikerjakan dulu sebelum tugas aktif di atas selesai dan di-merge).*
+*   **Tugas:** TASK 03.01.03 — Configure Forgot Password (Backend)
+*   *(Catatan: Tugas TASK 03.01.02 Customize Login UI dilewati terlebih dahulu karena merupakan porsi Frontend/Dev 4).*

@@ -54,6 +54,8 @@
 - 04.03.06 — Gallery Image Upload
 - 04.04.01 — Testimonial Migration
 - 04.04.02 — Testimonial Model
+- 04.04.03 — Testimonial Repository
+- 04.04.04 — Testimonial Service
 
 ---
 

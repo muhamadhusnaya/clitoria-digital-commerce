@@ -24,6 +24,24 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 04.04.04 — Testimonial Service
+
+Date: 2026-06-29
+
+### Added
+- Membuat `TestimonialService` di `app/Services` yang mewarisi `BaseService`.
+- Menginjeksi antarmuka `TestimonialRepositoryInterface` ke dalam `TestimonialService` sebagai perantara basis data.
+- Menambahkan metode `setFeatured(int $id)` untuk mengatur suatu testimoni sebagai yang disorot, beserta penambahan fitur pembantu `removeFeaturedAll()` di tingkat *Repository*.
+
+## TASK 04.04.03 — Testimonial Repository
+
+Date: 2026-06-29
+
+### Added
+- Membuat antarmuka `TestimonialRepositoryInterface` di `app/Repositories/Contracts`.
+- Membuat kelas `TestimonialRepository` di `app/Repositories/Eloquent` yang mengimplementasikan *interface* tersebut beserta pewarisan dari *BaseRepository*.
+- Menambahkan *binding* dependensi di `AppServiceProvider` untuk memetakan kombinasi *Interface-Class* tersebut.
+
 ## TASK 04.04.02 — Testimonial Model
 
 Date: 2026-06-28

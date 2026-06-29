@@ -46,10 +46,11 @@ Periksa docs/CURRENT_SPRINT.md untuk detail tugas aktif saat ini, dan validasi k
 ### 💻 Case A: Setup Awal Kontribusi (Baru Pertama Kali)
 Lakukan langkah-langkah ini jika Anda baru pertama kali bergabung ke dalam proyek:
 
-1.  **Clone Repositori:**
+1.  **Clone Repositori & Pindah ke Branch develop:**
     ```bash
     git clone <repository-url>
     cd clitoria-digital-commerce
+    git checkout develop
     ```
 2.  **Instal Dependensi:**
     ```bash

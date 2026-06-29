@@ -102,9 +102,9 @@ Ini adalah:
 
 ## 2.3 Engineering Philosophy
 
-* Domain Driven Modular Monolith
-* Service Layer mandatory
-* Repository Layer preferred
+* Layered MVC + Service-Repository Architecture
+* Service Layer mandatory for business logic
+* Repository Layer mandatory for database access
 * No business logic in Controller
 * Schema-first development (SCHEMA.md is source of truth)
 * Design-first UI implementation (DESAIN.md is UI source of truth)
@@ -177,17 +177,17 @@ DO NOT:
 
 ---
 
-## 4.3 Domain Separation
+## 4.3 Logical Module Separation
 
-System is divided into:
+System is divided logically into modules:
 
-* Auth Domain
-* CMS Domain
-* Commerce Domain
-* Analytics Domain
-* Settings Domain
+* Auth (Authentication & Authorization)
+* CMS (Hero, Benefit, Gallery, Testimonial, Team, Partner)
+* Commerce (Product, Product Pricing, Cart, WhatsApp Checkout)
+* Analytics (Dashboard, Sales, Reports)
+* Settings (Business Settings, SEO Settings)
 
-Each domain MUST be isolated.
+Each module is separated logically via specific namespaces, Models, Repositories, and Services, maintaining loose coupling.
 
 ---
 
@@ -215,6 +215,7 @@ If conflict exists:
 * Model: PascalCase singular
 * Controller: PascalCaseController
 * Service: PascalCaseService
+* Repository: PascalCaseRepository
 
 ---
 
@@ -388,7 +389,6 @@ If AI is acting as coding agent:
 * Follow TASK_EXECUTION_PLAN.md
 * Implement ONE feature at a time
 * Respect SCHEMA.md strictly
-* Confirm domain before coding
 * Read DESAIN.md before implementing UI
 * Follow Component Registry
 * Follow UI Contract

@@ -8,7 +8,7 @@ Development Methodology:
 Feature Driven Development (FDD)
 
 Architecture:
-Domain-Oriented Modular Monolith
+Standard MVC + Service-Repository Pattern
 
 Framework:
 Laravel 12
@@ -50,7 +50,7 @@ PROJECT FOUNDATION
 
 Goal:
 
-Menyiapkan fondasi Laravel, arsitektur domain, dan lingkungan pengembangan.
+Menyiapkan fondasi Laravel, struktur arsitektur Service-Repository, dan lingkungan pengembangan.
 
 ---
 
@@ -89,7 +89,7 @@ Architecture Foundation
 
 Tasks:
 
-* Create Domain Structure
+* Create Repository-Service Structure
 * Create Service Layer Base Classes
 * Create Repository Layer Base Classes
 * Configure Route Structure

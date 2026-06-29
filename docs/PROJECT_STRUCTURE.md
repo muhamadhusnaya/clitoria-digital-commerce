@@ -4,21 +4,20 @@
 
 Version: 1.0
 
-Architecture Style: Modular Monolith (Domain-Oriented Architecture)
-
+Architecture Style: MVC + Service-Repository Pattern
 Framework: Laravel 12
 
 ---
 
 # 1. Purpose
 
-Dokumen ini mendefinisikan struktur proyek, organisasi source code, pemisahan domain bisnis, serta standar pengembangan untuk Clitoria Digital Commerce Platform.
+Dokumen ini mendefinisikan struktur proyek, organisasi source code, pemisahan modul bisnis secara logis, serta standar pengembangan untuk Clitoria Digital Commerce Platform.
 
 Tujuan utama:
 
 * Menjaga maintainability
 * Mempermudah scaling fitur
-* Mengurangi coupling antar module
+* Mengurangi coupling antar module menggunakan lapisan Service & Repository
 * Mempermudah onboarding developer baru
 * Menjadi pedoman implementasi Laravel
 
@@ -26,23 +25,15 @@ Tujuan utama:
 
 # 2. Architecture Overview
 
-Clitoria menggunakan pendekatan:
+Clitoria menggunakan pendekatan **Standard Laravel MVC dengan tambahan Service & Repository Layer**. Pemisahan modul dilakukan secara **logis** pada namespace dan penamaan file, bukan menggunakan folder fisik `app/Domains`.
 
-Domain-Oriented Modular Monolith
+Domain bisnis yang dipisahkan secara logis meliputi:
 
-Bukan:
-
-Traditional Laravel MVC
-
-Karena aplikasi memiliki beberapa domain bisnis yang berbeda:
-
-* Authentication
-* Content Management
-* Commerce
-* Analytics
-* Settings
-
-Setiap domain memiliki tanggung jawab yang jelas dan terisolasi.
+* **Authentication:** Pengelolaan sesi login, registrasi, password reset admin.
+* **CMS (Content Management System):** Pengelolaan konten dinamis seperti Hero, Benefit, Gallery, Testimonial, Team, dan Partner.
+* **Commerce:** Pengelolaan katalog produk, penentuan harga, keranjang belanja (cart), dan WhatsApp checkout redirect.
+* **Analytics:** Dashboard monitoring, pencatatan transaksi manual, dan laporan penjualan.
+* **Settings:** Konfigurasi informasi bisnis utama dan manajemen SEO.
 
 ---
 
@@ -51,7 +42,7 @@ Setiap domain memiliki tanggung jawab yang jelas dan terisolasi.
 ```text
 ┌───────────────────────────┐
 │      Presentation Layer   │
-│  Blade + Tailwind + JS    │
+│  Blade + Tailwind + Alpine│
 └─────────────┬─────────────┘
               │
 ┌─────────────▼─────────────┐
@@ -60,16 +51,17 @@ Setiap domain memiliki tanggung jawab yang jelas dan terisolasi.
               │
 ┌─────────────▼─────────────┐
 │        Service Layer      │
-│     Business Process      │
+│  (Business Logic & Files) │
 └─────────────┬─────────────┘
               │
 ┌─────────────▼─────────────┐
 │      Repository Layer     │
-│      Data Access Logic    │
+│  (DB Query & Data Access) │
 └─────────────┬─────────────┘
               │
 ┌─────────────▼─────────────┐
 │        Eloquent ORM       │
+│        (Model Layer)      │
 └─────────────┬─────────────┘
               │
 ┌─────────────▼─────────────┐
@@ -83,722 +75,138 @@ Setiap domain memiliki tanggung jawab yang jelas dan terisolasi.
 
 ```text
 clitoria/
-
-├── app/
-├── bootstrap/
-├── config/
-├── database/
-├── docs/
-├── public/
-├── resources/
-├── routes/
-├── storage/
-├── tests/
-├── vendor/
-
-├── artisan
-├── composer.json
-├── package.json
-├── README.md
+├── app/                  # Logika aplikasi (Model, Controller, Service, Repository, dll)
+├── bootstrap/            # Inisialisasi framework & providers
+├── config/               # Konfigurasi sistem Laravel
+├── database/             # Migrasi, Seeders, dan Factories
+├── docs/                 # Dokumentasi proyek (Source of Truth)
+├── public/               # File aset publik hasil kompilasi
+├── resources/            # views (Blade), css (Tailwind), js (AlpineJS)
+├── routes/               # Routing aplikasi (web, console, dll)
+├── storage/              # Berkas upload lokal & log sistem
+├── tests/                # Unit & Feature Testing
+├── artisan               # CLI Laravel
+├── composer.json         # Dependensi PHP
+├── package.json          # Dependensi JS/CSS
+└── README.md
 ```
 
 ---
 
-# 5. Documentation Structure
+# 5. Application Structure (app/)
 
-```text
-docs/
-
-├── PRD.md
-├── SRS.md
-
-├── ERD.dbml
-├── ERD.png
-├── SCHEMA.md
-├── DESAIN.md
-│
-│   UI/UX Source of Truth
-│   Design System
-│   Component Registry
-│   Layout Tree
-│   Responsive Rules
-│   UI Contract
-│
-├── PROJECT_STRUCTURE.md
-├── DEVELOPMENT_ROADMAP.md
-├── PROJECT_CONTEXT.md
-├── TASK_EXECUTION_PLAN.md
-```
-
-# 5.1 Documentation Authority
-
-```
-Each document has a specific responsibility and authority.
-
-PRD.md
-→ Business Requirements Authority
-
-SRS.md
-→ Functional Requirements Authority
-
-ERD.dbml
-→ Data Relationship Reference
-
-SCHEMA.md
-→ Database Source of Truth
-
-DESAIN.md
-→ UI/UX Source of Truth
-
-PROJECT_STRUCTURE.md
-→ Architecture Source of Truth
-
-DEVELOPMENT_ROADMAP.md
-→ Feature Planning Authority
-
-TASK_EXECUTION_PLAN.md
-→ Task Execution Authority
-```
-
----
-
-# 6. Application Structure
+File aplikasi disusun menggunakan folder standar Laravel demi kemudahan kurva belajar developer baru, namun dipisahkan fungsinya secara modular:
 
 ```text
 app/
-
-├── Domains/
+├── Contracts/            # Abstraksi Interface Repositori
+│   ├── BaseRepositoryInterface.php
+│   ├── HeroRepositoryInterface.php
+│   ├── ProductRepositoryInterface.php
+│   └── ...
+│
+├── Helpers/              # Fungsi bantuan standar global
+│   └── helpers.php
+│
 ├── Http/
-├── Providers/
-├── View/
-├── Exceptions/
-```
-
----
-
-# 7. Domain Structure
-
-```text
-app/Domains/
-
-├── Auth/
-├── CMS/
-├── Commerce/
-├── Analytics/
-├── Settings/
-```
-
-Domain menjadi unit organisasi utama aplikasi.
-
----
-
-# 8. Authentication Domain
-
-```text
-Auth/
-
-├── Models/
-│   └── User.php
+│   ├── Controllers/
+│   │   ├── Admin/        # Controller CMS & Management untuk Dashboard Admin
+│   │   │   ├── HeroController.php
+│   │   │   ├── TeamController.php
+│   │   │   └── ...
+│   │   ├── Auth/         # Controller Autentikasi Admin (Laravel Breeze)
+│   │   └── ProfileController.php
+│   └── Requests/         # Form Request Validation (satu kelas per operasi form)
 │
-├── Controllers/
-│   └── AuthController.php
+├── Models/               # Representasi data / Eloquent Model
+│   ├── User.php
+│   ├── Hero.php
+│   ├── Product.php
+│   └── ...
 │
-├── Requests/
+├── Providers/            # Konfigurasi bootstrap Laravel
+│   ├── AppServiceProvider.php       # Registrasi bindings Repositori
+│   └── ...
 │
-├── Services/
+├── Repositories/         # Lapisan akses data (Query Builder / Eloquent)
+│   ├── BaseRepository.php           # Implementasi query dasar
+│   └── Eloquent/
+│       ├── HeroRepository.php
+│       ├── ProductRepository.php
+│       └── ...
 │
-├── Policies/
-```
-
-Responsibilities:
-
-* Login
-* Logout
-* Session Management
-* Authorization
-
----
-
-# 9. CMS Domain
-
-```text
-CMS/
-
-├── Hero/
-├── Benefit/
-├── Gallery/
-├── Testimonial/
-├── Team/
-├── Partner/
-```
-
-CMS bertanggung jawab mengelola seluruh konten website.
-
----
-
-# 10. Hero Module
-
-```text
-Hero/
-
-├── Models/
-│   └── Hero.php
+├── Services/             # Lapisan logika bisnis (Business Logic & Uploads)
+│   ├── BaseService.php              # Kerangka service dasar
+│   ├── HeroService.php
+│   ├── ProductService.php
+│   └── ...
 │
-├── Controllers/
-│   └── HeroController.php
-│
-├── Requests/
-│   ├── UpdateHeroRequest.php
-│
-├── Services/
-│   └── HeroService.php
-│
-├── Repositories/
-│   └── HeroRepository.php
-```
-
-Responsibilities:
-
-* Hero content management
-* Hero image management
-
----
-
-# 11. Benefit Module
-
-```text
-Benefit/
-
-├── Models/
-├── Controllers/
-├── Requests/
-├── Services/
-├── Repositories/
-```
-
-Responsibilities:
-
-* Benefit CRUD
-* Benefit ordering
-* Benefit visibility
-
----
-
-# 12. Gallery Module
-
-```text
-Gallery/
-
-├── Models/
-├── Controllers/
-├── Requests/
-├── Services/
-├── Repositories/
-```
-
-Responsibilities:
-
-* Gallery CRUD
-* Image upload
-* Gallery visibility
-
----
-
-# 13. Testimonial Module
-
-```text
-Testimonial/
-
-├── Models/
-├── Controllers/
-├── Requests/
-├── Services/
-├── Repositories/
-```
-
-Responsibilities:
-
-* Testimonial CRUD
-* Featured testimonial management
-
----
-
-# 14. Team Module
-
-```text
-Team/
-
-├── Models/
-├── Controllers/
-├── Requests/
-├── Services/
-├── Repositories/
-```
-
-Responsibilities:
-
-* Team member management
-* Social profile management
-
----
-
-# 15. Partner Module
-
-```text
-Partner/
-
-├── Models/
-├── Controllers/
-├── Requests/
-├── Services/
-├── Repositories/
-```
-
-Responsibilities:
-
-* Partner logo management
-* Partner information management
-
----
-
-# 16. Commerce Domain
-
-```text
-Commerce/
-
-├── Product/
-├── ProductPrice/
-├── Cart/
-├── Checkout/
-```
-
-Commerce menangani seluruh proses penjualan.
-
----
-
-# 17. Product Module
-
-```text
-Product/
-
-├── Models/
-│   └── Product.php
-│
-├── Controllers/
-│
-├── Requests/
-│
-├── Services/
-│
-├── Repositories/
-│
-├── Policies/
-```
-
-Responsibilities:
-
-* Product CRUD
-* Product publishing
-* Product visibility
-
----
-
-# 18. Product Price Module
-
-```text
-ProductPrice/
-
-├── Models/
-├── Controllers/
-├── Requests/
-├── Services/
-├── Repositories/
-```
-
-Responsibilities:
-
-* Product pricing management
-* Bundle management
-
----
-
-# 19. Cart Module
-
-```text
-Cart/
-
-├── DTOs/
-├── Actions/
-├── Services/
-```
-
-Responsibilities:
-
-* Session cart management
-* Quantity management
-* Cart summary calculation
-
-Notes:
-
-Cart menggunakan Laravel Session.
-
-Tidak memiliki database table.
-
----
-
-# 20. Checkout Module
-
-```text
-Checkout/
-
-├── DTOs/
-├── Actions/
-├── Services/
-```
-
-Responsibilities:
-
-* WhatsApp message generation
-* Checkout validation
-* Order summary creation
-
-Example Action:
-
-```text
-GenerateWhatsappMessageAction
+└── Traits/               # Fungsi pembantu reusable (seperti UploadTrait)
+    └── UploadTrait.php
 ```
 
 ---
 
-# 21. Analytics Domain
+# 6. Service & Repository Layer Rules
 
-```text
-Analytics/
+Untuk menjaga agar kode tetap bersih dan modular:
 
-├── Dashboard/
-├── Sales/
-├── Reports/
-```
-
-Analytics digunakan untuk monitoring bisnis.
-
----
-
-# 22. Dashboard Module
-
-```text
-Dashboard/
-
-├── Controllers/
-├── Services/
-```
-
-Responsibilities:
-
-* Dashboard metrics
-* Revenue metrics
-* Sales metrics
+1. **Controller Cleanliness:**
+   Controller hanya bertugas menerima *HTTP Request*, melakukan validasi (lewat Form Request), memanggil satu atau lebih *Service*, lalu merender *View* atau mengembalikan *Response/Redirect*. Controller **tidak boleh** memuat logika database atau pengolahan file secara langsung.
+2. **Service Layer Mandatory:**
+   Seluruh logika bisnis (seperti pemrosesan unggahan file, penghapusan berkas usang, formatting data sebelum disimpan, atau logika WhatsApp checkout) wajib ditempatkan di dalam kelas **Service**.
+3. **Repository Layer Priority:**
+   Seluruh kueri basis data (Eloquent) harus diisolasi di dalam kelas **Repository**. Model Eloquent tidak boleh di-query secara langsung dari Controller atau Service, melainkan harus diakses melalui implementasi antarmuka Repositori (`*RepositoryInterface`).
+4. **Dependency Injection:**
+   Service harus menyuntikkan *Repository Interface* di konstruktornya untuk memanfaatkan Dependency Injection Laravel yang didaftarkan pada `AppServiceProvider`.
 
 ---
 
-# 23. Sales Module
+# 7. Naming Conventions
 
-```text
-Sales/
-
-├── Models/
-│   ├── Sale.php
-│   └── SaleItem.php
-│
-├── Controllers/
-├── Requests/
-├── Services/
-├── Repositories/
-├── Actions/
-```
-
-Responsibilities:
-
-* Sales recording
-* Revenue calculation
-* Product sales statistics
+* **Model:** PascalCase (`Product`, `Testimonial`)
+* **Controller:** PascalCaseController (`ProductController`, `TeamController`)
+* **Service:** PascalCaseService (`ProductService`, `TeamService`)
+* **Repository Interface:** PascalCaseRepositoryInterface (`ProductRepositoryInterface`)
+* **Repository Implementation:** PascalCaseRepository (`ProductRepository`)
+* **Form Request:** Store[Entity]Request atau Update[Entity]Request (`StoreProductRequest`)
+* **Migration File:** prefix timestamp + snake_case nama tabel (`create_products_table`)
+* **Database Table:** snake_case jamak (plural) (`products`, `testimonials`)
+* **Database Column:** snake_case (`short_description`, `order_number`)
+* **Route URL:** kebab-case (`/admin/product-pricing`)
 
 ---
 
-# 24. Reports Module
+# 8. Storage Structure
 
-```text
-Reports/
+File yang diunggah dikelompokkan berdasarkan foldernya di dalam disk `public` (`storage/app/public/`):
 
-├── Services/
-├── DTOs/
-```
-
-Responsibilities:
-
-* Daily sales report
-* Monthly sales report
-* Product performance report
+* `heroes/` - Gambar banner/hero section
+* `products/` - Gambar produk
+* `galleries/` - Foto-foto galeri kegiatan/produk
+* `testimonials/` - Foto pemberi ulasan/mitra
+* `teams/` - Foto anggota tim
+* `partners/` - Logo partner/mitra kerjasama
+* `seo/` - Gambar meta Open Graph
 
 ---
 
-# 25. Settings Domain
-
-```text
-Settings/
-
-├── Business/
-├── SEO/
-```
-
----
-
-# 26. Business Settings Module
-
-```text
-Business/
-
-├── Controllers/
-├── Services/
-├── Repositories/
-```
-
-Responsibilities:
-
-* WhatsApp configuration
-* Business email configuration
-* Address configuration
-* Social media configuration
-
----
-
-# 27. SEO Settings Module
-
-```text
-SEO/
-
-├── Controllers/
-├── Services/
-├── Repositories/
-```
-
-Responsibilities:
-
-* Meta title
-* Meta description
-* Meta keywords
-* Open Graph image
-
----
-
-# 28. Route Structure
-
-```text
-routes/
-
-├── web.php
-├── admin.php
-├── auth.php
-├── commerce.php
-```
-
-Responsibilities:
-
-web.php
-
-* Public pages
-
-auth.php
-
-* Authentication
-
-admin.php
-
-* CMS & Admin
-
-commerce.php
-
-* Cart & Checkout
-
----
-
-# 29. View Structure
-
-```text
-resources/views/
-├── layouts/
-│   ├── public.blade.php
-│   └── admin.blade.php
-│
-├── components/
-│   ├── public/
-│   └── admin/
-│
-├── public/
-├── admin/
-```
-
----
-
-# 30. Public Views
-
-```text
-public/
-
-├── home.blade.php
-├── products.blade.php
-├── product-detail.blade.php
-├── cart.blade.php
-```
-
----
-
-# 31. Admin Views
-
-```text
-admin/
-
-├── dashboard/
-├── products/
-├── sales/
-├── benefits/
-├── gallery/
-├── testimonials/
-├── teams/
-├── partners/
-├── settings/
-├── seo/
-```
-
----
-
-# 32. Database Structure
-
-```text
-database/
-
-├── migrations/
-├── seeders/
-├── factories/
-```
-
----
-
-# 33. Seeder Structure
-
-```text
-seeders/
-
-├── UserSeeder.php
-├── HeroSeeder.php
-├── BenefitSeeder.php
-├── ProductSeeder.php
-├── GallerySeeder.php
-├── TestimonialSeeder.php
-├── TeamSeeder.php
-├── PartnerSeeder.php
-```
-
----
-
-# 34. Storage Structure
-
-```text
-storage/app/public/
-
-├── heroes/
-├── products/
-├── galleries/
-├── testimonials/
-├── teams/
-├── partners/
-├── seo/
-```
-
----
-
-# 35. Service Layer Rules
-
-Controller hanya bertanggung jawab:
-
-* menerima request
-* memanggil service
-* mengembalikan response
-
-Business logic harus berada pada Service Layer.
-
-Repository bertanggung jawab terhadap akses data.
-
-Controller tidak boleh mengandung business logic kompleks.
-
----
-
-# 36. Development Standards
-
-Naming Convention:
-
-* Model: PascalCase
-* Controller: PascalCaseController
-* Service: PascalCaseService
-* Repository: PascalCaseRepository
-* Request: StoreEntityRequest / UpdateEntityRequest
-
-Database:
-
-* snake_case
-* plural table name
-
-Routes:
-
-* kebab-case URL
-
----
-
-# 37. MVP Scope Modules
-
-Included:
-
-* Authentication
-* Hero
-* Benefits
-* Products
-* Product Pricing
-* Cart
-* WhatsApp Checkout
-* Gallery
-* Testimonials
-* Team
-* Partners
-* Business Settings
-* SEO Settings
-* Sales Tracking
-* Analytics Dashboard
-
-Excluded:
-
-* Orders
-* Customers
-* Inventory
-* Payment Gateway
-* Blog
-
----
-
-# 38. Future Scalability
-
-Phase 2:
-
-* Order Management
-* Customer Management
-* Inventory Management
-* Blog System
-
-Phase 3:
-
-* Midtrans Integration
-* Xendit Integration
-* Shipping Integration
-* Voucher System
-* Full E-Commerce Platform
-
-Arsitektur saat ini harus mendukung ekspansi tersebut tanpa perubahan struktur besar.
+# 9. MVP Scope Modules
+
+Modul yang diimplementasikan pada fase MVP:
+
+1. **Authentication:** Proteksi admin panel.
+2. **Hero CMS:** Pengelolaan spanduk/slide promo utama halaman depan.
+3. **Benefits CMS:** Fitur keunggulan produk.
+4. **Products Catalog:** Daftar katalog produk.
+5. **Product Pricing:** Pengaturan harga dan diskon produk.
+6. **Cart (Session):** Penampung pilihan belanjaan sementara.
+7. **WhatsApp Checkout:** Konverter data belanja menjadi format pesan teks WhatsApp + tautan API WhatsApp.
+8. **Gallery CMS:** Repositori foto publik.
+9. **Testimonials CMS:** Kelola review pelanggan/mitra.
+10. **Team CMS:** Kelola profil pengurus Clitoria.
+11. **Partners CMS:** Kelola logo kemitraan.
+12. **Business Settings:** Pengaturan kontak WhatsApp, sosial media, dan alamat bisnis.
+13. **SEO Settings:** Manajemen Meta Tag & Open Graph.
+14. **Sales Tracking:** Halaman pencatatan data penjualan manual oleh admin.
+15. **Analytics Dashboard:** Visualisasi grafik laba dan statistik performa produk terlaris.

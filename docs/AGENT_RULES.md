@@ -1,152 +1,73 @@
-# AGENT_RULES.md
+# AGENT_RULES.md - v2.0
 
-# Clitoria Digital Commerce Platform
+# Clitoria AI Agent Execution Rules
 
-## AI Coding Agent Operating Rules
-
-Version: 2.0
+This document defines strict operational rules for AI coding agents.
 
 ---
 
-# TASK VERIFICATION RULE
+# 1. CORE MISSION
 
-Before marking a task as completed, Agent MUST verify:
+AI agent must focus ONLY on:
 
-1. Task output matches TASK_EXECUTION_PLAN.md
-2. Database changes match SCHEMA.md
-3. UI matches DESAIN.md
-4. Architecture matches PROJECT_STRUCTURE.md
-5. Acceptance Criteria pass
-
-If any verification fails:
-
-DO NOT mark task as completed.
+* Current task defined in `docs/CURRENT_SPRINT.md`
+* Keeping documentation in sync
 
 ---
 
-# FILE CREATION RULE
+# 2. CONTEXT AWARENESS
 
-Agent MUST NOT create new files unless:
+Before starting, agent must read:
 
-- Required by current task
-- Required by Laravel convention
-- Defined in PROJECT_STRUCTURE.md
+* `docs/CURRENT_SPRINT.md`
+* `docs/PROJECT_CONTEXT.md`
+* `docs/PROJECT_STRUCTURE.md`
+* `docs/SCHEMA.md`
 
-Do not invent helper classes, manager classes, processor classes, utility classes, or custom architectures.
+Agent must verify the task's validity against `docs/TASK_EXECUTION_PLAN.md`.
 
 ---
 
-# CURRENT SPRINT RULE
+# 3. TASK BOUNDARY RULE
 
-CURRENT_SPRINT.md is the operational source of truth.
+Agent is allowed to:
+
+* Implement ONLY the current task
+* Create/modify files required by the current task
+* Modify the tracking files:
+  - `docs/PROJECT_STATUS.md`
+  - `docs/CHANGELOG.md`
+  - `docs/CURRENT_SPRINT.md`
+
+Agent MUST NOT:
+
+* Modify unrelated files
+* Create speculative code
+* Implement future features
+* Refactor code outside the scope of the current task
+
+---
+
+# 4. CODE STYLE & INTEGRITY
+
+Agent must follow:
+
+* Keep existing code structure
+* Preserve all comments
+* Preserve all docstrings
+* Use standard Laravel 12 features
+* Implement error handling
+* Write clean, readable code
+
+---
+
+# 5. UI DESIGN RULES
+
+UI implementation must follow `docs/DESAIN.md`.
 
 Agent MUST:
 
-1. Read CURRENT_SPRINT.md first
-2. Execute only the Current Task defined inside it
-3. Run validations and testing
-4. Update the project status documents (see DOCUMENTATION UPDATE RULE)
-5. Report completion
-6. Stop
-
-Agent MUST NOT execute the Next Task automatically.
-
----
-
-# DOCUMENTATION UPDATE RULE
-
-Upon completing a task, the developer/agent MUST manually update the following status documents before committing:
-
-1.  **`docs/CURRENT_SPRINT.md`** *(Manual update)*: Update the `PREVIOUS TASK` with the completed task deliverables. Update the `CURRENT TASK`, `CURRENT TASK OBJECTIVE`, `ACCEPTANCE CRITERIA`, and `NEXT TASK` sections to match the next scheduled task from `docs/TASK_EXECUTION_PLAN.md`.
-2.  **`docs/PROJECT_STATUS.md`** *(Manual update)*: Add the completed task ID and name under the correct Epic section.
-3.  **`docs/CHANGELOG.md`**: Insert a new chronological entry at the top of the file using the template, listing what was Added, Changed, and Verified.
-
----
-
-# TASK LOOP PROTOCOL
-
-After task completion:
-
-1. Validate task output (unit tests, manual checks)
-2. Update `docs/CURRENT_SPRINT.md`, `docs/PROJECT_STATUS.md`, and `docs/CHANGELOG.md`
-3. Report completed files and next task
-4. STOP and wait for next instruction
-
-Never execute the next task automatically in the same run.
-
----
-
-# 1. PURPOSE
-
-This document defines the mandatory operating procedures for any AI coding agent working on the Clitoria Digital Commerce Platform.
-
-The objective is to ensure:
-
-* Predictable execution
-* Consistent architecture
-* Zero scope drift
-* Zero unauthorized redesign
-* Safe incremental implementation
-
----
-
-# 2. PROJECT HIERARCHY
-
-When conflicts occur, use the following priority order:
-
-```text
-1. USER INSTRUCTION
-2. AGENT_RULES.md
-3. CURRENT_SPRINT.md
-4. PROJECT_CONTEXT.md
-5. TASK_EXECUTION_PLAN.md
-6. SCHEMA.md
-7. DESAIN.md
-8. PROJECT_STRUCTURE.md
-9. SRS.md
-10. PRD.md
-```
-
----
-
-# 3. MANDATORY READING ORDER
-
-Before implementing ANY task, read:
-
-```text
-STEP 1 → CURRENT_SPRINT.md
-STEP 2 → PROJECT_CONTEXT.md
-STEP 3 → TASK_EXECUTION_PLAN.md
-STEP 4 → SCHEMA.md
-STEP 5 → PROJECT_STRUCTURE.md
-STEP 6 → DESAIN.md
-STEP 7 → Execute task
-```
-
-Skipping any document is prohibited.
-
----
-
-# 4. SINGLE TASK EXECUTION RULE
-
-Agent may execute:
-
-```text
-ONE TASK ONLY
-```
-
-per execution cycle.
-
----
-
-# 5. UI IMPLEMENTATION RULES
-
-DESAIN.md is the UI source of truth.
-
-Agent MUST:
-
-* Follow design tokens
-* Follow spacing system
+* Use Tailwind CSS variables
 * Follow typography scale
 * Follow responsive rules
 * Follow page structures
@@ -202,8 +123,9 @@ Model
 Mandatory:
 
 * Form Requests
-* Service Layer
-* Domain Isolation
+* Service Layer (Business Logic & File Handling)
+* Repository Layer (Database Access / Eloquent Queries)
+* Separation of Concerns
 
 Forbidden:
 
@@ -214,11 +136,9 @@ Forbidden:
 
 ---
 
-# 8. DOMAIN BOUNDARY RULE
+# 8. MODULE DEPENDENCY RULE
 
-The project uses Domain-Oriented Modular Monolith architecture.
-
-Domains:
+The project uses Standard Laravel MVC + Service-Repository architecture with logical module grouping:
 
 ```text
 Auth
@@ -230,11 +150,8 @@ Settings
 
 Agent MUST NOT:
 
-* Mix domain responsibilities
-* Access another domain directly
-* Create cross-domain shortcuts
-
-Use services or repositories when integration is required.
+* Allow direct cross-module database querying using unrelated Models in Services (e.g. `ProductService` querying `Testimonial` model directly).
+* Bypass the Repository layer when accessing other modules' data. If module integration is needed, use the target module's Service or Repository Interface.
 
 ---
 
@@ -298,146 +215,24 @@ Always:
 
 * Use eager loading
 * Paginate admin tables
-* Optimize image loading
-* Avoid N+1 queries
-
-Never:
-
-* Load large datasets without pagination
+* Optimize image sizes
+* Index query filters
 
 ---
 
-# 14. SECURITY RULES
+# 14. DOCUMENTATION SYNC RULE
 
-Mandatory:
+Every task completion must:
 
-* CSRF protection
-* Authorization middleware
-* Input validation
-* Upload validation
-
-Forbidden:
-
-* Raw request injection
-* Unvalidated uploads
-* Unprotected admin routes
+* Update `docs/PROJECT_STATUS.md` (move completed task to completed section)
+* Update `docs/CHANGELOG.md` (add changes under task ID)
+* Propose the next task for `docs/CURRENT_SPRINT.md`
 
 ---
 
-# 15. DEFINITION OF DONE
+# 15. COMMUNICATION STYLE
 
-A task is complete only when:
-
-* Acceptance criteria pass
-* Architecture rules respected
-* SCHEMA.md respected
-* DESAIN.md respected
-* Documentation status files (`CURRENT_SPRINT.md`, `PROJECT_STATUS.md`, `CHANGELOG.md`) updated
-* No unrelated files modified
-* No known errors remain
-
----
-
-# 16. OUTPUT FORMAT
-
-After every task execution, report:
-
-```text
-TASK COMPLETED:
-[Task ID]
-
-ACCEPTANCE CRITERIA:
-✅ Passed
-
-FILES CREATED:
-...
-
-FILES MODIFIED:
-...
-
-CURRENT TASK STATUS:
-Completed
-
-NEXT TASK:
-...
-
-DOCUMENTATION STATUS:
-✅ CURRENT_SPRINT.md updated
-✅ PROJECT_STATUS.md updated
-✅ CHANGELOG.md updated
-
-STOPPED WAITING FOR INSTRUCTION
-```
-
----
-
-# TASK FAILURE PROTOCOL
-
-If blocked:
-
-1. Explain blocker
-2. Explain affected files
-3. Explain missing information
-4. Suggest resolution
-5. STOP
-
-Do not make assumptions.
-Do not continue implementation.
-
----
-
-## Alternative Output (Task Blocked)
-
-If task cannot be completed, report:
-
-```text
-TASK BLOCKED:
-[Task ID]
-
-CURRENT TASK STATUS:
-Blocked
-
-BLOCKER:
-...
-
-AFFECTED FILES:
-...
-
-REQUIRED INFORMATION:
-...
-
-SUGGESTED RESOLUTION:
-...
-
-STOPPED WAITING FOR INSTRUCTION
-```
-
----
-
-# DEFINITION OF READY
-
-A task may start only if:
-
-- Current Task exists in CURRENT_SPRINT.md
-- Task exists in TASK_EXECUTION_PLAN.md
-- Required schema exists in SCHEMA.md
-- Required UI exists in DESAIN.md (if UI task)
-- Dependencies are completed
-
----
-
-# 17. FINAL PRINCIPLE
-
-```text
-Do exactly what the current task requires.
-
-Do not anticipate future tasks.
-
-Do not redesign approved solutions.
-
-Do not expand scope.
-
-Complete.
-Validate.
-Stop.
-```
+* Keep descriptions concise
+* Be direct and clear
+* Do not make assumptions
+* Raise questions immediately if conflict is found

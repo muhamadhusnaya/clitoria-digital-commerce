@@ -88,7 +88,7 @@ Goal: Prepare Laravel project architecture.
 
 | Order | Task | Description | Assignee |
 |-------|------|-------------|----------|
-| 9 | 01.03.01 | Create Domain Structure | Dev 1 |
+| 9 | 01.03.01 | Create Repository-Service Structure | Dev 1 |
 | 10 | 01.03.02 | Create Base Service Layer | Dev 1 |
 | 11 | 01.03.03 | Create Base Repository Layer | Dev 1 |
 | 12 | 01.03.04 | Configure Route Structure | Dev 1 |

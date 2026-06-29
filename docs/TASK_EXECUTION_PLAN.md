@@ -88,7 +88,7 @@ Goal: Prepare Laravel project architecture.
 
 | Order | Task | Description | Assignee |
 |-------|------|-------------|----------|
-| 9 | 01.03.01 | Create Domain Structure | Dev 1 |
+| 9 | 01.03.01 | Create Repository-Service Structure | Dev 1 |
 | 10 | 01.03.02 | Create Base Service Layer | Dev 1 |
 | 11 | 01.03.03 | Create Base Repository Layer | Dev 1 |
 | 12 | 01.03.04 | Configure Route Structure | Dev 1 |
@@ -376,10 +376,8 @@ Goal: All business configuration manageable without coding.
 | 118 | 07.01.01 | Settings Migration | Dev 2 |
 | 119 | 07.01.02 | Settings Repository | Dev 2 |
 | 120 | 07.01.03 | Settings Service | Dev 2 |
-| 121 | 07.01.04 | WhatsApp Number Setting | Dev 2 |
-| 122 | 07.01.05 | Business Email Setting | Dev 2 |
-| 123 | 07.01.06 | Address Setting | Dev 2 |
-| 124 | 07.01.07 | Social Media Settings | Dev 2 |
+| 121 | 07.01.04 | Business Settings Backend | Dev 2 |
+| 122 | 07.01.05 | Business Settings CRUD UI | Dev 4 |
 
 ---
 
@@ -387,10 +385,8 @@ Goal: All business configuration manageable without coding.
 
 | Order | Task | Description | Assignee |
 |-------|------|-------------|----------|
-| 125 | 07.02.01 | Meta Title | Dev 2 |
-| 126 | 07.02.02 | Meta Description | Dev 2 |
-| 127 | 07.02.03 | Meta Keywords | Dev 2 |
-| 128 | 07.02.04 | Open Graph Image | Dev 2 |
+| 123 | 07.02.01 | SEO Settings Backend | Dev 2 |
+| 124 | 07.02.02 | SEO Settings CRUD UI | Dev 4 |
 
 ---
 
@@ -398,9 +394,7 @@ Goal: All business configuration manageable without coding.
 
 | Order | Task | Description | Assignee |
 |-------|------|-------------|----------|
-| 129 | 07.03.01 | SEO Blade Components | Dev 2 |
-| 130 | 07.03.02 | Dynamic Meta Tags | Dev 2 |
-| 131 | 07.03.03 | Dynamic OG Tags | Dev 2 |
+| 125 | 07.03.01 | SEO Frontend Implementation | Dev 2 |
 
 ---
 
@@ -414,12 +408,12 @@ Goal: Application ready for production environment.
 
 | Order | Task | Description | Assignee |
 |-------|------|-------------|----------|
-| 132 | 08.01.01 | Authentication Testing | Dev 1 |
-| 133 | 08.01.02 | CMS Testing | Dev 1 |
-| 134 | 08.01.03 | Product Testing | Dev 1 |
-| 135 | 08.01.04 | Cart Testing | Dev 1 |
-| 136 | 08.01.05 | Checkout Testing | Dev 1 |
-| 137 | 08.01.06 | Sales Testing | Dev 1 |
+| 126 | 08.01.01 | Authentication Testing | Dev 1 |
+| 127 | 08.01.02 | CMS Testing | Dev 1 |
+| 128 | 08.01.03 | Product Testing | Dev 1 |
+| 129 | 08.01.04 | Cart Testing | Dev 1 |
+| 130 | 08.01.05 | Checkout Testing | Dev 1 |
+| 131 | 08.01.06 | Sales Testing | Dev 1 |
 
 ---
 
@@ -427,11 +421,11 @@ Goal: Application ready for production environment.
 
 | Order | Task | Description | Assignee |
 |-------|------|-------------|----------|
-| 138 | 08.02.01 | Query Optimization | Dev 1 |
-| 139 | 08.02.02 | Eager Loading Audit | Dev 1 |
-| 140 | 08.02.03 | Image Optimization | Dev 1 |
-| 141 | 08.02.04 | Lazy Loading | Dev 1 |
-| 142 | 08.02.05 | Caching Strategy | Dev 1 |
+| 132 | 08.02.01 | Query Optimization | Dev 1 |
+| 133 | 08.02.02 | Eager Loading Audit | Dev 1 |
+| 134 | 08.02.03 | Image Optimization | Dev 1 |
+| 135 | 08.02.04 | Lazy Loading | Dev 1 |
+| 136 | 08.02.05 | Caching Strategy | Dev 1 |
 
 ---
 
@@ -439,10 +433,10 @@ Goal: Application ready for production environment.
 
 | Order | Task | Description | Assignee |
 |-------|------|-------------|----------|
-| 143 | 08.03.01 | CSRF Validation | Dev 1 |
-| 144 | 08.03.02 | XSS Protection | Dev 1 |
-| 145 | 08.03.03 | Authorization Review | Dev 1 |
-| 146 | 08.03.04 | Upload Validation | Dev 1 |
+| 137 | 08.03.01 | CSRF Validation | Dev 1 |
+| 138 | 08.03.02 | XSS Protection | Dev 1 |
+| 139 | 08.03.03 | Authorization Review | Dev 1 |
+| 140 | 08.03.04 | Upload Validation | Dev 1 |
 
 ---
 
@@ -450,12 +444,12 @@ Goal: Application ready for production environment.
 
 | Order | Task | Description | Assignee |
 |-------|------|-------------|----------|
-| 147 | 08.04.01 | VPS Setup | Dev 1 |
-| 148 | 08.04.02 | Environment Setup | Dev 1 |
-| 149 | 08.04.03 | Database Migration | Dev 1 |
-| 150 | 08.04.04 | Storage Link | Dev 1 |
-| 151 | 08.04.05 | SSL Configuration | Dev 1 |
-| 152 | 08.04.06 | Backup Strategy | Dev 1 |
+| 141 | 08.04.01 | VPS Setup | Dev 1 |
+| 142 | 08.04.02 | Environment Setup | Dev 1 |
+| 143 | 08.04.03 | Database Migration | Dev 1 |
+| 144 | 08.04.04 | Storage Link | Dev 1 |
+| 145 | 08.04.05 | SSL Configuration | Dev 1 |
+| 146 | 08.04.06 | Backup Strategy | Dev 1 |
 
 ---
 

@@ -10,40 +10,41 @@
 
 ## 📌 IDENTITAS TUGAS
 
-*   **Fase Proyek:** PHASE 2 — CMS Module Development
-*   **Epic Aktif:** EPIC 04 — CMS
-*   **Fitur Aktif:** FEATURE 04.01 — Hero Management
-*   **Tugas Aktif:** TASK 04.01.01 — Hero Migration
+* **Fase Proyek:** PHASE 2 — CMS Module Development
+* **Epic Aktif:** EPIC 04 — CMS
+* **Fitur Aktif:** FEATURE 04.05 — Team Management
+* **Tugas Aktif:** TASK 04.05.05 — Team CRUD UI
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini menandai dimulainya Epic CMS, khususnya pada fitur pengaturan Hero (komponen visual utama di halaman publik). Tugas pertama ini bertujuan untuk membuat skema database dan file migration.
+Tugas ini menjadi etalase akhir dari keseluruhan pengembangan *Backend* modul ini. Berhubung rekan *Frontend A* (Dev 4) mungkin mengerjakan hal lain, Anda diizinkan untuk membangun rute (*Route*), *Controller*, dan antarmuka *Blade* untuk administrasi (CRUD) dari `Team`.
 
 **Cakupan Pekerjaan:**
-- Membuat *migration* untuk tabel `heroes` sesuai definisi di `SCHEMA.md`.
-- Memastikan struktur kolom dan tipe data tepat.
+- Menginisiasi `TeamController` yang akan menggunakan `TeamService`.
+- Membuat fail-fail *view* (seperti `index.blade.php`, `create.blade.php`, `edit.blade.php`) di dalam folder `resources/views/admin/teams`.
+- Mendaftarkan sekumpulan rute *resource* untuk administrasi entitas `Team` di fail *routes/web.php*.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] File *migration* untuk tabel `heroes` berhasil dibuat.
-- [ ] Menjalankan `php artisan migrate` mengeksekusi migrasi tanpa *error*.
-- [ ] Struktur tabel database sesuai dengan referensi.
+- [ ] Controller `TeamController` tersedia dan seluruh fungsinya terhubung ke lapisan _Service_.
+- [ ] Folder _views_ untuk entitas tim (`admin/teams`) tersedia dan mampu menampilkan elemen antarmuka yang kohesif dengan desain sistem.
+- [ ] Rute CRUD sukses terdaftar dan tidak *conflict* dengan jalur URL yang lain.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 03.01.05 — Profile Management (Backend)
-*   **Hasil Kerja (Deliverables):**
-    - Menyelesaikan fungsionalitas manajemen profil admin dan menuntaskan EPIC 03.
+* **Tugas:** TASK 04.05.04 — Team Service
+* **Hasil Kerja (Deliverables):**
+    - Abstraksi logika *Service* siap pakai (`TeamService`) yang membalut interaksi file `photo` serta mendelegasikan tugas ke repositori.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 04.01.02 — Hero Model
+* **Tugas:** EPIC 04.06 — Partner Management (TASK 04.06.01 - Partner Migration)

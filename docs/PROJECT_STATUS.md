@@ -18,7 +18,7 @@
 - 01.02.01 — Install Tailwind CSS
 - 01.02.02 — Install AlpineJS
 - 01.02.03 — Configure Frontend Build Pipeline
-- 01.03.01 — Create Repository-Service Structure
+- 01.03.01 — Create Domain Structure
 - 01.03.02 — Create Base Service Layer
 - 01.03.03 — Create Base Repository Layer
 - 01.03.04 — Configure Route Structure

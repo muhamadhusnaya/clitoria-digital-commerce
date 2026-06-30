@@ -18,6 +18,10 @@ class SettingSeeder extends Seeder
             'instagram_url' => '',
             'address' => '',
             'google_maps_embed' => '',
+            'seo_meta_title' => '',
+            'seo_meta_description' => '',
+            'seo_meta_keywords' => '',
+            'seo_og_image' => '',
         ];
 
         foreach ($settings as $key => $value) {

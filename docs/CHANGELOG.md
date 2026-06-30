@@ -24,6 +24,14 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 07.02.01 — SEO Settings Backend
+
+Date: 2026-06-30
+
+### Added
+- Memperbarui `SettingSeeder` dengan menambahkan kunci konfigurasi SEO (`seo_meta_title`, `seo_meta_description`, `seo_meta_keywords`, `seo_og_image`).
+- Membuat `UpdateSeoSettingRequest` untuk memvalidasi pembatasan karakter form SEO (misalnya meta title maksimal 60 karakter) dan validasi unggahan `og_image`.
+
 ## TASK 07.01.04 — Business Settings Backend
 
 Date: 2026-06-29

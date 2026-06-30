@@ -71,6 +71,7 @@
 - 07.01.02 — Settings Repository
 - 07.01.03 — Settings Service
 - 07.01.04 — Business Settings Backend
+- 07.02.01 — SEO Settings Backend
 
 ---
 

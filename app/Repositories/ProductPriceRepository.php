@@ -56,4 +56,17 @@ class ProductPriceRepository implements ProductPriceRepositoryInterface
             ->latest()
             ->get();
     }
+    public function getLowestPriceByProduct(int $productId)
+    {
+    return ProductPrice::where('product_id', $productId)
+        ->orderBy('price')
+        ->first();
+    }
+
+    public function getHighestPriceByProduct(int $productId)
+    {
+    return ProductPrice::where('product_id', $productId)
+        ->orderByDesc('price')
+        ->first();
+    }
 }

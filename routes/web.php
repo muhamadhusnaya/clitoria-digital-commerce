@@ -8,6 +8,10 @@ Route::name('public.')->group(function () {
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
+
+    Route::get('/dummy-public', function () {
+        return view('dummy-public');
+    })->name('dummy-public');
 });
 
 // Admin Routes

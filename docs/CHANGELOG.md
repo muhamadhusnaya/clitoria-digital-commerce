@@ -22,7 +22,306 @@ Date: YYYY-MM-DD
 ### Verified
 - Item
 
+## TASK 02.03.04 — Footer
+
+Date: 2026-07-01
+
+### Added
+- Pembuatan struktur antarmuka `<x-public-footer />` (`public-footer.blade.php`) di _layer components_. Komponen terdiri dari matriks _flex_ & _grid_ dengan 4 kolom utama (_Brand_, _Quick Links_, _Support_, _Newsletter & Admin Link_).
+
+### Changed
+- Perombakan _master layout_ (`public.blade.php`) dengan mencabut _placeholder yield_ usang dan meletakkan komponen _footer_ baru tepat di bawah badan konten utama.
+
+### Verified
+- Kompilasi blade `view:cache` selesai mulus mengonfirmasi tag Blade tidak mengalami kendala penulisan.
+
 -->
+
+## TASK 02.03.03 — Navigation
+
+Date: 2026-07-01
+
+### Added
+- Komponen navigasi bawah layar gawai `<x-mobile-bottom-nav />` di `resources/views/components/mobile-bottom-nav.blade.php`. Menggunakan sistem *fixed-bottom* dengan ikon Material *outlined* vs *filled* berdasarkan kecocokan parameter *URL route*.
+
+### Changed
+- Pembaruan `public.blade.php` untuk menaruh `x-mobile-bottom-nav` dan memberi ruang _padding-bottom_ (20 unit / 5rem) bagi `<main>` pada _mobile_ viewport.
+- Modifikasi `public-header.blade.php` untuk membaca URI state aktif via `request()->routeIs(...)` sebagai pelengkap variabel properti statis.
+
+### Verified
+- Kompilasi blade `view:cache` selesai tanpa _error_ tag HTML.
+
+## TASK 02.03.02 — Public Header
+
+Date: 2026-07-01
+
+### Added
+- Pembuatan *blade component* `<x-public-header />` di `resources/views/components/public-header.blade.php`.
+- Header memiliki fitur *glassmorphism* dan animasi efek bayangan pada saat *scrolling* menggunakan AlpineJS.
+- Penambahan tombol menu _hamburger_ dengan _drawer_ vertikal (animasi _slide-in_) khusus untuk penayangan _mobile_.
+- Variabel `$cartCount` untuk menampung *badge* indikator keranjang belanja (saat ini *default* bernilai statis `0`).
+
+### Changed
+- Modifikasi master layout (`resources/views/layouts/public.blade.php`) untuk menggunakan `<x-public-header />` dan menambahkan *padding-top* pada badan utama konten.
+- Penghapusan konfigurasi header statis dari dalam rute *dummy testing* (`resources/views/dummy-public.blade.php`).
+
+### Verified
+- Komponen dan halaman terkini divalidasi keutuhan strukturnya dengan `php artisan view:cache` tanpa kendala.
+
+## TASK 02.03.01 — Public Master Layout
+
+Date: 2026-07-01
+
+### Added
+- File master layout publik di `resources/views/layouts/public.blade.php`.
+- Kerangka HTML5 standar dengan meta tags, integrasi Vite (CSS dan JS), font Inter, dan Material Symbols.
+- Kontainer yield dan slot untuk konten dinamis.
+- Rute dan view pengujian dummy (`dummy-public.blade.php`).
+
+### Verified
+- Kompilasi blade berjalan tanpa error via `php artisan view:cache`.
+
+## TASK XX.XX.XX — Nama Tugas
+
+Date: YYYY-MM-DD
+
+### Added
+- Item
+
+### Changed
+- Item
+
+### Removed
+- Item
+
+### Verified
+- Item
+
+-->
+
+## TASK 05.01.06 — Product Image Upload
+
+Date: 2026-06-29
+
+### Added
+- Pembentukan `UploadTrait` guna merangkum operasi penyimpanan (`store`) dan pembersihan data rongsokan (`delete`) agar siap diadaptasi oleh kelas *Service* lain.
+
+### Changed
+- Modifikasi logika fungsi `store` dan `update` dalam `ProductService` yang kini mendelegasikan wewenang manajemen *file image* sepenuhnya pada *Trait* abstrak.
+
+## TASK 05.01.04 — Product Service
+
+Date: 2026-06-29
+
+### Added
+- Penyediaan `ProductService` sebagai pengendali pusat logika bisnis spesifik untuk modul `Product`.
+- Injeksi dependensi absolut menuju `ProductRepositoryInterface`.
+- Penimpaan logika _store_ dan _update_ untuk mengotomatisasi penanganan unggahan fail `image` sekaligus pengelolaan pembersihan (*garbage cleanup*) berkas yang tertinggal pada memori diska.
+
+## TASK 05.01.03 — Product Repository
+
+Date: 2026-06-29
+
+### Added
+- Pendirian abstraksi _database_ `ProductRepositoryInterface`.
+- Implementasi repositori sesungguhnya pada `ProductRepository` yang menampung model `Product`.
+- Injeksi dependensi (*Service Binding*) dari `ProductRepositoryInterface` ke `ProductRepository` pada wadah `AppServiceProvider`.
+
+## TASK 05.01.02 — Product Model
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan kelas model `Product` untuk modul Commerce.
+- Penentuan atribut perlindungan pengisian massal (`$fillable`) terhadap `name`, `slug`, `short_description`, `description`, `image`, dan `status`.
+- Penanaman _trait_ `SoftDeletes` untuk menyokong fungsionalitas pemulihan dan peninjauan riwayat data.
+
+## TASK 05.01.01 — Product Migration
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan file migrasi untuk entitas produk `products` pada sub-sistem _Commerce_.
+- Penambahan struktur kolom `name`, `slug` (unique), `short_description`, `description`, `image`, dan `status`.
+- Penambahan fitur keamanan dan integritas pangkalan data melalui *index* pada kolom `status` serta penerapan `softDeletes()`.
+
+## TASK 04.05.04 — Team Service
+
+Date: 2026-06-29
+
+### Added
+- Penyediaan `TeamService` sebagai pelayan logika bisnis tim yang bernaung pada `BaseService`.
+- Penyuntikan dependensi `TeamRepositoryInterface` via konstruktor.
+- Penimpaan logika _store_, _update_, dan _delete_ untuk merealisasikan mekanisme kelola dan pembersihan fail fisik (foto anggota tim) dengan mengadopsi _facade Storage_ secara dinamis.
+
+## TASK 04.05.03 — Team Repository
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan antarmuka `TeamRepositoryInterface` yang menuruni standar `BaseRepositoryInterface`.
+- Implementasi fungsional via kelas `TeamRepository` diiringi integrasi abstraksi model `Team`.
+- Registrasi pola _Service-Repository_ pada penampung modul kerangka kerja di `AppServiceProvider`.
+
+## TASK 04.05.02 — Team Model
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan kelas model `Team` sebagai entitas Eloquent di `app/Models`.
+- Atribut pengamanan *mass-assignment* untuk properti `name`, `position`, `photo`, `instagram`, dan `linkedin`.
+- Trait `SoftDeletes` untuk mengamankan data yang dihapus tanpa merusaknya secara absolut.
+
+## TASK 04.05.01 — Team Migration
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan tabel migrasi baru untuk entitas `teams` guna menyimpan data anggota tim organisasi.
+- Pendaftaran atribut *name*, *position*, *photo*, beserta tautan media sosial (*instagram*, *linkedin*).
+- Implementasi dukungan `softDeletes` untuk proteksi penghapusan data.
+
+## TASK 04.04.02 — Testimonial Model
+
+Date: 2026-06-28
+
+### Added
+- Model `Testimonial` di lapis aplikasi `app/Models`.
+- Pengaturan keamanan *mass-assignment* `$fillable` untuk membatasi masukan atribut tabel secara masal.
+- Proteksi `SoftDeletes` untuk menyokong operasi penghapusan tanpa menghilangkan data dari pangkalan data.
+
+## TASK 04.04.01 — Testimonial Migration
+
+Date: 2026-06-28
+
+### Added
+- Berkas migrasi `create_testimonials_table` yang mendefinisikan skema tabel penyimpan testimoni.
+- Kolom esensial seperti nama, jabatan, perusahaan, konten testimoni, gambar, status publikasi, dan fitur _soft delete_.
+
+## TASK 04.03.06 — Gallery Image Upload
+
+Date: 2026-06-28
+
+### Changed
+- Meng-*override* metode `create`, `update`, dan `delete` pada `GalleryService` dengan integrasi `UploadTrait`.
+- Menambahkan prosedur penghapusan *file* usang setiap kali terjadi pergantian gambar atau penghapusan data.
+
+## TASK 04.03.04 — Gallery Service
+
+Date: 2026-06-28
+
+### Added
+- Pembuatan kelas `GalleryService` di lapis aplikasi `app/Services`.
+- Menjadikan `GalleryService` turunan dari `BaseService`.
+- Penyuntikan `GalleryRepositoryInterface` ke dalam `GalleryService` guna kelancaran mekanisme CRUD.
+
+## TASK 04.03.03 — Gallery Repository
+
+Date: 2026-06-28
+
+### Added
+- Pembuatan antarmuka `GalleryRepositoryInterface`.
+- Kelas `GalleryRepository` untuk meng-handle eksekusi _query_ berbasis Eloquent.
+- Binding dependensi di dalam `AppServiceProvider` guna merekatkan *Repository Pattern*.
+
+## TASK 04.03.02 — Gallery Model
+
+Date: 2026-06-28
+
+### Added
+- Membuat `Gallery` model di `app/Models`.
+- Mengimplementasikan `SoftDeletes` dan `$fillable` fields untuk entitas Gallery.
+
+## TASK 04.03.01 — Gallery Migration
+
+Date: 2026-06-28
+
+### Added
+- Berkas migrasi `create_galleries_table` untuk pembentukan tabel *galleries*.
+- Konfigurasi struktur kolom `image`, `title`, `description`, `status` dengan indeks dan fitur `softDeletes`.
+
+## TASK 04.02.06 — Benefit Ordering
+
+Date: 2026-06-28
+
+### Added
+- Migrasi baru `add_order_number_to_benefits_table` untuk penambahan atribut urutan.
+- `updateOrder` fungsionalitas di `BenefitService` untuk reposisi hierarki.
+- Atribut `order_number` ke dalam list `$fillable` Model `Benefit`.
+
+## TASK 04.02.04 — Benefit Service
+
+Date: 2026-06-28
+
+### Added
+- Membuat `BenefitService` di `app/Services`.
+- Menghubungkan *Repository* `BenefitRepositoryInterface` ke dalam ekosistem servis.
+- Menurunkan karakteristik fungsional (CRUD) dari `BaseService`.
+
+## TASK 04.02.03 — Benefit Repository
+
+Date: 2026-06-28
+
+### Added
+- Membuat `BenefitRepositoryInterface` di `app/Repositories/Contracts`.
+- Mengimplementasikan `BenefitRepository` dengan metode *Dependency Injection* ke modul `Benefit`.
+- Mengonfigurasi `RepositoryServiceProvider` dengan *binding* interface-ke-implementasi (membuat ulang class Provider karena migrasi branch/lingkungan lokal).
+
+## TASK 04.02.02 — Benefit Model
+
+Date: 2026-06-28
+
+### Added
+- Membuat file *Model* `Benefit.php`.
+- Menentukan tipe perlindungan *mass-assignment* pada properti `$fillable` (`title`, `icon`, `status`) bersama penambahan pustaka/factory yang dibutuhkan.
+
+## TASK 04.02.01 — Benefit Migration
+
+Date: 2026-06-28
+
+### Added
+- Membuat file *migration* untuk inisialisasi tabel `benefits` (`2026_06_28_070838_create_benefits_table.php`).
+- Mendefinisikan kolom spesifik (`title`, `icon`, `status`) yang mematuhi rujukan skema *database*.
+
+## TASK 04.01.06 — Hero Image Upload
+
+Date: 2026-06-28
+
+### Added
+- Membuat *trait* reusabel `UploadTrait` untuk membantu pemrosesan simpan/hapus file.
+- Mengintegrasikan fungsi unggah dan hapus otomatis (pembersihan gambar usang/yatim) di `HeroService`.
+
+## TASK 04.01.04 — Hero Service
+
+Date: 2026-06-28
+
+### Added
+- Membuat `HeroService` yang mewarisi `BaseService`.
+- Mengimplementasikan logika operasional awal (CRUD) dengan menginjeksi antarmuka repositori pahlawan (Hero).
+
+## TASK 04.01.03 — Hero Repository
+
+Date: 2026-06-28
+
+### Added
+- Membuat `HeroRepositoryInterface` yang mengekstensi kontrak *BaseRepository*.
+- Membuat kelas `HeroRepository` yang mengimplementasikan manajemen data `Hero`.
+- Membuat dan mengonfigurasi `RepositoryServiceProvider` (dan mendaftarkannya di struktur Laravel 11) untuk menangani injeksi dependensi.
+
+## TASK 04.01.02 — Hero Model
+
+Date: 2026-06-28
+
+### Added
+- Membuat model Eloquent `Hero` (`app/Models/Hero.php`) dan mendeklarasikan atribut `$fillable` secara definitif sesuai skema yang telah dirancang.
+- Mengonfirmasi validitas sintaks *class* `Hero` melalui uji CLI `php -l`.
+
+## TASK 04.01.01 — Hero Migration
+
+Date: 2026-06-28
+
+### Added
+- Membuat *file migration* untuk tabel `heroes` dengan struktur yang mendefinisikan *primary key*, `title`, `subtitle`, `image`, `button_text`, `button_link`, dan `timestamps`.
 
 ## TASK 03.01.05 — Profile Management (Backend)
 

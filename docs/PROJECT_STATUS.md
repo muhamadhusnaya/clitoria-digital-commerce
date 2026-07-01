@@ -18,11 +18,20 @@
 - 01.02.01 — Install Tailwind CSS
 - 01.02.02 — Install AlpineJS
 - 01.02.03 — Configure Frontend Build Pipeline
-- 01.03.01 — Create Repository-Service Structure
+- 01.03.01 — Create Domain Structure
 - 01.03.02 — Create Base Service Layer
 - 01.03.03 — Create Base Repository Layer
 - 01.03.04 — Configure Route Structure
 - 01.03.05 — Configure Shared Helpers
+
+---
+
+## 🎨 EPIC 02 — UI FOUNDATION
+
+- 02.03.01 — Public Master Layout
+- 02.03.02 — Public Header
+- 02.03.03 — Navigation
+- 02.03.04 — Footer
 
 ---
 
@@ -32,6 +41,42 @@
 - 03.01.03 — Configure Forgot Password (Backend)
 - 03.01.04 — Configure Email Verification (Backend)
 - 03.01.05 — Profile Management (Backend)
+
+---
+
+## 🛒 EPIC 05 — COMMERCE
+
+- 05.01.01 — Product Migration
+- 05.01.02 — Product Model
+- 05.01.03 — Product Repository
+- 05.01.04 — Product Service
+- 05.01.06 — Product Image Upload
+
+---
+
+## 📝 EPIC 04 — CMS
+
+- 04.01.01 — Hero Migration
+- 04.01.02 — Hero Model
+- 04.01.03 — Hero Repository
+- 04.01.04 — Hero Service
+- 04.01.06 — Hero Image Upload
+- 04.02.01 — Benefit Migration
+- 04.02.02 — Benefit Model
+- 04.02.03 — Benefit Repository
+- 04.02.04 — Benefit Service
+- 04.02.06 — Benefit Ordering
+- 04.03.01 — Gallery Migration
+- 04.03.02 — Gallery Model
+- 04.03.03 — Gallery Repository
+- 04.03.04 — Gallery Service
+- 04.03.06 — Gallery Image Upload
+- 04.04.01 — Testimonial Migration
+- 04.04.02 — Testimonial Model
+- 04.05.01 — Team Migration
+- 04.05.02 — Team Model
+- 04.05.03 — Team Repository
+- 04.05.04 — Team Service
 
 ---
 

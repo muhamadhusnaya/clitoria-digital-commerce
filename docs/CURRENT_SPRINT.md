@@ -10,40 +10,43 @@
 
 ## 📌 IDENTITAS TUGAS
 
-*   **Fase Proyek:** PHASE 2 — CMS Module Development
-*   **Epic Aktif:** EPIC 04 — CMS
-*   **Fitur Aktif:** FEATURE 04.01 — Hero Management
-*   **Tugas Aktif:** TASK 04.01.01 — Hero Migration
+* **Fase Proyek:** PHASE 1 — UI & Layout Foundation
+* **Epic Aktif:** EPIC 02 — UI FOUNDATION
+* **Fitur Aktif:** FEATURE 02.03 — Public Layout
+* **Tugas Aktif:** TASK 02.03.05 — WhatsApp CTA
+* **Assignee:** Dev 5 (Cynthia)
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini menandai dimulainya Epic CMS, khususnya pada fitur pengaturan Hero (komponen visual utama di halaman publik). Tugas pertama ini bertujuan untuk membuat skema database dan file migration.
+Tugas ini merupakan tahap terakhir dari fitur tata letak publik (Public Layout). Objektif utamanya adalah merancang tombol aksi melayang (Floating Action Button) spesifik untuk memicu komunikasi langsung via WhatsApp.
 
 **Cakupan Pekerjaan:**
-- Membuat *migration* untuk tabel `heroes` sesuai definisi di `SCHEMA.md`.
-- Memastikan struktur kolom dan tipe data tepat.
+- Mengembangkan komponen `<x-whatsapp-cta />` yang disisipkan di dalam master layout publik.
+- Mengimplementasikan tata letak melayang (`fixed bottom-X right-X`) dengan properti _z-index_ tinggi.
+- Mengakomodasi tombol dengan ikon WhatsApp SVG.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] File *migration* untuk tabel `heroes` berhasil dibuat.
-- [ ] Menjalankan `php artisan migrate` mengeksekusi migrasi tanpa *error*.
-- [ ] Struktur tabel database sesuai dengan referensi.
+- [ ] Komponen tombol WhatsApp CTA berhasil dirangkai menjadi komponen mandiri.
+- [ ] Komponen diintegrasikan dan muncul pada *master layout* `public.blade.php`.
+- [ ] Gaya visual telah menggunakan rona hijau WhatsApp dengan ikon yang jelas (sesuai `docs/DESAIN.md`).
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 03.01.05 — Profile Management (Backend)
-*   **Hasil Kerja (Deliverables):**
-    - Menyelesaikan fungsionalitas manajemen profil admin dan menuntaskan EPIC 03.
+* **Tugas:** TASK 02.03.04 — Footer
+* **Hasil Kerja (Deliverables):**
+    - Merealisasikan `<x-public-footer>` dan mengaitkannya di bagian bawah dari *master layout*.
+    - Penerapan palet `bg-surface-container-highest` dengan struktur layout 4 kolom responsif.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 04.01.02 — Hero Model
+* **Tugas:** TASK 02.04.01 — Admin Layout (Dev 4) atau modul lain sesuai eksekusi tim.

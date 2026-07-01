@@ -68,4 +68,42 @@ class SalesRepository implements SalesRepositoryInterface
             ->when($endDate, fn ($query) => $query->whereDate('sale_date', '<=', $endDate))
             ->count();
     }
+    public function getAverageOrderValue(?string $startDate = null, ?string $endDate = null)
+    {
+    return Sale::query()
+        ->when($startDate, fn ($query) => $query->whereDate('sale_date', '>=', $startDate))
+        ->when($endDate, fn ($query) => $query->whereDate('sale_date', '<=', $endDate))
+        ->avg('total_amount') ?? 0;
+    }
+
+    public function getTotalItemsSold(?string $startDate = null, ?string $endDate = null)
+    {
+    return SalesItem::query()
+        ->whereHas('sale', function ($query) use ($startDate, $endDate) {
+            $query
+                ->when($startDate, fn ($query) => $query->whereDate('sale_date', '>=', $startDate))
+                ->when($endDate, fn ($query) => $query->whereDate('sale_date', '<=', $endDate));
+        })
+        ->sum('qty');
+    }
+
+        public function getProductRanking(?string $startDate = null, ?string $endDate = null, int $limit = 10)
+    {
+    return SalesItem::query()
+        ->selectRaw('
+            product_id,
+            product_name,
+            SUM(qty) as total_qty,
+            SUM(subtotal) as total_revenue
+        ')
+        ->whereHas('sale', function ($query) use ($startDate, $endDate) {
+            $query
+                ->when($startDate, fn ($query) => $query->whereDate('sale_date', '>=', $startDate))
+                ->when($endDate, fn ($query) => $query->whereDate('sale_date', '<=', $endDate));
+        })
+        ->groupBy('product_id', 'product_name')
+        ->orderByDesc('total_revenue')
+        ->limit($limit)
+        ->get();
+    }
 }

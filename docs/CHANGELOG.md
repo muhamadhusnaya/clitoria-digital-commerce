@@ -24,6 +24,16 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 05.01.05 — Product CRUD UI
+
+Date: 2026-07-03
+
+### Added
+- Membuat `ProductController` untuk menangani *request* antarmuka produk.
+- Menambahkan rute *resource* untuk produk di `routes/web.php` di bawah area *admin*.
+- Membuat form requests `StoreProductRequest` dan `UpdateProductRequest` untuk validasi form pengisian produk.
+- Mengimplementasikan tampilan `index.blade.php`, `create.blade.php`, dan `edit.blade.php` di `resources/views/admin/products` dengan komponen Breeze dan styling Tailwind CSS standar.
+
 ## TASK 05.01.06 — Product Image Upload
 
 Date: 2026-06-29

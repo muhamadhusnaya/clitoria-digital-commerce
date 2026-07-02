@@ -42,9 +42,29 @@
 - 05.01.03 — Product Repository
 - 05.01.04 — Product Service
 - 05.01.06 — Product Image Upload
+- 05.02.01 — Product Price Migration
+- 05.02.02 — Product Price CRUD
+- 05.02.03 — Variant Support
+- 05.02.04 — Price Calculation
+- 05.04.01 — Session Cart Service
+- 05.04.05 — Cart Summary
+- 05.05.01 — WhatsApp Message Generator
 
 ---
+## 📝  EPIC 06 — ANALYTICS
 
+- 06.01.01 — Sales Migration
+- 06.01.02 — Sales Item Migration
+- 06.01.03 — Sales Repository
+- 06.01.04 — Sales Service
+- 06.02.02 — Revenue Metrics
+- 06.02.03 — Sales Metrics
+- 06.02.04 — Product Ranking
+- 06.03.01 — Daily Report
+- 06.03.02 — Monthly Report
+- 06.03.03 — Revenue Summary
+- 06.03.04 — Product Performance
+---
 ## 📝 EPIC 04 — CMS
 
 - 04.01.01 — Hero Migration

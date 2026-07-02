@@ -11,91 +11,44 @@
 ## 📌 IDENTITAS TUGAS
 
 * **Fase Proyek:** PHASE 2 — CMS Module Development
-* **Epic Aktif:** EPIC 04 — CMS
-* **Fitur Aktif:** FEATURE 04.06 — Partner Management
-* **Tugas Aktif:** TASK 04.06.03 — Partner Repository
-
----
-
-## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS# CURRENT_SPRINT.md — Tugas Aktif Saat Ini
-
-> [!NOTE]
-> **PANDUAN UNTUK DEVELOPER & AI AGENT:**
-> * File ini berisi **SATU (1) TUGAS SAJA** yang sedang dikerjakan sekarang.
-> * Update file ini secara manual di branch Anda saat mulai mengerjakan tugas baru dari `TASK_EXECUTION_PLAN.md`.
-> * Jangan pernah mengerjakan tugas di luar apa yang tertulis di dokumen ini.
-
----
-
-## 📌 IDENTITAS TUGAS
-
-* **Fase Proyek:** PHASE 2 — CMS Module Development
-* **Epic Aktif:** EPIC 04 — CMS
-* **Fitur Aktif:** FEATURE 04.06 — Partner Management
-* **Tugas Aktif:** TASK 04.06.04 — Partner Service
+* **Epic Aktif:** EPIC 04 — CMS[cite: 1]
+* **Fitur Aktif:** FEATURE 04.06 — Partner Management[cite: 1]
+* **Tugas Aktif:** TASK 04.06.05 — Partner CRUD UI[cite: 1]
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini bertujuan untuk membangun *Service Layer* (`PartnerService`) yang akan menangani seluruh alur *business logic* terkait manajemen data Partner. Lapis ini berfungsi memproses aturan bisnis sebelum data dilempar ke lapis penyimpanan.
+Tugas ini berfokus pada pembuatan antarmuka pengguna (UI) di halaman Admin untuk mengelola data Partner (Mitra Kerja/Sponsor). Halaman ini akan menjadi tempat admin menambah, mengedit, melihat, dan menghapus profil mitra yang akan ditampilkan di halaman publik.
 
 **Cakupan Pekerjaan:**
-- Membangun berkas kelas `PartnerService` di dalam direktori `app/Services`.
-- Menginjeksi `PartnerRepositoryInterface` ke dalam `PartnerService` melalui *constructor injection*.
-- Mengimplementasikan fungsi-fungsi logika bisnis utama untuk manajemen partner (seperti validasi status aktif, pengondisian data sebelum disimpan, atau manipulasi objek partner lainnya).
-- Memastikan pemisahan tanggung jawab yang bersih, di mana seluruh operasi kueri database didelegasikan sepenuhnya ke *Repository*.
+- Membuat halaman *Index* (tabel atau *grid*) untuk menampilkan daftar Partner yang terdaftar.
+- Membuat form *Create* dan *Edit* (mencakup isian untuk nama partner, tautan *website/URL*, status aktif, dan *upload* logo partner).
+- Membuat fitur *Delete* dengan konfirmasi modal untuk mencegah penghapusan data secara tidak sengaja.
+- Menyambungkan form dan tombol aksi UI dengan *Controller* yang memanggil logika dari *Partner Service*.
+- Menggunakan komponen UI/Blade (*Input*, *Button*, *Table*, *Modal*, dll) yang sudah dikembangkan di Epic 02.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Berkas `PartnerService.php` berhasil dibuat di folder `app/Services`.
-- [ ] Fungsi-fungsi penanganan logika bisnis untuk manajemen Partner tersedia dengan memanfaatkan metode dari *Repository Interface*.
-- [ ] Kode bersih dari pemanggilan langsung model Eloquent atau kueri database mentah (*raw queries*).
+- [ ] Admin bisa melihat daftar Partner dengan rapi beserta logonya.
+- [ ] Admin bisa menambah, mengubah, dan menghapus data Partner dengan lancar.
+- [ ] Validasi *form* di sisi UI (seperti keharusan mengunggah gambar) dan respon *error* dari *backend* tertangani serta ditampilkan dengan jelas.
+- [ ] Terdapat notifikasi visual (*flash message* sukses/gagal).
+- [ ] Tampilan responsif dan sesuai dengan *Design System* aplikasi (merujuk ke `docs/DESAIN.md`).
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-* **Tugas:** TASK 04.06.03 — Partner Repository (Assignee: Dev 2 - Tyas)
+* **Tugas:** TASK 04.06.04 — Partner Service[cite: 1] (Assignee: Dev 2 - Tyas)[cite: 1]
 * **Hasil Kerja (Deliverables):**
-    - `PartnerRepositoryInterface` dan `PartnerRepository` telah selesai dibuat serta berhasil terikat (*bound*) di dalam *Service Provider* proyek tanpa *error*.
+    - Sistem *backend* (`PartnerService`) telah selesai dibangun dan siap digunakan untuk menangani alur bisnis data Partner.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-* **Tugas:** TASK 04.06.05 — Partner CRUD UI (Assignee: Dev 4 - Alwi)
-
-Tugas ini bertujuan untuk membangun lapis abstraksi data (*Repository Pattern*) untuk entitas Partner. Langkah ini diambil guna memisahkan logika kueri database dari lapis bisnis (*Service*) maupun antarmuka (*Controller*).
-
-**Cakupan Pekerjaan:**
-- Membangun berkas kontrak `PartnerRepositoryInterface` di dalam direktori `app/Repositories/Contracts`.
-- Membangun kelas implementasi `PartnerRepository` di dalam direktori `app/Repositories/Eloquent`.
-- Memastikan `PartnerRepository` menginduk pada `BaseRepository` yang sudah ada di proyek untuk memanfaatkan fungsi CRUD standar.
-- Melakukan registrasi atau *binding* antara `PartnerRepositoryInterface` dengan `PartnerRepository` di dalam `AppServiceProvider` atau `RepositoryServiceProvider`.
-
----
-
-## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
-
-Tugas ini dianggap selesai jika:
-- [ ] Berkas `PartnerRepositoryInterface.php` berhasil dibuat di folder kontrak yang tepat.
-- [ ] Berkas `PartnerRepository.php` berhasil mengimplementasikan *interface* dan menginduk pada *Base Repository*.
-- [ ] *Binding* di *Service Provider* berjalan sukses tanpa memicu insiden *binding error* saat kelas dieksekusi atau diinjeksi.
-
----
-
-## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
-
-* **Tugas:** TASK 04.06.02 — Partner Model (Assignee: Dev 2 - Tyas)
-* **Hasil Kerja (Deliverables):**
-    - Berkas Eloquent Model `Partner.php` telah selesai dibuat dengan konfigurasi `$fillable` dan pengaktifan proteksi data lewat `SoftDeletes`.
-
----
-
-## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
-
-* **Tugas:** TASK 04.06.04 — Partner Service (Assignee: Dev 2 - Tyas)
+* **Tugas:** TASK 05.01.01 — Product Migration[cite: 1] (Masuk ke EPIC 05 — COMMERCE, Assignee: Dev 3 - Arum)[cite: 1]

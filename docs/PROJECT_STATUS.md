@@ -62,6 +62,7 @@
 - 04.06.02 — Partner Model
 - 04.06.03 — Partner Repository
 - 04.06.04 — Partner Service
+- 04.06.05 — Partner CRUD UI
 
 ---
 

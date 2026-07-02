@@ -24,6 +24,119 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 04.06.05 — Partner CRUD UI
+
+Date: 2026-07-03
+
+### Added
+- Pembuatan antarmuka pengguna (UI) untuk operasi CRUD manajemen Partner.
+
+## TASK 04.05.05 — Team CRUD UI
+
+Date: 2026-07-03
+
+### Added
+- Pembuatan antarmuka pengguna (UI) untuk operasi CRUD manajemen Team.
+
+## TASK 04.04.05 — Testimonial CRUD UI
+
+Date: 2026-07-03
+
+### Added
+- Pembuatan antarmuka pengguna (UI) untuk operasi CRUD manajemen Testimonial.
+
+## TASK 04.03.07 — Gallery Preview
+
+Date: 2026-07-03
+
+### Added
+- Implementasi fungsionalitas pratinjau (preview) untuk Gallery.
+
+## TASK 04.03.05 — Gallery CRUD UI
+
+Date: 2026-07-03
+
+### Added
+- Pembuatan antarmuka pengguna (UI) untuk operasi CRUD manajemen Gallery.
+
+## TASK 04.02.05 — Benefit CRUD UI
+
+Date: 2026-07-03
+
+### Added
+- Pembuatan antarmuka pengguna (UI) untuk operasi CRUD manajemen Benefit.
+
+## TASK 04.01.05 — Hero CRUD UI
+
+Date: 2026-07-03
+
+### Added
+- Pembuatan antarmuka pengguna (UI) untuk operasi CRUD manajemen Hero.
+
+## TASK 07.03.01 — SEO Frontend Implementation
+
+Date: 2026-06-30
+
+### Added
+- Implementasi frontend untuk mengakomodasi Dynamic SEO Rendering.
+
+## TASK 07.02.01 — SEO Settings Backend
+
+Date: 2026-06-30
+
+### Added
+- Implementasi logika backend dan integrasi sistem untuk modul SEO Settings.
+
+## TASK 07.01.04 — Business Settings Backend
+
+Date: 2026-06-29
+
+### Added
+- Implementasi fungsionalitas logika bisnis utama untuk fitur Business Settings.
+
+## TASK 07.01.03 — Settings Service
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan `SettingsService` di `app/Services` yang mewarisi `BaseService`.
+
+## TASK 07.01.02 — Settings Repository
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan antarmuka `SettingsRepositoryInterface` beserta implementasinya pada `SettingsRepository`.
+
+## TASK 07.01.01 — Settings Migration
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan *file migration* untuk tabel pengaturan (Business Settings).
+
+## TASK 04.04.06 — Featured Testimonial
+
+Date: 2026-06-29
+
+### Added
+- Penambahan logika untuk memunculkan testimoni unggulan (featured testimonial).
+
+## TASK 04.04.04 — Testimonial Service
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan `TestimonialService` yang mewarisi `BaseService` untuk manajemen logika bisnis testimoni.
+
+## TASK 04.04.03 — Testimonial Repository
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan antarmuka `TestimonialRepositoryInterface` beserta implementasinya pada `TestimonialRepository`.
+- Binding dependensi repositori testimoni pada `AppServiceProvider`.
+
 ## TASK 04.06.04 — Partner Service
 
 Date: 2026-06-29

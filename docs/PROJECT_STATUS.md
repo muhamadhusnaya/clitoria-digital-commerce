@@ -56,6 +56,7 @@
 - 04.04.02 — Testimonial Model
 - 04.04.03 — Testimonial Repository
 - 04.04.04 — Testimonial Service
+- 04.04.05 — Testimonial CRUD UI
 
 ---
 

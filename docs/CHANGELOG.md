@@ -24,6 +24,25 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 04.03.07 — Gallery Preview
+
+Date: 2026-07-03
+
+### Added
+- Membuat antarmuka UI *Lightbox* modal menggunakan Alpine.js untuk fitur pratinjau galeri gambar beresolusi tinggi di Admin panel.
+- Membuat view `resources/views/admin/galleries/index.blade.php` dengan tata letak grid dan *mock data* untuk memfasilitasi integrasi Backend selanjutnya.
+- Menambahkan rute uji coba sementara (`/admin/galleries`) untuk keperluan UI testing.
+
+## TASK 04.02.05 — Benefit CRUD UI
+
+Date: 2026-07-03
+
+### Added
+- Membuat `BenefitController` untuk memproses logika antarmuka manajemen Benefit.
+- Membuat kelas form request `StoreBenefitRequest` dan `UpdateBenefitRequest` untuk validasi `title`, `icon`, dan `status`.
+- Membuat file blade views (`index`, `create`, `edit`) di dalam `resources/views/admin/benefits/` dengan desain tersistem menggunakan Tailwind.
+- Menambahkan rute *resource* untuk `benefits` di grup middleware admin.
+
 ## TASK 04.02.06 — Benefit Ordering
 
 Date: 2026-06-28

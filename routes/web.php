@@ -20,6 +20,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        // Hero Management
+        Route::resource('heroes', \App\Http\Controllers\Admin\HeroController::class)->except(['show']);
+        
+        // Benefit Management
+        Route::resource('benefits', \App\Http\Controllers\Admin\BenefitController::class)->except(['show']);
+
+        // Gallery Management
+        Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class)->except(['show']);
     });
 
     require __DIR__.'/auth.php';

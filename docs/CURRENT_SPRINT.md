@@ -12,42 +12,42 @@
 
 * **Fase Proyek:** PHASE 2 — CMS Module Development
 * **Epic Aktif:** EPIC 04 — CMS
-* **Fitur Aktif:** FEATURE 04.02 — Benefit Management
-* **Tugas Aktif:** TASK 04.02.05 — Benefit CRUD UI
+* **Fitur Aktif:** FEATURE 04.03 — Gallery Management
+* **Tugas Aktif:** TASK 04.03.05 — Gallery CRUD UI
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini bertujuan untuk membangun antarmuka pengguna (UI) dan pengontrol (Controller) yang akan menangani interaksi admin untuk modul Benefit. Tugas ini akan menghubungkan tampilan visual dengan logika bisnis di `BenefitService` yang telah diselesaikan sebelumnya.
+Tugas ini berfokus pada pembuatan antarmuka pengguna (UI) di halaman Admin untuk mengelola data Gallery. Halaman ini akan menjadi tempat admin mengunggah, melihat, mengedit metadata, dan menghapus gambar/foto yang akan ditampilkan di halaman publik.
 
 **Cakupan Pekerjaan:**
-- Membuat `BenefitController` di dalam direktori `app/Http/Controllers/Admin`.
-- Menghubungkan *routing* CRUD Benefit di dalam `routes/admin.php`.
-- Membuat berkas *Blade template* untuk halaman daftar data (`index`), form tambah (`create`), dan form ubah (`edit`) di dalam direktori `resources/views/admin/benefits`.
-- Mengintegrasikan form dengan fungsionalitas *upload* gambar/ikon dan sistem pengurutan data (*ordering*).
+- Membuat halaman *Index* untuk menampilkan daftar galeri (bisa menggunakan bentuk tabel atau *grid layout* agar visual gambar lebih jelas).
+- Membuat form *Create* dan *Edit* (mencakup *field* untuk judul/caption gambar, urutan, dan persiapan *field upload*).
+- Membuat fitur *Delete* dengan konfirmasi modal untuk mencegah penghapusan data secara tidak sengaja.
+- Mengintegrasikan antarmuka ini dengan *Controller* yang memanggil logika dari *Gallery Service*.
+- Menggunakan komponen UI bawaan (*Design System*) yang sudah dibangun pada Epic 02.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] `BenefitController` berhasil dibuat dan menggunakan `BenefitService` melalui *Dependency Injection*.
-- [ ] Rute CRUD terdaftar dengan benar di `routes/admin.php` dan dilindungi oleh *middleware* autentikasi admin.
-- [ ] Antarmuka visual (tabel data dan form) dapat dirender tanpa *error* dan *responsive* di panel admin.
-- [ ] Admin dapat melakukan operasi Tambah, Lihat, Ubah, dan Hapus (termasuk *upload* file) langsung melalui *browser* dengan notifikasi sukses/gagal yang sesuai.
+- [ ] Tampilan halaman *Index*, *Create*, dan *Edit* sudah tersedia, berfungsi dengan baik, dan responsif.
+- [ ] Admin dapat melakukan interaksi pada form (tambah, ubah, hapus) dengan lancar.
+- [ ] Terdapat notifikasi visual (*flash message*) saat aksi penyimpanan atau penghapusan berhasil maupun gagal.
+- [ ] Tampilan UI sesuai dengan panduan visual pada `docs/DESAIN.md`.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-* **Tugas:** TASK 04.02.06 — Benefit Ordering
+* **Tugas:** TASK 04.03.04 — Gallery Service (Assignee: Dev 2 - Tyas)
 * **Hasil Kerja (Deliverables):**
-    - Lapisan *backend* (Service & Repository) untuk modul Benefit telah sepenuhnya selesai, termasuk logika manipulasi *file upload* dan pengaturan nomor urut data.
+    - Sistem *backend* (`GalleryService`) telah selesai dibangun dan siap menangani operasi data untuk modul Gallery.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-* **Tugas:** TASK 04.03.01 — Gallery Migration
-* *(Catatan: Setelah integrasi UI Benefit selesai, fokus akan kembali ke tim Backend untuk memulai inisialisasi skema basis data modul Gallery).*
+* **Tugas:** TASK 04.03.06 — Gallery Upload (Assignee: Dev 2 - Tyas)

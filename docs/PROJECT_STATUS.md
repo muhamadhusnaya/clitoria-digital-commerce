@@ -46,7 +46,10 @@
 - 04.02.02 — Benefit Model
 - 04.02.03 — Benefit Repository
 - 04.02.04 — Benefit Service
+- 04.02.05 — Benefit CRUD UI
 - 04.02.06 — Benefit Ordering
+- 04.03.05 — Gallery CRUD UI
+- 04.03.07 — Gallery Preview
 
 ---
 

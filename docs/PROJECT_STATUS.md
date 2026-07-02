@@ -58,6 +58,7 @@
 - 04.05.02 — Team Model
 - 04.05.03 — Team Repository
 - 04.05.04 — Team Service
+- 04.05.05 — Team CRUD UI
 
 ---
 

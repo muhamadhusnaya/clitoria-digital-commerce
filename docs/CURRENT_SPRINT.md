@@ -10,42 +10,45 @@
 
 ## 📌 IDENTITAS TUGAS
 
-* **Fase Proyek:** PHASE 3 — Commerce Module Development
-* **Epic Aktif:** EPIC 05 — COMMERCE
-* **Fitur Aktif:** FEATURE 05.02 — Product Pricing
-* **Tugas Aktif:** TASK 05.02.01 — Product Price Migration
+* **Fase Proyek:** PHASE 4 — Commerce Development
+* **Epic Aktif:** EPIC 05 — COMMERCE[cite: 1]
+* **Fitur Aktif:** FEATURE 05.01 — Product Management[cite: 1]
+* **Tugas Aktif:** TASK 05.01.05 — Product CRUD UI[cite: 1]
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini menjadi langkah pembuka bagi entitas `Product Price`. Harga produk tidak hanya bersifat absolut, namun bisa jadi memiliki varian, masa berlaku (harga diskon), maupun penyesuaian khusus. Oleh karena itu, entitas ini perlu dipisahkan atau ditambahkan sebagai ekstensi produk.
+Tugas ini berfokus pada pembuatan antarmuka pengguna (UI) di halaman Admin untuk mengelola data Produk. Halaman ini sangat krusial karena akan menjadi pusat kendali admin dalam menambah, mengubah, melihat, dan menghapus katalog produk yang dijual.
 
 **Cakupan Pekerjaan:**
-- Menginisiasi file *migration* untuk tabel harga (misal: `product_prices` atau sejenisnya) yang tertaut ke tabel `products`.
-- Mendefinisikan skema kolom (termasuk referensi relasi) seperti `product_id`, `price`, `discount_price`, `currency`, dll.
-- Mengeksekusi migrasi ke *database*.
+- Membuat halaman *Index* (tabel atau *grid*) untuk menampilkan daftar Produk beserta informasi dasar (seperti nama, harga, dan stok jika ada).
+- Membuat form *Create* dan *Edit* (mencakup isian kompleks seperti nama produk, deskripsi lengkap, harga, dan persiapan *field upload* gambar).
+- Membuat fitur *Delete* dengan konfirmasi modal untuk mencegah penghapusan data produk secara tidak sengaja.
+- Menyambungkan form dan tombol aksi UI dengan *Controller* yang memanggil logika dari *Product Service*.
+- Menggunakan komponen UI/Blade (*Input*, *Textarea*, *Button*, *Table*, *Modal*, dll) yang sudah dikembangkan di Epic 02.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Tersedia file *migration* untuk Product Price dengan skema sesuai kebutuhan `SCHEMA.md`.
-- [ ] Kolom-kolom harga terbangun dan memiliki tipe data finansial yang akurat (seperti `decimal` atau `bigInteger`).
-- [ ] Tabel berhasil terbentuk tanpa _error_ (telah di-_migrate_).
+- [ ] Admin bisa melihat daftar Produk dengan rapi.
+- [ ] Admin bisa melakukan operasi CRUD dasar pada data Produk dengan lancar.
+- [ ] Validasi *form* di sisi UI (seperti keharusan mengisi nama dan harga) dan respon *error* dari *backend* tertangani serta ditampilkan dengan jelas.
+- [ ] Terdapat notifikasi visual (*flash message* sukses/gagal).
+- [ ] Tampilan responsif dan sesuai dengan *Design System* aplikasi (merujuk ke `docs/DESAIN.md`).
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-* **Tugas:** TASK 05.01.06 — Product Image Upload
+* **Tugas:** TASK 05.01.04 — Product Service[cite: 1] (Assignee: Dev 3 - Arum)[cite: 1]
 * **Hasil Kerja (Deliverables):**
-    - `UploadTrait` selesai diciptakan dan berhasil diaplikasikan dalam `ProductService` untuk menyederhanakan *upload file*.
+    - Sistem *backend* (`ProductService`) telah selesai dibangun dan siap digunakan untuk menangani alur bisnis data Produk.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-* **Tugas:** TASK 05.02.02 — Product Price CRUD
-* *(Catatan: Selesainya tugas penanganan file produk ini menandai rampungnya backend untuk Feature 05.01. Fokus akan berlanjut ke inisialisasi basis data untuk sistem harga).*
+* **Tugas:** TASK 05.01.06 — Product Image Upload[cite: 1] (Assignee: Dev 3 - Arum)[cite: 1]

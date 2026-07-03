@@ -10,43 +10,44 @@
 
 ## 📌 IDENTITAS TUGAS
 
-* **Fase Proyek:** PHASE 1 — UI & Layout Foundation
-* **Epic Aktif:** EPIC 02 — UI FOUNDATION
-* **Fitur Aktif:** FEATURE 02.03 — Public Layout
-* **Tugas Aktif:** TASK 02.03.05 — WhatsApp CTA
+* **Fase Proyek:** PHASE 3 — Commerce Development
+* **Epic Aktif:** EPIC 05 — COMMERCE
+* **Fitur Aktif:** FEATURE 05.03 — Product Catalog
+* **Tugas Aktif:** TASK 05.03.04 — Product Search
 * **Assignee:** Dev 5 (Cynthia)
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini merupakan tahap terakhir dari fitur tata letak publik (Public Layout). Objektif utamanya adalah merancang tombol aksi melayang (Floating Action Button) spesifik untuk memicu komunikasi langsung via WhatsApp.
+Tugas ini bertujuan untuk membangun fitur penyaringan (filtering) produk pada halaman Katalog (`Product Listing Page`). Fitur ini akan mempermudah calon pembeli dalam memilah-milah produk berdasarkan kriteria tertentu agar pengalaman belanja menjadi lebih efisien.
 
 **Cakupan Pekerjaan:**
-- Mengembangkan komponen `<x-whatsapp-cta />` yang disisipkan di dalam master layout publik.
-- Mengimplementasikan tata letak melayang (`fixed bottom-X right-X`) dengan properti _z-index_ tinggi.
-- Mengakomodasi tombol dengan ikon WhatsApp SVG.
+- Merancang komponen UI kontrol filter (misalnya dalam bentuk *Sidebar* di desktop atau *Modal/Drawer* di mobile).
+- Menyediakan opsi penyaringan esensial seperti berdasarkan Kategori Produk, Rentang Harga (*Price Range*), dan opsi pengurutan (*Sorting* seperti termurah, termahal, atau terbaru).
+- Menangkap input filter dari *frontend* dan mengirimkannya kembali ke Controller menggunakan *Query Strings URL* (contoh: `?category=sapphire&sort=price_asc`).
+- Memodifikasi *query builder* Eloquent pada sisi backend agar dapat menyaring koleksi produk secara dinamis berdasarkan parameter filter yang aktif.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Komponen tombol WhatsApp CTA berhasil dirangkai menjadi komponen mandiri.
-- [ ] Komponen diintegrasikan dan muncul pada *master layout* `public.blade.php`.
-- [ ] Gaya visual telah menggunakan rona hijau WhatsApp dengan ikon yang jelas (sesuai `docs/DESAIN.md`).
+- [ ] Komponen UI penyaringan telah terintegrasi dengan baik pada halaman `Product Listing Page`.
+- [ ] Ketika kriteria filter dipilih dan diterapkan, daftar produk otomatis berubah dan hanya menampilkan produk yang memenuhi syarat.
+- [ ] *Query string* pada URL berubah secara dinamis mencerminkan filter yang sedang aktif, sehingga halaman hasil filter dapat di-*bookmark* atau dibagikan kembali.
+- [ ] Pagination (jika ada) tetap mempertahankan *state* filter saat berpindah halaman (contoh: `?category=sapphire&page=2`).
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-* **Tugas:** TASK 02.03.04 — Footer
+* **Tugas:** TASK 05.03.02 — Product Detail Page
 * **Hasil Kerja (Deliverables):**
-    - Merealisasikan `<x-public-footer>` dan mengaitkannya di bagian bawah dari *master layout*.
-    - Penerapan palet `bg-surface-container-highest` dengan struktur layout 4 kolom responsif.
+    - Menyelesaikan halaman detail produk dinamis (`/products/{slug}`) lengkap dengan layout terpisah untuk galeri foto dan deskripsi teks kaya.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-* **Tugas:** TASK 02.04.01 — Admin Layout (Dev 4) atau modul lain sesuai eksekusi tim.
+* **Tugas:** TASK 05.03.04 — Product Search

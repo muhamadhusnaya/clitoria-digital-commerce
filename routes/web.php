@@ -12,6 +12,8 @@ Route::name('public.')->group(function () {
     Route::get('/dummy-public', function () {
         return view('dummy-public');
     })->name('dummy-public');
+    Route::get('/products', [App\Http\Controllers\Public\ProductListingController::class, 'index'])->name('public.product.list');
+    Route::get('/search', [App\\Http\\Controllers\\Public\\ProductSearchController::class, 'index'])-\u003ename('public.product.search');
 });
 
 // Admin Routes

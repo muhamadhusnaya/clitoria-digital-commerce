@@ -24,6 +24,16 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 07.01.05 — Business Settings CRUD UI
+
+Date: 2026-07-03
+
+### Added
+- Pembuatan antarmuka pengguna `admin.settings.index` untuk mengelola konfigurasi profil bisnis perusahaan (Nomor WhatsApp, Email, Instagram, Alamat Fisik, dan tautan semat Google Maps).
+- Integrasi helper `get_setting()` pada kolom *input* untuk melakukan inisialisasi (*auto-fill*) data saat form dibuka.
+- Inisiasi `SettingController` dengan fungsi *index* dan *update*, menggunakan lapisan perantara (Request dan Service) untuk validasi dan manajemen pembaruan basis data terpusat.
+- Penambahan rute konfigurasi `admin.settings.index` dan `admin.settings.update` ke kelompok otentikasi admin pada berkas `routes/web.php`.
+
 ## TASK 07.01.04 — Business Settings Backend
 
 Date: 2026-06-29

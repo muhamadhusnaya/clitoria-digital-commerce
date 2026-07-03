@@ -10,42 +10,44 @@
 
 ## 📌 IDENTITAS TUGAS
 
-* **Fase Proyek:** PHASE 3 — Commerce Module Development
-* **Epic Aktif:** EPIC 05 — COMMERCE
-* **Fitur Aktif:** FEATURE 05.02 — Product Pricing
-* **Tugas Aktif:** TASK 05.02.01 — Product Price Migration
+* **Fase Proyek:** PHASE 5 — Analytics & Reporting
+* **Epic Aktif:** EPIC 06 — ANALYTICS[cite: 1]
+* **Fitur Aktif:** FEATURE 06.02 — Dashboard Analytics[cite: 1]
+* **Tugas Aktif:** TASK 06.02.05 — Recent Sales Widget[cite: 1]
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini menjadi langkah pembuka bagi entitas `Product Price`. Harga produk tidak hanya bersifat absolut, namun bisa jadi memiliki varian, masa berlaku (harga diskon), maupun penyesuaian khusus. Oleh karena itu, entitas ini perlu dipisahkan atau ditambahkan sebagai ekstensi produk.
+Tugas ini berfokus pada pembuatan antarmuka komponen (*widget*) "Penjualan Terbaru" (Recent Sales) yang akan dipajang di halaman *Dashboard Admin*. Widget ini bertujuan agar admin bisa langsung melihat sekilas transaksi-transaksi yang baru saja masuk tanpa harus membuka halaman rincian penjualan.
 
 **Cakupan Pekerjaan:**
-- Menginisiasi file *migration* untuk tabel harga (misal: `product_prices` atau sejenisnya) yang tertaut ke tabel `products`.
-- Mendefinisikan skema kolom (termasuk referensi relasi) seperti `product_id`, `price`, `discount_price`, `currency`, dll.
-- Mengeksekusi migrasi ke *database*.
+- Merancang komponen *widget* berbentuk tabel mini atau daftar (*list*) berdesain ringkas.
+- Menampilkan informasi esensial dari transaksi terbaru (misalnya: ID Pesanan, Tanggal, Nama Pembeli/Produk, dan Total Harga).
+- Menyiapkan elemen visual seperti *badge* status jika diperlukan.
+- Mengintegrasikan *widget* ini ke dalam *layout* utama Dashboard Admin.
+- Menggunakan komponen UI/Blade (*Card*, *Table*, *Badge*) yang sudah dibangun sebelumnya di Epic 02[cite: 1].
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Tersedia file *migration* untuk Product Price dengan skema sesuai kebutuhan `SCHEMA.md`.
-- [ ] Kolom-kolom harga terbangun dan memiliki tipe data finansial yang akurat (seperti `decimal` atau `bigInteger`).
-- [ ] Tabel berhasil terbentuk tanpa _error_ (telah di-_migrate_).
+- [ ] *Widget* Penjualan Terbaru berhasil dipasang dan tampil rapi di halaman *Dashboard*.
+- [ ] Desain tabel atau daftar di dalam *widget* mudah dibaca dan ukurannya proporsional.
+- [ ] UI sudah disiapkan untuk menerima data dinamis (berisi *dummy data* sementara yang siap diganti oleh data dari *Controller*).
+- [ ] Tampilan responsif (tabel bisa di-*scroll* horizontal atau menyesuaikan diri dengan layar *mobile*) dan sesuai dengan `docs/DESAIN.md`.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-* **Tugas:** TASK 05.01.06 — Product Image Upload
+* **Tugas:** TASK 06.02.04 — Product Ranking[cite: 1] (Assignee: Dev 3 - Arum)[cite: 1]
 * **Hasil Kerja (Deliverables):**
-    - `UploadTrait` selesai diciptakan dan berhasil diaplikasikan dalam `ProductService` untuk menyederhanakan *upload file*.
+    - Logika *backend* untuk menghitung metrik peringkat produk (produk terlaris) telah diselesaikan oleh tim *backend*.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-* **Tugas:** TASK 05.02.02 — Product Price CRUD
-* *(Catatan: Selesainya tugas penanganan file produk ini menandai rampungnya backend untuk Feature 05.01. Fokus akan berlanjut ke inisialisasi basis data untuk sistem harga).*
+* **Tugas:** TASK 06.03.01 — Daily Report[cite: 1] (Masuk ke FEATURE 06.03 — Reporting[cite: 1], Assignee: Dev 3 - Arum)[cite: 1]

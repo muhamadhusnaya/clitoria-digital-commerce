@@ -24,6 +24,24 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 06.02.05 — Recent Sales Widget
+
+Date: 2026-07-03
+
+### Added
+- Integrasi *widget* daftar transaksi terbaru ke dalam `dashboard.blade.php`.
+- Tabel berdesain bersih untuk memuat ID Pesanan, Tanggal, Pelanggan, dan Total Harga.
+- Logika *fallback* dan *empty state* untuk menghindari kerusakan aplikasi saat data `$recentSales` belum disuntikkan oleh peladen.
+
+## TASK 06.02.01 — KPI Cards
+
+Date: 2026-07-03
+
+### Added
+- Perombakan total tata letak *Dashboard Admin* dari gaya standar bawaan *Breeze*.
+- Empat buah komponen *Key Performance Indicator* (KPI) Cards responsif: *Total Revenue*, *Total Sales*, *Active Products*, dan *Partners*.
+- Penyematan panel aksi cepat (Quick Actions) untuk jalan pintas navigasi manajemen toko.
+- Logika keamanan *Null Coalescing* pada seluruh variabel analitik di halaman dasbor.
 ## TASK 05.01.06 — Product Image Upload
 
 Date: 2026-06-29

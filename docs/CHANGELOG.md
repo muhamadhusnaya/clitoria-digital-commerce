@@ -24,6 +24,16 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 07.02.02 — SEO Settings CRUD UI
+
+Date: 2026-07-03
+
+### Added
+- Pembuatan form UI `seo.blade.php` untuk mengelola konfigurasi optimasi mesin pencari (*meta title*, *description*, *keywords*) dan *Open Graph Image*.
+- Fitur pratinjau gambar dinamis (*dynamic image preview*) pada form UI yang aktif secara instan apabila data `seo_og_image` sudah tersimpan.
+- Penambahan fungsi unggah gambar (upload) di `SettingController@updateSeo` yang mengintegrasikan `Storage` facade, memastikan gambar lama dihapus otomatis agar beban penyimpanan server tetap efisien sebelum gambar baru disimpan.
+- Pendaftaran rute `admin.settings.seo` (GET) dan `admin.settings.seo.update` (PUT) pada daftar otentikasi di `routes/web.php`.
+
 ## TASK 07.02.01 — SEO Settings Backend
 
 Date: 2026-06-30

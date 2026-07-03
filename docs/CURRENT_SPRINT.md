@@ -2,7 +2,7 @@
 
 > [!NOTE]
 > **PANDUAN UNTUK DEVELOPER & AI AGENT:**
-> * File ini berisi **DUA (2) TUGAS FRONTEND** yang digabungkan secara khusus untuk efisiensi pengerjaan oleh Dev 4.
+> * File ini berisi **TUGAS FRONTEND** yang dikerjakan oleh Dev 4.
 > * Update file ini secara manual di branch Anda saat mulai mengerjakan tugas baru dari `TASK_EXECUTION_PLAN.md`.
 > * Jangan pernah mengerjakan tugas di luar apa yang tertulis di dokumen ini.
 
@@ -11,44 +11,43 @@
 ## 📌 IDENTITAS TUGAS
 
 * **Fase Proyek:** PHASE 2 — CMS Module Development
-* **Epic Aktif:** EPIC 04 — CMS
-* **Fitur Aktif:** FEATURE 04.03 — Gallery Management
-* **Tugas Aktif:** - TASK 04.03.05 — Gallery CRUD UI (Dev 4)
-  - TASK 04.03.07 — Gallery Preview (Dev 4)
+* **Epic Aktif:** EPIC 04 — CMS[cite: 1]
+* **Fitur Aktif:** FEATURE 04.04 — Testimonial Management[cite: 1]
+* **Tugas Aktif:** TASK 04.04.05 — Testimonial CRUD UI (Dev 4)[cite: 1]
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini bertujuan untuk merampungkan seluruh antarmuka pengguna (UI) panel admin untuk modul *Gallery*, sekaligus mengintegrasikan fitur *Preview* agar admin dapat meninjau tata letak dan gambar galeri sebelum dipublikasikan.
+Tugas ini bertujuan untuk membangun antarmuka pengguna (UI) panel admin untuk modul *Testimonial*, memungkinkan admin untuk mengelola ulasan atau testimoni pelanggan dengan mudah.
 
 **Cakupan Pekerjaan:**
-- Membuat berkas *Blade template* untuk halaman daftar data (`index`), form tambah (`create`), dan form ubah (`edit`) di dalam `resources/views/admin/galleries`.
-- Mengimplementasikan elemen antarmuka untuk unggah gambar yang terhubung dengan `GalleryService` (buatan tim Backend).
-- Membangun komponen antarmuka *Preview* (bisa berupa *modal pop-up* atau halaman terpisah) untuk menampilkan representasi visual galeri secara langsung (*real-time* atau berdasarkan data tersimpan).
-- Menghubungkan *Controller* terkait untuk merender *view* tersebut.
+* Membuat berkas *Blade template* untuk halaman daftar data (`index`), form tambah (`create`), dan form ubah (`edit`) di dalam direktori `resources/views/admin/testimonials`.
+* Mengimplementasikan elemen antarmuka form yang mencakup input teks (nama klien, jabatan/perusahaan), *textarea* (isi testimoni), dan unggah gambar (avatar/foto klien).
+* Menghubungkan antarmuka dengan *Controller* terkait untuk memastikan data dapat ditampilkan, ditambahkan, diperbarui, dan dihapus dengan lancar.
+* Memastikan seluruh tampilan tabel dan form menggunakan komponen UI yang sudah terstandarisasi dan responsif.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Seluruh halaman CRUD UI (Index, Create, Edit) untuk entitas *Gallery* dapat dirender tanpa *error* dan responsif.
-- [ ] Admin dapat melakukan operasi penambahan dan pengubahan data (termasuk unggah gambar) melalui form UI.
-- [ ] Fitur *Gallery Preview* beroperasi dengan baik, menampilkan *thumbnail* atau tata letak gambar sesuai dengan desain yang diharapkan.
-- [ ] Rute UI terlindungi oleh *middleware* autentikasi.
+* [ ] Seluruh halaman CRUD UI (Index, Create, Edit) untuk entitas *Testimonial* dapat dirender tanpa *error* dan sepenuhnya responsif di berbagai ukuran layar.
+* [ ] Admin dapat melakukan operasi penambahan dan pengubahan data, termasuk mengunggah foto avatar klien melalui form UI.
+* [ ] Validasi form (jika ada *error* dari *backend*) ditampilkan dengan benar pada antarmuka.
+* [ ] Rute UI terlindungi oleh *middleware* autentikasi dan mematuhi standar desain yang telah ditetapkan.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-* **Tugas:** TASK 04.03.06 — Gallery Image Upload (Backend)
+* **Tugas:** TASK 04.04.04 — Testimonial Service (Dev 2)[cite: 1]
 * **Hasil Kerja (Deliverables):**
-    - Tim Backend (Dev 1) telah menyelesaikan logika penanganan *file* (simpan dan hapus menggunakan `UploadTrait`) secara sempurna di `GalleryService`.
+    * Tim Backend (Dev 2) telah menyelesaikan pembuatan Service, Repository, Model, dan Migration untuk entitas Testimonial[cite: 1].
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-* **Tugas:** TASK 04.04.01 — Testimonial Migration
-* *(Catatan: Setelah antarmuka Gallery selesai, alur kerja akan kembali ke Backend (Dev 1) untuk memulai inisialisasi basis data modul Testimonial).*
+* **Tugas:** TASK 04.04.06 — Featured Testimonial (Dev 2)[cite: 1]
+* *(Catatan: Setelah antarmuka Testimonial CRUD UI selesai, alur kerja akan kembali ke Backend (Dev 2) untuk mengerjakan fitur Featured Testimonial).*

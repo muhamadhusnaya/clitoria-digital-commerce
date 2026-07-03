@@ -24,6 +24,25 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 06.01.06 — Sales Detail View
+
+Date: 2026-07-03
+
+### Added
+- Halaman antarmuka daftar transaksi penjualan (`admin.sales.index`) lengkap dengan tabel ringkasan data.
+- Halaman detail kuitansi (`admin.sales.show`) dengan format menyerupai struk untuk menjabarkan rincian item, catatan, pelanggan, serta perhitungan grand total secara elegan.
+- *Route* khusus fungsi *show* diregistrasi ulang dalam `routes/web.php`.
+- Injeksi metode `show` pada `SaleController` untuk mengambil relasi data `items` dan `creator`.
+
+## TASK 06.01.05 — Sales Entry UI
+
+Date: 2026-07-03
+
+### Added
+- Form pendaftaran transaksi manual (`admin.sales.create`) dengan fungsionalitas penambahan baris secara dinamis memanfaatkan *Alpine.js*.
+- Fitur kalkulasi otomatis (Subtotal dan Grand Total) yang bersifat seketika di peramban.
+- Pembuatan kelas validasi `StoreSaleRequest` untuk memverifikasi entri bersarang (`items.*`).
+- Implementasi metode pendaftaran (`create` dan `store`) pada kerangka kerja `SaleController`.
 ## TASK 05.01.06 — Product Image Upload
 
 Date: 2026-06-29

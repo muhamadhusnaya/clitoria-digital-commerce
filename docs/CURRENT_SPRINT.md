@@ -10,42 +10,44 @@
 
 ## 📌 IDENTITAS TUGAS
 
-* **Fase Proyek:** PHASE 3 — Commerce Module Development
+* **Fase Proyek:** PHASE 3 — Commerce Development
 * **Epic Aktif:** EPIC 05 — COMMERCE
-* **Fitur Aktif:** FEATURE 05.02 — Product Pricing
-* **Tugas Aktif:** TASK 05.02.01 — Product Price Migration
+* **Fitur Aktif:** FEATURE 05.05 — WhatsApp Checkout
+* **Tugas Aktif:** TASK 05.05.04 — Dynamic WhatsApp Redirect
+* **Assignee:** Dev 5 (Cynthia)
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini menjadi langkah pembuka bagi entitas `Product Price`. Harga produk tidak hanya bersifat absolut, namun bisa jadi memiliki varian, masa berlaku (harga diskon), maupun penyesuaian khusus. Oleh karena itu, entitas ini perlu dipisahkan atau ditambahkan sebagai ekstensi produk.
+Tugas ini merupakan tahap final dari alur transaksi WhatsApp Checkout. Objektif utamanya adalah membangun mekanisme pengalihan tautan (*redirect URL*) dinamis yang membawa payload string pesan pesanan dari aplikasi web menuju API WhatsApp resmi (`api.whatsapp.com` atau `wa.me`).
 
 **Cakupan Pekerjaan:**
-- Menginisiasi file *migration* untuk tabel harga (misal: `product_prices` atau sejenisnya) yang tertaut ke tabel `products`.
-- Mendefinisikan skema kolom (termasuk referensi relasi) seperti `product_id`, `price`, `discount_price`, `currency`, dll.
-- Mengeksekusi migrasi ke *database*.
+- Menyediakan rute atau interseptor frontend untuk menangani proses finalisasi redirect setelah teks pesanan sukses di-generate.
+- Mengonstruksi tautan WhatsApp tujuan secara dinamis dengan melakukan enkoding teks (*URL Encoding*) pada payload pesan agar kompatibel dengan query parameter `text` di WhatsApp.
+- Mengintegrasikan nomor WhatsApp tujuan (nomor admin) secara dinamis dari konfigurasi sistem/bisnis (tidak boleh di-*hardcode*).
+- Menangani aksi pembukaan jendela/tab baru browser secara aman (*secure client-side redirection*) yang responsif baik di perangkat desktop maupun aplikasi mobile.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Tersedia file *migration* untuk Product Price dengan skema sesuai kebutuhan `SCHEMA.md`.
-- [ ] Kolom-kolom harga terbangun dan memiliki tipe data finansial yang akurat (seperti `decimal` atau `bigInteger`).
-- [ ] Tabel berhasil terbentuk tanpa _error_ (telah di-_migrate_).
+- [ ] Pengguna otomatis dialihkan ke WhatsApp setelah menekan tombol konfirmasi checkout (baik dari jalur Cart maupun Buy Now).
+- [ ] Tautan mengarah ke nomor WhatsApp admin yang terkonfigurasi dengan format kode negara yang valid (misal: `62xxx`).
+- [ ] Teks pesanan yang terisi otomatis di kolom obrolan WhatsApp terformat secara rapi (karakter spasi, baris baru, dan tanda baca khusus tidak rusak akibat proses enkoding URL).
+- [ ] Fitur pengalihan berfungsi lancar di peramban desktop (membuka tab baru / WhatsApp Web) maupun perangkat mobile (memicu pembukaan aplikasi WhatsApp/WhatsApp Business lokal).
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-* **Tugas:** TASK 05.01.06 — Product Image Upload
+* **Tugas:** TASK 05.05.03 — Buy Now Checkout
 * **Hasil Kerja (Deliverables):**
-    - `UploadTrait` selesai diciptakan dan berhasil diaplikasikan dalam `ProductService` untuk menyederhanakan *upload file*.
+    - Menyelesaikan alur transaksi kilat langsung dari halaman detail produk tunggal tanpa mengganggu isi session keranjang belanja aktif pengguna.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-* **Tugas:** TASK 05.02.02 — Product Price CRUD
-* *(Catatan: Selesainya tugas penanganan file produk ini menandai rampungnya backend untuk Feature 05.01. Fokus akan berlanjut ke inisialisasi basis data untuk sistem harga).*
+* **Tugas:** TASK 06.01.01 — Sales Migration 

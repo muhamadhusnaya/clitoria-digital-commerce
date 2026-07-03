@@ -8,6 +8,11 @@ Route::name('public.')->group(function () {
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
+
+    // Cart endpoints
+    Route::post('/cart/add', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+    Route::delete('/cart/remove', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+    Route::put('/cart/update', [\App\Http\Controllers\CartController::class, 'updateQuantity'])->name('cart.update');
 });
 
 // Admin Routes

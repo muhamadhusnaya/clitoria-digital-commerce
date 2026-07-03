@@ -10,42 +10,46 @@
 
 ## 📌 IDENTITAS TUGAS
 
-* **Fase Proyek:** PHASE 3 — Commerce Module Development
+* **Fase Proyek:** PHASE 3 — Commerce Development
 * **Epic Aktif:** EPIC 05 — COMMERCE
-* **Fitur Aktif:** FEATURE 05.02 — Product Pricing
-* **Tugas Aktif:** TASK 05.02.01 — Product Price Migration
+* **Fitur Aktif:** FEATURE 05.04 — Shopping Cart
+* **Tugas Aktif:** TASK 05.04.04 — Update Quantity
+* **Assignee:** Dev 5 (Cynthia)
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
 
-Tugas ini menjadi langkah pembuka bagi entitas `Product Price`. Harga produk tidak hanya bersifat absolut, namun bisa jadi memiliki varian, masa berlaku (harga diskon), maupun penyesuaian khusus. Oleh karena itu, entitas ini perlu dipisahkan atau ditambahkan sebagai ekstensi produk.
+Tugas ini bertujuan untuk membangun fungsionalitas pembaruan kuantitas produk (Update Quantity) secara langsung dari halaman/modal keranjang belanja publik. Pengguna dapat menambah atau mengurangi jumlah item sebelum melanjutkan ke proses pemesanan.
 
 **Cakupan Pekerjaan:**
-- Menginisiasi file *migration* untuk tabel harga (misal: `product_prices` atau sejenisnya) yang tertaut ke tabel `products`.
-- Mendefinisikan skema kolom (termasuk referensi relasi) seperti `product_id`, `price`, `discount_price`, `currency`, dll.
-- Mengeksekusi migrasi ke *database*.
+- Menyediakan rute PUT/POST internal untuk memproses perubahan jumlah item keranjang belanja (misal: `/cart/update`).
+- Menyediakan elemen input numerik beserta tombol penambah (`+`) dan pengurang (`-`) kuantitas pada baris item keranjang belanja (`cart-item.blade.php`).
+- Memanfaatkan AlpineJS atau AJAX request untuk mengirim data kuantitas baru beserta pengidentifikasi unik item ke backend sesaat setelah input berubah.
+- Memanggil method pembaruan kuantitas (`updateQuantity`) pada `SessionCartService` di Controller untuk memperbarui data session Laravel.
+- Melakukan pembaruan visual harga subtotal per item, kalkulasi total belanja keseluruhan, serta indikator jumlah item (*item counter*) global secara *real-time*.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 
 Tugas ini dianggap selesai jika:
-- [ ] Tersedia file *migration* untuk Product Price dengan skema sesuai kebutuhan `SCHEMA.md`.
-- [ ] Kolom-kolom harga terbangun dan memiliki tipe data finansial yang akurat (seperti `decimal` atau `bigInteger`).
-- [ ] Tabel berhasil terbentuk tanpa _error_ (telah di-_migrate_).
+- [ ] Tombol pengubah kuantitas (`+` / `-`) atau input angka berfungsi dengan baik dan mengirimkan payload kuantitas terbaru ke backend.
+- [ ] Kuantitas item berhasil diperbarui di dalam struktur data *session* keranjang belanja.
+- [ ] Subtotal harga item tersebut dan total harga ringkasan belanja otomatis terkalkulasi ulang serta berubah secara *real-time* tanpa memuat ulang halaman (*page refresh*).
+- [ ] Indikator jumlah item keranjang belanja pada `<x-public-header />` dan `<x-mobile-bottom-nav />` sinkron secara dinamis mengikuti akumulasi kuantitas yang baru.
+- [ ] Sistem membatasi batas minimum kuantitas (minimal 1) atau otomatis memicu fungsi hapus jika kuantitas dikurangi hingga angka 0 (sesuai spesifikasi UX).
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-* **Tugas:** TASK 05.01.06 — Product Image Upload
+* **Tugas:** TASK 05.04.03 — Remove Item
 * **Hasil Kerja (Deliverables):**
-    - `UploadTrait` selesai diciptakan dan berhasil diaplikasikan dalam `ProductService` untuk menyederhanakan *upload file*.
+    - Menyelesaikan interaksi penghapusan item dari keranjang berbasis sesi, lengkap dengan pembaruan data *session* serta pembaruan komponen visual secara *real-time*.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-* **Tugas:** TASK 05.02.02 — Product Price CRUD
-* *(Catatan: Selesainya tugas penanganan file produk ini menandai rampungnya backend untuk Feature 05.01. Fokus akan berlanjut ke inisialisasi basis data untuk sistem harga).*
+* **Tugas:** TASK 05.04.05 — Cart Summary Page / Component

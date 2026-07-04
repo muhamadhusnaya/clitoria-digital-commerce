@@ -15,6 +15,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\Contracts\HeroRepositoryInterface::class,
             \App\Repositories\Eloquent\HeroRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Contracts\BenefitRepositoryInterface::class,
+            \App\Repositories\Eloquent\BenefitRepository::class
+        );
     }
 
     /**

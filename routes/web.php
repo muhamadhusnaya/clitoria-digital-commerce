@@ -23,6 +23,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Hero Management
         Route::resource('heroes', \App\Http\Controllers\Admin\HeroController::class)->except(['show']);
+        
+        // Benefit Management
+        Route::resource('benefits', \App\Http\Controllers\Admin\BenefitController::class)->except(['show']);
+
+        // Gallery Management
+        Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class)->except(['show']);
     });
 
     require __DIR__.'/auth.php';

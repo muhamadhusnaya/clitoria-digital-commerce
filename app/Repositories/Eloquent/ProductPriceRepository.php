@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Repositories\Contracts\ProductPriceRepositoryInterface;
 use App\Models\ProductPrice;
+use App\Repositories\BaseRepository;
 
 class ProductPriceRepository extends BaseRepository implements ProductPriceRepositoryInterface
 {

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Contracts\ProductPriceRepositoryInterface;
+use App\Repositories\Contracts\ProductPriceRepositoryInterface;
 use App\Models\ProductPrice;
 use InvalidArgumentException;
 

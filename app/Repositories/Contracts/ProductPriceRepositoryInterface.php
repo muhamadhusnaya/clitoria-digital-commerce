@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Contracts;
 
+use App\Contracts\BaseRepositoryInterface;
+
 interface ProductPriceRepositoryInterface extends BaseRepositoryInterface
 {
     public function getByProduct(int $productId);

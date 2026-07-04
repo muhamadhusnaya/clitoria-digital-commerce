@@ -27,13 +27,6 @@ Route::name('public.')->group(function () {
     Route::post('/buy-now', [\App\Http\Controllers\BuyNowController::class, 'store'])->name('buy-now.store');
 });
 
-// Cart Routes (authenticated users)
-Route::middleware('auth')->group(function () {
-    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
-    Route::patch('/cart/update', [CartController::class, 'updateQuantity'])->name('cart.update');
-});
 
 // Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {

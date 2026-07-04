@@ -21,7 +21,7 @@ class TeamController extends Controller
      */
     public function index()
     {
-        $teams = $this->teamService->all();
+        $teams = $this->teamService->getAllTeams();
         
         return view('admin.teams.index', compact('teams'));
     }
@@ -39,7 +39,7 @@ class TeamController extends Controller
      */
     public function store(StoreTeamRequest $request)
     {
-        $this->teamService->create($request->validated());
+        $this->teamService->createTeam($request->validated());
 
         return redirect()->route('admin.teams.index')
             ->with('success', 'Team member added successfully.');
@@ -50,7 +50,7 @@ class TeamController extends Controller
      */
     public function edit(int $id)
     {
-        $team = $this->teamService->find($id);
+        $team = $this->teamService->getTeamById($id);
         
         if (!$team) {
             abort(404);
@@ -64,7 +64,7 @@ class TeamController extends Controller
      */
     public function update(UpdateTeamRequest $request, int $id)
     {
-        $this->teamService->update($id, $request->validated());
+        $this->teamService->updateTeam($id, $request->validated());
 
         return redirect()->route('admin.teams.index')
             ->with('success', 'Team member updated successfully.');
@@ -75,7 +75,7 @@ class TeamController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->teamService->delete($id);
+        $this->teamService->deleteTeam($id);
 
         return redirect()->route('admin.teams.index')
             ->with('success', 'Team member deleted successfully.');

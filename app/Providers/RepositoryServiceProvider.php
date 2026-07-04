@@ -27,6 +27,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\Contracts\TestimonialRepositoryInterface::class,
             \App\Repositories\Eloquent\TestimonialRepository::class
         );
+        $this->app->bind(
+            \App\Repositories\Contracts\TeamRepositoryInterface::class,
+            \App\Repositories\Eloquent\TeamRepository::class
+        );
     }
 
     /**

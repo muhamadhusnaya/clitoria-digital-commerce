@@ -7,99 +7,93 @@ use Illuminate\Support\Facades\Storage;
 
 class TeamService extends BaseService
 {
+    use \App\Traits\UploadTrait;
+
+    protected string $uploadPath = 'teams';
+
     /**
      * @var TeamRepositoryInterface
      */
-    protected $repository;
+    protected TeamRepositoryInterface $teamRepository;
 
     /**
      * TeamService constructor.
      *
-     * @param TeamRepositoryInterface $repository
+     * @param TeamRepositoryInterface $teamRepository
      */
-    public function __construct(TeamRepositoryInterface $repository)
+    public function __construct(TeamRepositoryInterface $teamRepository)
     {
-        $this->repository = $repository;
+        $this->teamRepository = $teamRepository;
     }
 
     /**
      * Get all teams.
      */
-    public function getAll()
+    public function getAllTeams()
     {
-        return $this->repository->all();
+        return $this->teamRepository->all();
     }
 
     /**
      * Get paginated teams.
      */
-    public function getPaginated($perPage = 10)
+    public function getPaginatedTeams($perPage = 10)
     {
-        return $this->repository->paginate($perPage);
+        return $this->teamRepository->paginate($perPage);
     }
 
     /**
      * Create a new team.
-     *
-     * @param array $data
-     * @return mixed
      */
-    public function store(array $data)
+    public function createTeam(array $data)
     {
         if (isset($data['photo']) && $data['photo'] instanceof \Illuminate\Http\UploadedFile) {
-            $data['photo'] = $data['photo']->store('teams', 'public');
+            $data['photo'] = $this->uploadFile($data['photo'], $this->uploadPath);
         }
 
-        return $this->repository->create($data);
+        return $this->teamRepository->create($data);
     }
 
     /**
      * Find a team by ID.
-     *
-     * @param int $id
-     * @return mixed
      */
-    public function find($id)
+    public function getTeamById($id)
     {
-        return $this->repository->find($id);
+        return $this->teamRepository->find($id);
     }
 
     /**
      * Update an existing team.
-     *
-     * @param int $id
-     * @param array $data
-     * @return mixed
      */
-    public function update($id, array $data)
+    public function updateTeam($id, array $data)
     {
-        $team = $this->repository->find($id);
+        $team = $this->teamRepository->find($id);
 
-        if (isset($data['photo']) && $data['photo'] instanceof \Illuminate\Http\UploadedFile) {
-            if ($team->photo && Storage::disk('public')->exists($team->photo)) {
-                Storage::disk('public')->delete($team->photo);
-            }
-            $data['photo'] = $data['photo']->store('teams', 'public');
+        if (!$team) {
+            return false;
         }
 
-        return $this->repository->update($id, $data);
+        if (isset($data['photo']) && $data['photo'] instanceof \Illuminate\Http\UploadedFile) {
+            if ($team->photo) {
+                $this->deleteFile($team->photo);
+            }
+            $data['photo'] = $this->uploadFile($data['photo'], $this->uploadPath);
+        }
+
+        return $this->teamRepository->update($id, $data);
     }
 
     /**
      * Delete a team.
-     *
-     * @param int $id
-     * @return mixed
      */
-    public function delete($id)
+    public function deleteTeam($id)
     {
-        $team = $this->repository->find($id);
+        $team = $this->teamRepository->find($id);
         
-        // Due to SoftDeletes, we might want to keep the photo, but if we need to remove it physically:
-        // if ($team->photo && Storage::disk('public')->exists($team->photo)) {
-        //     Storage::disk('public')->delete($team->photo);
-        // }
+        if ($team && $team->photo) {
+            $this->deleteFile($team->photo);
+        }
 
-        return $this->repository->delete($id);
+        return $this->teamRepository->delete($id);
     }
 }

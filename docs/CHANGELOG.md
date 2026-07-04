@@ -24,15 +24,34 @@ Date: YYYY-MM-DD
 
 -->
 
+<<<<<<< HEAD
 ## TASK 07.01.05 — Business Settings CRUD UI
+=======
+## TASK 07.02.02 — SEO Settings CRUD UI
+>>>>>>> origin/feature/07.02-seo-settings
 
 Date: 2026-07-03
 
 ### Added
+<<<<<<< HEAD
 - Pembuatan antarmuka pengguna `admin.settings.index` untuk mengelola konfigurasi profil bisnis perusahaan (Nomor WhatsApp, Email, Instagram, Alamat Fisik, dan tautan semat Google Maps).
 - Integrasi helper `get_setting()` pada kolom *input* untuk melakukan inisialisasi (*auto-fill*) data saat form dibuka.
 - Inisiasi `SettingController` dengan fungsi *index* dan *update*, menggunakan lapisan perantara (Request dan Service) untuk validasi dan manajemen pembaruan basis data terpusat.
 - Penambahan rute konfigurasi `admin.settings.index` dan `admin.settings.update` ke kelompok otentikasi admin pada berkas `routes/web.php`.
+=======
+- Pembuatan form UI `seo.blade.php` untuk mengelola konfigurasi optimasi mesin pencari (*meta title*, *description*, *keywords*) dan *Open Graph Image*.
+- Fitur pratinjau gambar dinamis (*dynamic image preview*) pada form UI yang aktif secara instan apabila data `seo_og_image` sudah tersimpan.
+- Penambahan fungsi unggah gambar (upload) di `SettingController@updateSeo` yang mengintegrasikan `Storage` facade, memastikan gambar lama dihapus otomatis agar beban penyimpanan server tetap efisien sebelum gambar baru disimpan.
+- Pendaftaran rute `admin.settings.seo` (GET) dan `admin.settings.seo.update` (PUT) pada daftar otentikasi di `routes/web.php`.
+
+## TASK 07.02.01 — SEO Settings Backend
+
+Date: 2026-06-30
+
+### Added
+- Memperbarui `SettingSeeder` dengan menambahkan kunci konfigurasi SEO (`seo_meta_title`, `seo_meta_description`, `seo_meta_keywords`, `seo_og_image`).
+- Membuat `UpdateSeoSettingRequest` untuk memvalidasi pembatasan karakter form SEO (misalnya meta title maksimal 60 karakter) dan validasi unggahan `og_image`.
+>>>>>>> origin/feature/07.02-seo-settings
 
 ## TASK 07.01.04 — Business Settings Backend
 

@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateBusinessSettingRequest;
+use App\Http\Requests\Admin\UpdateSeoSettingRequest;
 use App\Services\SettingService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SettingController extends Controller
 {
@@ -43,5 +45,26 @@ class SettingController extends Controller
 
         return redirect()->route('admin.settings.index')
             ->with('success', 'Business settings updated successfully.');
+    }
+
+    /**
+     * Display the SEO settings form (optional if we combine it).
+     */
+    public function seo()
+    {
+        return view('admin.settings.seo');
+    }
+
+    /**
+     * Update the SEO settings.
+     */
+    public function updateSeo(UpdateSeoSettingRequest $request)
+    {
+        $validated = $request->validated();
+        
+        $this->settingService->updateMany($validated);
+
+        return redirect()->back()
+            ->with('success', 'SEO settings updated successfully.');
     }
 }

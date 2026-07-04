@@ -10,6 +10,7 @@
 
 ## ??? EPIC 01 — FOUNDATION
 
+<<<<<<< HEAD
 - 01.01.01 — Initialize Laravel Project
 - 01.01.02 — Configure Environment
 - 01.01.03 — Configure Database
@@ -23,6 +24,21 @@
 - 01.03.03 — Create Base Repository Layer
 - 01.03.04 — Configure Route Structure
 - 01.03.05 — Configure Shared Helpers
+=======
+- 01.01.01 â€” Initialize Laravel Project
+- 01.01.02 â€” Configure Environment
+- 01.01.03 â€” Configure Database
+- 01.01.04 â€” Configure Storage
+- 01.01.05 â€” Configure Vite
+- 01.02.01 â€” Install Tailwind CSS
+- 01.02.02 â€” Install AlpineJS
+- 01.02.03 â€” Configure Frontend Build Pipeline
+- 01.03.01 â€” Create Domain Structure
+- 01.03.02 â€” Create Base Service Layer
+- 01.03.03 â€” Create Base Repository Layer
+- 01.03.04 â€” Configure Route Structure
+- 01.03.05 â€” Configure Shared Helpers
+>>>>>>> origin/feature/07.02-seo-settings
 
 ---
 
@@ -78,11 +94,20 @@
 
 ## ?? EPIC 07 — SETTINGS
 
+<<<<<<< HEAD
 - 07.01.01 — Settings Migration
 - 07.01.02 — Settings Repository
 - 07.01.03 — Settings Service
 - 07.01.04 — Business Settings Backend
 - 07.01.05 — Business Settings CRUD UI
+=======
+- 07.01.01 â€” Settings Migration
+- 07.01.02 â€” Settings Repository
+- 07.01.03 â€” Settings Service
+- 07.01.04 â€” Business Settings Backend
+- 07.02.01 â€” SEO Settings Backend
+- 07.02.02 â€” SEO Settings CRUD UI
+>>>>>>> origin/feature/07.02-seo-settings
 
 ---
 

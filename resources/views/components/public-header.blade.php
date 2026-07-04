@@ -6,8 +6,8 @@
 <header 
     x-data="{ scrolled: false, isMobileMenuOpen: false }" 
     @scroll.window="scrolled = (window.pageYOffset > 20)"
-    :class="{ 'py-2 shadow-md border-b border-outline-variant bg-surface/95': scrolled, 'py-4 bg-surface/80': !scrolled }"
-    class="fixed top-0 w-full z-50 backdrop-blur-md transition-all duration-300"
+    :class="{ 'py-2 shadow-md': scrolled, 'py-4 border-transparent': !scrolled }"
+    class="fixed top-0 w-full z-50 transition-all duration-300 glass-effect"
 >
     <div class="max-w-[1280px] mx-auto px-5 md:px-16 flex justify-between items-center">
         <!-- Mobile Hamburger (Left) -->

@@ -21,7 +21,7 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        $partners = $this->partnerService->all();
+        $partners = $this->partnerService->getAllPartners();
         
         return view('admin.partners.index', compact('partners'));
     }
@@ -39,7 +39,7 @@ class PartnerController extends Controller
      */
     public function store(StorePartnerRequest $request)
     {
-        $this->partnerService->create($request->validated());
+        $this->partnerService->createPartner($request->validated());
 
         return redirect()->route('admin.partners.index')
             ->with('success', 'Partner added successfully.');
@@ -50,7 +50,7 @@ class PartnerController extends Controller
      */
     public function edit(int $id)
     {
-        $partner = $this->partnerService->find($id);
+        $partner = $this->partnerService->getPartnerById($id);
         
         if (!$partner) {
             abort(404);
@@ -64,7 +64,7 @@ class PartnerController extends Controller
      */
     public function update(UpdatePartnerRequest $request, int $id)
     {
-        $this->partnerService->update($id, $request->validated());
+        $this->partnerService->updatePartner($id, $request->validated());
 
         return redirect()->route('admin.partners.index')
             ->with('success', 'Partner updated successfully.');
@@ -75,7 +75,7 @@ class PartnerController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->partnerService->delete($id);
+        $this->partnerService->deletePartner($id);
 
         return redirect()->route('admin.partners.index')
             ->with('success', 'Partner deleted successfully.');

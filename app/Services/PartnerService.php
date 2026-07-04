@@ -8,73 +8,85 @@ use Illuminate\Database\Eloquent\Model;
 
 class PartnerService extends BaseService
 {
+    use \App\Traits\UploadTrait;
+
+    protected string $uploadPath = 'partners';
+
     /**
      * @var PartnerRepositoryInterface
      */
-    protected PartnerRepositoryInterface $repository;
+    protected PartnerRepositoryInterface $partnerRepository;
 
     /**
      * PartnerService constructor.
      *
-     * @param PartnerRepositoryInterface $repository
+     * @param PartnerRepositoryInterface $partnerRepository
      */
-    public function __construct(PartnerRepositoryInterface $repository)
+    public function __construct(PartnerRepositoryInterface $partnerRepository)
     {
-        $this->repository = $repository;
+        $this->partnerRepository = $partnerRepository;
     }
 
     /**
      * Get all partners.
-     *
-     * @return Collection
      */
-    public function all(): Collection
+    public function getAllPartners()
     {
-        return $this->repository->all();
+        return $this->partnerRepository->all();
     }
 
     /**
      * Find a partner by ID.
-     *
-     * @param int $id
-     * @return Model|null
      */
-    public function find(int $id): ?Model
+    public function getPartnerById(int $id)
     {
-        return $this->repository->find($id);
+        return $this->partnerRepository->find($id);
     }
 
     /**
      * Create a new partner.
-     *
-     * @param array $data
-     * @return Model
      */
-    public function create(array $data): Model
+    public function createPartner(array $data)
     {
-        return $this->repository->create($data);
+        if (isset($data['logo']) && $data['logo'] instanceof \Illuminate\Http\UploadedFile) {
+            $data['logo'] = $this->uploadFile($data['logo'], $this->uploadPath);
+        }
+
+        return $this->partnerRepository->create($data);
     }
 
     /**
      * Update an existing partner.
-     *
-     * @param int $id
-     * @param array $data
-     * @return bool
      */
-    public function update(int $id, array $data): bool
+    public function updatePartner(int $id, array $data)
     {
-        return $this->repository->update($id, $data);
+        $partner = $this->partnerRepository->find($id);
+
+        if (!$partner) {
+            return false;
+        }
+
+        if (isset($data['logo']) && $data['logo'] instanceof \Illuminate\Http\UploadedFile) {
+            if ($partner->logo) {
+                $this->deleteFile($partner->logo);
+            }
+            $data['logo'] = $this->uploadFile($data['logo'], $this->uploadPath);
+        }
+
+        return $this->partnerRepository->update($id, $data);
     }
 
     /**
      * Delete a partner.
-     *
-     * @param int $id
-     * @return bool
      */
-    public function delete(int $id): bool
+    public function deletePartner(int $id)
     {
-        return $this->repository->delete($id);
+        $partner = $this->partnerRepository->find($id);
+
+        if ($partner && $partner->logo) {
+            $this->deleteFile($partner->logo);
+        }
+
+        return $this->partnerRepository->delete($id);
     }
 }

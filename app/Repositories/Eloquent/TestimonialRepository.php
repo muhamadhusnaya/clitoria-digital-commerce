@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Repositories\BaseRepository;
+
 use App\Models\Testimonial;
 use App\Repositories\Contracts\TestimonialRepositoryInterface;
 

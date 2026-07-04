@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Repositories\BaseRepository;
+
 use App\Models\Team;
 use App\Repositories\Contracts\TeamRepositoryInterface;
 

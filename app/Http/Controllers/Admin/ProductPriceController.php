@@ -12,7 +12,8 @@ class ProductPriceController extends Controller
      */
     public function index()
     {
-        //
+        $product_prices = \App\Models\ProductPrice::all();
+        return view('admin.product-prices.index', compact('product_prices'));
     }
 
     /**

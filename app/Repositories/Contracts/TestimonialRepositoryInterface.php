@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Contracts;
 
+use App\Contracts\BaseRepositoryInterface;
+
 interface TestimonialRepositoryInterface extends BaseRepositoryInterface
 {
     /**

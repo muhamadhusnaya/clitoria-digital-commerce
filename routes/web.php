@@ -20,6 +20,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+        Route::resource('product-prices', \App\Http\Controllers\Admin\ProductPriceController::class);
     });
 
     require __DIR__.'/auth.php';

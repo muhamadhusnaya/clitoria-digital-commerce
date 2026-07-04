@@ -66,6 +66,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Reports
         Route::get('/reports', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('reports.index');
         Route::get('/reports/export', [\App\Http\Controllers\Admin\ExportController::class, 'exportCsv'])->name('reports.export');
+
+        // Business Settings
+        Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+        Route::put('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+
+        // SEO Settings
+        Route::put('/settings/seo', [\App\Http\Controllers\Admin\SettingController::class, 'updateSeo'])->name('settings.seo.update');
     });
 
     require __DIR__.'/auth.php';

@@ -21,4 +21,10 @@ interface SalesRepositoryInterface
     public function getTotalRevenue(?string $startDate = null, ?string $endDate = null);
 
     public function getSalesCount(?string $startDate = null, ?string $endDate = null);
+
+    public function getAverageOrderValue(?string $startDate = null, ?string $endDate = null);
+
+    public function getTotalItemsSold(?string $startDate = null, ?string $endDate = null);
+
+    public function getProductRanking(?string $startDate = null, ?string $endDate = null, int $limit = 10);
 }

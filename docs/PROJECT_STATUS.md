@@ -75,6 +75,19 @@
 
 ---
 
+## 📊 EPIC 06 — ANALYTICS
+
+- 06.01.02 — Sale Model & Migration
+- 06.01.03 — Sales Repository
+- 06.01.04 — Sales Service
+- 06.01.05 — Sales Entry UI
+- 06.01.06 — Sales Detail View
+- 06.02.01 — KPI Cards
+- 06.02.04 — Product Ranking
+- 06.02.05 — Recent Sales Widget
+
+---
+
 <!-- 
 PANDUAN PENAMBAHAN EPIC BARU:
 Jika Anda menyelesaikan tugas untuk Epic baru yang belum ada di atas (misal Epic 02 atau Epic 03):

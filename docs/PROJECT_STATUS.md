@@ -26,6 +26,24 @@
 
 ---
 
+## 🎨 EPIC 02 - UI FOUNDATION
+
+- 02.01.01 - Implement Design Tokens
+- 02.01.02 - Implement Typography
+- 02.01.03 - Implement Color System
+- 02.01.04 - Implement Spacing System
+- 02.01.05 - Implement Responsive Breakpoints
+- 02.02.01 - Button Component
+- 02.02.05 - Badge Component
+- 02.02.07 - Card Component
+- 02.03.01 - Public Master Layout
+- 02.03.02 - Public Header
+- 02.03.03 - Navigation
+- 02.03.04 - Footer
+- 02.03.05 - WhatsApp CTA
+
+---
+
 ## 🔐 EPIC 03 - AUTHENTICATION
 
 - 03.01.01 - Install & Configure Laravel Breeze (Backend)

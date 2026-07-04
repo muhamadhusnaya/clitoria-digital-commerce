@@ -7,13 +7,58 @@ use App\Repositories\Contracts\BenefitRepositoryInterface;
 class BenefitService extends BaseService
 {
     /**
+     * @var BenefitRepositoryInterface
+     */
+    protected BenefitRepositoryInterface $benefitRepository;
+
+    /**
      * BenefitService constructor.
      *
-     * @param BenefitRepositoryInterface $repository
+     * @param BenefitRepositoryInterface $benefitRepository
      */
-    public function __construct(BenefitRepositoryInterface $repository)
+    public function __construct(BenefitRepositoryInterface $benefitRepository)
     {
-        parent::__construct($repository);
+        $this->benefitRepository = $benefitRepository;
+    }
+
+    /**
+     * Get all benefits.
+     */
+    public function getAllBenefits()
+    {
+        return $this->benefitRepository->all();
+    }
+
+    /**
+     * Find a benefit by ID.
+     */
+    public function getBenefitById(int $id)
+    {
+        return $this->benefitRepository->find($id);
+    }
+
+    /**
+     * Create a new benefit.
+     */
+    public function createBenefit(array $data)
+    {
+        return $this->benefitRepository->create($data);
+    }
+
+    /**
+     * Update an existing benefit.
+     */
+    public function updateBenefit(int $id, array $data)
+    {
+        return $this->benefitRepository->update($id, $data);
+    }
+
+    /**
+     * Delete a benefit.
+     */
+    public function deleteBenefit(int $id)
+    {
+        return $this->benefitRepository->delete($id);
     }
 
     /**
@@ -25,7 +70,7 @@ class BenefitService extends BaseService
     public function updateOrder(array $orderData): void
     {
         foreach ($orderData as $id => $orderNumber) {
-            $this->repository->update($id, ['order_number' => $orderNumber]);
+            $this->benefitRepository->update($id, ['order_number' => $orderNumber]);
         }
     }
 }

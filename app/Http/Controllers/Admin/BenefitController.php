@@ -23,7 +23,7 @@ class BenefitController extends Controller
     {
         // Getting all benefits from service, ordered by order_number if the service repository method supports it
         // Or we just get all for now
-        $benefits = $this->benefitService->all();
+        $benefits = $this->benefitService->getAllBenefits();
         
         // Let's sort them by order_number ascending if available
         if ($benefits instanceof \Illuminate\Support\Collection) {
@@ -46,7 +46,7 @@ class BenefitController extends Controller
      */
     public function store(StoreBenefitRequest $request)
     {
-        $this->benefitService->create($request->validated());
+        $this->benefitService->createBenefit($request->validated());
 
         return redirect()->route('admin.benefits.index')
             ->with('success', 'Benefit created successfully.');
@@ -57,7 +57,7 @@ class BenefitController extends Controller
      */
     public function edit(int $id)
     {
-        $benefit = $this->benefitService->find($id);
+        $benefit = $this->benefitService->getBenefitById($id);
         
         if (!$benefit) {
             abort(404);
@@ -71,7 +71,7 @@ class BenefitController extends Controller
      */
     public function update(UpdateBenefitRequest $request, int $id)
     {
-        $this->benefitService->update($id, $request->validated());
+        $this->benefitService->updateBenefit($id, $request->validated());
 
         return redirect()->route('admin.benefits.index')
             ->with('success', 'Benefit updated successfully.');
@@ -82,7 +82,7 @@ class BenefitController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->benefitService->delete($id);
+        $this->benefitService->deleteBenefit($id);
 
         return redirect()->route('admin.benefits.index')
             ->with('success', 'Benefit deleted successfully.');

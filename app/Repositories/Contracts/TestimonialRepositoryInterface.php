@@ -2,14 +2,12 @@
 
 namespace App\Repositories\Contracts;
 
-use App\Contracts\BaseRepositoryInterface;
-
 interface TestimonialRepositoryInterface extends BaseRepositoryInterface
 {
     /**
-     * Remove featured status from all testimonials.
+     * Get all featured testimonials.
      *
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function removeFeaturedAll(): bool;
+    public function getFeatured();
 }

@@ -3,7 +3,6 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Testimonial;
-use App\Repositories\BaseRepository;
 use App\Repositories\Contracts\TestimonialRepositoryInterface;
 
 class TestimonialRepository extends BaseRepository implements TestimonialRepositoryInterface
@@ -19,12 +18,12 @@ class TestimonialRepository extends BaseRepository implements TestimonialReposit
     }
 
     /**
-     * Remove featured status from all testimonials.
+     * Get all featured testimonials.
      *
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function removeFeaturedAll(): bool
+    public function getFeatured()
     {
-        return $this->model->newQuery()->update(['featured' => false]) > 0;
+        return $this->model->where('is_featured', true)->where('status', 'published')->get();
     }
 }

@@ -24,7 +24,7 @@ class TestimonialController extends Controller
         // For pagination as requested in CURRENT_SPRINT.md
         // Assuming $this->testimonialService->paginate() exists. If not, it can be adjusted.
         // We'll use all() for now and handle UI logic if paginate() isn't implemented.
-        $testimonials = $this->testimonialService->all();
+        $testimonials = $this->testimonialService->getAllTestimonials();
         
         return view('admin.testimonials.index', compact('testimonials'));
     }
@@ -43,9 +43,9 @@ class TestimonialController extends Controller
     public function store(StoreTestimonialRequest $request)
     {
         $data = $request->validated();
-        $data['featured'] = $request->has('featured');
+        $data['is_featured'] = $request->has('featured');
 
-        $this->testimonialService->create($data);
+        $this->testimonialService->createTestimonial($data);
 
         return redirect()->route('admin.testimonials.index')
             ->with('success', 'Testimonial created successfully.');
@@ -56,7 +56,7 @@ class TestimonialController extends Controller
      */
     public function edit(int $id)
     {
-        $testimonial = $this->testimonialService->find($id);
+        $testimonial = $this->testimonialService->getTestimonialById($id);
         
         if (!$testimonial) {
             abort(404);
@@ -71,9 +71,9 @@ class TestimonialController extends Controller
     public function update(UpdateTestimonialRequest $request, int $id)
     {
         $data = $request->validated();
-        $data['featured'] = $request->has('featured');
+        $data['is_featured'] = $request->has('featured');
 
-        $this->testimonialService->update($id, $data);
+        $this->testimonialService->updateTestimonial($id, $data);
 
         return redirect()->route('admin.testimonials.index')
             ->with('success', 'Testimonial updated successfully.');
@@ -84,7 +84,7 @@ class TestimonialController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->testimonialService->delete($id);
+        $this->testimonialService->deleteTestimonial($id);
 
         return redirect()->route('admin.testimonials.index')
             ->with('success', 'Testimonial deleted successfully.');

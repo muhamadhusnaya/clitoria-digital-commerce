@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('content');
             $table->string('image')->nullable();
             $table->enum('status', ['published', 'draft', 'archived'])->default('published')->index();
+            $table->boolean('is_featured')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

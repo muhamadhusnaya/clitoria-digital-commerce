@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,18 @@ Route::name('public.')->group(function () {
     Route::post('/cart/add', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
     Route::delete('/cart/remove', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
     Route::put('/cart/update', [\App\Http\Controllers\CartController::class, 'updateQuantity'])->name('cart.update');
+
+    // Checkout & Buy Now endpoints
+    Route::get('/checkout', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/buy-now', [\App\Http\Controllers\BuyNowController::class, 'store'])->name('buy-now.store');
+});
+
+// Cart Routes (authenticated users)
+Route::middleware('auth')->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+    Route::patch('/cart/update', [CartController::class, 'updateQuantity'])->name('cart.update');
 });
 
 // Admin Routes

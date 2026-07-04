@@ -85,6 +85,10 @@
 - 06.02.01 — KPI Cards
 - 06.02.04 — Product Ranking
 - 06.02.05 — Recent Sales Widget
+- 06.03.01 — Daily Report
+- 06.03.02 — Monthly Report
+- 06.03.03 — Revenue Summary
+- 06.03.04 — Product Performance
 
 ---
 

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Contracts\SalesRepositoryInterface;
+use App\Repositories\Contracts\SalesRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;

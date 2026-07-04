@@ -1,47 +1,34 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Eloquent;
 
-use App\Contracts\SalesRepositoryInterface;
+use App\Repositories\Contracts\SalesRepositoryInterface;
 use App\Models\Sale;
+use App\Models\SalesItem;
+use App\Repositories\BaseRepository;
 
-class SalesRepository implements SalesRepositoryInterface
+class SalesRepository extends BaseRepository implements SalesRepositoryInterface
 {
+    public function __construct(Sale $model)
+    {
+        parent::__construct($model);
+    }
+
     public function all()
     {
-        return Sale::with(['items', 'creator'])->latest('sale_date')->get();
+        return $this->model->with(['items', 'creator'])->latest('sale_date')->get();
     }
 
     public function paginate(int $perPage = 10)
     {
-        return Sale::with(['items', 'creator'])
+        return $this->model->with(['items', 'creator'])
             ->latest('sale_date')
             ->paginate($perPage);
     }
 
     public function find(int $id)
     {
-        return Sale::with(['items.product', 'creator'])->findOrFail($id);
-    }
-
-    public function create(array $data)
-    {
-        return Sale::create($data);
-    }
-
-    public function update(int $id, array $data)
-    {
-        $sale = $this->find($id);
-        $sale->update($data);
-
-        return $sale->fresh(['items.product', 'creator']);
-    }
-
-    public function delete(int $id)
-    {
-        $sale = $this->find($id);
-
-        return $sale->delete();
+        return $this->model->with(['items.product', 'creator'])->findOrFail($id);
     }
 
     public function getByDateRange(?string $startDate = null, ?string $endDate = null)

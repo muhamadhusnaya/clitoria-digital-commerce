@@ -12,9 +12,9 @@ Route::name('public.')->group(function () {
 
 // Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])
+        ->middleware(['auth', 'verified'])
+        ->name('dashboard');
 
     Route::middleware('auth')->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,6 +41,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         // Sales Management
         Route::resource('sales', \App\Http\Controllers\Admin\SaleController::class);
+
+        // Reports
+        Route::get('/reports', [\App\Http\Controllers\Admin\ReportController::class, 'index'])->name('reports.index');
+        Route::get('/reports/export', [\App\Http\Controllers\Admin\ExportController::class, 'exportCsv'])->name('reports.export');
     });
 
     require __DIR__.'/auth.php';

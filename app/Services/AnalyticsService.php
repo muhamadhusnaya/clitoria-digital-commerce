@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Contracts\SalesRepositoryInterface;
+use App\Repositories\Contracts\SalesRepositoryInterface;
 
 class AnalyticsService extends BaseService
 {

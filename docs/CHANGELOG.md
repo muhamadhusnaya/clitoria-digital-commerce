@@ -24,6 +24,85 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 06.03.04 — Product Performance
+Date: 2026-07-04
+### Added
+- Membuat endpoint laporan performa produk.
+
+## TASK 06.03.03 — Revenue Summary
+Date: 2026-07-04
+### Added
+- Membuat laporan ringkasan revenue.
+
+## TASK 06.03.02 — Monthly Report
+Date: 2026-07-04
+### Added
+- Membuat filter dan endpoint laporan bulanan.
+
+## TASK 06.03.01 — Daily Report
+Date: 2026-07-04
+### Added
+- Membuat ExportController untuk mengunduh laporan ke format CSV.
+- Menambahkan View UI untuk Filter dan tabel Transaksi (`admin.reports.index`).
+- Mendaftarkan *routes* untuk `/admin/reports` dan `/admin/reports/export`.
+
+## TASK 06.02.05 — Recent Sales Widget
+Date: 2026-07-04
+### Added
+- Menampilkan data recent sales di UI DashboardController.
+
+## TASK 06.02.04 — Product Ranking
+Date: 2026-07-04
+### Added
+- Menambahkan method `getProductRanking` di `SalesRepository`.
+
+## TASK 06.02.03 — Sales Metrics
+Date: 2026-07-04
+### Added
+- Menambahkan method metrik penjualan di `AnalyticsService`.
+
+## TASK 06.02.02 — Revenue Metrics
+Date: 2026-07-04
+### Added
+- Menambahkan method `getAverageOrderValue` dan `getTotalItemsSold` di `SalesRepository`.
+
+## TASK 06.02.01 — KPI Cards
+Date: 2026-07-04
+### Added
+- Membuat DashboardController yang me-render View Dashboard beserta variabel summary dan recentSales.
+
+## TASK 06.01.06 — Sales Detail View
+Date: 2026-07-04
+### Added
+- Membuat UI dummy/struktur untuk melihat detail penjualan.
+
+## TASK 06.01.05 — Sales Entry UI
+Date: 2026-07-04
+### Added
+- Membuat form input untuk mencatat penjualan baru secara manual (jika diperlukan).
+
+## TASK 06.01.04 — Sales Service
+Date: 2026-07-04
+### Changed
+- Meng-update `SalesService` untuk menggunakan `SalesRepositoryInterface` dari namespace yang diperbarui.
+
+## TASK 06.01.03 — Sales Repository
+Date: 2026-07-04
+### Changed
+- Merefaktor `SalesRepository` untuk extends `BaseRepository` dengan pola repositori yang sesuai.
+- Memindahkan `SalesRepositoryInterface` ke folder Contracts.
+- Mendaftarkan binding repositori di `RepositoryServiceProvider`.
+
+## TASK 06.01.02 — Sales Item Migration
+Date: 2026-07-04
+### Added
+- Migration dan Model `SalesItem`.
+
+## TASK 06.01.01 — Sales Migration
+Date: 2026-07-04
+### Added
+- Migration dan Model `Sale`.
+
 ## TASK 04.06.06 — Partner Image Upload
 Date: 2026-07-04
 ### Changed

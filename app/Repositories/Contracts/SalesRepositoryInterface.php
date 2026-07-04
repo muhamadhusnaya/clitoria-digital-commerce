@@ -1,20 +1,13 @@
 <?php
 
-namespace App\Contracts;
+namespace App\Repositories\Contracts;
 
-interface SalesRepositoryInterface
+use App\Contracts\BaseRepositoryInterface;
+
+interface SalesRepositoryInterface extends BaseRepositoryInterface
 {
-    public function all();
-
     public function paginate(int $perPage = 10);
 
-    public function find(int $id);
-
-    public function create(array $data);
-
-    public function update(int $id, array $data);
-
-    public function delete(int $id);
 
     public function getByDateRange(?string $startDate = null, ?string $endDate = null);
 

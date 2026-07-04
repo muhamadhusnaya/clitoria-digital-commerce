@@ -14,7 +14,7 @@ class SalesRepository extends BaseRepository implements SalesRepositoryInterface
         parent::__construct($model);
     }
 
-    public function all()
+    public function all(): \Illuminate\Database\Eloquent\Collection
     {
         return $this->model->with(['items', 'creator'])->latest('sale_date')->get();
     }
@@ -26,7 +26,7 @@ class SalesRepository extends BaseRepository implements SalesRepositoryInterface
             ->paginate($perPage);
     }
 
-    public function find(int $id)
+    public function find(int $id): ?\Illuminate\Database\Eloquent\Model
     {
         return $this->model->with(['items.product', 'creator'])->findOrFail($id);
     }

@@ -29,6 +29,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Gallery Management
         Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class)->except(['show']);
+
+        // Testimonial Management
+        Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class)->except(['show']);
     });
 
     require __DIR__.'/auth.php';

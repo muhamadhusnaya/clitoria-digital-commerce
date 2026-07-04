@@ -43,6 +43,11 @@
 - 04.01.04 — Hero Service
 - 04.01.05 — Hero CRUD UI
 - 04.01.06 — Hero Image Upload
+- 04.02 — Benefit Management (Integration & Refactor)
+- 04.03 — Gallery Management (Integration & Refactor)
+- 04.04 — Testimonial Management (Integration & Refactor)
+- 04.05 — Team Management (Integration & Refactor)
+- 04.06 — Partner Management (Integration & Refactor)
 
 ---
 

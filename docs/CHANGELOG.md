@@ -24,6 +24,43 @@ Date: YYYY-MM-DD
 
 -->
 
+## EPIC 04 — CMS Management Integration & Fixes
+
+Date: 2026-07-04
+
+### Changed
+- Menggabungkan (*merge*) dan memperbaiki cabang-cabang fitur untuk EPIC 04: Hero, Benefit, Gallery, Testimonial, Team, dan Partner Management ke dalam `fix/epic-04-cms-integration`.
+- Merefaktor *Service Layer* (`BenefitService`, `GalleryService`, `TestimonialService`, `TeamService`, `PartnerService`) agar mengikuti standar Repositori Pattern (wrapper CRUD yang memanggil *repository* tanpa *invalid parent constructor call*) dan menggunakan `UploadTrait` secara konsisten.
+- Mengkonsolidasi *Service Provider binding* dari `AppServiceProvider` ke `RepositoryServiceProvider`.
+- Menyeragamkan panggilan nama *method wrapper* di *Controller* masing-masing (*e.g.*, `getAllHeroes()`, `createHero()`).
+
+### Added
+- Menambahkan kolom `is_featured` pada *migration* `testimonials`.
+- Membuat kelas `TestimonialRepository`, antarmuka, serta `TestimonialService` yang sebelumnya hilang pada tugas pengembangan asli.
+- Membuat _placeholder_ kosong untuk berkas-berkas *view blade* `admin.*.index`, `create`, `edit` pada Benefit, Gallery, Testimonial, Team, dan Partner.
+
+### Verified
+- Seluruh 25 _test suites_ (termasuk *auth tests* dan *custom backend logic tests*) berhasil dilalui (*passed*) dengan `php artisan test`.
+- *Database Migration* berhasil di-*fresh* tanpa galat.
+
+## TASK XX.XX.XX — Nama Tugas
+
+Date: YYYY-MM-DD
+
+### Added
+- Item
+
+### Changed
+- Item
+
+### Removed
+- Item
+
+### Verified
+- Item
+
+-->
+
 ## TASK 04.01.06 — Hero Image Upload
 
 Date: 2026-06-28

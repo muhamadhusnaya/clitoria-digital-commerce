@@ -33,10 +33,15 @@ Sprint ini merupakan **Sprint Integrasi (Fix)** yang bertujuan untuk menggabungk
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
 Tugas ini dianggap selesai jika:
-- [ ] Seluruh tabel database dari Epic 04 (Hero, Benefit, Gallery, Testimonial, Team, Partner) berhasil di-migrate tanpa error.
-- [ ] Semua Repository di Epic 04 sudah berada di folder `app/Repositories/Eloquent/` dan terikat (bound) secara terpusat di `RepositoryServiceProvider.php`.
-- [ ] Tidak ada lagi *Fatal Error* atau masalah penyimpanan gambar pada fitur Gallery, Team, maupun Partner.
-- [ ] File *Controller* tetap dibuat dan berfungsi mengirim data ke *View*, meskipun file `blade.php`-nya dibiarkan kosong/dummy.
+- [x] Seluruh tabel database dari Epic 04 (Hero, Benefit, Gallery, Testimonial, Team, Partner) berhasil di-migrate tanpa error.
+- [x] Semua Repository di Epic 04 sudah berada di folder `app/Repositories/Eloquent/` dan terikat (bound) secara terpusat di `RepositoryServiceProvider.php`.
+- [x] Epic 04 CMS Management Integration
+  - [x] Fix Hero Management
+  - [x] Fix Benefit Management
+  - [x] Fix Gallery Management
+  - [x] Fix Testimonial Management
+  - [x] Fix Team Management
+  - [x] Fix Partner Management
 - [ ] Tidak ada perubahan/pembuatan antarmuka (UI) frontend yang dilakukan di luar dari yang sudah ada, guna mencegah konflik di Epic 02 nantinya.
 
 ---

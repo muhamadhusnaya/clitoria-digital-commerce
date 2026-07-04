@@ -24,6 +24,43 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 05.05.04 — Dynamic WhatsApp Redirect
+Date: 2026-07-04
+### Added
+- Mengintegrasikan rute `checkout.index` dan meregister `BuyNowController` dan `CheckoutController` pada `routes/web.php`.
+- Mengatasi fatal error dan mengimplementasikan Dummy Views pada Checkout page.
+
+## TASK 05.04.05 — Cart Summary
+Date: 2026-07-04
+### Fixed
+- Menyelesaikan Fatal Syntax Bug akibat duplikasi deklarasi _class_ di `CartController`.
+- Memperbaiki konflik rute Shopping Cart antara grup Publik dan Auth.
+- Membuat dummy view untuk halaman keranjang (`cart.index`).
+
+## TASK 05.03.04 — Product Search
+Date: 2026-07-04
+### Fixed
+- Menambahkan _method_ `index` pada `ProductListingController` dan `ProductSearchController`.
+- Membuat dummy view `public.products.index` untuk halaman Product Catalog.
+
+## TASK 05.02.04 — Price Calculation
+Date: 2026-07-04
+### Fixed
+- Menambahkan import `BaseRepository` pada `ProductPriceRepository` untuk menyelesaikan *fatal error*.
+
+## TASK 05.02.02 — Product Price CRUD
+Date: 2026-07-04
+### Fixed
+- Merefaktor *Service Layer* dan Repositori Pattern untuk manajemen Harga Produk.
+- Menambahkan *binding* di `RepositoryServiceProvider` dan _dummy views_ untuk `admin.product-prices.index`, `create`, `edit`.
+
+## TASK 05.01.05 — Product CRUD UI
+Date: 2026-07-04
+### Fixed
+- Melengkapi integrasi modul *Product Management* dan menyatukan implementasi `UploadTrait`.
+- Memastikan `ProductRepository` di-_bind_ dengan benar melalui `RepositoryServiceProvider`.
+- Menyediakan _dummy views_ dasar untuk fitur manajemen Produk.
+
 ## TASK 04.06.06 — Partner Image Upload
 Date: 2026-07-04
 ### Changed

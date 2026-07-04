@@ -75,6 +75,34 @@
 
 ---
 
+## 🛒 EPIC 05 — COMMERCE
+
+- 05.01.01 — Product Migration
+- 05.01.02 — Product Model
+- 05.01.03 — Product Repository
+- 05.01.04 — Product Service
+- 05.01.05 — Product CRUD UI
+- 05.01.06 — Product Image Upload
+- 05.02.01 — Product Price Migration
+- 05.02.02 — Product Price CRUD
+- 05.02.03 — Variant Support
+- 05.02.04 — Price Calculation
+- 05.03.01 — Product Listing Page
+- 05.03.02 — Product Detail Page
+- 05.03.03 — Product Filtering
+- 05.03.04 — Product Search
+- 05.04.01 — Session Cart Service
+- 05.04.02 — Add To Cart
+- 05.04.03 — Remove Item
+- 05.04.04 — Update Quantity
+- 05.04.05 — Cart Summary
+- 05.05.01 — WhatsApp Message Generator
+- 05.05.02 — Cart Checkout
+- 05.05.03 — Buy Now Checkout
+- 05.05.04 — Dynamic WhatsApp Redirect
+
+---
+
 <!-- 
 PANDUAN PENAMBAHAN EPIC BARU:
 Jika Anda menyelesaikan tugas untuk Epic baru yang belum ada di atas (misal Epic 02 atau Epic 03):

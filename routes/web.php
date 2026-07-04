@@ -38,6 +38,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Partner Management
         Route::resource('partners', \App\Http\Controllers\Admin\PartnerController::class)->except(['show']);
+
+        // Business Settings
+        Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+        Route::put('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
     });
 
     require __DIR__.'/auth.php';

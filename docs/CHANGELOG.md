@@ -24,6 +24,52 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 07.01.05 — Business Settings CRUD UI
+
+Date: 2026-07-03
+
+### Added
+- Pembuatan antarmuka pengguna `admin.settings.index` untuk mengelola konfigurasi profil bisnis perusahaan (Nomor WhatsApp, Email, Instagram, Alamat Fisik, dan tautan semat Google Maps).
+- Integrasi helper `get_setting()` pada kolom *input* untuk melakukan inisialisasi (*auto-fill*) data saat form dibuka.
+- Inisiasi `SettingController` dengan fungsi *index* dan *update*, menggunakan lapisan perantara (Request dan Service) untuk validasi dan manajemen pembaruan basis data terpusat.
+- Penambahan rute konfigurasi `admin.settings.index` dan `admin.settings.update` ke kelompok otentikasi admin pada berkas `routes/web.php`.
+
+## TASK 07.01.04 — Business Settings Backend
+
+Date: 2026-06-29
+
+### Added
+- Membuat `SettingSeeder` untuk *seeding* kunci pengaturan (`whatsapp_number`, `business_email`, `instagram_url`, `address`, `google_maps_embed`).
+- Menambahkan Helper Global `get_setting()` di `app/Helpers/helpers.php` untuk mengambil data pengaturan.
+- Membuat `UpdateBusinessSettingRequest` untuk memvalidasi *form input* secara spesifik sesuai jenis datanya.
+
+## TASK 07.01.03 — Settings Service
+
+Date: 2026-06-29
+
+### Added
+- Membuat `SettingService` di `app/Services` yang mewarisi `BaseService`.
+- Mengimplementasikan metode `updateMany(array $settings)` di `SettingService` untuk pembaruan massal *key-value pair*.
+- Menambahkan metode `updateByKey()` ke `SettingRepository` untuk memfasilitasi pencarian dan pembaruan berbasis kunci.
+
+## TASK 07.01.02 — Settings Repository
+
+Date: 2026-06-29
+
+### Added
+- Membuat model Eloquent `Setting` dengan konfigurasi `$fillable` (key, value).
+- Membuat antarmuka `SettingRepositoryInterface` dan kelas implementasinya `SettingRepository`.
+- Meregistrasikan implementasi *Dependency Injection* untuk `SettingRepositoryInterface` di `AppServiceProvider`.
+
+## TASK 07.01.01 — Settings Migration
+
+Date: 2026-06-29
+
+### Added
+- Membuat file migrasi untuk tabel `settings`.
+- Mengonfigurasi skema kolom `key` (unik) dan `value` untuk *key-value pair* data dinamis.
+- Menjalankan migrasi secara sukses pada basis data.
+
 ## TASK 04.06.06 — Partner Image Upload
 Date: 2026-07-04
 ### Changed
@@ -181,6 +227,179 @@ Date: 2026-07-04
 Date: 2026-07-04
 ### Added
 - Setup `benefits` migration.
+
+## TASK 04.06.04 — Partner Service
+
+Date: 2026-06-29
+
+### Added
+- Membuat `PartnerService` di `app/Services` yang mewarisi `BaseService`.
+- Menginjeksi antarmuka `PartnerRepositoryInterface` ke dalam `PartnerService` sebagai perantara basis data.
+
+## TASK 04.06.03 — Partner Repository
+
+Date: 2026-06-29
+
+### Added
+- Membuat `PartnerRepositoryInterface` di `app/Repositories/Contracts`.
+- Membuat `PartnerRepository` yang mengimplementasikan antarmuka di atas serta mewarisi CRUD bawaan `BaseRepository`.
+- Meregistrasikan pola *Dependency Injection* untuk Partner Repository ke dalam `AppServiceProvider`.
+
+## TASK 04.06.02 — Partner Model
+
+Date: 2026-06-29
+
+### Added
+- Membuat model Eloquent `Partner` (`app/Models/Partner.php`).
+- Mendaftarkan atribut `name`, `logo`, `website` ke dalam properti keamanan `$fillable`.
+- Menerapkan *trait* `SoftDeletes` untuk mendukung *soft deletes* dari database.
+
+## TASK 04.06.01 — Partner Migration
+
+Date: 2026-06-29
+
+### Added
+- Membuat file migrasi untuk tabel `partners` dengan kolom `name`, `logo`, `website`, dan fitur `softDeletes`.
+- Menjalankan migrasi database sukses.
+
+## TASK 04.05.04 — Team Service
+
+Date: 2026-06-29
+
+### Added
+- Penyediaan `TeamService` sebagai pelayan logika bisnis tim yang bernaung pada `BaseService`.
+- Penyuntikan dependensi `TeamRepositoryInterface` via konstruktor.
+- Penimpaan logika _store_, _update_, dan _delete_ untuk merealisasikan mekanisme kelola dan pembersihan fail fisik (foto anggota tim) dengan mengadopsi _facade Storage_ secara dinamis.
+
+## TASK 04.05.03 — Team Repository
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan antarmuka `TeamRepositoryInterface` yang menuruni standar `BaseRepositoryInterface`.
+- Implementasi fungsional via kelas `TeamRepository` diiringi integrasi abstraksi model `Team`.
+- Registrasi pola _Service-Repository_ pada penampung modul kerangka kerja di `AppServiceProvider`.
+
+## TASK 04.05.02 — Team Model
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan kelas model `Team` sebagai entitas Eloquent di `app/Models`.
+- Atribut pengamanan *mass-assignment* untuk properti `name`, `position`, `photo`, `instagram`, dan `linkedin`.
+- Trait `SoftDeletes` untuk mengamankan data yang dihapus tanpa merusaknya secara absolut.
+
+## TASK 04.05.01 — Team Migration
+
+Date: 2026-06-29
+
+### Added
+- Pembuatan tabel migrasi baru untuk entitas `teams` guna menyimpan data anggota tim organisasi.
+- Pendaftaran atribut *name*, *position*, *photo*, beserta tautan media sosial (*instagram*, *linkedin*).
+- Implementasi dukungan `softDeletes` untuk proteksi penghapusan data.
+
+## TASK 04.04.02 — Testimonial Model
+
+Date: 2026-06-28
+
+### Added
+- Model `Testimonial` di lapis aplikasi `app/Models`.
+- Pengaturan keamanan *mass-assignment* `$fillable` untuk membatasi masukan atribut tabel secara masal.
+- Proteksi `SoftDeletes` untuk menyokong operasi penghapusan tanpa menghilangkan data dari pangkalan data.
+
+## TASK 04.04.01 — Testimonial Migration
+
+Date: 2026-06-28
+
+### Added
+- Berkas migrasi `create_testimonials_table` yang mendefinisikan skema tabel penyimpan testimoni.
+- Kolom esensial seperti nama, jabatan, perusahaan, konten testimoni, gambar, status publikasi, dan fitur _soft delete_.
+
+## TASK 04.03.06 — Gallery Image Upload
+
+Date: 2026-06-28
+
+### Changed
+- Meng-*override* metode `create`, `update`, dan `delete` pada `GalleryService` dengan integrasi `UploadTrait`.
+- Menambahkan prosedur penghapusan *file* usang setiap kali terjadi pergantian gambar atau penghapusan data.
+
+## TASK 04.03.04 — Gallery Service
+
+Date: 2026-06-28
+
+### Added
+- Pembuatan kelas `GalleryService` di lapis aplikasi `app/Services`.
+- Menjadikan `GalleryService` turunan dari `BaseService`.
+- Penyuntikan `GalleryRepositoryInterface` ke dalam `GalleryService` guna kelancaran mekanisme CRUD.
+
+## TASK 04.03.03 — Gallery Repository
+
+Date: 2026-06-28
+
+### Added
+- Pembuatan antarmuka `GalleryRepositoryInterface`.
+- Kelas `GalleryRepository` untuk meng-handle eksekusi _query_ berbasis Eloquent.
+- Binding dependensi di dalam `AppServiceProvider` guna merekatkan *Repository Pattern*.
+
+## TASK 04.03.02 — Gallery Model
+
+Date: 2026-06-28
+
+### Added
+- Membuat `Gallery` model di `app/Models`.
+- Mengimplementasikan `SoftDeletes` dan `$fillable` fields untuk entitas Gallery.
+
+## TASK 04.03.01 — Gallery Migration
+
+Date: 2026-06-28
+
+### Added
+- Berkas migrasi `create_galleries_table` untuk pembentukan tabel *galleries*.
+- Konfigurasi struktur kolom `image`, `title`, `description`, `status` dengan indeks dan fitur `softDeletes`.
+
+## TASK 04.02.06 — Benefit Ordering
+
+Date: 2026-06-28
+
+### Added
+- Migrasi baru `add_order_number_to_benefits_table` untuk penambahan atribut urutan.
+- `updateOrder` fungsionalitas di `BenefitService` untuk reposisi hierarki.
+- Atribut `order_number` ke dalam list `$fillable` Model `Benefit`.
+
+## TASK 04.02.04 — Benefit Service
+
+Date: 2026-06-28
+
+### Added
+- Membuat `BenefitService` di `app/Services`.
+- Menghubungkan *Repository* `BenefitRepositoryInterface` ke dalam ekosistem servis.
+- Menurunkan karakteristik fungsional (CRUD) dari `BaseService`.
+
+## TASK 04.02.03 — Benefit Repository
+
+Date: 2026-06-28
+
+### Added
+- Membuat `BenefitRepositoryInterface` di `app/Repositories/Contracts`.
+- Mengimplementasikan `BenefitRepository` dengan metode *Dependency Injection* ke modul `Benefit`.
+- Mengonfigurasi `RepositoryServiceProvider` dengan *binding* interface-ke-implementasi (membuat ulang class Provider karena migrasi branch/lingkungan lokal).
+
+## TASK 04.02.02 — Benefit Model
+
+Date: 2026-06-28
+
+### Added
+- Membuat file *Model* `Benefit.php`.
+- Menentukan tipe perlindungan *mass-assignment* pada properti `$fillable` (`title`, `icon`, `status`) bersama penambahan pustaka/factory yang dibutuhkan.
+
+## TASK 04.02.01 — Benefit Migration
+
+Date: 2026-06-28
+
+### Added
+- Membuat file *migration* untuk inisialisasi tabel `benefits` (`2026_06_28_070838_create_benefits_table.php`).
+- Mendefinisikan kolom spesifik (`title`, `icon`, `status`) yang mematuhi rujukan skema *database*.
+>>>>>>> origin/feature/07.01-business-settings
 
 ## TASK 04.01.06 — Hero Image Upload
 

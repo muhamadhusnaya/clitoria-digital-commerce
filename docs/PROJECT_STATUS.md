@@ -35,6 +35,17 @@
 
 ---
 
+## 📝 EPIC 04 — CMS
+
+- 04.01.01 — Hero Migration
+- 04.01.02 — Hero Model
+- 04.01.03 — Hero Repository
+- 04.01.04 — Hero Service
+- 04.01.05 — Hero CRUD UI
+- 04.01.06 — Hero Image Upload
+
+---
+
 <!-- 
 PANDUAN PENAMBAHAN EPIC BARU:
 Jika Anda menyelesaikan tugas untuk Epic baru yang belum ada di atas (misal Epic 02 atau Epic 03):

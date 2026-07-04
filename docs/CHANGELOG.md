@@ -24,6 +24,46 @@ Date: YYYY-MM-DD
 
 -->
 
+## TASK 04.01.06 — Hero Image Upload
+
+Date: 2026-06-28
+
+### Added
+- Membuat *trait* reusabel `UploadTrait` untuk membantu pemrosesan simpan/hapus file.
+- Mengintegrasikan fungsi unggah dan hapus otomatis (pembersihan gambar usang/yatim) di `HeroService`.
+
+## TASK 04.01.04 — Hero Service
+
+Date: 2026-06-28
+
+### Added
+- Membuat `HeroService` yang mewarisi `BaseService`.
+- Mengimplementasikan logika operasional awal (CRUD) dengan menginjeksi antarmuka repositori pahlawan (Hero).
+
+## TASK 04.01.03 — Hero Repository
+
+Date: 2026-06-28
+
+### Added
+- Membuat `HeroRepositoryInterface` yang mengekstensi kontrak *BaseRepository*.
+- Membuat kelas `HeroRepository` yang mengimplementasikan manajemen data `Hero`.
+- Membuat dan mengonfigurasi `RepositoryServiceProvider` (dan mendaftarkannya di struktur Laravel 11) untuk menangani injeksi dependensi.
+
+## TASK 04.01.02 — Hero Model
+
+Date: 2026-06-28
+
+### Added
+- Membuat model Eloquent `Hero` (`app/Models/Hero.php`) dan mendeklarasikan atribut `$fillable` secara definitif sesuai skema yang telah dirancang.
+- Mengonfirmasi validitas sintaks *class* `Hero` melalui uji CLI `php -l`.
+
+## TASK 04.01.01 — Hero Migration
+
+Date: 2026-06-28
+
+### Added
+- Membuat *file migration* untuk tabel `heroes` dengan struktur yang mendefinisikan *primary key*, `title`, `subtitle`, `image`, `button_text`, `button_link`, dan `timestamps`.
+
 ## TASK 03.01.05 — Profile Management (Backend)
 
 Date: 2026-06-28

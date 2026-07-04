@@ -12,26 +12,47 @@ class GalleryService extends BaseService
     protected string $uploadPath = 'galleries';
 
     /**
+     * @var GalleryRepositoryInterface
+     */
+    protected GalleryRepositoryInterface $galleryRepository;
+
+    /**
      * GalleryService constructor.
      *
-     * @param GalleryRepositoryInterface $repository
+     * @param GalleryRepositoryInterface $galleryRepository
      */
-    public function __construct(GalleryRepositoryInterface $repository)
+    public function __construct(GalleryRepositoryInterface $galleryRepository)
     {
-        parent::__construct($repository);
+        $this->galleryRepository = $galleryRepository;
+    }
+
+    /**
+     * Get all galleries.
+     */
+    public function getAllGalleries()
+    {
+        return $this->galleryRepository->all();
+    }
+
+    /**
+     * Find a gallery by ID.
+     */
+    public function getGalleryById(int $id)
+    {
+        return $this->galleryRepository->find($id);
     }
 
     /**
      * @param array $data
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function create(array $data)
+    public function createGallery(array $data)
     {
         if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
             $data['image'] = $this->uploadFile($data['image'], $this->uploadPath);
         }
 
-        return parent::create($data);
+        return $this->galleryRepository->create($data);
     }
 
     /**
@@ -39,9 +60,9 @@ class GalleryService extends BaseService
      * @param array $data
      * @return bool
      */
-    public function update(int $id, array $data): bool
+    public function updateGallery(int $id, array $data): bool
     {
-        $gallery = $this->repository->find($id);
+        $gallery = $this->galleryRepository->find($id);
 
         if (!$gallery) {
             return false;
@@ -54,16 +75,16 @@ class GalleryService extends BaseService
             $data['image'] = $this->uploadFile($data['image'], $this->uploadPath);
         }
 
-        return parent::update($id, $data);
+        return $this->galleryRepository->update($id, $data);
     }
 
     /**
      * @param int $id
      * @return bool
      */
-    public function delete(int $id): bool
+    public function deleteGallery(int $id): bool
     {
-        $gallery = $this->repository->find($id);
+        $gallery = $this->galleryRepository->find($id);
 
         if ($gallery) {
             if ($gallery->image) {
@@ -71,6 +92,6 @@ class GalleryService extends BaseService
             }
         }
 
-        return parent::delete($id);
+        return $this->galleryRepository->delete($id);
     }
 }

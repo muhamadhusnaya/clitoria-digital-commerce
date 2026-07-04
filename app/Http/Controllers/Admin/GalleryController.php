@@ -22,7 +22,7 @@ class GalleryController extends Controller
     public function index()
     {
         // Get all galleries. The UI mockup uses $galleries.
-        $galleries = $this->galleryService->all();
+        $galleries = $this->galleryService->getAllGalleries();
         
         return view('admin.galleries.index', compact('galleries'));
     }
@@ -40,7 +40,7 @@ class GalleryController extends Controller
      */
     public function store(StoreGalleryRequest $request)
     {
-        $this->galleryService->create($request->validated());
+        $this->galleryService->createGallery($request->validated());
 
         return redirect()->route('admin.galleries.index')
             ->with('success', 'Gallery image uploaded successfully.');
@@ -51,7 +51,7 @@ class GalleryController extends Controller
      */
     public function edit(int $id)
     {
-        $gallery = $this->galleryService->find($id);
+        $gallery = $this->galleryService->getGalleryById($id);
         
         if (!$gallery) {
             abort(404);
@@ -65,7 +65,7 @@ class GalleryController extends Controller
      */
     public function update(UpdateGalleryRequest $request, int $id)
     {
-        $this->galleryService->update($id, $request->validated());
+        $this->galleryService->updateGallery($id, $request->validated());
 
         return redirect()->route('admin.galleries.index')
             ->with('success', 'Gallery metadata updated successfully.');
@@ -76,7 +76,7 @@ class GalleryController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->galleryService->delete($id);
+        $this->galleryService->deleteGallery($id);
 
         return redirect()->route('admin.galleries.index')
             ->with('success', 'Gallery image deleted successfully.');

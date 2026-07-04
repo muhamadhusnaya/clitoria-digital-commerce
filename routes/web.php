@@ -35,6 +35,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Team Management
         Route::resource('teams', \App\Http\Controllers\Admin\TeamController::class)->except(['show']);
+
+        // Partner Management
+        Route::resource('partners', \App\Http\Controllers\Admin\PartnerController::class)->except(['show']);
     });
 
     require __DIR__.'/auth.php';

@@ -32,6 +32,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Testimonial Management
         Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class)->except(['show']);
+
+        // Team Management
+        Route::resource('teams', \App\Http\Controllers\Admin\TeamController::class)->except(['show']);
     });
 
     require __DIR__.'/auth.php';

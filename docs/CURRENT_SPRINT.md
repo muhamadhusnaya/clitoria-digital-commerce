@@ -12,38 +12,48 @@
 
 *   **Fase Proyek:** PHASE 2 — CMS Module Development
 *   **Epic Aktif:** EPIC 04 — CMS
-*   **Fitur Aktif:** FEATURE 04.01 — Hero Management
-*   **Tugas Aktif:** TASK 04.01.01 — Hero Migration
+*   **Fitur Aktif:** Integrasi Fitur 04.01 - 04.06
+*   **Tugas Aktif:** Backend Integration & Fixes
 
 ---
 
 ## 🎯 OBJEKTIF & RUANG LINGKUP TUGAS
-
-Tugas ini menandai dimulainya Epic CMS, khususnya pada fitur pengaturan Hero (komponen visual utama di halaman publik). Tugas pertama ini bertujuan untuk membuat skema database dan file migration.
+Sprint ini merupakan **Sprint Integrasi (Fix)** yang bertujuan untuk menggabungkan, menstandardisasi, dan memperbaiki seluruh kode *Backend* dari Epic 04 (CMS) yang dikerjakan pada fitur 04.01 hingga 04.06. Sprint ini berfokus murni pada stabilitas Arsitektur dan Data, **bukan** pada pembuatan UI/Blade baru.
 
 **Cakupan Pekerjaan:**
-- Membuat *migration* untuk tabel `heroes` sesuai definisi di `SCHEMA.md`.
-- Memastikan struktur kolom dan tipe data tepat.
+- Menggabungkan (*cherry-pick* / *merge*) logika Backend (Migration, Model, Repository, Service, Request, Controller) dari branch `feature/04.01` hingga `feature/04.06` ke dalam satu branch integrasi baru.
+- **Standarisasi Arsitektur:** Memastikan semua *Repository* di Epic 04 wajib menge-extend `BaseRepository` dan semua *binding interface* wajib dipindahkan ke `RepositoryServiceProvider.php` (menghapus yang ada di `AppServiceProvider`).
+- **Penyelesaian Bug Fatal:**
+  - Memperbaiki `GalleryService` yang memanggil `parent::create` (menyebabkan crash).
+  - Menambahkan `UploadTrait` pada `PartnerService` agar file gambar benar-benar ter-upload ke sistem.
+  - Memperbaiki `TeamService` agar menggunakan `UploadTrait` secara konsisten.
+- **Melengkapi Fitur Terlewat:** Membangun `TestimonialRepository` dan `TestimonialService` beserta logika *Featured Testimonial* yang sebelumnya bolos dikerjakan oleh Dev 2.
 
 ---
 
 ## 🔍 KRITERIA PENERIMAAN (ACCEPTANCE CRITERIA)
-
 Tugas ini dianggap selesai jika:
-- [ ] File *migration* untuk tabel `heroes` berhasil dibuat.
-- [ ] Menjalankan `php artisan migrate` mengeksekusi migrasi tanpa *error*.
-- [ ] Struktur tabel database sesuai dengan referensi.
+- [x] Seluruh tabel database dari Epic 04 (Hero, Benefit, Gallery, Testimonial, Team, Partner) berhasil di-migrate tanpa error.
+- [x] Semua Repository di Epic 04 sudah berada di folder `app/Repositories/Eloquent/` dan terikat (bound) secara terpusat di `RepositoryServiceProvider.php`.
+- [x] Epic 04 CMS Management Integration
+  - [x] Fix Hero Management
+  - [x] Fix Benefit Management
+  - [x] Fix Gallery Management
+  - [x] Fix Testimonial Management
+  - [x] Fix Team Management
+  - [x] Fix Partner Management
+- [ ] Tidak ada perubahan/pembuatan antarmuka (UI) frontend yang dilakukan di luar dari yang sudah ada, guna mencegah konflik di Epic 02 nantinya.
 
 ---
 
 ## ⏮️ TUGAS SEBELUMNYA (PREVIOUS TASK)
 
-*   **Tugas:** TASK 03.01.05 — Profile Management (Backend)
+*   **Tugas:** Audit Keseluruhan Epics (Epic 04 - Epic 07)
 *   **Hasil Kerja (Deliverables):**
-    - Menyelesaikan fungsionalitas manajemen profil admin dan menuntaskan EPIC 03.
+    - Mendokumentasikan status dan bug pada semua implementation branches.
 
 ---
 
 ## ⏭️ TUGAS BERIKUTNYA (NEXT TASK)
 
-*   **Tugas:** TASK 04.01.02 — Hero Model
+*   **Tugas:** Epic 05 Commerce Integration & Fixes

@@ -44,7 +44,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
 
         // SEO Settings
-        Route::get('/settings/seo', [\App\Http\Controllers\Admin\SettingController::class, 'seo'])->name('settings.seo');
         Route::put('/settings/seo', [\App\Http\Controllers\Admin\SettingController::class, 'updateSeo'])->name('settings.seo.update');
     });
 

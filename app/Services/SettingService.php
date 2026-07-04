@@ -6,8 +6,13 @@ use App\Repositories\Contracts\SettingRepositoryInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Traits\UploadTrait;
+use Illuminate\Http\UploadedFile;
+
 class SettingService extends BaseService
 {
+    use UploadTrait;
+
     /**
      * @var SettingRepositoryInterface
      */
@@ -87,9 +92,14 @@ class SettingService extends BaseService
     public function updateMany(array $settings): void
     {
         foreach ($settings as $key => $value) {
-            // value could be null, empty string, etc.
-            // if we need to handle file uploads, we can check for UploadedFile here.
-            // but for simplicity, we assume text/json values.
+            if ($value instanceof UploadedFile) {
+                $oldValue = get_setting($key);
+                if ($oldValue) {
+                    $this->deleteFile($oldValue);
+                }
+                $value = $this->uploadFile($value, 'settings');
+            }
+
             $this->repository->updateByKey($key, $value);
         }
     }

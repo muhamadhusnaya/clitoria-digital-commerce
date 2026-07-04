@@ -47,13 +47,6 @@ class SettingController extends Controller
             ->with('success', 'Business settings updated successfully.');
     }
 
-    /**
-     * Display the SEO settings form (optional if we combine it).
-     */
-    public function seo()
-    {
-        return view('admin.settings.seo');
-    }
 
     /**
      * Update the SEO settings.

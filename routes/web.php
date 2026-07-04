@@ -8,6 +8,12 @@ Route::name('public.')->group(function () {
     Route::get('/', function () {
         return view('welcome');
     })->name('home');
+
+    Route::get('/dummy-public', function () {
+        return view('dummy-public');
+    })->name('dummy-public');
+    Route::get('/products', [\App\Http\Controllers\Public\ProductListingController::class, 'index'])->name('product.list');
+    Route::get('/search', [\App\Http\Controllers\Public\ProductSearchController::class, 'index'])->name('product.search');
 });
 
 // Admin Routes

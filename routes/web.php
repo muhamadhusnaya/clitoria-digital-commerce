@@ -14,6 +14,12 @@ Route::name('public.')->group(function () {
     })->name('dummy-public');
     Route::get('/products', [\App\Http\Controllers\Public\ProductListingController::class, 'index'])->name('product.list');
     Route::get('/search', [\App\Http\Controllers\Public\ProductSearchController::class, 'index'])->name('product.search');
+
+    // Cart endpoints
+    Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+    Route::delete('/cart/remove', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+    Route::put('/cart/update', [\App\Http\Controllers\CartController::class, 'updateQuantity'])->name('cart.update');
 });
 
 // Admin Routes

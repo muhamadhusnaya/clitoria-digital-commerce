@@ -24,42 +24,163 @@ Date: YYYY-MM-DD
 
 -->
 
-## EPIC 04 — CMS Management Integration & Fixes
-
+## TASK 04.06.06 — Partner Image Upload
 Date: 2026-07-04
-
 ### Changed
-- Menggabungkan (*merge*) dan memperbaiki cabang-cabang fitur untuk EPIC 04: Hero, Benefit, Gallery, Testimonial, Team, dan Partner Management ke dalam `fix/epic-04-cms-integration`.
-- Merefaktor *Service Layer* (`BenefitService`, `GalleryService`, `TestimonialService`, `TeamService`, `PartnerService`) agar mengikuti standar Repositori Pattern (wrapper CRUD yang memanggil *repository* tanpa *invalid parent constructor call*) dan menggunakan `UploadTrait` secara konsisten.
-- Mengkonsolidasi *Service Provider binding* dari `AppServiceProvider` ke `RepositoryServiceProvider`.
-- Menyeragamkan panggilan nama *method wrapper* di *Controller* masing-masing (*e.g.*, `getAllHeroes()`, `createHero()`).
+- Mengintegrasikan fungsi unggah logo menggunakan `UploadTrait` secara konsisten pada `PartnerService`.
 
+## TASK 04.06.05 — Partner CRUD UI
+Date: 2026-07-04
 ### Added
+- Membuat _placeholder_ kosong untuk berkas-berkas *view blade* `admin.partners.index`, `create`, `edit`.
+### Changed
+- Menyeragamkan panggilan nama *method wrapper* di `PartnerController`.
+
+## TASK 04.06.04 — Partner Service
+Date: 2026-07-04
+### Changed
+- Merefaktor *Service Layer* `PartnerService` agar mengikuti standar Repositori Pattern tanpa *invalid parent constructor call*.
+
+## TASK 04.06.03 — Partner Repository
+Date: 2026-07-04
+### Added
+- Mengkonsolidasi *Service Provider binding* dari `AppServiceProvider` ke `RepositoryServiceProvider` untuk `PartnerRepositoryInterface`.
+
+## TASK 04.06.02 — Partner Model
+Date: 2026-07-04
+### Added
+- Setup `Partner` model.
+
+## TASK 04.06.01 — Partner Migration
+Date: 2026-07-04
+### Added
+- Setup `partners` migration.
+
+## TASK 04.05.06 — Team Image Upload
+Date: 2026-07-04
+### Changed
+- Mengintegrasikan fungsi unggah foto menggunakan `UploadTrait` secara konsisten pada `TeamService`.
+
+## TASK 04.05.05 — Team CRUD UI
+Date: 2026-07-04
+### Added
+- Membuat _placeholder_ kosong untuk berkas-berkas *view blade* `admin.teams.index`, `create`, `edit`.
+### Changed
+- Menyeragamkan panggilan nama *method wrapper* di `TeamController`.
+
+## TASK 04.05.04 — Team Service
+Date: 2026-07-04
+### Changed
+- Merefaktor *Service Layer* `TeamService` agar mengikuti standar Repositori Pattern.
+
+## TASK 04.05.03 — Team Repository
+Date: 2026-07-04
+### Added
+- Mengkonsolidasi *Service Provider binding* dari `AppServiceProvider` ke `RepositoryServiceProvider` untuk `TeamRepositoryInterface`.
+
+## TASK 04.05.02 — Team Model
+Date: 2026-07-04
+### Added
+- Setup `Team` model.
+
+## TASK 04.05.01 — Team Migration
+Date: 2026-07-04
+### Added
+- Setup `teams` migration.
+
+## TASK 04.04.06 — Testimonial Image Upload
+Date: 2026-07-04
+### Changed
+- Mengintegrasikan fungsi unggah avatar menggunakan `UploadTrait` secara konsisten pada `TestimonialService`.
+
+## TASK 04.04.05 — Testimonial CRUD UI
+Date: 2026-07-04
+### Added
+- Membuat _placeholder_ kosong untuk berkas-berkas *view blade* `admin.testimonials.index`, `create`, `edit`.
+### Changed
+- Menyeragamkan panggilan nama *method wrapper* di `TestimonialController`.
+
+## TASK 04.04.04 — Testimonial Service
+Date: 2026-07-04
+### Added
+- Membuat `TestimonialService` yang sebelumnya tidak ada.
+
+## TASK 04.04.03 — Testimonial Repository
+Date: 2026-07-04
+### Added
+- Membuat kelas `TestimonialRepository` dan antarmuka `TestimonialRepositoryInterface`.
+- Menambahkan binding ke `RepositoryServiceProvider`.
+
+## TASK 04.04.02 — Testimonial Model
+Date: 2026-07-04
+### Added
+- Setup `Testimonial` model.
+
+## TASK 04.04.01 — Testimonial Migration
+Date: 2026-07-04
+### Added
+- Setup `testimonials` migration.
+### Changed
 - Menambahkan kolom `is_featured` pada *migration* `testimonials`.
-- Membuat kelas `TestimonialRepository`, antarmuka, serta `TestimonialService` yang sebelumnya hilang pada tugas pengembangan asli.
-- Membuat _placeholder_ kosong untuk berkas-berkas *view blade* `admin.*.index`, `create`, `edit` pada Benefit, Gallery, Testimonial, Team, dan Partner.
 
-### Verified
-- Seluruh 25 _test suites_ (termasuk *auth tests* dan *custom backend logic tests*) berhasil dilalui (*passed*) dengan `php artisan test`.
-- *Database Migration* berhasil di-*fresh* tanpa galat.
-
-## TASK XX.XX.XX — Nama Tugas
-
-Date: YYYY-MM-DD
-
-### Added
-- Item
-
+## TASK 04.03.06 — Gallery Image Upload
+Date: 2026-07-04
 ### Changed
-- Item
+- Mengintegrasikan fungsi unggah gambar menggunakan `UploadTrait` secara konsisten pada `GalleryService`.
 
-### Removed
-- Item
+## TASK 04.03.05 — Gallery CRUD UI
+Date: 2026-07-04
+### Added
+- Membuat _placeholder_ kosong untuk berkas-berkas *view blade* `admin.galleries.index`, `create`, `edit`.
+### Changed
+- Menyeragamkan panggilan nama *method wrapper* di `GalleryController`.
 
-### Verified
-- Item
+## TASK 04.03.04 — Gallery Service
+Date: 2026-07-04
+### Changed
+- Merefaktor *Service Layer* `GalleryService` agar mengikuti standar Repositori Pattern (wrapper CRUD yang memanggil *repository* tanpa *invalid parent constructor call*).
 
--->
+## TASK 04.03.03 — Gallery Repository
+Date: 2026-07-04
+### Added
+- Mengkonsolidasi *Service Provider binding* dari `AppServiceProvider` ke `RepositoryServiceProvider` untuk `GalleryRepositoryInterface`.
+
+## TASK 04.03.02 — Gallery Model
+Date: 2026-07-04
+### Added
+- Setup `Gallery` model.
+
+## TASK 04.03.01 — Gallery Migration
+Date: 2026-07-04
+### Added
+- Setup `galleries` migration.
+
+## TASK 04.02.05 — Benefit CRUD UI
+Date: 2026-07-04
+### Added
+- Membuat _placeholder_ kosong untuk berkas-berkas *view blade* `admin.benefits.index`, `create`, `edit`.
+### Changed
+- Menyeragamkan panggilan nama *method wrapper* di `BenefitController`.
+
+## TASK 04.02.04 — Benefit Service
+Date: 2026-07-04
+### Changed
+- Merefaktor *Service Layer* `BenefitService` agar mengikuti standar Repositori Pattern.
+
+## TASK 04.02.03 — Benefit Repository
+Date: 2026-07-04
+### Added
+- Mengkonsolidasi *Service Provider binding* ke `RepositoryServiceProvider` untuk `BenefitRepositoryInterface`.
+
+## TASK 04.02.02 — Benefit Model
+Date: 2026-07-04
+### Added
+- Setup `Benefit` model.
+
+## TASK 04.02.01 — Benefit Migration
+Date: 2026-07-04
+### Added
+- Setup `benefits` migration.
 
 ## TASK 04.01.06 — Hero Image Upload
 

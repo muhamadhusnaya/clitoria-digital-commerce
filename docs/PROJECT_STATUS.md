@@ -76,6 +76,37 @@
 
 ---
 
+## 🛒 EPIC 05 - COMMERCE
+
+- 05.01.01 - Product Migration
+- 05.01.02 - Product Model
+- 05.01.03 - Product Repository
+- 05.01.04 - Product Service
+- 05.01.05 - Product CRUD UI
+- 05.02.01 - Product Price Migration
+- 05.02.02 - Product Price Model
+- 05.02.03 - Product Price Repository
+- 05.02.04 - Product Price Service
+- 05.02.05 - Product Price CRUD UI
+- 05.03.04 - Product Search Backend
+- 05.04.05 - Cart Summary Backend
+- 05.05.04 - Checkout / WhatsApp Redirect Backend
+
+---
+
+## 📊 EPIC 06 - ANALYTICS
+
+- 06.01.01 - Analytics Models & Migrations
+- 06.01.02 - Analytics Repository
+- 06.01.03 - Analytics Service
+- 06.01.04 - Dashboard Backend (Stats)
+- 06.02.01 - Sales Metrics Backend
+- 06.03.01 - Reporting Backend
+- 06.03.02 - CSV Export
+- 06.03.03 - Report Filter
+
+---
+
 ## ⚙️ EPIC 07 - SETTINGS
 
 - 07.01.01 - Settings Migration

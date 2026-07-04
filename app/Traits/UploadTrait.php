@@ -10,6 +10,9 @@ trait UploadTrait
     /**
      * Upload a file and return its path.
      *
+    /**
+     * Upload a file and return its path.
+     *
      * @param UploadedFile $file
      * @param string $path
      * @param string $disk

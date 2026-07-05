@@ -87,4 +87,24 @@ class BenefitController extends Controller
         return redirect()->route('admin.benefits.index')
             ->with('success', 'Benefit deleted successfully.');
     }
+
+    /**
+     * Reorder benefits via AJAX.
+     */
+    public function reorder(\Illuminate\Http\Request $request)
+    {
+        $request->validate([
+            'order' => 'required|array',
+            'order.*' => 'integer|exists:benefits,id',
+        ]);
+
+        $orderData = [];
+        foreach ($request->order as $index => $id) {
+            $orderData[$id] = $index + 1;
+        }
+        
+        $this->benefitService->updateOrder($orderData);
+
+        return response()->json(['success' => true]);
+    }
 }

@@ -3,9 +3,11 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\BenefitRepositoryInterface;
+use App\Traits\UploadTrait;
 
 class BenefitService extends BaseService
 {
+    use UploadTrait;
     /**
      * @var BenefitRepositoryInterface
      */
@@ -42,6 +44,18 @@ class BenefitService extends BaseService
      */
     public function createBenefit(array $data)
     {
+        if (isset($data['icon_type']) && $data['icon_type'] === 'image') {
+            if (isset($data['icon_file']) && $data['icon_file'] instanceof \Illuminate\Http\UploadedFile) {
+                $data['icon'] = $this->uploadFile($data['icon_file'], 'benefits');
+            } else {
+                $data['icon'] = 'eco'; // default fallback
+            }
+        } elseif (isset($data['icon_type']) && $data['icon_type'] === 'material' && empty($data['icon'])) {
+            $data['icon'] = 'eco'; // fallback
+        }
+        
+        unset($data['icon_type'], $data['icon_file']);
+
         return $this->benefitRepository->create($data);
     }
 
@@ -50,6 +64,29 @@ class BenefitService extends BaseService
      */
     public function updateBenefit(int $id, array $data)
     {
+        $benefit = $this->benefitRepository->find($id);
+
+        if (isset($data['icon_type']) && $data['icon_type'] === 'image') {
+            if (isset($data['icon_file']) && $data['icon_file'] instanceof \Illuminate\Http\UploadedFile) {
+                if ($benefit && $benefit->icon && (str_contains($benefit->icon, '/') || str_contains($benefit->icon, '.'))) {
+                    $this->deleteFile($benefit->icon);
+                }
+                $data['icon'] = $this->uploadFile($data['icon_file'], 'benefits');
+            } else {
+                // If no new image is uploaded, we must keep the old one.
+                unset($data['icon']);
+            }
+        } elseif (isset($data['icon_type']) && $data['icon_type'] === 'material') {
+            if ($benefit && $benefit->icon && (str_contains($benefit->icon, '/') || str_contains($benefit->icon, '.'))) {
+                $this->deleteFile($benefit->icon);
+            }
+            if (empty($data['icon'])) {
+                $data['icon'] = 'eco'; // fallback
+            }
+        }
+        
+        unset($data['icon_type'], $data['icon_file']);
+
         return $this->benefitRepository->update($id, $data);
     }
 
@@ -58,6 +95,12 @@ class BenefitService extends BaseService
      */
     public function deleteBenefit(int $id)
     {
+        $benefit = $this->benefitRepository->find($id);
+
+        if ($benefit && $benefit->icon && (str_contains($benefit->icon, '/') || str_contains($benefit->icon, '.'))) {
+            $this->deleteFile($benefit->icon);
+        }
+
         return $this->benefitRepository->delete($id);
     }
 

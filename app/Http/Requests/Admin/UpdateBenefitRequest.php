@@ -24,9 +24,11 @@ class UpdateBenefitRequest extends FormRequest
     {
         return [
             'title' => ['required', 'string', 'max:255'],
-            'icon' => ['required', 'string', 'max:50'],
+            'description' => ['nullable', 'string'],
+            'icon_type' => ['required', 'in:material,image'],
+            'icon' => ['nullable', 'string', 'max:255'],
+            'icon_file' => ['nullable', 'image', 'mimes:jpeg,png,jpg,svg,webp', 'max:2048'],
             'status' => ['required', 'in:1,0'],
-            'order_number' => ['nullable', 'integer'],
         ];
     }
 }

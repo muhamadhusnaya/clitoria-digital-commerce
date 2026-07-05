@@ -43,6 +43,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('heroes', \App\Http\Controllers\Admin\HeroController::class)->except(['show']);
         
         // Benefit Management
+        Route::post('benefits/reorder', [\App\Http\Controllers\Admin\BenefitController::class, 'reorder'])->name('benefits.reorder');
         Route::resource('benefits', \App\Http\Controllers\Admin\BenefitController::class)->except(['show']);
 
         // Gallery Management

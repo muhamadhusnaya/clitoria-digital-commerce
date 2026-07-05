@@ -39,10 +39,10 @@
                         </select>
                     </div>
 
-                    <!-- Order Number -->
+                    <!-- Description -->
                     <div class="flex flex-col gap-2">
-                        <label class="text-[14px] font-medium text-[#484553] ml-1" for="order_number">Nomor Urut</label>
-                        <input name="order_number" type="number" value="{{ old('order_number', $benefit->order_number) }}" class="h-[56px] px-6 rounded-xl border-0 bg-[#f4f2ff] focus:ring-2 focus:ring-[#432b9f] focus:bg-white shadow-sm transition-all duration-300 text-[16px]" id="order_number" />
+                        <label class="text-[14px] font-medium text-[#484553] ml-1" for="description">Subjudul / Deskripsi Singkat</label>
+                        <textarea name="description" class="px-6 py-4 rounded-xl border-0 bg-[#f4f2ff] focus:ring-2 focus:ring-[#432b9f] focus:bg-white shadow-sm transition-all duration-300 text-[16px] placeholder:text-[#797584] resize-none" id="description" placeholder="Jelaskan secara singkat manfaat ini untuk pelanggan..." rows="4">{{ old('description', $benefit->description) }}</textarea>
                     </div>
                 </div>
 

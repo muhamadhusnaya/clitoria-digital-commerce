@@ -23,11 +23,11 @@
         </div>
         <div class="bg-white p-6 rounded-2xl shadow-[0_10px_30px_-5px_rgba(31,35,64,0.04)] flex flex-col gap-1 border border-[#c9c4d5]/30">
             <span class="text-[#797584] uppercase text-[11px] tracking-widest font-semibold">Aktif</span>
-            <span class="text-3xl font-bold text-[#306600]">{{ count($benefits) }}</span>
+            <span class="text-3xl font-bold text-[#306600]">{{ collect($benefits)->where('status', 1)->count() }}</span>
         </div>
         <div class="bg-white p-6 rounded-2xl shadow-[0_10px_30px_-5px_rgba(31,35,64,0.04)] flex flex-col gap-1 border border-[#c9c4d5]/30">
             <span class="text-[#797584] uppercase text-[11px] tracking-widest font-semibold">Tidak Aktif</span>
-            <span class="text-3xl font-bold text-[#614cba]">0</span>
+            <span class="text-3xl font-bold text-[#ba1a1a]">{{ collect($benefits)->where('status', 0)->count() }}</span>
         </div>
         <div class="bg-[#e6deff] p-6 rounded-2xl shadow-[0_10px_30px_-5px_rgba(31,35,64,0.04)] flex items-center justify-center border border-[#432b9f]/10">
             <div class="text-center">
@@ -53,15 +53,19 @@
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-[#f4f2ff]">
+                        <th class="px-4 py-4 w-10 border-b border-[#c9c4d5]/30"></th>
                         <th class="px-8 py-4 text-[#797584] uppercase tracking-widest text-[11px] font-semibold border-b border-[#c9c4d5]/30">Ikon</th>
                         <th class="px-8 py-4 text-[#797584] uppercase tracking-widest text-[11px] font-semibold border-b border-[#c9c4d5]/30">Judul & Deskripsi</th>
-                        <th class="px-8 py-4 text-[#797584] uppercase tracking-widest text-[11px] font-semibold border-b border-[#c9c4d5]/30">Urutan</th>
+                        <th class="px-8 py-4 text-[#797584] uppercase tracking-widest text-[11px] font-semibold border-b border-[#c9c4d5]/30">Status</th>
                         <th class="px-8 py-4 text-[#797584] uppercase tracking-widest text-[11px] font-semibold border-b border-[#c9c4d5]/30 text-right">Aksi</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-[#c9c4d5]/30">
+                <tbody id="sortable-benefits" class="divide-y divide-[#c9c4d5]/30">
                     @forelse($benefits as $benefit)
-                    <tr class="hover:bg-[#f4f2ff]/50 transition-colors group">
+                    <tr data-id="{{ $benefit->id }}" class="hover:bg-[#f4f2ff]/50 transition-colors group bg-white">
+                        <td class="px-4 py-6 text-center">
+                            <span class="material-symbols-outlined drag-handle cursor-grab active:cursor-grabbing text-[#c9c4d5] hover:text-[#432b9f]">drag_indicator</span>
+                        </td>
                         <td class="px-8 py-6">
                             <div class="w-12 h-12 rounded-full bg-[#e6deff] flex items-center justify-center text-[#4931a1]">
                                 @if($benefit->icon_type === 'image')
@@ -78,9 +82,15 @@
                             </div>
                         </td>
                         <td class="px-8 py-6">
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#306600]/10 text-[#306600] text-[12px] font-bold">
-                                {{ $benefit->order_number }}
-                            </span>
+                            @if($benefit->status)
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#306600]/10 text-[#306600] text-[12px] font-bold">
+                                    Aktif
+                                </span>
+                            @else
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ba1a1a]/10 text-[#ba1a1a] text-[12px] font-bold">
+                                    Tidak Aktif
+                                </span>
+                            @endif
                         </td>
                         <td class="px-8 py-6">
                             <div class="flex items-center justify-end gap-2">
@@ -99,7 +109,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="4" class="px-8 py-12 text-center text-[#797584]">
+                        <td colspan="5" class="px-8 py-12 text-center text-[#797584]">
                             <span class="material-symbols-outlined text-4xl mb-2 opacity-50">health_and_safety</span>
                             <p>Belum ada manfaat yang ditambahkan.</p>
                         </td>
@@ -109,4 +119,40 @@
             </table>
         </div>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const el = document.getElementById('sortable-benefits');
+            if (el) {
+                Sortable.create(el, {
+                    animation: 150,
+                    handle: '.drag-handle',
+                    ghostClass: 'bg-[#f4f2ff]',
+                    onEnd: function () {
+                        let order = [];
+                        el.querySelectorAll('tr').forEach((row, index) => {
+                            order.push(row.dataset.id);
+                        });
+
+                        fetch('{{ route("admin.benefits.reorder") }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({ order: order })
+                        }).then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                console.log('Urutan berhasil diperbarui.');
+                            }
+                        }).catch(error => {
+                            console.error('Error reordering:', error);
+                        });
+                    }
+                });
+            }
+        });
+    </script>
 </x-app-layout>

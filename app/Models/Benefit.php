@@ -16,8 +16,20 @@ class Benefit extends Model
      */
     protected $fillable = [
         'title',
+        'description',
         'icon',
         'status',
         'order_number',
     ];
+
+    /**
+     * Get the icon type (material or image) based on the icon value.
+     */
+    public function getIconTypeAttribute()
+    {
+        if ($this->icon && (str_contains($this->icon, '/') || str_contains($this->icon, '.'))) {
+            return 'image';
+        }
+        return 'material';
+    }
 }

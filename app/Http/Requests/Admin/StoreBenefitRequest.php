@@ -25,7 +25,7 @@ class StoreBenefitRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'icon' => ['required', 'string', 'max:50'],
-            'status' => ['required', 'in:active,inactive'],
+            'status' => ['required', 'in:1,0'],
             'order_number' => ['nullable', 'integer'],
         ];
     }

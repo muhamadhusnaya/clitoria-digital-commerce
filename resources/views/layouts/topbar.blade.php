@@ -1,35 +1,32 @@
-<header class="flex items-center justify-between px-6 py-4 bg-surface-container-lowest border-b border-outline-variant">
-    <div class="flex items-center">
-        <button @click="sidebarOpen = true" class="p-2 mr-4 text-on-surface-variant rounded-full hover:bg-surface-container lg:hidden transition-colors focus:outline-none">
-            <span class="material-symbols-outlined">menu</span>
-        </button>
+<!-- TopAppBar Anchor -->
+<header class="fixed top-0 right-0 left-64 h-16 z-30 bg-[#fbf8ff]/80 backdrop-blur-xl border-b border-[#c9c4d5]/20 shadow-sm flex justify-between items-center px-6">
+    <div class="flex items-center gap-4 flex-1">
+        <div class="relative w-full max-w-md">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#797584] text-xl">search</span>
+            <input class="w-full bg-[#f4f2ff] border-none rounded-full pl-10 pr-4 py-2 text-[16px] focus:ring-2 focus:ring-[#432b9f]/20 transition-all" placeholder="Search data or reports..." type="text"/>
+        </div>
     </div>
-
+    
     <div class="flex items-center gap-4">
-        <div class="hidden sm:flex sm:items-center">
-            <x-dropdown align="right" width="48">
-                <x-slot name="trigger">
-                    <button class="flex items-center gap-2 p-2 text-sm font-medium text-on-surface-variant rounded-full hover:bg-surface-container transition-colors focus:outline-none">
-                        <span>{{ Auth::user()->name }}</span>
-                        <span class="material-symbols-outlined text-[20px]">expand_more</span>
-                    </button>
-                </x-slot>
-
-                <x-slot name="content">
-                    <x-dropdown-link :href="route('admin.profile.edit')" class="hover:bg-surface-container text-on-surface">
-                        {{ __('Profile') }}
-                    </x-dropdown-link>
-
-                    <form method="POST" action="{{ route('admin.logout') }}">
-                        @csrf
-                        <x-dropdown-link :href="route('admin.logout')"
-                                onclick="event.preventDefault(); this.closest('form').submit();"
-                                class="hover:bg-error-container hover:text-error text-error">
-                            {{ __('Log Out') }}
-                        </x-dropdown-link>
-                    </form>
-                </x-slot>
-            </x-dropdown>
+        <button class="hover:bg-[#e6e6ff] text-[#484553] rounded-full p-2 transition-all hover:scale-105 active:scale-95">
+            <span class="material-symbols-outlined">notifications</span>
+        </button>
+        <button class="hover:bg-[#e6e6ff] text-[#484553] rounded-full p-2 transition-all hover:scale-105 active:scale-95">
+            <span class="material-symbols-outlined">help</span>
+        </button>
+        
+        <div class="h-8 w-[1px] bg-[#c9c4d5]/30 mx-2"></div>
+        
+        <div class="flex items-center gap-3 cursor-pointer hover:bg-[#e6e6ff] p-1 pr-4 rounded-full transition-colors">
+            <!-- Profile Avatar using UI Avatars -->
+            <img class="w-8 h-8 rounded-full border-2 border-[#432b9f]/20 object-cover" 
+                 alt="{{ Auth::user()->name ?? 'Admin Profile' }}" 
+                 src="https://ui-avatars.com/api/?name={{ urlencode(Auth::user()->name ?? 'Admin') }}&color=432b9f&background=e6deff"/>
+            
+            <div class="hidden lg:block text-left">
+                <p class="text-[14px] font-medium text-[#151936]">{{ Auth::user()->name ?? 'Admin Profile' }}</p>
+                <p class="text-[10px] text-[#797584] leading-tight">{{ Auth::user()->email ?? 'Master Admin' }}</p>
+            </div>
         </div>
     </div>
 </header>

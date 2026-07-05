@@ -23,12 +23,12 @@ class StoreTestimonialRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer_name' => ['required', 'string', 'max:255'],
-            'occupation' => ['nullable', 'string', 'max:255'],
-            'rating' => ['required', 'integer', 'min:1', 'max:5'],
-            'review' => ['required', 'string'],
-            'photo' => ['nullable', 'image', 'max:2048'],
-            'featured' => ['nullable', 'boolean'],
+            'name' => ['required', 'string', 'max:255'],
+            'role' => ['nullable', 'string', 'max:255'],
+            'company' => ['nullable', 'string', 'max:255'],
+            'content' => ['required', 'string'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'status' => ['required', 'string', 'in:active,draft'],
         ];
     }
 }

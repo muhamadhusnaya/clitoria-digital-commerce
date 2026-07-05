@@ -3,16 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreProductRequest;
+use App\Http\Requests\Admin\UpdateProductRequest;
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    protected ProductService $productService;
+
+    public function __construct(ProductService $productService)
+    {
+        $this->productService = $productService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = \App\Models\Product::all();
+        $products = $this->productService->getAll();
         return view('admin.products.index', compact('products'));
     }
 
@@ -21,15 +31,18 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.products.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        //
+        $this->productService->store($request->validated());
+
+        return redirect()->route('admin.products.index')
+            ->with('success', 'Product created successfully.');
     }
 
     /**
@@ -37,7 +50,13 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = $this->productService->find($id);
+
+        if (!$product) {
+            abort(404);
+        }
+
+        return view('admin.products.show', compact('product'));
     }
 
     /**
@@ -45,15 +64,24 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = $this->productService->find($id);
+
+        if (!$product) {
+            abort(404);
+        }
+
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProductRequest $request, string $id)
     {
-        //
+        $this->productService->update($id, $request->validated());
+
+        return redirect()->route('admin.products.index')
+            ->with('success', 'Product updated successfully.');
     }
 
     /**
@@ -61,6 +89,9 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $this->productService->delete($id);
+
+        return redirect()->route('admin.products.index')
+            ->with('success', 'Product deleted successfully.');
     }
 }

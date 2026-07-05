@@ -1,74 +1,157 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-on-surface leading-tight">
-                { __('Manage Team') }
-            </h2>
-            <a href="{ route('admin.teams.create') }" class="px-4 py-2 bg-primary text-white rounded-full text-sm font-medium hover:bg-primary-container transition-all shadow-[0_4px_14px_0_rgba(67,43,159,0.39)]">
-                Add New Team
-            </a>
-        </div>
-    </x-slot>
+ <style>
+ .card-shadow {
+ box-shadow: 0 10px 30px rgba(31, 35, 64, 0.04);
+ }
+ .premium-button {
+ transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+ }
+ .premium-button:active {
+ transform: scale(0.96);
+ }
+ </style>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if (session('success'))
-                <div class="mb-6 bg-tertiary-container text-on-tertiary-container p-4 rounded-xl border border-tertiary-fixed font-medium">
-                    { session('success') }
-                </div>
-            @endif
+ <!-- Page Header -->
+ <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+ <div>
+ <h2 class="text-3xl font-semibold text-[#151936] tracking-tight mb-2">Anggota Tim</h2>
+ <p class="font-body-lg text-[18px] text-[#797584] max-w-2xl">
+ Kelola spesialis teh organik, ahli botani, dan tim operasional Anda yang menjadikan Clitoria standar emas dalam minuman premium.
+ </p>
+ </div>
+ <a href="{{ route('admin.teams.create') }}" class="bg-[#5b46b8] text-white px-8 py-4 rounded-xl text-[16px] font-bold premium-button flex items-center gap-2 card-shadow hover:bg-[#432b9f] transition-colors">
+ <span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+ Tambah Anggota
+ </a>
+ </div>
+ 
+ @if (session('success'))
+ <div class="mb-6 bg-[#306600] text-[#a2e373] p-4 rounded-xl border border-[#b3f582] font-medium text-[14px]">
+ {{ session('success') }}
+ </div>
+ @endif
 
-            <div class="bg-surface-container-lowest overflow-hidden shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)] sm:rounded-2xl border border-outline-variant/30">
-                <div class="p-0">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="bg-surface-container-low border-b border-outline-variant/50">
-                                    <th class="px-6 py-4 text-xs tracking-wider uppercase font-semibold text-on-surface-variant">ID</th>
-                                    <th class="px-6 py-4 text-xs tracking-wider uppercase font-semibold text-on-surface-variant">Name</th>
-                                    <th class="px-6 py-4 text-xs tracking-wider uppercase font-semibold text-on-surface-variant">Position</th>
-                                    <th class="px-6 py-4 text-xs tracking-wider uppercase font-semibold text-on-surface-variant">Photo</th>
+ <!-- Dashboard Stats Row -->
+ <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+ <div class="bg-white p-6 rounded-xl card-shadow flex items-center gap-4 border border-[#c9c4d5]/10">
+ <div class="w-14 h-14 rounded-full bg-[#e6deff] flex items-center justify-center">
+ <span class="material-symbols-outlined text-[#432b9f]" data-icon="group">group</span>
+ </div>
+ <div>
+ <p class="text-[#797584] text-[14px] font-medium">Total Anggota</p>
+ <p class="text-[24px] font-semibold text-[#151936] tracking-tight">{{ $teams->count() }} Aktif</p>
+ </div>
+ </div>
+ <div class="bg-white p-6 rounded-xl card-shadow flex items-center gap-4 border border-[#c9c4d5]/10">
+ <div class="w-14 h-14 rounded-full bg-[#b3f582] flex items-center justify-center">
+ <span class="material-symbols-outlined text-[#224c00]" data-icon="eco">eco</span>
+ </div>
+ <div>
+ <p class="text-[#797584] text-[14px] font-medium">Spesialis (Data Simulasi)</p>
+ <p class="text-[24px] font-semibold text-[#151936] tracking-tight">8 Anggota</p>
+ </div>
+ </div>
+ <div class="bg-white p-6 rounded-xl card-shadow flex items-center gap-4 border border-[#c9c4d5]/10">
+ <div class="w-14 h-14 rounded-full bg-[#e6deff] flex items-center justify-center">
+ <span class="material-symbols-outlined text-[#614cba]" data-icon="work">work</span>
+ </div>
+ <div>
+ <p class="text-[#797584] text-[14px] font-medium">Lowongan (Data Simulasi)</p>
+ <p class="text-[24px] font-semibold text-[#151936] tracking-tight">3 Terbuka</p>
+ </div>
+ </div>
+ </div>
 
-                                    <th class="px-6 py-4 text-xs tracking-wider uppercase font-semibold text-on-surface-variant text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($teams as $team)
-                                    <tr class="border-b border-outline-variant/30 hover:bg-surface-container-low/50 transition-all duration-200">
-                                        <td class="px-6 py-4 font-medium text-primary">#{ $team->id }</td>
-                                                                                <td class="px-6 py-4 text-sm text-on-surface-variant">Data...</td>
-                                        <td class="px-6 py-4 text-sm text-on-surface-variant">Data...</td>
-                                        <td class="px-6 py-4 text-sm text-on-surface-variant">Data...</td>
+ <!-- Table Container -->
+ <div class="bg-white rounded-xl card-shadow overflow-hidden border border-[#edecff]">
+ <div class="overflow-x-auto">
+ <table class="w-full text-left">
+ <thead>
+ <tr class="bg-[#f4f2ff]">
+ <th class="px-6 py-5 font-bold tracking-widest text-[12px] text-[#797584] uppercase">Foto</th>
+ <th class="px-6 py-5 font-bold tracking-widest text-[12px] text-[#797584] uppercase">Nama</th>
+ <th class="px-6 py-5 font-bold tracking-widest text-[12px] text-[#797584] uppercase">Posisi</th>
+ <th class="px-6 py-5 font-bold tracking-widest text-[12px] text-[#797584] uppercase">Tautan Sosial</th>
+ <th class="px-6 py-5 font-bold tracking-widest text-[12px] text-[#797584] uppercase text-right">Aksi</th>
+ </tr>
+ </thead>
+ <tbody class="divide-y divide-surface-container">
+ @forelse ($teams as $team)
+ <tr class="hover:bg-[#ffffff] transition-colors group">
+ <td class="px-6 py-5">
+ <div class="w-12 h-12 rounded-full overflow-hidden bg-[#edecff] border border-[#c9c4d5]/30 flex items-center justify-center text-outline">
+ @if($team->photo)
+ <img class="w-full h-full object-cover" src="{{ asset('storage/' . $team->photo) }}" alt="{{ $team->name }}">
+ @else
+ <span class="material-symbols-outlined text-[24px]">person</span>
+ @endif
+ </div>
+ </td>
+ <td class="px-6 py-5">
+ <div class="flex items-center gap-2">
+ <p class="text-[16px] font-semibold text-[#151936]">{{ $team->name }}</p>
+ <span class="w-2 h-2 rounded-full bg-[#224c00]"></span>
+ </div>
+ </td>
+ <td class="px-6 py-5">
+ <span class="px-3 py-1 bg-[#e6deff] text-[#4831a4] text-[14px] rounded-full font-medium">{{ $team->position }}</span>
+ </td>
+ <td class="px-6 py-5">
+ <div class="flex gap-3 text-[#432b9f]/60">
+ @if($team->instagram)
+ <a class="hover:text-[#432b9f] transition-all text-[#797584]" href="{{ $team->instagram }}" target="_blank" title="Instagram"><span class="material-symbols-outlined text-[20px]" data-icon="photo_camera">photo_camera</span></a>
+ @endif
+ @if($team->linkedin)
+ <a class="hover:text-[#432b9f] transition-all text-[#797584]" href="{{ $team->linkedin }}" target="_blank" title="LinkedIn"><span class="material-symbols-outlined text-[20px]" data-icon="work">work</span></a>
+ @endif
+ @if(!$team->instagram && !$team->linkedin)
+ <span class="text-[12px] italic opacity-50 text-[#797584]">Tidak ada tautan</span>
+ @endif
+ </div>
+ </td>
+ <td class="px-6 py-5 text-right">
+ <div class="flex justify-end gap-2">
+ <a href="{{ route('admin.teams.edit', $team->id) }}" class="p-2 hover:bg-[#e6deff] rounded-lg text-[#797584] hover:text-[#432b9f] transition-all inline-block">
+ <span class="material-symbols-outlined" data-icon="edit">edit</span>
+ </a>
+ <form action="{{ route('admin.teams.destroy', $team->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus anggota tim ini?');">
+ @csrf
+ @method('DELETE')
+ <button type="submit" class="p-2 hover:bg-[#ffdad6] rounded-lg text-[#797584] hover:text-[#ba1a1a] transition-all cursor-pointer">
+ <span class="material-symbols-outlined" data-icon="delete">delete</span>
+ </button>
+ </form>
+ </div>
+ </td>
+ </tr>
+ @empty
+ <tr>
+ <td colspan="5" class="px-6 py-12 text-center text-[#797584]">
+ <div class="flex flex-col items-center justify-center">
+ <span class="material-symbols-outlined text-4xl mb-3 text-[#c9c4d5]">groups</span>
+ <p class="text-[16px]">Belum ada data anggota tim.</p>
+ <a href="{{ route('admin.teams.create') }}" class="mt-2 text-[#432b9f] hover:underline font-bold text-[14px]">Tambah Anggota Sekarang</a>
+ </div>
+ </td>
+ </tr>
+ @endforelse
+ </tbody>
+ </table>
+ </div>
+ 
+ <!-- Pagination / Footer table -->
+ @if($teams->count() > 0)
+ <div class="px-6 py-4 flex items-center justify-between border-t border-[#edecff] bg-[#ffffff]">
+ <p class="text-[14px] font-medium text-[#797584]">Menampilkan {{ $teams->count() }} data anggota aktif.</p>
+ </div>
+ @endif
+ </div>
 
-                                        <td class="px-6 py-4 text-right">
-                                            <a href="{ route('admin.teams.edit', $team->id) }" class="inline-flex items-center justify-center w-8 h-8 mr-2 bg-primary-fixed text-on-primary-fixed rounded-full hover:bg-primary-fixed-dim transition-colors" title="Edit">
-                                                <span class="material-symbols-outlined text-[18px]">edit</span>
-                                            </a>
-                                            <form action="{ route('admin.teams.destroy', $team->id) }" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this Team?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="inline-flex items-center justify-center w-8 h-8 bg-error-container text-on-error-container rounded-full hover:bg-error transition-colors hover:text-white" title="Delete">
-                                                    <span class="material-symbols-outlined text-[18px]">delete</span>
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="px-6 py-12 text-center text-on-surface-variant">
-                                            <div class="flex flex-col items-center justify-center">
-                                                <span class="material-symbols-outlined text-4xl mb-3 text-outline-variant">inbox</span>
-                                                <p>No data found.</p>
-                                                <a href="{ route('admin.teams.create') }" class="mt-2 text-primary hover:underline font-medium">Create one now</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+ <!-- Footer Message -->
+ <div class="mt-8 flex justify-center">
+ <div class="flex items-center gap-2 text-[#797584]/50 text-[14px] font-medium">
+ <span class="material-symbols-outlined text-[16px]" data-icon="verified">verified</span>
+ <span>Semua data tim dienkripsi dan disinkronisasi.</span>
+ </div>
+ </div>
 </x-app-layout>

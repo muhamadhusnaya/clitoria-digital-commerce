@@ -35,11 +35,13 @@ class TestimonialService extends BaseService
     }
 
     /**
-     * Get featured testimonials.
+     * Get active testimonials.
      */
-    public function getFeaturedTestimonials()
+    public function getActiveTestimonials()
     {
-        return $this->testimonialRepository->getFeatured();
+        // Assuming there is a findBy method in the BaseRepository, or we filter the collection.
+        // If not implemented, we can filter it here for now.
+        return $this->testimonialRepository->all()->where('status', 'active');
     }
 
     /**
@@ -59,8 +61,8 @@ class TestimonialService extends BaseService
             $data['image'] = $this->uploadFile($data['image'], $this->uploadPath);
         }
 
-        // Set default is_featured to false if not provided
-        $data['is_featured'] = $data['is_featured'] ?? false;
+        // Default status if not provided
+        $data['status'] = $data['status'] ?? 'draft';
 
         return $this->testimonialRepository->create($data);
     }
@@ -83,7 +85,7 @@ class TestimonialService extends BaseService
             $data['image'] = $this->uploadFile($data['image'], $this->uploadPath);
         }
 
-        $data['is_featured'] = $data['is_featured'] ?? false;
+        $data['status'] = $data['status'] ?? 'draft';
 
         return $this->testimonialRepository->update($id, $data);
     }

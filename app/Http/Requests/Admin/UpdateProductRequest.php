@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTestimonialRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,9 @@ class UpdateTestimonialRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'role' => ['nullable', 'string', 'max:255'],
-            'company' => ['nullable', 'string', 'max:255'],
-            'content' => ['required', 'string'],
+            'slug' => ['required', 'string', 'max:255', 'unique:products,slug,' . $this->route('product')],
+            'short_description' => ['nullable', 'string', 'max:500'],
+            'description' => ['nullable', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
             'status' => ['required', 'string', 'in:active,draft'],
         ];

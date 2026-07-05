@@ -5,7 +5,7 @@ namespace App\Http\Requests\Admin;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBenefitRequest extends FormRequest
+class StoreProductPriceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,15 +18,15 @@ class UpdateBenefitRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
-            'icon' => ['required', 'string', 'max:50'],
-            'status' => ['required', 'in:1,0'],
-            'order_number' => ['nullable', 'integer'],
+            'product_id' => ['required', 'exists:products,id'],
+            'package_name' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'string', 'in:single,bundle'],
+            'price' => ['required', 'numeric', 'min:0'],
         ];
     }
 }

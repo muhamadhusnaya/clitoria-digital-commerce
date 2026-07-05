@@ -21,9 +21,6 @@ class TestimonialController extends Controller
      */
     public function index()
     {
-        // For pagination as requested in CURRENT_SPRINT.md
-        // Assuming $this->testimonialService->paginate() exists. If not, it can be adjusted.
-        // We'll use all() for now and handle UI logic if paginate() isn't implemented.
         $testimonials = $this->testimonialService->getAllTestimonials();
         
         return view('admin.testimonials.index', compact('testimonials'));
@@ -42,10 +39,7 @@ class TestimonialController extends Controller
      */
     public function store(StoreTestimonialRequest $request)
     {
-        $data = $request->validated();
-        $data['is_featured'] = $request->has('featured');
-
-        $this->testimonialService->createTestimonial($data);
+        $this->testimonialService->createTestimonial($request->validated());
 
         return redirect()->route('admin.testimonials.index')
             ->with('success', 'Testimonial created successfully.');
@@ -70,10 +64,7 @@ class TestimonialController extends Controller
      */
     public function update(UpdateTestimonialRequest $request, int $id)
     {
-        $data = $request->validated();
-        $data['is_featured'] = $request->has('featured');
-
-        $this->testimonialService->updateTestimonial($id, $data);
+        $this->testimonialService->updateTestimonial($id, $request->validated());
 
         return redirect()->route('admin.testimonials.index')
             ->with('success', 'Testimonial updated successfully.');

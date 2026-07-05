@@ -1,232 +1,249 @@
 <x-app-layout>
- <x-slot name="header">
- <div class="flex justify-between items-center">
- <h2 class="font-semibold text-xl text-on-surface leading-tight">
- {{ __('New Sales Entry') }}
- </h2>
- <a href="{{ route('admin.dashboard') }}" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-on-surface rounded-full text-sm font-medium hover:bg-gray-300 dark:hover:bg-gray-600 transition-all">
- Cancel
- </a>
- </div>
- </x-slot>
+    <style>
+        .custom-shadow {
+            box-shadow: 0px 10px 30px 0px rgba(31, 35, 64, 0.04);
+        }
+    </style>
+    
+    <div x-data="salesForm({{ $products->toJson() }})" class="pb-32">
+        <!-- Breadcrumbs & Header -->
+        <div class="mb-10 animate-in fade-in duration-700">
+            <a class="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all mb-4" href="{{ route('admin.sales.index') }}">
+                <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                <span class="font-label-md">Kembali ke Daftar</span>
+            </a>
+            <h2 class="font-display-lg text-[32px] lg:text-[48px] font-bold text-on-surface tracking-tight">Catat Penjualan Manual</h2>
+            <p class="text-body-lg text-[18px] text-on-surface-variant mt-2 max-w-2xl">Buat transaksi manual untuk pesanan luring, pesanan khusus, atau penjualan lainnya.</p>
+        </div>
 
- <div class="py-12" x-data="salesForm({{ $products->toJson() }})">
- <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
- <div class="bg-surface-container-lowest dark:bg-surface-container-highest overflow-hidden shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)] sm:rounded-2xl">
- <div class="p-6 text-on-surface ">
- 
- @if (session('success'))
- <div class="mb-6 bg-tertiary-container text-on-tertiary-container p-4 rounded-md flex items-center gap-2">
- <span class="material-symbols-outlined">check_circle</span>
- {{ session('success') }}
- </div>
- @endif
+        @if ($errors->any())
+        <div class="mb-6 bg-[#FFDAD6] text-error p-4 rounded-xl custom-shadow">
+            <ul class="list-disc pl-5 font-medium">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
- @if ($errors->any())
- <div class="mb-6 bg-[#FFDAD6] text-error p-4 rounded-md">
- <ul class="list-disc pl-5">
- @foreach ($errors->all() as $error)
- <li>{{ $error }}</li>
- @endforeach
- </ul>
- </div>
- @endif
+        <form action="{{ route('admin.sales.store') }}" method="POST" id="sales-form">
+            @csrf
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left Column: Sale Details -->
+                <section class="lg:col-span-5 space-y-6">
+                    <div class="bg-white p-8 rounded-xl custom-shadow border border-surface-container">
+                        <h3 class="font-headline-sm text-[24px] font-bold text-on-surface mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">description</span>
+                            Detail Penjualan
+                        </h3>
+                        
+                        <div class="space-y-5">
+                            <div class="group">
+                                <label class="block font-bold text-[14px] text-on-surface-variant mb-2 group-focus-within:text-primary transition-colors">Tanggal Transaksi</label>
+                                <div class="relative">
+                                    <input type="date" name="sale_date" value="{{ old('sale_date', date('Y-m-d')) }}" class="w-full h-[56px] px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:bg-white text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all">
+                                </div>
+                            </div>
+                            
+                            <div class="group">
+                                <label class="block font-bold text-[14px] text-on-surface-variant mb-2 group-focus-within:text-primary transition-colors">Nama Pelanggan (Opsional)</label>
+                                <div class="relative">
+                                    <input type="text" name="customer_name" value="{{ old('customer_name') }}" class="w-full h-[56px] px-4 rounded-xl border border-outline-variant bg-surface-container-low focus:bg-white text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Masukkan nama pelanggan...">
+                                    <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none">person_search</span>
+                                </div>
+                            </div>
+                            
+                            <div class="group">
+                                <label class="block font-bold text-[14px] text-on-surface-variant mb-2 group-focus-within:text-primary transition-colors">Catatan Internal</label>
+                                <textarea name="notes" rows="4" class="w-full p-4 rounded-xl border border-outline-variant bg-surface-container-low focus:bg-white text-body-md resize-none focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Catatan pengiriman khusus atau instruksi pesanan...">{{ old('notes') }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Decorative Visual -->
+                    <div class="h-64 rounded-xl overflow-hidden relative group hidden lg:block">
+                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="{{ asset('images/bunga_telang_tea.png') }}" alt="Teh bunga telang">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent flex items-end p-6">
+                            <p class="text-white font-bold text-[14px] opacity-90 italic">"Kemurnian di setiap seduhan."</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Right Column: Order Items -->
+                <section class="lg:col-span-7 space-y-6">
+                    <div class="bg-white p-8 rounded-xl custom-shadow border border-surface-container">
+                        <h3 class="font-headline-sm text-[24px] font-bold text-on-surface mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">inventory</span>
+                            Daftar Pesanan
+                        </h3>
+                        
+                        <!-- Add Item Controls (Alpine-driven logic replacement) -->
+                        <div class="flex items-center gap-4 mb-8">
+                            <button type="button" @click="addItem()" class="h-[56px] px-6 bg-primary-container text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all shadow-md">
+                                <span class="material-symbols-outlined text-[20px]">add</span>
+                                Tambah Produk
+                            </button>
+                        </div>
+                        
+                        <!-- Dynamic Items List / Table -->
+                        <div class="overflow-hidden border border-outline-variant/30 rounded-xl">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-surface-container-low border-b border-outline-variant/30">
+                                        <th class="px-6 py-4 font-bold text-[12px] uppercase tracking-widest text-on-surface-variant">Produk</th>
+                                        <th class="px-6 py-4 font-bold text-[12px] uppercase tracking-widest text-on-surface-variant text-center">Harga (Rp)</th>
+                                        <th class="px-6 py-4 font-bold text-[12px] uppercase tracking-widest text-on-surface-variant text-center w-24">Jml</th>
+                                        <th class="px-6 py-4 font-bold text-[12px] uppercase tracking-widest text-on-surface-variant text-right">Subtotal</th>
+                                        <th class="px-6 py-4"></th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-outline-variant/20">
+                                    <template x-for="(item, index) in items" :key="item.id">
+                                        <tr class="hover:bg-surface-container-lowest transition-colors">
+                                            
+                                            <!-- Product Name/Selection -->
+                                            <td class="px-4 py-4 align-top">
+                                                <input type="hidden" :name="`items[${index}][product_id]`" x-model="item.product_id">
+                                                <div class="flex flex-col gap-2">
+                                                    <select x-model="item.selected_product" @change="updateProductDetails(index)" class="w-full border border-outline-variant bg-surface-container-low rounded-lg px-3 py-2 text-sm outline-none focus:border-primary">
+                                                        <option value="custom">-- Kustom --</option>
+                                                        <template x-for="product in products" :key="product.id">
+                                                            <option :value="product.id" x-text="product.name"></option>
+                                                        </template>
+                                                    </select>
+                                                    <input type="text" :name="`items[${index}][product_name]`" x-model="item.product_name" required class="w-full border border-outline-variant bg-surface-container-low rounded-lg px-3 py-2 text-sm outline-none focus:border-primary" placeholder="Nama produk...">
+                                                </div>
+                                            </td>
+                                            
+                                            <!-- Price -->
+                                            <td class="px-4 py-4 align-top">
+                                                <input type="number" :name="`items[${index}][price]`" x-model.number="item.price" min="0" required class="w-full border border-outline-variant bg-surface-container-low rounded-lg px-3 py-2 text-sm outline-none text-right focus:border-primary">
+                                            </td>
+                                            
+                                            <!-- Quantity -->
+                                            <td class="px-4 py-4 align-top">
+                                                <input type="number" :name="`items[${index}][qty]`" x-model.number="item.qty" min="1" required class="w-full border border-outline-variant bg-surface-container-low rounded-lg px-3 py-2 text-sm outline-none text-center focus:border-primary">
+                                            </td>
+                                            
+                                            <!-- Subtotal -->
+                                            <td class="px-4 py-4 text-right font-bold text-on-surface align-top pt-6">
+                                                Rp <span x-text="formatCurrency(item.price * item.qty)"></span>
+                                            </td>
+                                            
+                                            <!-- Action -->
+                                            <td class="px-4 py-4 text-right align-top pt-5">
+                                                <button type="button" @click="removeItem(index)" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors" title="Hapus Item" :disabled="items.length === 1">
+                                                    <span class="material-symbols-outlined text-[18px]">delete</span>
+                                                </button>
+                                            </td>
+                                            
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                            
+                            <!-- Empty State for Items -->
+                            <div x-show="items.length === 0" class="text-center py-8">
+                                <p class="text-on-surface-variant text-[14px]">Belum ada produk yang ditambahkan.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Summary Calculation -->
+                        <div class="mt-8 pt-8 border-t border-outline-variant/30 flex flex-col items-end space-y-3">
+                            <div class="flex justify-between w-full max-w-[280px] text-on-surface-variant">
+                                <span class="font-bold text-[14px]">Total Item</span>
+                                <span class="font-bold text-[14px] text-on-surface" x-text="totalItems()"></span>
+                            </div>
+                            <div class="flex justify-between w-full max-w-[280px] pt-3">
+                                <span class="font-headline-sm text-[20px] font-bold text-on-surface">Total Harga</span>
+                                <span class="font-headline-sm text-[20px] font-bold text-primary">Rp <span x-text="formatCurrency(grandTotal())"></span></span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+                
+            </div>
+            
+            <!-- Sticky Bottom Action Bar -->
+            <div class="fixed bottom-0 md:left-64 left-0 right-0 h-24 bg-white/80 backdrop-blur-md border-t border-surface-container shadow-[0_-4px_20px_rgba(31,35,64,0.05)] px-6 z-40">
+                <div class="max-w-[1280px] mx-auto w-full h-full flex items-center justify-between">
+                    <div class="hidden md:flex items-center gap-4 text-on-surface-variant">
+                        <span class="material-symbols-outlined text-[20px] text-primary">info</span>
+                        <p class="font-bold text-[14px]">Perubahan tidak akan disimpan hingga Anda mengirimkan form.</p>
+                    </div>
+                    <div class="flex items-center gap-4 w-full md:w-auto justify-end">
+                        <a href="{{ route('admin.sales.index') }}" class="px-8 h-14 rounded-xl font-bold flex items-center justify-center text-primary-container hover:bg-primary-container/5 transition-colors">
+                            Batal
+                        </a>
+                        <button type="submit" class="px-10 h-14 bg-primary-container text-white rounded-xl font-bold flex items-center gap-3 hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-primary-container/20">
+                            <span class="material-symbols-outlined">save</span>
+                            Simpan Penjualan
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
 
- <form action="{{ route('admin.sales.store') }}" method="POST" id="sales-form">
- @csrf
- 
- <!-- Transaction Details Card -->
- <div class="mb-8 p-6 bg-surface-container-low dark:bg-surface-container-highest border border-outline-variant rounded-xl">
- <h3 class="text-lg font-semibold text-primary mb-4 border-b border-outline-variant pb-2 flex items-center gap-2">
- <span class="material-symbols-outlined">receipt_long</span> Transaction Details
- </h3>
- 
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
- <div>
- <label for="sale_date" class="block text-sm font-medium text-on-surface mb-1">Transaction Date</label>
- <input type="date" name="sale_date" id="sale_date" value="{{ old('sale_date', date('Y-m-d')) }}" class="w-full bg-surface-container-lowest dark:bg-[#3E3E3A] border border-[#797584] rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#432B9F] focus:border-[#432B9F] transition-all outline-none">
- </div>
- 
- <div>
- <label for="customer_name" class="block text-sm font-medium text-on-surface mb-1">Customer Name</label>
- <input type="text" name="customer_name" id="customer_name" value="{{ old('customer_name') }}" class="w-full bg-surface-container-lowest dark:bg-[#3E3E3A] border border-[#797584] rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#432B9F] focus:border-[#432B9F] transition-all outline-none" placeholder="e.g. John Doe (Optional)">
- </div>
-
- <div class="md:col-span-2">
- <label for="notes" class="block text-sm font-medium text-on-surface mb-1">Internal Notes</label>
- <textarea name="notes" id="notes" rows="2" class="w-full bg-surface-container-lowest dark:bg-[#3E3E3A] border border-[#797584] rounded-xl px-4 py-3 focus:ring-2 focus:ring-[#432B9F] focus:border-[#432B9F] transition-all outline-none" placeholder="e.g. Paid via Bank Transfer">{{ old('notes') }}</textarea>
- </div>
- </div>
- </div>
-
- <!-- Products Section -->
- <div class="mb-8">
- <div class="flex justify-between items-center mb-4">
- <h3 class="text-lg font-semibold text-on-surface flex items-center gap-2">
- <span class="material-symbols-outlined text-primary">inventory_2</span> Products Sold
- </h3>
- <button type="button" @click="addItem()" class="px-4 py-2 bg-primary-fixed text-primary rounded-full text-sm font-medium hover:bg-[#D0BCFF] transition-all flex items-center gap-1">
- <span class="material-symbols-outlined text-sm">add</span> Add Row
- </button>
- </div>
-
- <!-- Desktop Table Header (hidden on mobile) -->
- <div class="hidden md:grid grid-cols-12 gap-4 mb-2 px-4 text-sm font-medium text-on-surface-variant ">
- <div class="col-span-5">Product</div>
- <div class="col-span-2">Price (Rp)</div>
- <div class="col-span-2">Quantity</div>
- <div class="col-span-2">Subtotal</div>
- <div class="col-span-1 text-center">Action</div>
- </div>
-
- <!-- Dynamic Items List -->
- <div class="space-y-4">
- <template x-for="(item, index) in items" :key="item.id">
- <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center bg-surface-container-low dark:bg-surface-container-highest md:bg-transparent md:dark:bg-transparent p-4 md:p-0 rounded-xl border border-outline-variant md:border-none ">
- 
- <!-- Product Selection -->
- <div class="md:col-span-5 space-y-2 md:space-y-0">
- <label class="md:hidden text-xs font-medium text-on-surface-variant">Product Name</label>
- 
- <!-- Hidden Inputs for Form Submission -->
- <input type="hidden" :name="`items[${index}][product_id]`" x-model="item.product_id">
- 
- <div class="flex items-center gap-2">
- <!-- Dropdown for existing products -->
- <select x-model="item.selected_product" @change="updateProductDetails(index)" class="w-1/3 bg-surface-container-lowest dark:bg-[#3E3E3A] border border-[#797584] rounded-lg px-2 py-2 focus:ring-2 focus:ring-[#432B9F] text-sm outline-none">
- <option value="custom">Custom...</option>
- <template x-for="product in products" :key="product.id">
- <option :value="product.id" x-text="product.name"></option>
- </template>
- </select>
- 
- <!-- Text input for product name -->
- <input type="text" :name="`items[${index}][product_name]`" x-model="item.product_name" required class="w-2/3 bg-surface-container-lowest dark:bg-[#3E3E3A] border border-[#797584] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#432B9F] text-sm outline-none" placeholder="Product name...">
- </div>
- </div>
-
- <!-- Price -->
- <div class="md:col-span-2 space-y-2 md:space-y-0">
- <label class="md:hidden text-xs font-medium text-on-surface-variant">Price (Rp)</label>
- <input type="number" :name="`items[${index}][price]`" x-model.number="item.price" min="0" required class="w-full bg-surface-container-lowest dark:bg-[#3E3E3A] border border-[#797584] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#432B9F] text-sm outline-none">
- </div>
-
- <!-- Quantity -->
- <div class="md:col-span-2 space-y-2 md:space-y-0">
- <label class="md:hidden text-xs font-medium text-on-surface-variant">Quantity</label>
- <input type="number" :name="`items[${index}][qty]`" x-model.number="item.qty" min="1" required class="w-full bg-surface-container-lowest dark:bg-[#3E3E3A] border border-[#797584] rounded-lg px-3 py-2 focus:ring-2 focus:ring-[#432B9F] text-sm outline-none">
- </div>
-
- <!-- Subtotal (Readonly) -->
- <div class="md:col-span-2 space-y-2 md:space-y-0">
- <label class="md:hidden text-xs font-medium text-on-surface-variant">Subtotal</label>
- <div class="w-full bg-surface-container-high dark:bg-gray-700 border border-transparent rounded-lg px-3 py-2 text-sm font-medium text-gray-700 flex items-center justify-between">
- <span>Rp</span>
- <span x-text="formatCurrency(item.price * item.qty)"></span>
- </div>
- </div>
-
- <!-- Action -->
- <div class="md:col-span-1 flex justify-end md:justify-center mt-2 md:mt-0">
- <button type="button" @click="removeItem(index)" class="text-error hover:bg-[#FFDAD6] p-2 rounded-full transition-colors flex items-center justify-center" title="Remove Item" :disabled="items.length === 1">
- <span class="material-symbols-outlined text-sm">delete</span>
- </button>
- </div>
- </div>
- </template>
- </div>
- 
- <!-- Add Row button if empty -->
- <div x-show="items.length === 0" class="text-center py-8 bg-surface-container-low dark:bg-surface-container-highest rounded-xl border border-dashed border-[#797584] ">
- <p class="text-on-surface-variant mb-3">No products added to this transaction.</p>
- <button type="button" @click="addItem()" class="px-4 py-2 bg-primary text-white rounded-full text-sm font-medium hover:bg-primary-container transition-all shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)]">
- Add First Product
- </button>
- </div>
- </div>
-
- <!-- Grand Total Summary -->
- <div class="flex flex-col items-end mb-8 border-t border-outline-variant pt-6">
- <div class="w-full md:w-1/3 bg-primary-fixed dark:bg-[#4A4458] rounded-xl p-6 shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)] border border-primary-fixed-dim dark:border-[#635B70]">
- <div class="flex justify-between items-center text-sm text-on-surface-variant mb-2">
- <span>Total Items:</span>
- <span class="font-bold text-on-surface " x-text="totalItems()"></span>
- </div>
- <div class="flex justify-between items-center text-xl font-bold text-primary dark:text-primary-fixed-dim mt-4 pt-4 border-t border-primary-fixed-dim dark:border-[#635B70]">
- <span>Grand Total:</span>
- <span>Rp <span x-text="formatCurrency(grandTotal())"></span></span>
- </div>
- </div>
- </div>
-
- <!-- Form Actions -->
- <div class="flex justify-end gap-3 pt-4">
- <button type="submit" class="px-8 py-3 bg-primary text-white rounded-full font-bold text-lg hover:bg-primary-container transition-all shadow-md flex items-center gap-2 w-full md:w-auto justify-center">
- <span class="material-symbols-outlined">save</span> Save Transaction
- </button>
- </div>
- </form>
-
- </div>
- </div>
- </div>
- </div>
-
- <!-- Alpine.js logic for Sales Form -->
- <script>
- document.addEventListener('alpine:init', () => {
- Alpine.data('salesForm', (productsList) => ({
- products: productsList,
- items: [
- { id: Date.now(), product_id: '', product_name: '', selected_product: 'custom', price: 0, qty: 1 }
- ],
- 
- addItem() {
- this.items.push({
- id: Date.now(),
- product_id: '',
- product_name: '',
- selected_product: 'custom',
- price: 0,
- qty: 1
- });
- },
- 
- removeItem(index) {
- if (this.items.length > 1) {
- this.items.splice(index, 1);
- }
- },
- 
- updateProductDetails(index) {
- const item = this.items[index];
- 
- if (item.selected_product === 'custom') {
- item.product_id = '';
- item.product_name = '';
- item.price = 0;
- } else {
- const product = this.products.find(p => p.id == item.selected_product);
- if (product) {
- item.product_id = product.id;
- item.product_name = product.name;
- item.price = product.price;
- }
- }
- },
- 
- totalItems() {
- return this.items.reduce((sum, item) => sum + (parseInt(item.qty) || 0), 0);
- },
- 
- grandTotal() {
- return this.items.reduce((sum, item) => sum + ((parseFloat(item.price) || 0) * (parseInt(item.qty) || 0)), 0);
- },
- 
- formatCurrency(value) {
- return new Intl.NumberFormat('id-ID', { maximumFractionDigits: 0 }).format(value);
- }
- }));
- });
- </script>
+    <!-- Alpine.js logic for Sales Form -->
+    <script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('salesForm', (productsList) => ({
+            products: productsList,
+            items: [
+                { id: Date.now(), product_id: '', product_name: '', selected_product: 'custom', price: 0, qty: 1 }
+            ],
+            
+            addItem() {
+                this.items.push({
+                    id: Date.now(),
+                    product_id: '',
+                    product_name: '',
+                    selected_product: 'custom',
+                    price: 0,
+                    qty: 1
+                });
+            },
+            
+            removeItem(index) {
+                if (this.items.length > 1) {
+                    this.items.splice(index, 1);
+                }
+            },
+            
+            updateProductDetails(index) {
+                const item = this.items[index];
+                
+                if (item.selected_product === 'custom') {
+                    item.product_id = '';
+                    item.product_name = '';
+                    item.price = 0;
+                } else {
+                    const product = this.products.find(p => p.id == item.selected_product);
+                    if (product) {
+                        item.product_id = product.id;
+                        item.product_name = product.name;
+                        item.price = product.price;
+                    }
+                }
+            },
+            
+            totalItems() {
+                return this.items.reduce((sum, item) => sum + (parseInt(item.qty) || 0), 0);
+            },
+            
+            grandTotal() {
+                return this.items.reduce((sum, item) => sum + ((parseFloat(item.price) || 0) * (parseInt(item.qty) || 0)), 0);
+            },
+            
+            formatCurrency(value) {
+                return new Intl.NumberFormat('id-ID', { maximumFractionDigits: 0 }).format(value);
+            }
+        }));
+    });
+    </script>
 </x-app-layout>

@@ -1,192 +1,208 @@
 <x-app-layout>
- <x-slot name="header">
- <h2 class="font-semibold text-2xl text-on-surface leading-tight">
- {{ __('Business Settings') }}
- </h2>
- </x-slot>
+    <style>
+        .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(224, 224, 255, 0.5); }
+        .input-focus-effect:focus-within { border-color: #432b9f; box-shadow: 0 0 0 4px rgba(67, 43, 159, 0.1); }
+    </style>
 
- <div class="py-12">
- <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
- <div class="bg-surface-container-lowest dark:bg-surface-container-highest overflow-hidden shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)] sm:rounded-2xl border border-outline-variant ">
- <div class="p-6 md:p-8">
- 
- <div class="mb-8 border-b border-outline-variant pb-5">
- <h3 class="text-xl font-bold text-on-surface flex items-center gap-2">
- <span class="material-symbols-outlined text-primary">storefront</span> 
- Company Information
- </h3>
- <p class="text-on-surface-variant text-sm mt-1">
- Update your business details. This information will be displayed to customers on the main storefront and used for direct contact.
- </p>
- </div>
+    <div class="pb-32">
+        <!-- Header -->
+        <header class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div class="flex flex-col">
+                <nav class="flex gap-2 text-[14px] font-medium text-on-surface-variant/60 mb-2">
+                    <a href="{{ route('admin.dashboard') }}" class="hover:text-primary transition-colors">Admin</a>
+                    <span>/</span>
+                    <span class="text-primary font-bold">Umum & SEO</span>
+                </nav>
+                <h2 class="font-headline-md text-[32px] font-bold text-on-surface tracking-tight">Pengaturan</h2>
+            </div>
+        </header>
 
- @if (session('success'))
- <div class="mb-8 bg-tertiary-container text-on-tertiary-container p-4 rounded-xl flex items-center gap-3 shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)] border border-[#9DE06A]">
- <span class="material-symbols-outlined">check_circle</span>
- <span class="font-medium">{{ session('success') }}</span>
- </div>
- @endif
+        @if (session('success'))
+            <div class="mb-6 bg-tertiary-container text-on-tertiary-container p-4 rounded-xl border border-tertiary-fixed font-medium text-[14px] flex items-center gap-2">
+                <span class="material-symbols-outlined">check_circle</span>
+                {{ session('success') }}
+            </div>
+        @endif
 
- <form action="{{ route('admin.settings.update') }}" method="POST" class="space-y-6">
- @csrf
- @method('PUT')
+        @if ($errors->any())
+            <div class="mb-6 bg-[#FFDAD6] text-error p-4 rounded-xl shadow-sm">
+                <ul class="list-disc pl-5 font-medium text-[14px]">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
- <!-- Contact Information Section -->
- <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
- 
- <!-- WhatsApp Number -->
- <div>
- <x-input-label for="whatsapp_number" :value="__('WhatsApp Number')" class="text-gray-700 font-medium" />
- <div class="mt-1 relative rounded-md shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)]">
- <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
- <span class="text-on-surface-variant sm:text-sm font-medium">+62</span>
- </div>
- <x-text-input id="whatsapp_number" name="whatsapp_number" type="tel" class="mt-1 block w-full pl-12 border-gray-300 focus:ring-[#432B9F] focus:border-[#432B9F] rounded-lg" :value="old('whatsapp_number', get_setting('whatsapp_number'))" placeholder="81234567890" />
- </div>
- <p class="mt-1 text-xs text-on-surface-variant">Without leading zero or country code (e.g., 812...)</p>
- <x-input-error class="mt-2" :messages="$errors->get('whatsapp_number')" />
- </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-4">
+            
+            <!-- Business Identity Column -->
+            <section class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined">business_center</span>
+                    </div>
+                    <h3 class="font-headline-sm text-[24px] font-bold text-on-surface">Identitas Bisnis</h3>
+                </div>
+                
+                <form action="{{ route('admin.settings.update') }}" method="POST" class="glass-card rounded-xl p-8 shadow-[0_10px_30px_rgba(31,35,64,0.04)] space-y-6">
+                    @csrf
+                    @method('PUT')
+                    
+                    <!-- WhatsApp -->
+                    <div class="relative mt-2">
+                        <label class="absolute -top-2 left-4 bg-white px-2 text-[12px] font-bold tracking-widest uppercase text-primary z-10">Nomor WhatsApp</label>
+                        <div class="flex items-center border border-outline-variant rounded-xl px-4 py-2 input-focus-effect bg-white/50 transition-all">
+                            <span class="material-symbols-outlined text-on-surface-variant mr-3">call</span>
+                            <span class="text-on-surface-variant font-medium mr-1">+62</span>
+                            <input name="whatsapp_number" class="w-full bg-transparent border-none focus:ring-0 text-[16px] text-on-surface outline-none" placeholder="81234567890" type="tel" value="{{ old('whatsapp_number', get_setting('whatsapp_number')) }}">
+                        </div>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="relative mt-4">
+                        <label class="absolute -top-2 left-4 bg-white px-2 text-[12px] font-bold tracking-widest uppercase text-primary z-10">Email Bisnis</label>
+                        <div class="flex items-center border border-outline-variant rounded-xl px-4 py-2 input-focus-effect bg-white/50 transition-all">
+                            <span class="material-symbols-outlined text-on-surface-variant mr-3">mail</span>
+                            <input name="business_email" class="w-full bg-transparent border-none focus:ring-0 text-[16px] text-on-surface outline-none" placeholder="halo@clitoria.com" type="email" value="{{ old('business_email', get_setting('business_email')) }}">
+                        </div>
+                    </div>
+                    
+                    <!-- Instagram -->
+                    <div class="relative mt-4">
+                        <label class="absolute -top-2 left-4 bg-white px-2 text-[12px] font-bold tracking-widest uppercase text-primary z-10">URL Instagram</label>
+                        <div class="flex items-center border border-outline-variant rounded-xl px-4 py-2 input-focus-effect bg-white/50 transition-all">
+                            <span class="material-symbols-outlined text-on-surface-variant mr-3">camera_alt</span>
+                            <span class="text-on-surface-variant font-medium mr-1">https://</span>
+                            <input name="instagram_url" class="w-full bg-transparent border-none focus:ring-0 text-[16px] text-on-surface outline-none" placeholder="instagram.com/clitoria" type="text" value="{{ old('instagram_url', str_replace('https://', '', get_setting('instagram_url'))) }}">
+                        </div>
+                    </div>
+                    
+                    <!-- Address -->
+                    <div class="relative mt-4">
+                        <label class="absolute -top-2 left-4 bg-white px-2 text-[12px] font-bold tracking-widest uppercase text-primary z-10">Alamat Fisik</label>
+                        <div class="flex items-start border border-outline-variant rounded-xl px-4 py-4 input-focus-effect bg-white/50 transition-all">
+                            <span class="material-symbols-outlined text-on-surface-variant mr-3 mt-1">location_on</span>
+                            <textarea name="address" class="w-full bg-transparent border-none focus:ring-0 text-[16px] text-on-surface resize-none outline-none" placeholder="Masukkan alamat lengkap" rows="3">{{ old('address', get_setting('address')) }}</textarea>
+                        </div>
+                    </div>
 
- <!-- Business Email -->
- <div>
- <x-input-label for="business_email" :value="__('Business Email')" class="text-gray-700 font-medium" />
- <div class="mt-1 relative rounded-md shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)]">
- <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
- <span class="material-symbols-outlined text-gray-400 text-lg">mail</span>
- </div>
- <x-text-input id="business_email" name="business_email" type="email" class="mt-1 block w-full pl-10 border-gray-300 focus:ring-[#432B9F] focus:border-[#432B9F] rounded-lg" :value="old('business_email', get_setting('business_email'))" placeholder="hello@clitoria.com" />
- </div>
- <x-input-error class="mt-2" :messages="$errors->get('business_email')" />
- </div>
+                    <!-- Google Maps Embed -->
+                    <div class="relative mt-4">
+                        <label class="absolute -top-2 left-4 bg-white px-2 text-[12px] font-bold tracking-widest uppercase text-primary z-10">Google Maps Embed (HTML)</label>
+                        <div class="flex items-start border border-outline-variant rounded-xl px-4 py-4 input-focus-effect bg-white/50 transition-all">
+                            <span class="material-symbols-outlined text-on-surface-variant mr-3 mt-1">code</span>
+                            <textarea name="google_maps_embed" class="w-full bg-transparent border-none focus:ring-0 text-[14px] font-mono text-on-surface-variant resize-none outline-none" placeholder="<iframe src='...'></iframe>" rows="4">{{ old('google_maps_embed', get_setting('google_maps_embed')) }}</textarea>
+                        </div>
+                        <p class="text-[12px] text-on-surface-variant mt-2 pl-2">Tempel kode iframe HTML yang dihasilkan oleh Google Maps.</p>
+                    </div>
 
- <!-- Instagram URL -->
- <div class="md:col-span-2">
- <x-input-label for="instagram_url" :value="__('Instagram Link')" class="text-gray-700 font-medium" />
- <div class="mt-1 relative rounded-md shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)]">
- <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
- <span class="text-on-surface-variant sm:text-sm">https://</span>
- </div>
- <x-text-input id="instagram_url" name="instagram_url" type="url" class="mt-1 block w-full pl-16 border-gray-300 focus:ring-[#432B9F] focus:border-[#432B9F] rounded-lg" :value="old('instagram_url', get_setting('instagram_url'))" placeholder="instagram.com/clitoriastore" />
- </div>
- <x-input-error class="mt-2" :messages="$errors->get('instagram_url')" />
- </div>
- </div>
+                    <div class="flex justify-end pt-4 border-t border-outline-variant/30 mt-6">
+                        <button type="submit" class="px-8 py-3 rounded-full bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all active:scale-[0.98] text-[14px] flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">save</span> Simpan Profil
+                        </button>
+                    </div>
+                </form>
+            </section>
 
- <!-- Location Information Section -->
- <div class="mt-10 border-t border-outline-variant pt-8 space-y-6">
- 
- <!-- Address -->
- <div>
- <x-input-label for="address" :value="__('Physical Address')" class="text-gray-700 font-medium" />
- <textarea id="address" name="address" rows="3" class="mt-1 block w-full border-gray-300 focus:border-[#432B9F] focus:ring-[#432B9F] rounded-lg shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)]" placeholder="Enter full business address">{{ old('address', get_setting('address')) }}</textarea>
- <x-input-error class="mt-2" :messages="$errors->get('address')" />
- </div>
+            <!-- SEO & Social Column -->
+            <section class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
+                        <span class="material-symbols-outlined">language</span>
+                    </div>
+                    <h3 class="font-headline-sm text-[24px] font-bold text-on-surface">Visibilitas SEO & Sosial</h3>
+                </div>
+                
+                <form action="{{ route('admin.settings.seo.update') }}" method="POST" enctype="multipart/form-data" class="glass-card rounded-xl p-8 shadow-[0_10px_30px_rgba(31,35,64,0.04)] space-y-6" x-data="seoForm()">
+                    @csrf
+                    @method('PUT')
+                    
+                    <!-- Meta Title -->
+                    <div class="relative mt-2">
+                        <div class="flex justify-between items-center mb-1 px-1">
+                            <label class="text-[12px] font-bold tracking-widest uppercase text-primary absolute -top-2 left-4 bg-white px-2 z-10">Meta Judul</label>
+                            <span class="text-[10px] font-bold text-on-surface-variant/40 absolute -top-1 right-2" :class="{'text-error': metaTitle.length > 60}" x-text="`${metaTitle.length} / 60`"></span>
+                        </div>
+                        <div class="flex items-center border border-outline-variant rounded-xl px-4 py-3 input-focus-effect bg-white/50 transition-all mt-3">
+                            <input name="seo_meta_title" x-model="metaTitle" class="w-full bg-transparent border-none focus:ring-0 text-[16px] text-on-surface outline-none" type="text" placeholder="Clitoria | Teh Bunga Telang Premium">
+                        </div>
+                    </div>
+                    
+                    <!-- Meta Description -->
+                    <div class="relative mt-5">
+                        <div class="flex justify-between items-center mb-1 px-1">
+                            <label class="text-[12px] font-bold tracking-widest uppercase text-primary absolute -top-2 left-4 bg-white px-2 z-10">Meta Deskripsi</label>
+                            <span class="text-[10px] font-bold text-on-surface-variant/40 absolute -top-1 right-2" :class="{'text-error': metaDesc.length > 160}" x-text="`${metaDesc.length} / 160`"></span>
+                        </div>
+                        <div class="flex items-start border border-outline-variant rounded-xl px-4 py-3 input-focus-effect bg-white/50 transition-all mt-3">
+                            <textarea name="seo_meta_description" x-model="metaDesc" class="w-full bg-transparent border-none focus:ring-0 text-[16px] text-on-surface resize-none outline-none" rows="3" placeholder="Deskripsi singkat mengenai situs Anda..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Meta Keywords -->
+                    <div class="relative mt-5">
+                        <label class="absolute -top-2 left-4 bg-white px-2 text-[12px] font-bold tracking-widest uppercase text-primary z-10">Meta Kata Kunci</label>
+                        <div class="flex items-center border border-outline-variant rounded-xl px-4 py-3 input-focus-effect bg-white/50 transition-all">
+                            <input name="seo_meta_keywords" class="w-full bg-transparent border-none focus:ring-0 text-[16px] text-on-surface outline-none" type="text" value="{{ old('seo_meta_keywords', get_setting('seo_meta_keywords')) }}" placeholder="teh, bunga telang, clitoria, organik (pisahkan dengan koma)">
+                        </div>
+                    </div>
+                    
+                    <!-- Open Graph Image -->
+                    <div class="relative mt-6">
+                        <label class="text-[12px] font-bold tracking-widest uppercase text-primary block mb-3 px-1">Pratinjau Berbagi Sosial (Open Graph)</label>
+                        
+                        <div class="border-2 border-dashed border-outline-variant rounded-xl p-6 flex flex-col items-center justify-center bg-surface-container-low/30 hover:bg-surface-container-low transition-colors relative overflow-hidden group">
+                            
+                            <template x-if="imageUrl">
+                                <div class="w-full h-40 rounded-lg overflow-hidden mb-4 shadow-sm relative">
+                                    <img :src="imageUrl" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                                        <span class="bg-white text-primary px-4 py-2 rounded-full font-bold text-[14px] shadow-lg pointer-events-none">Ubah Gambar</span>
+                                    </div>
+                                </div>
+                            </template>
+                            
+                            <template x-if="!imageUrl">
+                                <div class="w-full h-40 rounded-lg overflow-hidden mb-4 shadow-sm bg-surface-container flex flex-col items-center justify-center text-outline-variant group-hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-[48px] mb-2">image</span>
+                                    <span class="font-medium text-[14px]">Belum ada gambar (Opsional)</span>
+                                </div>
+                            </template>
 
- <!-- Google Maps Embed -->
- <div>
- <x-input-label for="google_maps_embed" :value="__('Google Maps Embed Code (HTML)')" class="text-gray-700 font-medium" />
- <textarea id="google_maps_embed" name="google_maps_embed" rows="4" class="mt-1 block w-full border-gray-300 focus:border-[#432B9F] focus:ring-[#432B9F] rounded-lg shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)] font-mono text-sm text-on-surface-variant " placeholder='<iframe src="https://www.google.com/maps/embed?pb=..." width="600" height="450" ...></iframe>'>{{ old('google_maps_embed', get_setting('google_maps_embed')) }}</textarea>
- <p class="mt-1 text-xs text-on-surface-variant">Paste the HTML iframe code generated by Google Maps to display the interactive map on the contact page.</p>
- <x-input-error class="mt-2" :messages="$errors->get('google_maps_embed')" />
- </div>
+                            <!-- Actual Input -->
+                            <input type="file" name="seo_og_image" accept="image/png, image/jpeg, image/webp" @change="fileChosen" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20">
+                            
+                            <p class="text-[14px] text-on-surface-variant font-medium relative z-10 text-center">Klik atau seret untuk mengganti gambar</p>
+                            <p class="text-[10px] text-on-surface-variant/50 mt-1 uppercase tracking-widest relative z-10 text-center">Rekomendasi: 1200 x 630 px (Maks 2MB)</p>
+                        </div>
+                    </div>
 
- </div>
+                    <div class="flex justify-end pt-4 border-t border-outline-variant/30 mt-6">
+                        <button type="submit" class="px-8 py-3 rounded-full bg-primary text-white font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:-translate-y-0.5 transition-all active:scale-[0.98] text-[14px] flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px]">language</span> Simpan SEO
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
 
- <!-- Submit Button -->
- <div class="flex items-center justify-end mt-8 pt-6 border-t border-outline-variant ">
- <button type="submit" class="px-6 py-3 bg-primary text-white rounded-full font-bold hover:bg-primary-container focus:ring-4 focus:ring-[#EADDFF] transition-all flex items-center gap-2 shadow-md">
- <span class="material-symbols-outlined text-[20px]">save</span> 
- {{ __('Save Changes') }}
- </button>
- </div>
- </form>
-
- <div class="mt-12 mb-8 border-b border-outline-variant pb-5">
- <h3 class="text-xl font-bold text-on-surface flex items-center gap-2">
- <span class="material-symbols-outlined text-primary">search_insights</span> 
- Search Engine Optimization
- </h3>
- <p class="text-on-surface-variant text-sm mt-1">
- Optimize how your storefront appears on search engines like Google and when shared on social media platforms like Facebook or Twitter.
- </p>
- </div>
-
- <form action="{{ route('admin.settings.seo.update') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
- @csrf
- @method('PUT')
-
- <!-- General SEO Section -->
- <div class="space-y-6">
- 
- <!-- Meta Title -->
- <div>
- <x-input-label for="seo_meta_title" :value="__('Meta Title')" class="text-gray-700 font-medium" />
- <x-text-input id="seo_meta_title" name="seo_meta_title" type="text" class="mt-1 block w-full border-gray-300 focus:ring-[#432B9F] focus:border-[#432B9F] rounded-lg" :value="old('seo_meta_title', get_setting('seo_meta_title'))" placeholder="Clitoria - Best Digital Commerce" />
- <p class="mt-1 text-xs text-on-surface-variant">Recommended length is 50-60 characters for optimal display on search engines.</p>
- <x-input-error class="mt-2" :messages="$errors->get('seo_meta_title')" />
- </div>
-
- <!-- Meta Description -->
- <div>
- <x-input-label for="seo_meta_description" :value="__('Meta Description')" class="text-gray-700 font-medium" />
- <textarea id="seo_meta_description" name="seo_meta_description" rows="3" class="mt-1 block w-full border-gray-300 focus:border-[#432B9F] focus:ring-[#432B9F] rounded-lg shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)]" placeholder="Discover the best digital products at Clitoria. We provide high-quality items for your needs.">{{ old('seo_meta_description', get_setting('seo_meta_description')) }}</textarea>
- <p class="mt-1 text-xs text-on-surface-variant">A brief summary of your site. Recommended length is 150-160 characters.</p>
- <x-input-error class="mt-2" :messages="$errors->get('seo_meta_description')" />
- </div>
-
- <!-- Meta Keywords -->
- <div>
- <x-input-label for="seo_meta_keywords" :value="__('Meta Keywords')" class="text-gray-700 font-medium" />
- <x-text-input id="seo_meta_keywords" name="seo_meta_keywords" type="text" class="mt-1 block w-full border-gray-300 focus:ring-[#432B9F] focus:border-[#432B9F] rounded-lg" :value="old('seo_meta_keywords', get_setting('seo_meta_keywords'))" placeholder="ecommerce, clitoria, digital products, store" />
- <p class="mt-1 text-xs text-on-surface-variant">Separate keywords with a comma (e.g., store, digital, products).</p>
- <x-input-error class="mt-2" :messages="$errors->get('seo_meta_keywords')" />
- </div>
- </div>
-
- <!-- Social Media Graph Section -->
- <div class="mt-10 border-t border-outline-variant pt-8 space-y-6">
- 
- <h4 class="text-lg font-bold text-on-surface mb-2">Social Sharing (Open Graph)</h4>
- 
- <!-- Open Graph Image -->
- <div>
- <x-input-label for="seo_og_image" :value="__('Open Graph Image')" class="text-gray-700 font-medium mb-2" />
- 
- @if(get_setting('seo_og_image'))
- <div class="mb-4">
- <p class="text-sm text-on-surface-variant mb-2">Current Image:</p>
- <div class="rounded-xl overflow-hidden border border-outline-variant shadow-[0_10px_30px_-10px_rgba(31,35,64,0.04)] inline-block" style="max-width: 300px;">
- <img src="{{ asset('storage/' . get_setting('seo_og_image')) }}" alt="Open Graph Preview" class="w-full h-auto object-cover">
- </div>
- </div>
- @endif
-
- <div class="mt-1 flex items-center gap-4">
- <input id="seo_og_image" name="seo_og_image" type="file" accept="image/png, image/jpeg, image/webp" class="block w-full text-sm text-on-surface-variant 
- file:mr-4 file:py-2.5 file:px-4
- file:rounded-full file:border-0
- file:text-sm file:font-semibold
- file:bg-surface-container-low file:text-primary
- hover:file:bg-primary-fixed transition-colors
- border border-outline-variant rounded-full" />
- </div>
- <p class="mt-2 text-xs text-on-surface-variant">This image will appear when you share your link on WhatsApp, Facebook, or Twitter. Recommended size: 1200 x 630 pixels. (Max: 2MB).</p>
- <x-input-error class="mt-2" :messages="$errors->get('seo_og_image')" />
- </div>
-
- </div>
-
- <!-- Submit Button -->
- <div class="flex items-center justify-end mt-8 pt-6 border-t border-outline-variant ">
- <button type="submit" class="px-6 py-3 bg-primary text-white rounded-full font-bold hover:bg-primary-container focus:ring-4 focus:ring-[#EADDFF] transition-all flex items-center gap-2 shadow-md">
- <span class="material-symbols-outlined text-[20px]">save</span> 
- {{ __('Save SEO Settings') }}
- </button>
- </div>
- </form>
-
- </div>
- </div>
- </div>
- </div>
+    <!-- Alpine.js logic for SEO Form -->
+    <script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('seoForm', () => ({
+            metaTitle: @json(old('seo_meta_title', get_setting('seo_meta_title')) ?? ''),
+            metaDesc: @json(old('seo_meta_description', get_setting('seo_meta_description')) ?? ''),
+            imageUrl: @json(get_setting('seo_og_image') ? asset('storage/' . get_setting('seo_og_image')) : null),
+            
+            fileChosen(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    this.imageUrl = URL.createObjectURL(file);
+                }
+            }
+        }));
+    });
+    </script>
 </x-app-layout>

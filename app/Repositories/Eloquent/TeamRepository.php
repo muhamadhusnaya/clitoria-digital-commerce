@@ -10,17 +10,12 @@ use App\Repositories\Contracts\TeamRepositoryInterface;
 class TeamRepository extends BaseRepository implements TeamRepositoryInterface
 {
     /**
-     * @var Team
-     */
-    protected $model;
-
-    /**
      * TeamRepository constructor.
      *
      * @param Team $model
      */
     public function __construct(Team $model)
     {
-        $this->model = $model;
+        parent::__construct($model);
     }
 }

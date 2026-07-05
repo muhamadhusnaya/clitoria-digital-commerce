@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreHeroRequest;
 use App\Http\Requests\Admin\UpdateHeroRequest;
+use App\Models\Hero;
 use App\Services\HeroService;
 
 class HeroController extends Controller
@@ -17,20 +18,14 @@ class HeroController extends Controller
     }
 
     /**
-     * Display a listing of the heroes.
+     * Display the hero settings page (singleton).
      */
     public function index()
     {
-        $heroes = $this->heroService->getAllHeroes();
-        return view('admin.heroes.index', compact('heroes'));
-    }
-
-    /**
-     * Show the form for creating a new hero.
-     */
-    public function create()
-    {
-        return view('admin.heroes.create');
+        // Get the first hero, or create an empty instance if none exists
+        $hero = $this->heroService->getAllHeroes()->first() ?? new Hero();
+        
+        return view('admin.heroes.edit', compact('hero'));
     }
 
     /**
@@ -45,20 +40,6 @@ class HeroController extends Controller
     }
 
     /**
-     * Show the form for editing the specified hero.
-     */
-    public function edit(int $id)
-    {
-        $hero = $this->heroService->getHeroById($id);
-        
-        if (!$hero) {
-            abort(404);
-        }
-
-        return view('admin.heroes.edit', compact('hero'));
-    }
-
-    /**
      * Update the specified hero in storage.
      */
     public function update(UpdateHeroRequest $request, int $id)
@@ -67,16 +48,5 @@ class HeroController extends Controller
 
         return redirect()->route('admin.heroes.index')
             ->with('success', 'Hero updated successfully.');
-    }
-
-    /**
-     * Remove the specified hero from storage.
-     */
-    public function destroy(int $id)
-    {
-        $this->heroService->deleteHero($id);
-
-        return redirect()->route('admin.heroes.index')
-            ->with('success', 'Hero deleted successfully.');
     }
 }

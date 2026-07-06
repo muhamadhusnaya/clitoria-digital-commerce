@@ -155,7 +155,7 @@
                 @endfor
             </div>
         </div>
-        <div class="relative max-w-4xl mx-auto h-[550px] md:h-[450px]" x-data="{ 
+        <div class="relative max-w-4xl mx-auto h-[700px] sm:h-[600px] md:h-[500px]" x-data="{ 
             active: 0, 
             items: {{ $testimonials->count() }},
             prev() { this.active = (this.active - 1 + this.items) % this.items },

@@ -155,7 +155,7 @@
                 @endfor
             </div>
         </div>
-        <div class="relative max-w-4xl mx-auto h-[450px]" x-data="{ 
+        <div class="relative max-w-4xl mx-auto h-[550px] md:h-[450px]" x-data="{ 
             active: 0, 
             items: {{ $testimonials->count() }},
             prev() { this.active = (this.active - 1 + this.items) % this.items },
@@ -164,7 +164,7 @@
         }">
             <div class="relative h-full w-full">
                 @foreach($testimonials as $index => $testimonial)
-                <div class="absolute left-1/2 top-1/2 -translate-y-1/2 w-[85%] md:w-3/4 max-w-2xl bg-white p-8 md:p-12 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
+                <div class="absolute left-1/2 top-[45%] md:top-1/2 -translate-y-1/2 w-[85%] md:w-3/4 max-w-2xl bg-white p-8 md:p-12 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
                      :class="{
                          'z-20 scale-100 opacity-100 -translate-x-1/2': active === {{ $index }},
                          'z-10 scale-90 opacity-40 -translate-x-[80%] md:-translate-x-[90%]': active === ({{ $index }} + 1) % items,
@@ -188,12 +188,14 @@
             </div>
 
             <!-- Navigation Controls -->
-            <button @click="prev()" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-2 md:-ml-12 z-30 bg-surface shadow-md p-3 rounded-full text-on-surface hover:text-primary hover:bg-surface-container-high transition-all outline-none">
-                <span class="material-symbols-outlined">chevron_left</span>
-            </button>
-            <button @click="next()" class="absolute right-0 top-1/2 -translate-y-1/2 -mr-2 md:-mr-12 z-30 bg-surface shadow-md p-3 rounded-full text-on-surface hover:text-primary hover:bg-surface-container-high transition-all outline-none">
-                <span class="material-symbols-outlined">chevron_right</span>
-            </button>
+            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-6 z-30">
+                <button @click="prev()" class="bg-surface shadow-md p-3 rounded-full text-on-surface hover:text-primary hover:bg-surface-container-high transition-all outline-none">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button @click="next()" class="bg-surface shadow-md p-3 rounded-full text-on-surface hover:text-primary hover:bg-surface-container-high transition-all outline-none">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            </div>
         </div>
     </div>
 </section>

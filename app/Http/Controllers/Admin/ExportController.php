@@ -45,7 +45,7 @@ class ExportController extends Controller
                 'Item Terjual',
                 'Total Revenue (Rp)',
                 'Dibuat Oleh'
-            ]);
+            ], ';');
 
             // Data rows
             foreach ($transactions as $transaction) {
@@ -56,7 +56,7 @@ class ExportController extends Controller
                     $transaction->items->sum('qty'),
                     $transaction->total_amount,
                     $transaction->creator ? $transaction->creator->name : 'System'
-                ]);
+                ], ';');
             }
 
             fclose($handle);

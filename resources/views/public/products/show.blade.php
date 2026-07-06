@@ -84,7 +84,7 @@
                     </form>
                     
                     <!-- Primary CTA WhatsApp -->
-                    <a :href="`https://wa.me/{{ $waNumber }}?text=${encodeURIComponent('Halo Clitoria! Saya ingin memesan ' + quantity + 'x ' + '{{ addslashes($product->name) }}' + ' (' + selectedPackage + ') ')}`" target="_blank" class="w-full bg-primary text-white hover:bg-primary-container transition-colors py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transform hover:scale-[1.02] duration-300">
+                    <a :href="`https://wa.me/{{ $waNumber }}?text=${encodeURIComponent('Halo Clitoria,\n\nSaya ingin memesan:\n\n1. {{ addslashes($product->name) }}' + (selectedPackage ? ' (' + selectedPackage + ')' : '') + '\n   Qty: ' + quantity + '\n\nTotal:\nRp ' + new Intl.NumberFormat('id-ID').format(currentPrice * quantity) + '\n\nMohon informasi pembayaran dan pengiriman.\n\nTerima kasih.')}`" target="_blank" class="w-full bg-primary text-white hover:bg-primary-container transition-colors py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transform hover:scale-[1.02] duration-300">
                         <span class="material-symbols-outlined">chat</span>
                         Order via WhatsApp
                     </a>

@@ -54,7 +54,9 @@
                             @php
                                 $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
                                 $waNumber = isset($settings['whatsapp_number']) ? preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) : '';
-                                $waText = rawurlencode("Halo Clitoria, saya ingin memesan " . $product->name . ".");
+                                $firstPrice = $product->prices->first();
+                                $rawWaText = "Halo Clitoria,\n\nSaya ingin memesan:\n\n1. " . $product->name . ($firstPrice ? " (" . $firstPrice->package_name . ")" : "") . "\n   Qty: 1\n\nTotal:\nRp " . ($firstPrice ? number_format($firstPrice->price, 0, ',', '.') : "0") . "\n\nMohon informasi pembayaran dan pengiriman.\n\nTerima kasih.";
+                                $waText = rawurlencode($rawWaText);
                             @endphp
                             <a href="https://wa.me/{{ $waNumber }}?text={{ $waText }}" target="_blank" class="bg-primary text-white hover:bg-primary-container px-4 py-2 rounded-full font-medium text-sm flex items-center gap-1 transition-colors">
                                 Buy Now

@@ -7,12 +7,21 @@
         $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
         $waNumber = isset($settings['whatsapp_number']) ? preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) : '';
         $itemsText = "";
+        $index = 1;
         foreach($summary['items'] as $item) {
-            $itemsText .= "- " . $item['quantity'] . "x " . $item['product_name'] . " (" . $item['package_name'] . ")\n";
+            // Append package name only if it's not empty, to make it look clean
+            $productName = $item['product_name'] . ($item['package_name'] ? " (" . $item['package_name'] . ")" : "");
+            $itemsText .= $index . ". " . $productName . "\n   Qty: " . $item['quantity'] . "\n\n";
+            $index++;
         }
-        $itemsText = rawurlencode($itemsText);
-        $totalFormatted = $summary['formatted_total_price'];
-        $waText = "Halo Clitoria! Saya ingin checkout pesanan saya:\n\n{$itemsText}\nTotal: {$totalFormatted}";
+        
+        $totalFormatted = str_replace('Rp ', 'Rp ', $summary['formatted_total_price']); // Ensure space
+        $rawWaText = "Halo Clitoria,\n\nSaya ingin memesan:\n\n" . 
+                     $itemsText . 
+                     "Total:\n" . $totalFormatted . "\n\n" .
+                     "Mohon informasi pembayaran dan pengiriman.\n\nTerima kasih.";
+                     
+        $waText = rawurlencode($rawWaText);
     @endphp
 
     <div class="max-w-[1280px] mx-auto px-5 md:px-16 pt-32 pb-24">

@@ -25,7 +25,7 @@ class UpdateTeamRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'position' => ['required', 'string', 'max:255'],
-            'photo' => ['nullable', 'image', 'max:2048'],
+            'photo' => ['nullable', 'image', 'max:10240'],
             'instagram' => ['nullable', 'string', 'max:255'],
             'linkedin' => ['nullable', 'string', 'max:255'],
         ];

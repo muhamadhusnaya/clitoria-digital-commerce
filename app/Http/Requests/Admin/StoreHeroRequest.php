@@ -27,7 +27,7 @@ class StoreHeroRequest extends FormRequest
             'subtitle' => ['nullable', 'string'],
             'button_text' => ['nullable', 'string', 'max:50'],
             'button_link' => ['nullable', 'string', 'max:255'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:10240'],
         ];
     }
 }

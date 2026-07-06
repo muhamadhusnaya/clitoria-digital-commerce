@@ -27,7 +27,7 @@ class UpdateBenefitRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'icon_type' => ['required', 'in:material,image'],
             'icon' => ['nullable', 'string', 'max:255'],
-            'icon_file' => ['nullable', 'image', 'mimes:jpeg,png,jpg,svg,webp', 'max:2048'],
+            'icon_file' => ['nullable', 'image', 'mimes:jpeg,png,jpg,svg,webp', 'max:10240'],
             'status' => ['required', 'in:1,0'],
         ];
     }

@@ -24,10 +24,10 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:products,slug,' . $this->route('product')],
+            'slug' => ['nullable', 'string', 'max:255', 'unique:products,slug,' . $this->route('product')],
             'short_description' => ['nullable', 'string', 'max:500'],
             'description' => ['nullable', 'string'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:10240'],
             'status' => ['required', 'string', 'in:active,draft'],
         ];
     }

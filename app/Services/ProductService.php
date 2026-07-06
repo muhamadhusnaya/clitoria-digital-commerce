@@ -48,6 +48,14 @@ class ProductService extends BaseService
      */
     public function store(array $data)
     {
+        if (empty($data['slug']) && !empty($data['name'])) {
+            $data['slug'] = \Illuminate\Support\Str::slug($data['name']);
+        }
+
+        if (isset($data['status'])) {
+            $data['status'] = $data['status'] === 'active' ? 1 : 0;
+        }
+
         if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
             $data['image'] = $this->uploadFile($data['image'], 'products');
         }
@@ -76,6 +84,14 @@ class ProductService extends BaseService
     public function update($id, array $data)
     {
         $product = $this->repository->find($id);
+
+        if (empty($data['slug']) && !empty($data['name'])) {
+            $data['slug'] = \Illuminate\Support\Str::slug($data['name']);
+        }
+
+        if (isset($data['status'])) {
+            $data['status'] = $data['status'] === 'active' ? 1 : 0;
+        }
 
         if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
             $this->deleteFile($product->image);

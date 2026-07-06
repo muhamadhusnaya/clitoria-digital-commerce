@@ -27,7 +27,7 @@ class UpdateTestimonialRequest extends FormRequest
             'role' => ['nullable', 'string', 'max:255'],
             'company' => ['nullable', 'string', 'max:255'],
             'content' => ['required', 'string'],
-            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:10240'],
             'status' => ['required', 'string', 'in:active,draft'],
         ];
     }

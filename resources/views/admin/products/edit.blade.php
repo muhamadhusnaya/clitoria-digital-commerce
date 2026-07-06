@@ -72,11 +72,11 @@
  <label for="status" class="block text-[12px] font-semibold uppercase tracking-wider text-outline mb-4 ml-1">Status Inventaris</label>
  <div class="space-y-4">
  <select name="status" id="status" class="w-full h-[56px] px-6 rounded-lg border-2 border-[#edecff] bg-[#fbf8ff] text-[16px] transition-all focus:border-primary focus:ring focus:ring-primary/20 outline-none appearance-none cursor-pointer">
- <option value="active" {{ old('status', $product->status) == 'active' ? 'selected' : '' }}>Diterbitkan</option>
- <option value="draft" {{ old('status', $product->status) == 'draft' ? 'selected' : '' }}>Draf</option>
+ <option value="active" {{ old('status', $product->status ? 'active' : 'draft') == 'active' ? 'selected' : '' }}>Diterbitkan</option>
+ <option value="draft" {{ old('status', $product->status ? 'active' : 'draft') == 'draft' ? 'selected' : '' }}>Draf</option>
  </select>
- <div class="flex items-center gap-3 p-4 {{ old('status', $product->status) == 'active' ? 'bg-[#b3f582]/10 border-[#b3f582]' : 'bg-[#e6e6ff] border-[#c9c4d5]/30' }} border rounded-xl" id="status-indicator">
- @if(old('status', $product->status) == 'active')
+ <div class="flex items-center gap-3 p-4 {{ old('status', $product->status ? 'active' : 'draft') == 'active' ? 'bg-[#b3f582]/10 border-[#b3f582]' : 'bg-[#e6e6ff] border-[#c9c4d5]/30' }} border rounded-xl" id="status-indicator">
+ @if(old('status', $product->status ? 'active' : 'draft') == 'active')
  <span class="material-symbols-outlined text-on-tertiary-fixed-variant" style="font-variation-settings: 'FILL' 1;">check_circle</span>
  <span class="text-on-tertiary-fixed-variant text-[14px] font-medium">Siap ditampilkan di toko</span>
  @else

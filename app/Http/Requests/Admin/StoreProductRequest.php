@@ -24,10 +24,10 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'slug' => ['required', 'string', 'max:255', 'unique:products,slug'],
+            'slug' => ['nullable', 'string', 'max:255', 'unique:products,slug'],
             'short_description' => ['nullable', 'string', 'max:500'],
             'description' => ['nullable', 'string'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,webp', 'max:10240'],
             'status' => ['required', 'string', 'in:active,draft'],
         ];
     }

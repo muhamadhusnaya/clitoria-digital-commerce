@@ -26,7 +26,7 @@ class UpdateSeoSettingRequest extends FormRequest
             'seo_meta_title' => ['nullable', 'string', 'max:60'],
             'seo_meta_description' => ['nullable', 'string', 'max:160'],
             'seo_meta_keywords' => ['nullable', 'string', 'max:255'],
-            'seo_og_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'seo_og_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:10240'],
         ];
     }
 }

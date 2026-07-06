@@ -162,14 +162,14 @@
             next() { this.active = (this.active + 1) % this.items },
             init() { setInterval(() => this.next(), 4000) }
         }">
-            <div class="relative h-full w-full flex items-center justify-center">
+            <div class="relative h-full w-full">
                 @foreach($testimonials as $index => $testimonial)
-                <div class="absolute w-[85%] md:w-3/4 max-w-2xl bg-white p-8 md:p-12 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
+                <div class="absolute left-1/2 top-1/2 -translate-y-1/2 w-[85%] md:w-3/4 max-w-2xl bg-white p-8 md:p-12 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
                      :class="{
-                         'z-20 scale-100 opacity-100 translate-x-0': active === {{ $index }},
-                         'z-10 scale-90 opacity-40 -translate-x-[20%] md:-translate-x-[30%]': active === ({{ $index }} + 1) % items,
-                         'z-10 scale-90 opacity-40 translate-x-[20%] md:translate-x-[30%]': active === ({{ $index }} - 1 + items) % items,
-                         'z-0 scale-75 opacity-0 translate-x-0 pointer-events-none': active !== {{ $index }} && active !== ({{ $index }} + 1) % items && active !== ({{ $index }} - 1 + items) % items
+                         'z-20 scale-100 opacity-100 -translate-x-1/2': active === {{ $index }},
+                         'z-10 scale-90 opacity-40 -translate-x-[80%] md:-translate-x-[90%]': active === ({{ $index }} + 1) % items,
+                         'z-10 scale-90 opacity-40 -translate-x-[20%] md:-translate-x-[10%]': active === ({{ $index }} - 1 + items) % items,
+                         'z-0 scale-75 opacity-0 -translate-x-1/2 pointer-events-none': active !== {{ $index }} && active !== ({{ $index }} + 1) % items && active !== ({{ $index }} - 1 + items) % items
                      }"
                      @click="active = {{ $index }}">
                     <span class="material-symbols-outlined text-primary/10 text-6xl md:text-8xl absolute top-4 left-4 z-0" data-icon="format_quote">format_quote</span>

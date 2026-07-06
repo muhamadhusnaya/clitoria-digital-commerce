@@ -4,8 +4,7 @@
             <!-- Brand Column -->
             <div class="col-span-1 md:col-span-1 flex flex-col gap-4">
                 <a href="{{ route('public.home') }}" class="font-bold text-primary flex items-center gap-2">
-                    <span class="material-symbols-outlined text-3xl" data-icon="eco">eco</span>
-                    <span class="text-2xl tracking-tight">Clitoria</span>
+                    <img src="{{ asset('images/logo.png') }}" alt="Clitoria" class="h-10 object-contain">
                 </a>
                 <p class="text-on-surface-variant text-sm mt-2">
                     Cultivating Digital Tranquility. Experience the finest organic butterfly pea flowers, ethically sourced for your daily wellness ritual.

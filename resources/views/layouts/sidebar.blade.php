@@ -1,8 +1,8 @@
 <!-- SideNavBar Anchor -->
 <aside class="fixed left-0 top-0 h-full w-64 z-40 bg-[#f4f2ff] shadow-sm flex flex-col gap-2 p-4 border-r border-[#c9c4d5]/30">
     <div class="mb-8 px-2 flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-[#432b9f] flex items-center justify-center text-white">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_florist</span>
+        <div class="w-10 h-10 rounded-xl bg-white p-1 flex items-center justify-center shrink-0">
+            <img src="{{ asset('images/logo.png') }}" alt="Clitoria" class="w-full h-full object-contain">
         </div>
         <div>
             <h1 class="text-[24px] leading-[32px] font-bold text-[#432b9f]">Clitoria</h1>

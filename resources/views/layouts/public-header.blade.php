@@ -2,8 +2,7 @@
     <div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop h-16 flex items-center justify-between">
         <div class="text-xl font-bold text-primary">
             <a href="/" class="flex items-center gap-2">
-                <span class="material-symbols-outlined" data-icon="spa">spa</span>
-                Clitoria Commerce
+                <img src="{{ asset('images/logo.png') }}" alt="Clitoria Commerce" class="h-8 md:h-10 object-contain">
             </a>
         </div>
         

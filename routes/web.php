@@ -6,26 +6,16 @@ use Illuminate\Support\Facades\Route;
 
 // Public Routes
 Route::name('public.')->group(function () {
-    Route::get('/', function () {
-        return view('public.home');
-    })->name('home');
+    Route::get('/', [\App\Http\Controllers\Public\HomeController::class, 'index'])->name('home');
 
-    Route::get('/dummy-public', function () {
-        return view('dummy-public');
-    })->name('dummy-public');
-
-    Route::get('/products', function () {
-        return view('public.products.index');
-    })->name('products.index');
-    
-    Route::get('/products/{slug}', function ($slug) {
-        return view('public.products.show', compact('slug'));
-    })->name('products.show');
+    Route::get('/products', [\App\Http\Controllers\Public\ProductListingController::class, 'index'])->name('products.index');
+    Route::get('/products/{slug}', [\App\Http\Controllers\Public\ProductListingController::class, 'show'])->name('products.show');
 
     // Cart endpoints
-    Route::get('/cart', function () {
-        return view('public.cart.index');
-    })->name('cart.index');
+    Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/remove', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/cart/update', [\App\Http\Controllers\CartController::class, 'updateQuantity'])->name('cart.update');
 
     // Checkout & Buy Now endpoints
     Route::get('/checkout', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');

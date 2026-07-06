@@ -1,143 +1,98 @@
 @extends('layouts.public')
 
-@section('title', 'Sacred Blue Butterfly Pea Tea | Clitoria Digital Commerce')
+@section('title', $product->name . ' - Clitoria')
 
 @section('content')
-    <div class="max-w-[1280px] mx-auto px-5 md:px-16 pt-32 pb-24">
-        <!-- Breadcrumbs -->
-        <nav class="flex text-sm text-on-surface-variant mb-8" aria-label="Breadcrumb">
-            <ol class="inline-flex items-center space-x-1 md:space-x-3">
-                <li class="inline-flex items-center">
-                    <a href="{{ route('public.home') }}" class="inline-flex items-center hover:text-primary transition-colors">Home</a>
-                </li>
-                <li>
-                    <div class="flex items-center">
-                        <span class="material-symbols-outlined text-sm mx-1">chevron_right</span>
-                        <a href="{{ route('public.products.index') ?? '#' }}" class="hover:text-primary transition-colors">Shop</a>
-                    </div>
-                </li>
-                <li aria-current="page">
-                    <div class="flex items-center">
-                        <span class="material-symbols-outlined text-sm mx-1">chevron_right</span>
-                        <span class="text-on-surface font-medium">Sacred Blue Butterfly Pea Tea</span>
-                    </div>
-                </li>
-            </ol>
-        </nav>
+    <!-- Breadcrumb -->
+    <div class="bg-surface-container-lowest border-b border-outline-variant py-4">
+        <div class="max-w-[1280px] mx-auto px-5 md:px-16 flex items-center gap-2 text-sm text-on-surface-variant">
+            <a href="{{ route('public.home') }}" class="hover:text-primary transition-colors">Home</a>
+            <span class="material-symbols-outlined text-sm">chevron_right</span>
+            <a href="{{ route('public.products.index') }}" class="hover:text-primary transition-colors">Shop</a>
+            <span class="material-symbols-outlined text-sm">chevron_right</span>
+            <span class="text-on-surface font-medium">{{ $product->name }}</span>
+        </div>
+    </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <!-- Left Side: Product Gallery (7 cols) -->
-            <div class="lg:col-span-7">
-                <div class="bg-surface-container-low rounded-xl overflow-hidden relative reveal">
-                    <img src="https://images.unsplash.com/photo-1615526674996-2b47e256b825?auto=format&fit=crop&w=800&q=80" alt="Sacred Blue Tea" class="w-full h-auto object-cover" id="mainImage">
-                    <div class="absolute top-6 left-6 bg-tertiary-container text-tertiary-fixed text-label-caps px-4 py-2 rounded-full">Organic Certified</div>
-                </div>
-                
-                <!-- Thumbnails Grid -->
-                <div class="grid grid-cols-4 gap-4 mt-4 reveal delay-100">
-                    <button class="bg-surface-container-low rounded-lg overflow-hidden border-2 border-primary focus:outline-none h-24">
-                        <img src="https://images.unsplash.com/photo-1615526674996-2b47e256b825?auto=format&fit=crop&w=200&q=80" alt="Thumb 1" class="w-full h-full object-cover">
-                    </button>
-                    <button class="bg-surface-container-lowest rounded-lg overflow-hidden border-2 border-transparent hover:border-primary/50 focus:outline-none h-24 transition-colors">
-                        <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?auto=format&fit=crop&w=200&q=80" alt="Thumb 2" class="w-full h-full object-cover">
-                    </button>
-                    <button class="bg-surface-container-lowest rounded-lg overflow-hidden border-2 border-transparent hover:border-primary/50 focus:outline-none h-24 transition-colors">
-                        <img src="https://images.unsplash.com/photo-1594283838618-292101e4a36f?auto=format&fit=crop&w=200&q=80" alt="Thumb 3" class="w-full h-full object-cover">
-                    </button>
-                    <button class="bg-surface-container-lowest rounded-lg overflow-hidden border-2 border-transparent hover:border-primary/50 focus:outline-none h-24 transition-colors">
-                        <img src="https://images.unsplash.com/photo-1576402187878-974f70c890a5?auto=format&fit=crop&w=200&q=80" alt="Thumb 4" class="w-full h-full object-cover">
-                    </button>
+    <!-- Product Detail Container -->
+    @php
+        $firstPrice = $product->prices->first();
+        $defaultPackage = $firstPrice ? $firstPrice->package_name : '';
+        $defaultPriceNum = $firstPrice ? $firstPrice->price : 0;
+        
+        $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+        $waNumber = isset($settings['whatsapp_number']) ? preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) : '';
+    @endphp
+
+    <div class="max-w-[1280px] mx-auto px-5 md:px-16 py-12 lg:py-20" x-data="{ selectedPackage: '{{ $defaultPackage }}', currentPrice: {{ $defaultPriceNum }}, selectedPriceId: {{ $firstPrice ? $firstPrice->id : 'null' }}, quantity: 1 }">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
+            
+            <!-- Left: Image Gallery -->
+            <div class="space-y-6">
+                <div class="aspect-square bg-surface-container-lowest rounded-2xl overflow-hidden flex items-center justify-center p-8 soft-shadow border border-outline-variant relative group">
+                    <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-700">
                 </div>
             </div>
 
-            <!-- Right Side: Product Info & Order Form (5 cols) -->
-            <div class="lg:col-span-5 flex flex-col">
+            <!-- Right: Product Info -->
+            <div class="flex flex-col">
                 <div class="reveal">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="text-primary text-label-caps tracking-widest">SIGNATURE COLLECTION</span>
-                    </div>
-                    <h1 class="text-3xl md:text-4xl font-bold text-on-surface mb-4">Sacred Blue Butterfly Pea Tea</h1>
+                    <h1 class="text-4xl lg:text-5xl font-bold text-on-surface mb-4 leading-tight">{{ $product->name }}</h1>
                     
-                    <!-- Rating -->
-                    <div class="flex items-center gap-2 mb-6">
-                        <div class="flex text-yellow-400">
-                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
-                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star_half</span>
-                        </div>
-                        <span class="text-on-surface-variant text-sm underline cursor-pointer">4.8 (124 Reviews)</span>
-                    </div>
-
                     <!-- Price -->
-                    <div class="text-3xl font-bold text-on-surface mb-8" id="productPrice">$32.00</div>
+                    <div class="text-3xl font-bold text-on-surface mb-8">Rp <span x-text="new Intl.NumberFormat('id-ID').format(currentPrice)"></span></div>
                 </div>
 
+                @if($product->prices->count() > 0)
                 <!-- Weight Selector -->
-                <div class="mb-8 reveal delay-100" x-data="{ selectedWeight: '100g' }">
-                    <h3 class="text-on-surface font-semibold mb-3">Select Size</h3>
-                    <div class="grid grid-cols-3 gap-3">
-                        <button @click="selectedWeight = '100g'; document.getElementById('productPrice').innerText = '$32.00';" :class="{'bg-primary text-white border-primary': selectedWeight === '100g', 'bg-surface border-outline-variant text-on-surface hover:border-primary': selectedWeight !== '100g'}" class="border rounded-md py-3 font-medium transition-colors focus:outline-none">
-                            100g
+                <div class="mb-8 reveal delay-100">
+                    <h3 class="text-on-surface font-semibold mb-3">Pilih Varian</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        @foreach($product->prices as $price)
+                        <button @click="selectedPackage = '{{ $price->package_name }}'; currentPrice = {{ $price->price }}; selectedPriceId = {{ $price->id }};" :class="{'bg-primary text-white border-primary': selectedPackage === '{{ $price->package_name }}', 'bg-surface border-outline-variant text-on-surface hover:border-primary': selectedPackage !== '{{ $price->package_name }}'}" class="border rounded-md py-3 font-medium transition-colors focus:outline-none">
+                            {{ $price->package_name }}
                         </button>
-                        <button @click="selectedWeight = '250g'; document.getElementById('productPrice').innerText = '$65.00';" :class="{'bg-primary text-white border-primary': selectedWeight === '250g', 'bg-surface border-outline-variant text-on-surface hover:border-primary': selectedWeight !== '250g'}" class="border rounded-md py-3 font-medium transition-colors focus:outline-none">
-                            250g
-                        </button>
-                        <button @click="selectedWeight = '500g'; document.getElementById('productPrice').innerText = '$120.00';" :class="{'bg-primary text-white border-primary': selectedWeight === '500g', 'bg-surface border-outline-variant text-on-surface hover:border-primary': selectedWeight !== '500g'}" class="border rounded-md py-3 font-medium transition-colors focus:outline-none">
-                            500g
-                        </button>
+                        @endforeach
                     </div>
                 </div>
+                @endif
                 
                 <!-- Quantity & Actions -->
-                <div class="mb-10 reveal delay-200" x-data="{ qty: 1 }">
-                    <div class="flex gap-4 mb-4">
-                        <!-- Qty Selector -->
-                        <div class="flex items-center border border-outline rounded-full bg-surface w-32 h-14">
-                            <button @click="if(qty > 1) qty--" class="w-10 h-full flex items-center justify-center text-on-surface hover:text-primary focus:outline-none">
-                                <span class="material-symbols-outlined">remove</span>
-                            </button>
-                            <input type="text" x-model="qty" class="w-12 h-full bg-transparent text-center font-semibold text-on-surface border-none focus:ring-0" readonly>
-                            <button @click="qty++" class="w-10 h-full flex items-center justify-center text-on-surface hover:text-primary focus:outline-none">
-                                <span class="material-symbols-outlined">add</span>
+                <div class="mb-10 reveal delay-200">
+                    <form action="{{ route('public.cart.add') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_price_id" x-bind:value="selectedPriceId">
+                        
+                        <div class="flex gap-4 mb-4">
+                            <!-- Qty Selector -->
+                            <div class="flex items-center border border-outline rounded-full bg-surface w-32 h-14">
+                                <button type="button" @click="if(quantity > 1) quantity--" class="w-10 h-full flex items-center justify-center text-on-surface hover:text-primary focus:outline-none">
+                                    <span class="material-symbols-outlined">remove</span>
+                                </button>
+                                <input type="text" name="quantity" x-model="quantity" class="w-12 h-full bg-transparent text-center font-semibold text-on-surface border-none focus:ring-0" readonly>
+                                <button type="button" @click="quantity++" class="w-10 h-full flex items-center justify-center text-on-surface hover:text-primary focus:outline-none">
+                                    <span class="material-symbols-outlined">add</span>
+                                </button>
+                            </div>
+                            
+                            <!-- Add to Bag -->
+                            <button type="submit" class="flex-grow bg-surface-container-low text-on-surface hover:bg-surface-container-high border border-outline-variant transition-colors rounded-full font-bold text-lg flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm hover:shadow-md">
+                                <span class="material-symbols-outlined">shopping_bag</span>
+                                Add to Bag
                             </button>
                         </div>
-                        
-                        <!-- Add to Bag -->
-                        <button class="flex-grow bg-surface-container-low text-on-surface hover:bg-surface-container-high border border-outline-variant transition-colors rounded-full font-bold text-lg flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm hover:shadow-md">
-                            <span class="material-symbols-outlined">shopping_bag</span>
-                            Add to Bag
-                        </button>
-                    </div>
+                    </form>
                     
                     <!-- Primary CTA WhatsApp -->
-                    <a :href="`https://wa.me/1234567890?text=Hello%20Clitoria!%20I%20would%20like%20to%20order%20${qty}x%20Sacred%20Blue%20Butterfly%20Pea%20Tea.`" target="_blank" class="w-full bg-primary text-white hover:bg-primary-container transition-colors py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transform hover:scale-[1.02] duration-300">
+                    <a :href="`https://wa.me/{{ $waNumber }}?text=${encodeURIComponent('Halo Clitoria! Saya ingin memesan ' + quantity + 'x ' + '{{ addslashes($product->name) }}' + ' (' + selectedPackage + ') ')}`" target="_blank" class="w-full bg-primary text-white hover:bg-primary-container transition-colors py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transform hover:scale-[1.02] duration-300">
                         <span class="material-symbols-outlined">chat</span>
                         Order via WhatsApp
                     </a>
                 </div>
 
                 <!-- Description & Benefits -->
-                <div class="reveal delay-300">
-                    <p class="text-on-surface-variant mb-6 leading-relaxed">
-                        Our signature Butterfly Pea Tea is ethically sourced from single-estate organic farms. Each flower is hand-picked at dawn to ensure maximum potency and color vibrancy. Perfect for brewing hot tea, crafting colorful lattes, or mixing into magical cocktails.
-                    </p>
-                    
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-start gap-3">
-                            <span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
-                            <span class="text-on-surface-variant">Rich in antioxidants (anthocyanins)</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
-                            <span class="text-on-surface-variant">Naturally caffeine-free & stress-relieving</span>
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
-                            <span class="text-on-surface-variant">Changes color from blue to purple with lemon</span>
-                        </li>
-                    </ul>
+                <div class="reveal delay-300 prose max-w-none text-on-surface-variant mb-8">
+                    {!! $product->description !!}
                 </div>
 
                 <!-- Bento Details Grid -->
@@ -157,5 +112,27 @@
                 </div>
             </div>
         </div>
+        
+        @if(isset($relatedProducts) && $relatedProducts->count() > 0)
+        <!-- Related Products -->
+        <div class="mt-24 border-t border-outline-variant pt-16">
+            <h2 class="text-3xl font-bold mb-8 text-on-surface">You May Also Like</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach($relatedProducts as $related)
+                <a href="{{ route('public.products.show', $related->slug) }}" class="block reveal group">
+                    <div class="aspect-square rounded-xl bg-surface-container-lowest overflow-hidden flex items-center justify-center border border-outline-variant hover:border-primary transition-all p-6 mb-4 relative soft-shadow">
+                        <img src="{{ Storage::url($related->image) }}" class="w-4/5 h-4/5 object-contain group-hover:scale-110 transition-transform duration-500" alt="{{ $related->name }}">
+                    </div>
+                    <h4 class="font-bold text-lg mb-1 group-hover:text-primary transition-colors">{{ $related->name }}</h4>
+                    <p class="text-primary font-bold">
+                        @if($related->prices->count() > 0)
+                            Rp {{ number_format($related->prices->first()->price, 0, ',', '.') }}
+                        @endif
+                    </p>
+                </a>
+                @endforeach
+            </div>
+        </div>
+        @endif
     </div>
 @endsection

@@ -3,14 +3,26 @@
 @section('title', 'Your Cart | Clitoria Digital Commerce')
 
 @section('content')
+    @php
+        $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
+        $waNumber = isset($settings['whatsapp_number']) ? preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) : '';
+        $itemsText = "";
+        foreach($summary['items'] as $item) {
+            $itemsText .= "- " . $item['quantity'] . "x " . $item['product_name'] . " (" . $item['package_name'] . ")\n";
+        }
+        $itemsText = rawurlencode($itemsText);
+        $totalFormatted = $summary['formatted_total_price'];
+        $waText = "Halo Clitoria! Saya ingin checkout pesanan saya:\n\n{$itemsText}\nTotal: {$totalFormatted}";
+    @endphp
+
     <div class="max-w-[1280px] mx-auto px-5 md:px-16 pt-32 pb-24">
         <!-- Header -->
         <div class="mb-12 reveal">
             <h1 class="text-3xl md:text-4xl font-bold text-on-surface mb-2">Review Your Order</h1>
-            <p class="text-on-surface-variant">You have 2 items in your cart.</p>
+            <p class="text-on-surface-variant">You have {{ $summary['total_items'] }} items in your cart.</p>
         </div>
 
-        <div class="grid grid-cols-1 xl:grid-cols-12 gap-12" x-data="{ items: [{id:1, name:'Sacred Blue Butterfly Pea Tea', price:65, qty:2, weight:'250g', img:'https://images.unsplash.com/photo-1615526674996-2b47e256b825'}, {id:2, name:'Premium Blue Matcha Powder', price:45, qty:1, weight:'100g', img:'https://images.unsplash.com/photo-1576402187878-974f70c890a5'}], get subtotal() { return this.items.reduce((sum, item) => sum + (item.price * item.qty), 0); } }">
+        <div class="grid grid-cols-1 xl:grid-cols-12 gap-12">
             
             <!-- Left Side: Cart Items (8 cols) -->
             <div class="xl:col-span-8">
@@ -23,59 +35,66 @@
                         <div class="col-span-3 text-right">Subtotal</div>
                     </div>
 
-                    <!-- Item rows (Alpine template for dummy logic) -->
-                    <template x-for="item in items" :key="item.id">
+                    @forelse($summary['items'] as $item)
+                        @php
+                            $product = \App\Models\Product::find($item['product_id']);
+                        @endphp
                         <div class="grid grid-cols-1 md:grid-cols-12 gap-4 p-6 border-b border-outline-variant last:border-0 items-center">
                             <!-- Product Details -->
                             <div class="col-span-1 md:col-span-6 flex gap-4 items-center">
-                                <button @click="items = items.filter(i => i.id !== item.id)" class="text-on-surface-variant hover:text-error transition-colors focus:outline-none">
-                                    <span class="material-symbols-outlined">close</span>
-                                </button>
+                                <form action="{{ route('public.cart.remove') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_price_id" value="{{ $item['product_price_id'] }}">
+                                    <button type="submit" class="text-on-surface-variant hover:text-error transition-colors focus:outline-none">
+                                        <span class="material-symbols-outlined">close</span>
+                                    </button>
+                                </form>
                                 <div class="w-20 h-20 bg-surface-container rounded-lg overflow-hidden flex-shrink-0">
-                                    <img :src="item.img" alt="Product Image" class="w-full h-full object-cover">
+                                    @if($product && $product->image)
+                                        <img src="{{ Storage::url($product->image) }}" alt="{{ $item['product_name'] }}" class="w-full h-full object-cover">
+                                    @endif
                                 </div>
                                 <div>
-                                    <h3 class="font-semibold text-on-surface text-lg" x-text="item.name"></h3>
-                                    <p class="text-sm text-on-surface-variant" x-text="item.weight"></p>
+                                    <h3 class="font-semibold text-on-surface text-lg">
+                                        @if($product)
+                                        <a href="{{ route('public.products.show', $product->slug) }}">{{ $item['product_name'] }}</a>
+                                        @else
+                                        {{ $item['product_name'] }}
+                                        @endif
+                                    </h3>
+                                    <p class="text-sm text-on-surface-variant">{{ $item['package_name'] }} - Rp {{ number_format($item['price'], 0, ',', '.') }}</p>
                                 </div>
                             </div>
                             
                             <!-- Quantity -->
                             <div class="col-span-1 md:col-span-3 flex justify-start md:justify-center items-center mt-4 md:mt-0">
-                                <div class="flex items-center border border-outline-variant rounded-full bg-surface h-10 w-28">
-                                    <button @click="if(item.qty > 1) item.qty--" class="w-8 h-full flex items-center justify-center text-on-surface hover:text-primary focus:outline-none">
-                                        <span class="material-symbols-outlined text-sm">remove</span>
-                                    </button>
-                                    <input type="text" x-model="item.qty" class="w-12 h-full bg-transparent text-center font-semibold text-on-surface border-none focus:ring-0 text-sm" readonly>
-                                    <button @click="item.qty++" class="w-8 h-full flex items-center justify-center text-on-surface hover:text-primary focus:outline-none">
-                                        <span class="material-symbols-outlined text-sm">add</span>
-                                    </button>
-                                </div>
+                                <form action="{{ route('public.cart.update') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_price_id" value="{{ $item['product_price_id'] }}">
+                                    <div class="flex items-center border border-outline-variant rounded-full bg-surface h-10 w-28">
+                                        <button type="submit" name="quantity" value="{{ $item['quantity'] - 1 }}" class="w-8 h-full flex items-center justify-center text-on-surface hover:text-primary focus:outline-none">
+                                            <span class="material-symbols-outlined text-sm">remove</span>
+                                        </button>
+                                        <input type="text" value="{{ $item['quantity'] }}" class="w-12 h-full bg-transparent text-center font-semibold text-on-surface border-none focus:ring-0 text-sm" readonly>
+                                        <button type="submit" name="quantity" value="{{ $item['quantity'] + 1 }}" class="w-8 h-full flex items-center justify-center text-on-surface hover:text-primary focus:outline-none">
+                                            <span class="material-symbols-outlined text-sm">add</span>
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
 
                             <!-- Subtotal -->
                             <div class="col-span-1 md:col-span-3 text-left md:text-right mt-2 md:mt-0 font-bold text-lg text-on-surface">
-                                $<span x-text="(item.price * item.qty).toFixed(2)"></span>
+                                Rp {{ number_format($item['subtotal'], 0, ',', '.') }}
                             </div>
                         </div>
-                    </template>
-                    
-                    <div x-show="items.length === 0" class="p-12 text-center text-on-surface-variant" style="display: none;">
-                        <span class="material-symbols-outlined text-5xl mb-4 opacity-50">shopping_cart</span>
-                        <p class="text-lg">Your cart is empty.</p>
-                        <a href="{{ route('public.products.index') ?? '#' }}" class="inline-block mt-4 text-primary font-medium hover:underline">Continue Shopping</a>
-                    </div>
-                </div>
-
-                <!-- Shipping Alert -->
-                <div class="bg-tertiary-container/30 border border-tertiary-fixed rounded-xl p-4 flex items-center gap-4 reveal delay-100">
-                    <div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary flex-shrink-0">
-                        <span class="material-symbols-outlined text-xl">local_shipping</span>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-on-surface">Complimentary Shipping Activated</h4>
-                        <p class="text-sm text-on-surface-variant">Your order qualifies for free global shipping!</p>
-                    </div>
+                    @empty
+                        <div class="p-12 text-center text-on-surface-variant">
+                            <span class="material-symbols-outlined text-5xl mb-4 opacity-50">shopping_cart</span>
+                            <p class="text-lg">Your cart is empty.</p>
+                            <a href="{{ route('public.products.index') }}" class="inline-block mt-4 text-primary font-medium hover:underline">Continue Shopping</a>
+                        </div>
+                    @endforelse
                 </div>
             </div>
 
@@ -87,28 +106,27 @@
                     <div class="space-y-4 text-on-surface-variant border-b border-outline-variant pb-6 mb-6">
                         <div class="flex justify-between items-center">
                             <span>Subtotal</span>
-                            <span class="font-medium text-on-surface">$<span x-text="subtotal.toFixed(2)"></span></span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span>Tax (Estimated)</span>
-                            <span class="font-medium text-on-surface">$0.00</span>
-                        </div>
-                        <div class="flex justify-between items-center text-tertiary">
-                            <span>Shipping</span>
-                            <span class="font-medium">Free</span>
+                            <span class="font-medium text-on-surface">{{ $summary['formatted_total_price'] }}</span>
                         </div>
                     </div>
 
                     <div class="flex justify-between items-center mb-8">
                         <span class="text-lg font-bold text-on-surface">Grand Total</span>
-                        <span class="text-2xl font-bold text-on-surface">$<span x-text="subtotal.toFixed(2)"></span></span>
+                        <span class="text-2xl font-bold text-on-surface">{{ $summary['formatted_total_price'] }}</span>
                     </div>
 
                     <!-- WhatsApp CTA -->
-                    <a :href="`https://wa.me/1234567890?text=Hello%20Clitoria!%20I%20would%20like%20to%20order%20the%20items%20in%20my%20cart.%20Total:%20$${subtotal.toFixed(2)}.`" target="_blank" class="w-full bg-primary text-white hover:bg-primary-container transition-colors py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transform hover:scale-[1.02] duration-300 w-full text-center">
+                    @if(count($summary['items']) > 0)
+                    <a href="https://wa.me/{{ $waNumber }}?text={{ $waText }}" target="_blank" class="w-full bg-primary text-white hover:bg-primary-container transition-colors py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-md hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transform hover:scale-[1.02] duration-300 text-center">
                         <span class="material-symbols-outlined">chat</span>
                         Checkout via WhatsApp
                     </a>
+                    @else
+                    <button disabled class="w-full bg-surface-variant text-on-surface-variant py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 cursor-not-allowed">
+                        <span class="material-symbols-outlined">chat</span>
+                        Checkout via WhatsApp
+                    </button>
+                    @endif
                     
                     <p class="text-xs text-center text-on-surface-variant mt-4">
                         By checking out via WhatsApp, you'll be connected directly with our concierge team to confirm shipping details.

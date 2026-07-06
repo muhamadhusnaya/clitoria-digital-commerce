@@ -13,64 +13,50 @@ class CartController extends Controller
     /**
      * View for Cart Page.
      */
-    public function index()
+    public function index(CartService $cartService)
     {
-        return view('public.cart.index');
+        $summary = $cartService->getSummary();
+        return view('public.cart.index', compact('summary'));
     }
 
     /**
      * Add a product to the cart.
      */
-    public function add(AddToCartRequest $request, CartService $cartService): JsonResponse
+    public function add(AddToCartRequest $request, CartService $cartService)
     {
         $validated = $request->validated();
-        $item = $cartService->addItem(
+        $cartService->addItem(
             (int) $validated['product_price_id'],
             (int) ($validated['quantity'] ?? 1)
         );
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Item added to cart.',
-            'item' => $item,
-            'cart_count' => $cartService->getItems()->sum('quantity'),
-        ]);
+        return redirect()->route('public.cart.index')->with('success', 'Item added to cart.');
     }
 
     /**
      * Remove an item from the cart.
      */
-    public function remove(RemoveFromCartRequest $request, CartService $cartService): JsonResponse
+    public function remove(RemoveFromCartRequest $request, CartService $cartService)
     {
         $validated = $request->validated();
         $cartService->removeItem((int) $validated['product_price_id']);
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Item removed from cart.',
-            'cart_count' => $cartService->getItems()->sum('quantity'),
-        ]);
+        return redirect()->route('public.cart.index')->with('success', 'Item removed from cart.');
     }
 
     /**
      * Update the quantity of an item in the cart.
      * If quantity is 0, the item is removed.
      */
-    public function updateQuantity(UpdateCartQuantityRequest $request, CartService $cartService): JsonResponse
+    public function updateQuantity(UpdateCartQuantityRequest $request, CartService $cartService)
     {
         $validated = $request->validated();
         $quantity = (int) $validated['quantity'];
         if ($quantity === 0) {
             $cartService->removeItem((int) $validated['product_price_id']);
-            $item = null;
             $message = 'Item removed from cart.';
         } else {
-            $item = $cartService->updateQuantity((int) $validated['product_price_id'], $quantity);
+            $cartService->updateQuantity((int) $validated['product_price_id'], $quantity);
             $message = 'Item quantity updated.';
         }
-        return response()->json([
-            'status' => 'success',
-            'message' => $message,
-            'item' => $item,
-            'cart_count' => $cartService->getItems()->sum('quantity'),
-        ]);
+        return redirect()->route('public.cart.index')->with('success', $message);
     }
 }

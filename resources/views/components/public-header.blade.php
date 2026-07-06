@@ -34,10 +34,13 @@
             <button class="hidden md:flex text-on-surface hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-full p-1">
                 <span class="material-symbols-outlined">search</span>
             </button>
-            <a href="{{ route('public.cart.index') ?? '#' }}" class="flex items-center gap-1 bg-primary text-white hover:bg-primary-container transition-colors px-4 py-2 rounded-full font-medium text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+            @php
+                $realCartCount = app(\App\Services\CartService::class)->getItems()->sum('quantity');
+            @endphp
+            <a href="{{ route('public.cart.index') }}" class="flex items-center gap-1 bg-primary text-white hover:bg-primary-container transition-colors px-4 py-2 rounded-full font-medium text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
                 <span class="material-symbols-outlined text-sm">shopping_bag</span>
                 <span class="hidden md:inline">Cart</span>
-                <span>({{ $cartCount }})</span>
+                <span>({{ $realCartCount }})</span>
             </a>
         </div>
     </div>

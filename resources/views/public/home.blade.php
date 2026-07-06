@@ -155,16 +155,29 @@
                 @endfor
             </div>
         </div>
-        <div class="relative max-w-4xl mx-auto h-[700px] sm:h-[600px] md:h-[500px]" x-data="{ 
+        <div class="relative max-w-4xl mx-auto pb-20" x-data="{ 
             active: 0, 
             items: {{ $testimonials->count() }},
             prev() { this.active = (this.active - 1 + this.items) % this.items },
             next() { this.active = (this.active + 1) % this.items },
-            init() { setInterval(() => this.next(), 4000) }
+            init() { 
+                setInterval(() => this.next(), 4000);
+                this.updateHeight();
+                window.addEventListener('resize', () => this.updateHeight());
+            },
+            updateHeight() {
+                setTimeout(() => {
+                    let max = 0;
+                    this.$refs.container.querySelectorAll('.t-card').forEach(el => {
+                        if (el.offsetHeight > max) max = el.offsetHeight;
+                    });
+                    this.$refs.container.style.height = max + 'px';
+                }, 100);
+            }
         }">
-            <div class="relative h-full w-full">
+            <div class="relative w-full" x-ref="container" style="transition: height 0.3s ease;">
                 @foreach($testimonials as $index => $testimonial)
-                <div class="absolute left-1/2 top-[45%] md:top-1/2 -translate-y-1/2 w-[85%] md:w-3/4 max-w-2xl bg-white p-8 md:p-12 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
+                <div class="t-card absolute left-1/2 top-0 w-[85%] md:w-3/4 max-w-2xl bg-white p-8 md:p-12 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
                      :class="{
                          'z-20 scale-100 opacity-100 -translate-x-1/2': active === {{ $index }},
                          'z-10 scale-90 opacity-40 -translate-x-[80%] md:-translate-x-[90%]': active === ({{ $index }} + 1) % items,

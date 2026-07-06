@@ -177,7 +177,7 @@
         }">
             <div class="relative w-full" x-ref="container" style="transition: height 0.3s ease;">
                 @foreach($testimonials as $index => $testimonial)
-                <div class="t-card absolute left-1/2 top-0 w-[85%] md:w-3/4 max-w-2xl bg-white p-8 md:p-12 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
+                <div class="t-card absolute left-1/2 top-0 w-[95%] sm:w-[90%] md:w-[85%] max-w-3xl bg-white p-8 md:p-12 lg:p-16 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
                      :class="{
                          'z-20 scale-100 opacity-100 -translate-x-1/2': active === {{ $index }},
                          'z-10 scale-90 opacity-40 -translate-x-[80%] md:-translate-x-[90%]': active === ({{ $index }} + 1) % items,
@@ -185,8 +185,7 @@
                          'z-0 scale-75 opacity-0 -translate-x-1/2 pointer-events-none': active !== {{ $index }} && active !== ({{ $index }} + 1) % items && active !== ({{ $index }} - 1 + items) % items
                      }"
                      @click="active = {{ $index }}">
-                    <span class="material-symbols-outlined text-primary/10 text-6xl md:text-8xl absolute top-4 left-4 z-0" data-icon="format_quote">format_quote</span>
-                    <p class="text-on-surface text-lg md:text-xl leading-relaxed mb-8 italic relative z-10">
+                    <p class="text-on-surface text-xl md:text-2xl leading-relaxed mb-8 italic relative z-10">
                         "{{ $testimonial->content }}"
                     </p>
                     <div class="flex flex-col items-center relative z-10">

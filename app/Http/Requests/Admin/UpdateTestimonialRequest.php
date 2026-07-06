@@ -29,6 +29,7 @@ class UpdateTestimonialRequest extends FormRequest
             'content' => ['required', 'string'],
             'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp', 'max:10240'],
             'status' => ['required', 'string', 'in:active,draft'],
+            'rating' => ['required', 'integer', 'min:1', 'max:5'],
         ];
     }
 }

@@ -59,7 +59,8 @@
                                 <span class="material-symbols-outlined star-active cursor-pointer text-[24px]">star</span>
                                 <span class="material-symbols-outlined star-active cursor-pointer text-[24px]">star</span>
                                 <span class="material-symbols-outlined star-active cursor-pointer text-[24px]">star</span>
-                                <span class="ml-4 text-[14px] font-semibold text-on-surface-variant" id="rating-text">5.0 / 5.0</span>
+                                <input type="hidden" name="rating" id="rating-input" value="{{ old('rating', $testimonial->rating) }}">
+                                <span class="ml-4 text-[14px] font-semibold text-on-surface-variant" id="rating-text">{{ old('rating', $testimonial->rating) }}.0 / 5.0</span>
                             </div>
                         </div>
                         
@@ -159,12 +160,39 @@
     </form>
 
     <script>
-        // Micro-interactions for Star Rating (Visual Only)
-        document.querySelectorAll('.star-active, .material-symbols-outlined.text-outline').forEach((star, index) => {
+        // Micro-interactions for Star Rating
+        const ratingInput = document.getElementById('rating-input');
+        
+        // Setup initial stars based on old input
+        const initialRating = parseInt(ratingInput.value) || 5;
+        const initialStars = document.querySelectorAll('.material-symbols-outlined.cursor-pointer');
+        const initialText = document.getElementById('rating-text');
+        
+        if (initialStars.length > 0) {
+            initialStars.forEach((s, i) => {
+                if (i < initialRating) {
+                    s.classList.add('star-active');
+                    s.classList.remove('text-outline');
+                    s.style.fontVariationSettings = "'FILL' 1";
+                    s.style.color = "#FFB800";
+                } else {
+                    s.classList.remove('star-active');
+                    s.classList.add('text-outline');
+                    s.style.fontVariationSettings = "'FILL' 0";
+                    s.style.color = "";
+                }
+            });
+            if(initialText) initialText.textContent = initialRating.toFixed(1) + ' / 5.0';
+        }
+
+        document.querySelectorAll('.material-symbols-outlined.cursor-pointer').forEach((star, index) => {
             star.addEventListener('click', function() {
                 const container = this.parentElement;
-                const stars = container.querySelectorAll('.material-symbols-outlined');
+                const stars = container.querySelectorAll('.material-symbols-outlined.cursor-pointer');
                 const text = container.querySelector('#rating-text');
+                const value = index + 1;
+                
+                if (ratingInput) ratingInput.value = value;
                 
                 stars.forEach((s, i) => {
                     if (i <= index) {
@@ -179,7 +207,8 @@
                         s.style.color = "";
                     }
                 });
-                text.textContent = (index + 1).toFixed(1) + ' / 5.0';
+                
+                text.textContent = value.toFixed(1) + ' / 5.0';
             });
         });
 

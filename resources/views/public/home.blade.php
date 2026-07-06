@@ -155,19 +155,30 @@
                 @endfor
             </div>
         </div>
-        <div class="relative max-w-4xl mx-auto flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 pb-8">
+        <div class="relative mx-auto flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 pb-8" 
+             x-data="{
+                 init() {
+                     setInterval(() => {
+                         if(this.$el.scrollLeft >= (this.$el.scrollWidth - this.$el.clientWidth - 50)) {
+                             this.$el.scrollTo({left: 0, behavior: 'smooth'});
+                         } else {
+                             this.$el.scrollBy({left: this.$el.children[0].offsetWidth + 24, behavior: 'smooth'});
+                         }
+                     }, 4000);
+                 }
+             }">
             @foreach($testimonials as $testimonial)
-            <div class="reveal bg-white p-10 lg:p-16 rounded-xl soft-shadow text-center relative shrink-0 w-full snap-center">
-                <span class="material-symbols-outlined text-primary/20 text-6xl absolute top-10 left-10" data-icon="format_quote">format_quote</span>
-                <p class="text-on-surface text-xl lg:text-2xl leading-relaxed mb-10 italic">
+            <div class="reveal bg-white p-8 lg:p-10 rounded-xl soft-shadow text-center relative shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-center flex flex-col justify-between">
+                <span class="material-symbols-outlined text-primary/10 text-8xl absolute top-4 left-4 z-0" data-icon="format_quote">format_quote</span>
+                <p class="text-on-surface text-lg leading-relaxed mb-8 italic relative z-10 flex-grow">
                     "{{ $testimonial->content }}"
                 </p>
-                <div class="flex flex-col items-center">
+                <div class="flex flex-col items-center relative z-10">
                     @if($testimonial->image)
-                    <div class="w-20 h-20 rounded-full bg-cover bg-center mb-4 border-2 border-primary-fixed" style="background-image: url('{{ Storage::url($testimonial->image) }}')"></div>
+                    <div class="w-16 h-16 rounded-full bg-cover bg-center mb-4 border-2 border-primary-fixed" style="background-image: url('{{ Storage::url($testimonial->image) }}')"></div>
                     @endif
-                    <h5 class="font-bold text-lg">{{ $testimonial->name }}</h5>
-                    <p class="text-on-surface-variant text-sm">{{ $testimonial->role }} @if($testimonial->company) di {{ $testimonial->company }} @endif</p>
+                    <h5 class="font-bold text-base">{{ $testimonial->name }}</h5>
+                    <p class="text-on-surface-variant text-xs">{{ $testimonial->role }} @if($testimonial->company) di {{ $testimonial->company }} @endif</p>
                 </div>
             </div>
             @endforeach

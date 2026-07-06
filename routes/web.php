@@ -7,20 +7,25 @@ use Illuminate\Support\Facades\Route;
 // Public Routes
 Route::name('public.')->group(function () {
     Route::get('/', function () {
-        return view('welcome');
+        return view('public.home');
     })->name('home');
 
     Route::get('/dummy-public', function () {
         return view('dummy-public');
     })->name('dummy-public');
-    Route::get('/products', [\App\Http\Controllers\Public\ProductListingController::class, 'index'])->name('product.list');
-    Route::get('/search', [\App\Http\Controllers\Public\ProductSearchController::class, 'index'])->name('product.search');
+
+    Route::get('/products', function () {
+        return view('public.products.index');
+    })->name('products.index');
+    
+    Route::get('/products/{slug}', function ($slug) {
+        return view('public.products.show', compact('slug'));
+    })->name('products.show');
 
     // Cart endpoints
-    Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
-    Route::post('/cart/add', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
-    Route::delete('/cart/remove', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
-    Route::put('/cart/update', [\App\Http\Controllers\CartController::class, 'updateQuantity'])->name('cart.update');
+    Route::get('/cart', function () {
+        return view('public.cart.index');
+    })->name('cart.index');
 
     // Checkout & Buy Now endpoints
     Route::get('/checkout', [\App\Http\Controllers\CheckoutController::class, 'index'])->name('checkout.index');

@@ -7,7 +7,7 @@
         </a>
 
         <!-- Products -->
-        <a href="#" class="flex flex-col items-center justify-center w-full h-full gap-1 {{ request()->routeIs('public.products.*') ? 'text-primary' : 'text-on-surface-variant hover:text-primary transition-colors' }}">
+        <a href="{{ route('public.products.index') ?? '#' }}" class="flex flex-col items-center justify-center w-full h-full gap-1 {{ request()->routeIs('public.products.*') ? 'text-primary' : 'text-on-surface-variant hover:text-primary transition-colors' }}">
             <span class="material-symbols-outlined" style="font-variation-settings: {{ request()->routeIs('public.products.*') ? "'FILL' 1" : "'FILL' 0" }}">storefront</span>
             <span class="text-[10px] font-medium">Products</span>
         </a>

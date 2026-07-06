@@ -29,10 +29,9 @@
                 <h2 class="text-[32px] leading-[40px] tracking-[-0.01em] font-semibold text-[#151936]">Ringkasan Dashboard</h2>
                 <p class="text-[16px] text-[#484553]">Kinerja waktu-nyata dan wawasan inventaris untuk Clitoria Botanical.</p>
             </div>
-            <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-xl shadow-sm border border-[#c9c4d5]/20 cursor-pointer hover:border-[#432b9f]/40 transition-colors">
-                <span class="material-symbols-outlined text-[#432b9f]">calendar_today</span>
-                <span class="text-[14px] font-medium" id="dashboard-date-range">...</span>
-                <span class="material-symbols-outlined text-[#797584]">expand_more</span>
+            <div class="flex items-center gap-2 bg-[#f4f2ff] text-[#432b9f] px-4 py-2 rounded-xl border border-[#c9c4d5]/20">
+                <span class="material-symbols-outlined text-[18px]">public</span>
+                <span class="text-[14px] font-bold">Sepanjang Waktu</span>
             </div>
         </div>
 
@@ -95,9 +94,9 @@
                     </div>
                     <span class="text-[10px] font-bold text-[#224c00] uppercase tracking-wider bg-[#b3f582]/40 px-2 py-1 rounded-full">Aktif</span>
                 </div>
-                <p class="text-[#797584] text-[14px] font-medium">Total Penjualan Bulan Ini</p>
+                <p class="text-[#797584] text-[14px] font-medium">Total Penjualan</p>
                 <div class="flex items-baseline gap-3">
-                    <h3 class="text-[48px] font-bold text-[#151936] mt-1">{{ $summary['total_transactions'] ?? 0 }}</h3>
+                    <h3 class="text-[48px] font-bold text-[#151936] mt-1">{{ $summary['sales']['sales_count'] ?? 0 }}</h3>
                 </div>
                 <div class="mt-4 h-1 w-full bg-[#edecff] rounded-full overflow-hidden">
                     <div class="h-full bg-[#98d869] w-3/4 rounded-full"></div>
@@ -111,10 +110,10 @@
                     <div class="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center text-white transition-transform group-hover:rotate-12">
                         <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">payments</span>
                     </div>
-                    <span class="text-[10px] font-bold text-white/80 uppercase tracking-wider bg-white/10 px-2 py-1 rounded-full">Pendapatan Bulanan</span>
+                    <span class="text-[10px] font-bold text-white/80 uppercase tracking-wider bg-white/10 px-2 py-1 rounded-full">Pendapatan Total</span>
                 </div>
-                <p class="text-white/70 text-[14px] font-medium relative z-10">Total Omzet Bulan Ini</p>
-                <h3 class="text-[40px] font-bold text-white mt-1 relative z-10">Rp {{ number_format($summary['total_revenue'] ?? 0, 0, ',', '.') }}</h3>
+                <p class="text-white/70 text-[14px] font-medium relative z-10">Keseluruhan Omzet</p>
+                <h3 class="text-[40px] font-bold text-white mt-1 relative z-10">Rp {{ number_format($summary['revenue']['total_revenue'] ?? 0, 0, ',', '.') }}</h3>
                 <p class="mt-4 text-white/60 text-[14px] relative z-10 flex items-center gap-1">
                     <span class="material-symbols-outlined text-sm">schedule</span> Terakhir diperbarui 12m yang lalu
                 </p>
@@ -173,24 +172,5 @@
         </div>
     </div>
 
-    @push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Simple date update logic for Dashboard
-            const dateSpan = document.getElementById('dashboard-date-range');
-            if (dateSpan) {
-                const now = new Date();
-                const firstDay = new Date(now.getFullYear(), now.getMonth(), 1);
-                const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-                
-                const formatDate = (date) => {
-                    const options = { month: 'short', day: '2-digit', year: 'numeric' };
-                    return date.toLocaleDateString('en-US', options);
-                };
-                
-                dateSpan.textContent = `${formatDate(firstDay)} - ${formatDate(lastDay)}`;
-            }
-        });
-    </script>
-    @endpush
+
 </x-app-layout>

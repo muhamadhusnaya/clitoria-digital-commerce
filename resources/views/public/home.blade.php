@@ -1,7 +1,5 @@
 @extends('layouts.public')
 
-@section('title', 'Clitoria - Where Flavor Meets Innovation')
-
 @push('styles')
 <style>
     .glass-effect {

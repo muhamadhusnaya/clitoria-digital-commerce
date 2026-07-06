@@ -34,7 +34,7 @@
             </div>
             <div>
                 <p class="text-[14px] font-medium text-outline">Rata-rata Penilaian</p>
-                <h3 class="text-[24px] font-bold text-on-surface">5.0 / 5.0</h3>
+                <h3 class="text-[24px] font-bold text-on-surface">{{ number_format($testimonials->avg('rating') ?? 5.0, 1) }} / 5.0</h3>
             </div>
         </div>
         <div class="bg-white p-6 rounded-2xl shadow-[0_10px_30px_-5px_rgba(31,35,64,0.04)] border border-outline-variant/10 flex items-center gap-5">
@@ -90,11 +90,13 @@
                         </td>
                         <td class="px-6 py-5">
                             <div class="flex text-amber-400">
-                                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1">grade</span>
-                                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1">grade</span>
-                                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1">grade</span>
-                                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1">grade</span>
-                                <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1">grade</span>
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i <= ($testimonial->rating ?? 5))
+                                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1">grade</span>
+                                    @else
+                                        <span class="material-symbols-outlined text-[18px] text-outline/30" style="font-variation-settings: 'FILL' 0">grade</span>
+                                    @endif
+                                @endfor
                             </div>
                         </td>
                         <td class="px-6 py-5">

@@ -10,6 +10,7 @@ use App\Models\Partner;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Testimonial;
+use App\Models\Team;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,6 +25,8 @@ class HomeController extends Controller
         $testimonials = Testimonial::where('status', 'published')->latest()->take(5)->get();
         $partners = Partner::get();
         
+        $ceo = Team::where('position', 'LIKE', '%CEO%')->first() ?? Team::first();
+        
         $settings = Setting::pluck('value', 'key')->toArray();
 
         return view('public.home', compact(
@@ -33,6 +36,7 @@ class HomeController extends Controller
             'galleries',
             'testimonials',
             'partners',
+            'ceo',
             'settings'
         ));
     }

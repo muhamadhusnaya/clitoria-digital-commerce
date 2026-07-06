@@ -145,7 +145,7 @@
 @endif
 <!-- Testimonials -->
 @if($testimonials->count() > 0)
-<section class="py-24 bg-surface-container-low overflow-hidden">
+<section class="py-24 bg-surface-container-low overflow-hidden" id="testimonials">
     <div class="max-w-[1280px] mx-auto px-6 lg:px-16">
         <div class="text-center mb-16 reveal">
             <h2 class="text-on-surface text-4xl font-bold mb-4">Loved by Thousands</h2>
@@ -212,6 +212,75 @@
     </div>
 </section>
 @endif
+<!-- About CEO & Clitoria Section -->
+<section class="py-24 px-6 lg:px-16 max-w-[1280px] mx-auto" id="about-ceo">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <!-- CEO Photo (Left) -->
+        <div class="reveal relative h-[500px] lg:h-[600px] flex items-center justify-center">
+            @if(isset($ceo) && $ceo && $ceo->photo)
+            <div class="relative z-20 w-4/5 aspect-[4/5] rounded-xl overflow-hidden soft-shadow">
+                <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ Storage::url($ceo->photo) }}')"></div>
+            </div>
+            @else
+            <!-- Placeholder if no CEO photo -->
+            <div class="relative z-20 w-4/5 aspect-[4/5] rounded-xl overflow-hidden soft-shadow bg-surface-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-6xl text-outline">person</span>
+            </div>
+            @endif
+            <!-- Background Decoration -->
+            <div class="absolute inset-0 z-0 flex items-center justify-center">
+                <div class="w-full h-full bg-primary/5 rounded-full blur-[80px]"></div>
+            </div>
+            @if(isset($ceo) && $ceo)
+            <!-- Floating Name Card -->
+            <div class="absolute bottom-10 -left-6 md:left-4 z-30 bg-white p-6 rounded-xl soft-shadow border border-outline-variant">
+                <h4 class="font-bold text-xl text-on-surface">{{ $ceo->name }}</h4>
+                <p class="text-primary font-medium">{{ $ceo->position }}</p>
+                <div class="flex gap-3 mt-3">
+                    @if($ceo->instagram)
+                    <a href="{{ $ceo->instagram }}" target="_blank" class="text-on-surface hover:text-primary transition-colors">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    @endif
+                    @if($ceo->linkedin)
+                    <a href="{{ $ceo->linkedin }}" target="_blank" class="text-on-surface hover:text-primary transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    @endif
+                </div>
+            </div>
+            @endif
+        </div>
+
+        <!-- About Description (Right) -->
+        <div class="reveal lg:pl-10">
+            <h2 class="text-primary font-bold tracking-wider uppercase text-sm mb-3">Tentang Kami</h2>
+            <h3 class="text-on-surface text-4xl lg:text-5xl font-bold mb-6 leading-tight">Mengenal Clitoria Lebih Dekat</h3>
+            <p class="text-on-surface-variant text-lg leading-relaxed mb-6">
+                Clitoria lahir dari passion kami terhadap kekayaan alam dan manfaat luar biasa dari Bunga Telang (Clitoria Ternatea). Berawal dari kebun kecil yang dirawat dengan cinta, kini kami berkomitmen untuk menghadirkan teh bunga telang organik premium ke seluruh cangkir di Indonesia.
+            </p>
+            <p class="text-on-surface-variant text-lg leading-relaxed mb-8">
+                Kami percaya bahwa kesehatan dan ketenangan pikiran dapat diraih melalui ritual sederhana menyeduh teh berkualitas. Setiap kelopak bunga yang kami panen dipilih secara hati-hati oleh petani lokal yang berdedikasi, memastikan Anda mendapatkan khasiat antioksidan terbaik dalam setiap tegukannya.
+            </p>
+            
+            <div class="flex gap-8 border-t border-outline-variant pt-8">
+                <div>
+                    <h4 class="text-3xl font-bold text-primary mb-1">100%</h4>
+                    <p class="text-sm text-on-surface-variant font-medium">Bahan Alami</p>
+                </div>
+                <div>
+                    <h4 class="text-3xl font-bold text-primary mb-1">Top</h4>
+                    <p class="text-sm text-on-surface-variant font-medium">Kualitas Premium</p>
+                </div>
+                <div>
+                    <h4 class="text-3xl font-bold text-primary mb-1">Lokal</h4>
+                    <p class="text-sm text-on-surface-variant font-medium">Dukungan Petani</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Partners Logo Cloud -->
 @if($partners->count() > 0)
 <section class="py-16 opacity-50 border-y border-outline-variant/30">
@@ -229,7 +298,7 @@
 </section>
 @endif
 <!-- Contact Section -->
-<section class="py-24 px-6 lg:px-16 bg-surface" id="about">
+<section class="py-24 px-6 lg:px-16 bg-surface" id="contact">
     <div class="max-w-[1280px] mx-auto grid lg:grid-cols-2 gap-20 items-center">
         <div class="reveal active">
             <h2 class="text-4xl font-bold mb-8">Let's connect</h2>

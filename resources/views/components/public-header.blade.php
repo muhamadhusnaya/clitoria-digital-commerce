@@ -22,10 +22,12 @@
 
         <!-- Desktop Navigation (Center Desktop) -->
         <nav class="hidden md:flex gap-8 absolute left-1/2 -translate-x-1/2">
-            <a href="{{ route('public.products.index') ?? '#' }}" class="text-on-surface hover:text-primary font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm {{ request()->routeIs('public.products.*') || $activeLink === 'shop' ? 'text-primary' : '' }}">Shop</a>
-            <a href="{{ route('public.home') }}#benefits" class="text-on-surface hover:text-primary font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm {{ request()->routeIs('public.benefits.*') || $activeLink === 'benefits' ? 'text-primary' : '' }}">Benefits</a>
-            <a href="{{ route('public.home') }}#gallery" class="text-on-surface hover:text-primary font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm {{ request()->routeIs('public.gallery.*') || $activeLink === 'gallery' ? 'text-primary' : '' }}">Gallery</a>
-            <a href="{{ route('public.home') }}#contact" class="text-on-surface hover:text-primary font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm {{ request()->routeIs('public.about.*') || $activeLink === 'about' ? 'text-primary' : '' }}">About</a>
+            <a href="{{ route('public.home') }}" class="text-on-surface hover:text-primary font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm {{ request()->routeIs('public.home') && !request()->hash ? 'text-primary' : '' }}">Beranda</a>
+            <a href="{{ route('public.home') }}#benefits" class="text-on-surface hover:text-primary font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm {{ $activeLink === 'benefits' ? 'text-primary' : '' }}">Manfaat</a>
+            <a href="{{ route('public.products.index') }}" class="text-on-surface hover:text-primary font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm {{ request()->routeIs('public.products.*') ? 'text-primary' : '' }}">Belanja</a>
+            <a href="{{ route('public.home') }}#testimonials" class="text-on-surface hover:text-primary font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm {{ $activeLink === 'testimonials' ? 'text-primary' : '' }}">Ulasan</a>
+            <a href="{{ route('public.home') }}#about-ceo" class="text-on-surface hover:text-primary font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm {{ $activeLink === 'about' ? 'text-primary' : '' }}">Tentang</a>
+            <a href="{{ route('public.home') }}#contact" class="text-on-surface hover:text-primary font-medium text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-primary rounded-sm {{ $activeLink === 'contact' ? 'text-primary' : '' }}">Kontak</a>
         </nav>
 
         <!-- Actions (Right) -->
@@ -84,10 +86,12 @@
                 <input type="text" placeholder="Search products..." class="w-full bg-surface-container-low border border-outline text-on-surface rounded-xl pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all">
             </div>
 
-            <a href="{{ route('public.products.index') ?? '#' }}" class="text-on-surface hover:text-primary font-semibold text-lg py-2 border-b border-outline-variant {{ request()->routeIs('public.products.*') || $activeLink === 'shop' ? 'text-primary' : '' }}">Shop</a>
-            <a href="{{ route('public.home') }}#benefits" class="text-on-surface hover:text-primary font-semibold text-lg py-2 border-b border-outline-variant {{ request()->routeIs('public.benefits.*') || $activeLink === 'benefits' ? 'text-primary' : '' }}">Benefits</a>
-            <a href="{{ route('public.home') }}#gallery" class="text-on-surface hover:text-primary font-semibold text-lg py-2 border-b border-outline-variant {{ request()->routeIs('public.gallery.*') || $activeLink === 'gallery' ? 'text-primary' : '' }}">Gallery</a>
-            <a href="{{ route('public.home') }}#contact" class="text-on-surface hover:text-primary font-semibold text-lg py-2 {{ request()->routeIs('public.about.*') || $activeLink === 'about' ? 'text-primary' : '' }}">About</a>
+            <a href="{{ route('public.home') }}" class="text-on-surface hover:text-primary font-semibold text-lg py-2 border-b border-outline-variant {{ request()->routeIs('public.home') ? 'text-primary' : '' }}">Beranda</a>
+            <a href="{{ route('public.home') }}#benefits" class="text-on-surface hover:text-primary font-semibold text-lg py-2 border-b border-outline-variant {{ $activeLink === 'benefits' ? 'text-primary' : '' }}">Manfaat</a>
+            <a href="{{ route('public.products.index') }}" class="text-on-surface hover:text-primary font-semibold text-lg py-2 border-b border-outline-variant {{ request()->routeIs('public.products.*') ? 'text-primary' : '' }}">Belanja</a>
+            <a href="{{ route('public.home') }}#testimonials" class="text-on-surface hover:text-primary font-semibold text-lg py-2 border-b border-outline-variant {{ $activeLink === 'testimonials' ? 'text-primary' : '' }}">Ulasan</a>
+            <a href="{{ route('public.home') }}#about-ceo" class="text-on-surface hover:text-primary font-semibold text-lg py-2 border-b border-outline-variant {{ $activeLink === 'about' ? 'text-primary' : '' }}">Tentang</a>
+            <a href="{{ route('public.home') }}#contact" class="text-on-surface hover:text-primary font-semibold text-lg py-2 {{ $activeLink === 'contact' ? 'text-primary' : '' }}">Kontak</a>
         </nav>
     </div>
 </header>

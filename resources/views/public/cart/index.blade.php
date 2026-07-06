@@ -6,6 +6,9 @@
     @php
         $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
         $waNumber = isset($settings['whatsapp_number']) ? preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) : '';
+                                if (str_starts_with($waNumber, '0')) {
+                                    $waNumber = '62' . substr($waNumber, 1);
+                                }
         $itemsText = "";
         $index = 1;
         foreach($summary['items'] as $item) {

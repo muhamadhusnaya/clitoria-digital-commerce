@@ -22,6 +22,9 @@
         
         $settings = \App\Models\Setting::pluck('value', 'key')->toArray();
         $waNumber = isset($settings['whatsapp_number']) ? preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) : '';
+                                if (str_starts_with($waNumber, '0')) {
+                                    $waNumber = '62' . substr($waNumber, 1);
+                                }
     @endphp
 
     <div class="max-w-[1280px] mx-auto px-5 md:px-16 py-12 lg:py-20" x-data="{ selectedPackage: '{{ $defaultPackage }}', currentPrice: {{ $defaultPriceNum }}, selectedPriceId: {{ $firstPrice ? $firstPrice->id : 'null' }}, quantity: 1 }">

@@ -81,7 +81,7 @@
                                 </div>
                                 <label class="relative inline-flex items-center cursor-pointer">
                                     <input type="hidden" name="status" value="draft">
-                                    <input type="checkbox" name="status" value="active" class="sr-only peer" {{ old('status', $testimonial->status) == 'active' ? 'checked' : '' }}>
+                                    <input type="checkbox" name="status" value="active" class="sr-only peer" {{ old('status', $testimonial->status) == 'published' ? 'checked' : '' }}>
                                     <div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-6 after:transition-all peer-checked:bg-primary"></div>
                                 </label>
                             </div>

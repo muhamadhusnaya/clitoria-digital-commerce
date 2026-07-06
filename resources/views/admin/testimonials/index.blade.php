@@ -43,7 +43,7 @@
             </div>
             <div>
                 <p class="text-[14px] font-medium text-outline">Ulasan Aktif</p>
-                <h3 class="text-[24px] font-bold text-on-surface">{{ $testimonials->where('status', 'active')->count() }} Aktif</h3>
+                <h3 class="text-[24px] font-bold text-on-surface">{{ $testimonials->where('status', 'published')->count() }} Aktif</h3>
             </div>
         </div>
     </div>
@@ -101,15 +101,10 @@
                             <p class="text-[16px] text-on-surface-variant line-clamp-2">"{{ $testimonial->content }}"</p>
                         </td>
                         <td class="px-6 py-5">
-                            @if($testimonial->status == 'active')
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/10 text-primary rounded-full text-[12px] font-bold">
-                                <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1">star</span>
-                                Unggulan
-                            </span>
+                            @if($testimonial->status == 'published')
+                                <span class="px-3 py-1 bg-[#b3f582]/20 text-[#306600] rounded-full text-[12px] font-bold tracking-wide">AKTIF</span>
                             @else
-                            <button class="text-outline/40 hover:text-primary transition-colors cursor-default">
-                                <span class="material-symbols-outlined text-[20px]">star_border</span>
-                            </button>
+                                <span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full text-[12px] font-bold tracking-wide">DRAFT</span>
                             @endif
                         </td>
                         <td class="px-6 py-5 text-right">
@@ -153,7 +148,7 @@
     <div class="mt-8 flex justify-end gap-4">
         <p class="flex items-center text-[14px] font-medium text-outline mr-auto">
             <span class="material-symbols-outlined mr-2 text-[18px]">info</span>
-            Ulasan dengan status 'active' akan ditampilkan sebagai Unggulan.
+            Ulasan dengan status 'published' akan ditampilkan sebagai Unggulan.
         </p>
         <button class="px-6 py-2 rounded-full border border-outline-variant text-on-surface-variant font-bold hover:bg-surface-container-high transition-all text-[14px]" onclick="window.location.reload();">Muat Ulang Data</button>
     </div>

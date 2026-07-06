@@ -41,7 +41,7 @@ class TestimonialService extends BaseService
     {
         // Assuming there is a findBy method in the BaseRepository, or we filter the collection.
         // If not implemented, we can filter it here for now.
-        return $this->testimonialRepository->all()->where('status', 'active');
+        return $this->testimonialRepository->all()->where('status', 'published');
     }
 
     /**
@@ -62,7 +62,8 @@ class TestimonialService extends BaseService
         }
 
         // Default status if not provided
-        $data['status'] = $data['status'] ?? 'draft';
+        $status = $data['status'] ?? 'draft';
+        $data['status'] = $status === 'active' ? 'published' : 'draft';
 
         return $this->testimonialRepository->create($data);
     }
@@ -85,7 +86,8 @@ class TestimonialService extends BaseService
             $data['image'] = $this->uploadFile($data['image'], $this->uploadPath);
         }
 
-        $data['status'] = $data['status'] ?? 'draft';
+        $status = $data['status'] ?? 'draft';
+        $data['status'] = $status === 'active' ? 'published' : 'draft';
 
         return $this->testimonialRepository->update($id, $data);
     }

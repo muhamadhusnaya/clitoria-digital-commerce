@@ -90,9 +90,9 @@
                 <button class="p-2 rounded-lg hover:bg-surface-container text-on-surface-variant transition-colors">
                     <span class="material-symbols-outlined">filter_list</span>
                 </button>
-                <button class="p-2 rounded-lg hover:bg-surface-container text-on-surface-variant transition-colors">
+                <a href="{{ route('admin.reports.export') }}" class="p-2 rounded-lg hover:bg-surface-container text-on-surface-variant transition-colors" title="Download CSV">
                     <span class="material-symbols-outlined">download</span>
-                </button>
+                </a>
             </div>
         </div>
         

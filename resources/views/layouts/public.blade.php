@@ -6,6 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', get_setting('seo_meta_title') ?: config('app.name', 'Clitoria Digital Commerce'))</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     
     <!-- SEO & Social Meta Tags -->
     @if(get_setting('seo_meta_description'))

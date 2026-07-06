@@ -134,9 +134,9 @@
         <h2 class="text-on-surface text-4xl font-bold mb-4">The Clitoria Lifestyle</h2>
         <p class="text-on-surface-variant">Shared moments from our global community of enthusiasts.</p>
     </div>
-    <div class="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
         @foreach($galleries as $index => $gallery)
-        <div class="reveal break-inside-avoid rounded-xl overflow-hidden soft-shadow group" style="transition-delay: {{ ($index % 3) * 100 }}ms;">
+        <div class="reveal rounded-xl overflow-hidden soft-shadow group" style="transition-delay: {{ ($index % 4) * 100 }}ms;">
             <div class="w-full bg-cover bg-center aspect-[4/5] group-hover:scale-105 transition-transform duration-700" style="background-image: url('{{ Storage::url($gallery->image) }}')" title="{{ $gallery->title }}"></div>
         </div>
         @endforeach

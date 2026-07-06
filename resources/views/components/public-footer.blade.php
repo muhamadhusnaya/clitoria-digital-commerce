@@ -15,19 +15,19 @@
             <!-- Quick Links -->
             <div class="col-span-1 flex flex-col gap-4">
                 <h3 class="font-bold text-lg mb-2 text-on-surface">Quick Links</h3>
-                <a href="#" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Shop Collection</a>
-                <a href="#" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Health Benefits</a>
-                <a href="#" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Our Story</a>
-                <a href="#" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Community Gallery</a>
+                <a href="/#products" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Shop Collection</a>
+                <a href="/#benefits" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Health Benefits</a>
+                <a href="/#about" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Our Story</a>
+                <a href="/#gallery" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Community Gallery</a>
             </div>
 
             <!-- Support -->
             <div class="col-span-1 flex flex-col gap-4">
                 <h3 class="font-bold text-lg mb-2 text-on-surface">Support</h3>
-                <a href="#" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">FAQ</a>
+                <a href="/#faq" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">FAQ</a>
                 <a href="#" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Shipping Policy</a>
                 <a href="#" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Returns & Refunds</a>
-                <a href="#" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Contact Us</a>
+                <a href="/#about" class="text-on-surface-variant hover:text-primary transition-colors text-sm w-fit">Contact Us</a>
             </div>
 
             <!-- Newsletter / Admin Link -->

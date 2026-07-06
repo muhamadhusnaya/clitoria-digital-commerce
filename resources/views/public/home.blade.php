@@ -266,7 +266,15 @@
                 </div>
                 <h4 class="text-2xl font-bold mb-4 text-on-surface">Need Instant Help?</h4>
                 <p class="text-on-surface-variant mb-10">Chat with our personal tea concierges for real-time brewing advice and order support.</p>
-                <a class="inline-flex items-center justify-center gap-3 w-full py-5 bg-[#25D366] text-white rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl shadow-[#25D366]/20" href="https://wa.me/{{ isset($settings['whatsapp_number']) ? preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) : '' }}">
+                @php
+                    $waNumberRaw = isset($settings['whatsapp_number']) ? preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) : '';
+                    if (str_starts_with($waNumberRaw, '0')) {
+                        $waNumberRaw = '62' . substr($waNumberRaw, 1);
+                    } elseif ($waNumberRaw && !str_starts_with($waNumberRaw, '62')) {
+                        $waNumberRaw = '62' . $waNumberRaw;
+                    }
+                @endphp
+                <a class="inline-flex items-center justify-center gap-3 w-full py-5 bg-[#25D366] text-white rounded-full font-bold text-lg hover:brightness-110 transition-all shadow-xl shadow-[#25D366]/20" href="https://wa.me/{{ $waNumberRaw }}">
                     Chat via WhatsApp
                 </a>
             </div>

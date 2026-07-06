@@ -155,33 +155,45 @@
                 @endfor
             </div>
         </div>
-        <div class="relative mx-auto flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-6 pb-8" 
-             x-data="{
-                 init() {
-                     setInterval(() => {
-                         if(this.$el.scrollLeft >= (this.$el.scrollWidth - this.$el.clientWidth - 50)) {
-                             this.$el.scrollTo({left: 0, behavior: 'smooth'});
-                         } else {
-                             this.$el.scrollBy({left: this.$el.children[0].offsetWidth + 24, behavior: 'smooth'});
-                         }
-                     }, 4000);
-                 }
-             }">
-            @foreach($testimonials as $testimonial)
-            <div class="reveal bg-white p-8 lg:p-10 rounded-xl soft-shadow text-center relative shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-center flex flex-col justify-between">
-                <span class="material-symbols-outlined text-primary/10 text-8xl absolute top-4 left-4 z-0" data-icon="format_quote">format_quote</span>
-                <p class="text-on-surface text-lg leading-relaxed mb-8 italic relative z-10 flex-grow">
-                    "{{ $testimonial->content }}"
-                </p>
-                <div class="flex flex-col items-center relative z-10">
-                    @if($testimonial->image)
-                    <div class="w-16 h-16 rounded-full bg-cover bg-center mb-4 border-2 border-primary-fixed" style="background-image: url('{{ Storage::url($testimonial->image) }}')"></div>
-                    @endif
-                    <h5 class="font-bold text-base">{{ $testimonial->name }}</h5>
-                    <p class="text-on-surface-variant text-xs">{{ $testimonial->role }} @if($testimonial->company) di {{ $testimonial->company }} @endif</p>
+        <div class="relative max-w-4xl mx-auto h-[450px]" x-data="{ 
+            active: 0, 
+            items: {{ $testimonials->count() }},
+            prev() { this.active = (this.active - 1 + this.items) % this.items },
+            next() { this.active = (this.active + 1) % this.items },
+            init() { setInterval(() => this.next(), 4000) }
+        }">
+            <div class="relative h-full w-full flex items-center justify-center">
+                @foreach($testimonials as $index => $testimonial)
+                <div class="absolute w-[85%] md:w-3/4 max-w-2xl bg-white p-8 md:p-12 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
+                     :class="{
+                         'z-20 scale-100 opacity-100 translate-x-0': active === {{ $index }},
+                         'z-10 scale-90 opacity-40 -translate-x-[20%] md:-translate-x-[30%]': active === ({{ $index }} + 1) % items,
+                         'z-10 scale-90 opacity-40 translate-x-[20%] md:translate-x-[30%]': active === ({{ $index }} - 1 + items) % items,
+                         'z-0 scale-75 opacity-0 translate-x-0 pointer-events-none': active !== {{ $index }} && active !== ({{ $index }} + 1) % items && active !== ({{ $index }} - 1 + items) % items
+                     }"
+                     @click="active = {{ $index }}">
+                    <span class="material-symbols-outlined text-primary/10 text-6xl md:text-8xl absolute top-4 left-4 z-0" data-icon="format_quote">format_quote</span>
+                    <p class="text-on-surface text-lg md:text-xl leading-relaxed mb-8 italic relative z-10">
+                        "{{ $testimonial->content }}"
+                    </p>
+                    <div class="flex flex-col items-center relative z-10">
+                        @if($testimonial->image)
+                        <div class="w-16 h-16 rounded-full bg-cover bg-center mb-4 border-2 border-primary-fixed" style="background-image: url('{{ Storage::url($testimonial->image) }}')"></div>
+                        @endif
+                        <h5 class="font-bold text-base md:text-lg">{{ $testimonial->name }}</h5>
+                        <p class="text-on-surface-variant text-xs md:text-sm">{{ $testimonial->role }} @if($testimonial->company) di {{ $testimonial->company }} @endif</p>
+                    </div>
                 </div>
+                @endforeach
             </div>
-            @endforeach
+
+            <!-- Navigation Controls -->
+            <button @click="prev()" class="absolute left-0 top-1/2 -translate-y-1/2 -ml-2 md:-ml-12 z-30 bg-surface shadow-md p-3 rounded-full text-on-surface hover:text-primary hover:bg-surface-container-high transition-all outline-none">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button @click="next()" class="absolute right-0 top-1/2 -translate-y-1/2 -mr-2 md:-mr-12 z-30 bg-surface shadow-md p-3 rounded-full text-on-surface hover:text-primary hover:bg-surface-container-high transition-all outline-none">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
         </div>
     </div>
 </section>

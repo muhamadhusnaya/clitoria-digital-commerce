@@ -7,18 +7,18 @@
         <!-- Header -->
         <div class="bg-gradient-to-br from-surface to-surface-container py-16">
             <div class="max-w-[1280px] mx-auto px-5 md:px-16 text-center reveal">
-                <h1 class="text-4xl md:text-display-lg font-bold text-on-surface mb-4">The Blue Collection</h1>
-                <p class="text-lg text-on-surface-variant max-w-2xl mx-auto">Explore our curated selection of premium, organic Butterfly Pea products. Elevate your wellness ritual with every sip.</p>
+                <h1 class="text-4xl md:text-display-lg font-bold text-on-surface mb-4">Produk Pilihan Clitoria</h1>
+                <p class="text-lg text-on-surface-variant max-w-2xl mx-auto">Jelajahi pilihan produk selai dan jelly bunga telang organik premium kami. Temukan cita rasa unik yang menyehatkan.</p>
             </div>
         </div>
 
         <!-- Filters (Sticky) -->
         <div class="sticky top-[72px] md:top-[88px] z-30 bg-surface-container/90 backdrop-blur-md border-b border-outline-variant py-4">
             <div class="max-w-[1280px] mx-auto px-5 md:px-16 flex justify-center gap-2 overflow-x-auto no-scrollbar">
-                <a href="#" class="px-6 py-2 rounded-full font-medium text-sm transition-colors whitespace-nowrap bg-primary text-white">All Collections</a>
-                <a href="#" class="px-6 py-2 rounded-full font-medium text-sm transition-colors whitespace-nowrap bg-surface-container-lowest text-on-surface hover:bg-surface-container-high border border-outline-variant">Teas</a>
-                <a href="#" class="px-6 py-2 rounded-full font-medium text-sm transition-colors whitespace-nowrap bg-surface-container-lowest text-on-surface hover:bg-surface-container-high border border-outline-variant">Powders</a>
-                <a href="#" class="px-6 py-2 rounded-full font-medium text-sm transition-colors whitespace-nowrap bg-surface-container-lowest text-on-surface hover:bg-surface-container-high border border-outline-variant">Extracts</a>
+                <a href="#" class="px-6 py-2 rounded-full font-medium text-sm transition-colors whitespace-nowrap bg-primary text-white">Semua Produk</a>
+                <a href="#" class="px-6 py-2 rounded-full font-medium text-sm transition-colors whitespace-nowrap bg-surface-container-lowest text-on-surface hover:bg-surface-container-high border border-outline-variant">Selai</a>
+                <a href="#" class="px-6 py-2 rounded-full font-medium text-sm transition-colors whitespace-nowrap bg-surface-container-lowest text-on-surface hover:bg-surface-container-high border border-outline-variant">Jelly</a>
+                <a href="#" class="px-6 py-2 rounded-full font-medium text-sm transition-colors whitespace-nowrap bg-surface-container-lowest text-on-surface hover:bg-surface-container-high border border-outline-variant">Lainnya</a>
             </div>
         </div>
 
@@ -64,7 +64,7 @@
                                 $waText = rawurlencode($rawWaText);
                             @endphp
                             <a href="https://wa.me/{{ $waNumber }}?text={{ $waText }}" target="_blank" class="bg-primary text-white hover:bg-primary-container px-4 py-2 rounded-full font-medium text-sm flex items-center gap-1 transition-colors">
-                                Buy Now
+                                Beli Sekarang
                             </a>
                         </div>
                     </div>

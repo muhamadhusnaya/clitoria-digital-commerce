@@ -6,9 +6,9 @@
     <!-- Breadcrumb -->
     <div class="bg-surface-container-lowest border-b border-outline-variant py-4">
         <div class="max-w-[1280px] mx-auto px-5 md:px-16 flex items-center gap-2 text-sm text-on-surface-variant">
-            <a href="{{ route('public.home') }}" class="hover:text-primary transition-colors">Home</a>
+            <a href="{{ route('public.home') }}" class="hover:text-primary transition-colors">Beranda</a>
             <span class="material-symbols-outlined text-sm">chevron_right</span>
-            <a href="{{ route('public.products.index') }}" class="hover:text-primary transition-colors">Shop</a>
+            <a href="{{ route('public.products.index') }}" class="hover:text-primary transition-colors">Belanja</a>
             <span class="material-symbols-outlined text-sm">chevron_right</span>
             <span class="text-on-surface font-medium">{{ $product->name }}</span>
         </div>
@@ -83,7 +83,7 @@
                             <!-- Add to Bag -->
                             <button type="submit" class="flex-grow bg-surface-container-low text-on-surface hover:bg-surface-container-high border border-outline-variant transition-colors rounded-full font-bold text-lg flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary shadow-sm hover:shadow-md">
                                 <span class="material-symbols-outlined">shopping_bag</span>
-                                Add to Bag
+                                Masukkan Keranjang
                             </button>
                         </div>
                     </form>
@@ -91,7 +91,7 @@
                     <!-- Primary CTA WhatsApp -->
                     <a :href="`https://wa.me/{{ $waNumber }}?text=${encodeURIComponent('Halo Clitoria,\n\nSaya ingin memesan:\n\n1. {{ addslashes($product->name) }}' + (selectedPackage ? ' (' + selectedPackage + ')' : '') + '\n   Qty: ' + quantity + '\n\nTotal:\nRp ' + new Intl.NumberFormat('id-ID').format(currentPrice * quantity) + '\n\nMohon informasi pembayaran dan pengiriman.\n\nTerima kasih.')}`" target="_blank" class="w-full bg-primary text-white hover:bg-primary-container transition-colors py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transform hover:scale-[1.02] duration-300">
                         <span class="material-symbols-outlined">chat</span>
-                        Order via WhatsApp
+                        Pesan via WhatsApp
                     </a>
                 </div>
 
@@ -104,15 +104,15 @@
                 <div class="grid grid-cols-3 gap-4 mt-auto reveal delay-300">
                     <div class="bg-surface-container-low p-4 rounded-xl text-center flex flex-col items-center justify-center">
                         <span class="material-symbols-outlined text-primary mb-2">public</span>
-                        <span class="text-xs font-semibold text-on-surface">Ethically Sourced</span>
+                        <span class="text-xs font-semibold text-on-surface">Bahan Alami</span>
                     </div>
                     <div class="bg-surface-container-low p-4 rounded-xl text-center flex flex-col items-center justify-center">
                         <span class="material-symbols-outlined text-primary mb-2">local_cafe</span>
-                        <span class="text-xs font-semibold text-on-surface">The Ritual</span>
+                        <span class="text-xs font-semibold text-on-surface">Ritual Minum</span>
                     </div>
                     <div class="bg-surface-container-low p-4 rounded-xl text-center flex flex-col items-center justify-center">
                         <span class="material-symbols-outlined text-primary mb-2">flight_takeoff</span>
-                        <span class="text-xs font-semibold text-on-surface">Global Delivery</span>
+                        <span class="text-xs font-semibold text-on-surface">Pengiriman Global</span>
                     </div>
                 </div>
             </div>
@@ -121,7 +121,7 @@
         @if(isset($relatedProducts) && $relatedProducts->count() > 0)
         <!-- Related Products -->
         <div class="mt-24 border-t border-outline-variant pt-16">
-            <h2 class="text-3xl font-bold mb-8 text-on-surface">You May Also Like</h2>
+            <h2 class="text-3xl font-bold mb-8 text-on-surface">Produk Terkait</h2>
             <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 @foreach($relatedProducts as $related)
                 <a href="{{ route('public.products.show', $related->slug) }}" class="block reveal group">

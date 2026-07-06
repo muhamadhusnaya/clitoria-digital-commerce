@@ -4,6 +4,8 @@
     $waNumber = $rawWa ? preg_replace('/[^0-9]/', '', $rawWa) : '628123456789';
     if (str_starts_with($waNumber, '0')) {
         $waNumber = '62' . substr($waNumber, 1);
+    } elseif ($waNumber && !str_starts_with($waNumber, '62')) {
+        $waNumber = '62' . $waNumber;
     }
 @endphp
 <a href="https://wa.me/{{ $waNumber }}" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-4 right-4 z-50 flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] shadow-lg hover:shadow-xl transition-colors duration-200 ease-in-out">

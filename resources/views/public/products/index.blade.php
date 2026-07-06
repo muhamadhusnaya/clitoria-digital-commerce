@@ -56,6 +56,8 @@
                                 $waNumber = isset($settings['whatsapp_number']) ? preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) : '';
                                 if (str_starts_with($waNumber, '0')) {
                                     $waNumber = '62' . substr($waNumber, 1);
+                                } elseif ($waNumber && !str_starts_with($waNumber, '62')) {
+                                    $waNumber = '62' . $waNumber;
                                 }
                                 $firstPrice = $product->prices->first();
                                 $rawWaText = "Halo Clitoria,\n\nSaya ingin memesan:\n\n1. " . $product->name . ($firstPrice ? " (" . $firstPrice->package_name . ")" : "") . "\n   Qty: 1\n\nTotal:\nRp " . ($firstPrice ? number_format($firstPrice->price, 0, ',', '.') : "0") . "\n\nMohon informasi pembayaran dan pengiriman.\n\nTerima kasih.";

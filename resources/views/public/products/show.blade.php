@@ -24,6 +24,8 @@
         $waNumber = isset($settings['whatsapp_number']) ? preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) : '';
                                 if (str_starts_with($waNumber, '0')) {
                                     $waNumber = '62' . substr($waNumber, 1);
+                                } elseif ($waNumber && !str_starts_with($waNumber, '62')) {
+                                    $waNumber = '62' . $waNumber;
                                 }
     @endphp
 

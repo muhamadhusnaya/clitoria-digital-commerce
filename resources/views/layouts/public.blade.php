@@ -5,9 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', config('app.name', 'Clitoria Digital Commerce'))</title>
-    @yield('meta')
+    <title>@yield('title', get_setting('seo_meta_title') ?: config('app.name', 'Clitoria Digital Commerce'))</title>
+    
+    <!-- SEO & Social Meta Tags -->
+    @if(get_setting('seo_meta_description'))
+    <meta name="description" content="{{ get_setting('seo_meta_description') }}">
+    <meta property="og:description" content="{{ get_setting('seo_meta_description') }}">
+    @endif
+    
+    @if(get_setting('seo_meta_keywords'))
+    <meta name="keywords" content="{{ get_setting('seo_meta_keywords') }}">
+    @endif
+    
+    <meta property="og:title" content="@yield('title', get_setting('seo_meta_title') ?: config('app.name'))">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    
+    @if(get_setting('seo_og_image'))
+    <meta property="og:image" content="{{ Storage::url(get_setting('seo_og_image')) }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="{{ Storage::url(get_setting('seo_og_image')) }}">
+    @endif
 
+    @yield('meta')
     <!-- Scripts and Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     

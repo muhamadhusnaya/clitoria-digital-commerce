@@ -40,10 +40,10 @@
                     <span class="material-symbols-outlined text-[18px]" data-icon="filter_list">filter_list</span>
                     Filter
                 </button>
-                <button class="flex items-center gap-2 px-4 py-2 rounded-full border border-outline-variant text-[14px] text-on-surface-variant hover:bg-surface-container-low transition-colors">
+                <a href="{{ route('admin.product-prices.export') }}" class="flex items-center gap-2 px-4 py-2 rounded-full border border-outline-variant text-[14px] text-on-surface-variant hover:bg-surface-container-low transition-colors">
                     <span class="material-symbols-outlined text-[18px]" data-icon="download">download</span>
                     Ekspor CSV
-                </button>
+                </a>
             </div>
         </div>
         

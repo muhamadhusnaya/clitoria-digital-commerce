@@ -54,6 +54,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('partners', \App\Http\Controllers\Admin\PartnerController::class)->except(['show']);
         // Product Management
         Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+        Route::get('product-prices/export', [\App\Http\Controllers\Admin\ExportController::class, 'exportProductPricesCsv'])->name('product-prices.export');
         Route::resource('product-prices', \App\Http\Controllers\Admin\ProductPriceController::class);
 
         // Sales Management

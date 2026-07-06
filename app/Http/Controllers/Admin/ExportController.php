@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Services\ReportService;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use App\Services\ProductPriceService;
 
 class ExportController extends Controller
 {
     protected ReportService $reportService;
+    protected ProductPriceService $productPriceService;
 
-    public function __construct(ReportService $reportService)
+    public function __construct(ReportService $reportService, ProductPriceService $productPriceService)
     {
         $this->reportService = $reportService;
+        $this->productPriceService = $productPriceService;
     }
 
     public function exportCsv(Request $request)
@@ -56,6 +59,45 @@ class ExportController extends Controller
                     $transaction->items->sum('qty'),
                     $transaction->total_amount,
                     $transaction->creator ? $transaction->creator->name : 'System'
+                ], ';');
+            }
+
+            fclose($handle);
+        }, 200, $headers);
+    }
+
+    public function exportProductPricesCsv(Request $request)
+    {
+        $prices = $this->productPriceService->getAll();
+        
+        $fileName = 'product_prices_' . date('Y-m-d_H-i-s') . '.csv';
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+        ];
+
+        return new StreamedResponse(function () use ($prices) {
+            $handle = fopen('php://output', 'w');
+            
+            // Add BOM for UTF-8 support in Excel
+            fputs($handle, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+            // Header row
+            fputcsv($handle, [
+                'Produk',
+                'Nama Paket',
+                'Tipe',
+                'Harga (Rp)',
+            ], ';');
+
+            // Data rows
+            foreach ($prices as $price) {
+                fputcsv($handle, [
+                    $price->product ? $price->product->name : 'N/A',
+                    $price->package_name,
+                    $price->type,
+                    $price->price
                 ], ';');
             }
 

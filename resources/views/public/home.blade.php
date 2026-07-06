@@ -50,9 +50,11 @@
                     {{ $hero->button_text }}
                 </a>
                 @endif
-                <a href="#benefits" class="inline-block px-8 py-4 border-2 border-outline-variant text-on-surface rounded-full font-bold text-lg hover:bg-surface-container transition-all">
-                    Manfaat
+                @if($hero->secondary_button_text)
+                <a href="{{ $hero->secondary_button_link ?? '#benefits' }}" class="inline-block px-8 py-4 border-2 border-outline-variant text-on-surface rounded-full font-bold text-lg hover:bg-surface-container transition-all">
+                    {{ $hero->secondary_button_text }}
                 </a>
+                @endif
             </div>
         </div>
         <!-- Floating Composition -->

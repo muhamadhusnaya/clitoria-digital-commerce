@@ -65,14 +65,26 @@
                             <div class="grid grid-cols-2 gap-6">
                                 <!-- Button Text -->
                                 <div class="space-y-2">
-                                    <label class="block text-[14px] font-medium text-[#484553] px-1" for="button_text">Teks Tombol</label>
+                                    <label class="block text-[14px] font-medium text-[#484553] px-1" for="button_text">Teks Tombol Utama</label>
                                     <input id="button_text" name="button_text" type="text" value="{{ old('button_text', $hero->button_text) }}"
                                            class="w-full h-[56px] px-4 bg-[#f4f2ff] rounded-xl border-none focus:ring-2 focus:ring-[#432b9f]/20 text-[16px] text-[#151936] transition-all outline-none" />
                                 </div>
                                 <!-- Button Link -->
                                 <div class="space-y-2">
-                                    <label class="block text-[14px] font-medium text-[#484553] px-1" for="button_link">Tautan Tombol</label>
+                                    <label class="block text-[14px] font-medium text-[#484553] px-1" for="button_link">Tautan Tombol Utama</label>
                                     <input id="button_link" name="button_link" type="text" value="{{ old('button_link', $hero->button_link) }}"
+                                           class="w-full h-[56px] px-4 bg-[#f4f2ff] rounded-xl border-none focus:ring-2 focus:ring-[#432b9f]/20 text-[16px] text-[#151936] transition-all outline-none" />
+                                </div>
+                                <!-- Secondary Button Text -->
+                                <div class="space-y-2">
+                                    <label class="block text-[14px] font-medium text-[#484553] px-1" for="secondary_button_text">Teks Tombol Kedua (Opsional)</label>
+                                    <input id="secondary_button_text" name="secondary_button_text" type="text" value="{{ old('secondary_button_text', $hero->secondary_button_text) }}"
+                                           class="w-full h-[56px] px-4 bg-[#f4f2ff] rounded-xl border-none focus:ring-2 focus:ring-[#432b9f]/20 text-[16px] text-[#151936] transition-all outline-none" />
+                                </div>
+                                <!-- Secondary Button Link -->
+                                <div class="space-y-2">
+                                    <label class="block text-[14px] font-medium text-[#484553] px-1" for="secondary_button_link">Tautan Tombol Kedua (Opsional)</label>
+                                    <input id="secondary_button_link" name="secondary_button_link" type="text" value="{{ old('secondary_button_link', $hero->secondary_button_link) }}"
                                            class="w-full h-[56px] px-4 bg-[#f4f2ff] rounded-xl border-none focus:ring-2 focus:ring-[#432b9f]/20 text-[16px] text-[#151936] transition-all outline-none" />
                                 </div>
                             </div>

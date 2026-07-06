@@ -25,7 +25,7 @@ class UpdateBusinessSettingRequest extends FormRequest
         return [
             'whatsapp_number' => ['nullable', 'string', 'max:20'],
             'business_email' => ['nullable', 'email', 'max:255'],
-            'instagram_url' => ['nullable', 'url', 'max:255'],
+            'instagram_url' => ['nullable', 'string', 'max:255'],
             'address' => ['nullable', 'string'],
             'google_maps_embed' => ['nullable', 'string'],
         ];

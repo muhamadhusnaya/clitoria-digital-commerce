@@ -93,4 +93,15 @@ class SalesRepository extends BaseRepository implements SalesRepositoryInterface
         ->limit($limit)
         ->get();
     }
+
+    public function getMonthlyRevenue(int $year)
+    {
+        return Sale::query()
+            ->selectRaw('MONTH(sale_date) as month, SUM(total_amount) as total')
+            ->whereYear('sale_date', $year)
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('total', 'month')
+            ->toArray();
+    }
 }

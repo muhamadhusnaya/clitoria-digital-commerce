@@ -106,20 +106,20 @@
                                             <!-- Product Name/Selection -->
                                             <td class="px-4 py-4 align-top">
                                                 <input type="hidden" :name="`items[${index}][product_id]`" x-model="item.product_id">
+                                                <input type="hidden" :name="`items[${index}][product_name]`" x-model="item.product_name">
                                                 <div class="flex flex-col gap-2">
-                                                    <select x-model="item.selected_product" @change="updateProductDetails(index)" class="w-full border border-outline-variant bg-surface-container-low rounded-lg px-3 py-2 text-sm outline-none focus:border-primary">
-                                                        <option value="custom">-- Kustom --</option>
+                                                    <select x-model="item.selected_product" @change="updateProductDetails(index)" required class="w-full border border-outline-variant bg-surface-container-low rounded-lg px-3 py-2 text-sm outline-none focus:border-primary">
+                                                        <option value="" disabled>-- Pilih Produk --</option>
                                                         <template x-for="product in products" :key="product.id">
                                                             <option :value="product.id" x-text="product.name"></option>
                                                         </template>
                                                     </select>
-                                                    <input type="text" :name="`items[${index}][product_name]`" x-model="item.product_name" required class="w-full border border-outline-variant bg-surface-container-low rounded-lg px-3 py-2 text-sm outline-none focus:border-primary" placeholder="Nama produk...">
                                                 </div>
                                             </td>
                                             
                                             <!-- Price -->
                                             <td class="px-4 py-4 align-top">
-                                                <input type="number" :name="`items[${index}][price]`" x-model.number="item.price" min="0" required class="w-full border border-outline-variant bg-surface-container-low rounded-lg px-3 py-2 text-sm outline-none text-right focus:border-primary">
+                                                <input type="number" :name="`items[${index}][price]`" x-model.number="item.price" min="0" required readonly class="w-full border border-outline-variant bg-surface-container-highest/30 text-on-surface-variant font-medium rounded-lg px-3 py-2 text-sm outline-none text-right cursor-not-allowed">
                                             </td>
                                             
                                             <!-- Quantity -->
@@ -195,7 +195,7 @@
         Alpine.data('salesForm', (productsList) => ({
             products: productsList,
             items: [
-                { id: Date.now(), product_id: '', product_name: '', selected_product: 'custom', price: 0, qty: 1 }
+                { id: Date.now(), product_id: '', product_name: '', selected_product: '', price: 0, qty: 1 }
             ],
             
             addItem() {
@@ -203,7 +203,7 @@
                     id: Date.now(),
                     product_id: '',
                     product_name: '',
-                    selected_product: 'custom',
+                    selected_product: '',
                     price: 0,
                     qty: 1
                 });
@@ -218,17 +218,11 @@
             updateProductDetails(index) {
                 const item = this.items[index];
                 
-                if (item.selected_product === 'custom') {
-                    item.product_id = '';
-                    item.product_name = '';
-                    item.price = 0;
-                } else {
-                    const product = this.products.find(p => p.id == item.selected_product);
-                    if (product) {
-                        item.product_id = product.id;
-                        item.product_name = product.name;
-                        item.price = product.price;
-                    }
+                const product = this.products.find(p => p.id == item.selected_product);
+                if (product) {
+                    item.product_id = product.id;
+                    item.product_name = product.name;
+                    item.price = product.price;
                 }
             },
             

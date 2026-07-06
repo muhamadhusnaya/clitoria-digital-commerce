@@ -25,11 +25,10 @@ class SaleController extends Controller
     public function index()
     {
         $sales = $this->salesService->getPaginated(15);
+        $monthlyRevenue = $this->salesService->getMonthlyRevenue(date('Y'));
+        $topProducts = $this->salesService->getProductRanking(null, null, 3);
         
-        // As TASK 06.01.06 (Sales Detail View) is next, 
-        // we assume the index view might not be fully built yet by this task,
-        // but we return the view if it exists.
-        return view('admin.sales.index', compact('sales'));
+        return view('admin.sales.index', compact('sales', 'monthlyRevenue', 'topProducts'));
     }
 
     /**
@@ -41,7 +40,9 @@ class SaleController extends Controller
         // We format them to include the first price (if bundle pricing is used)
         // or a default value, to make it easier for the frontend.
         $products = $this->productService->getAll(true)->map(function ($product) {
-            $basePrice = $product->prices->firstWhere('type', 'single')?->price ?? 0;
+            $basePrice = $product->prices->firstWhere('type', 'single')?->price 
+                         ?? $product->prices->first()?->price 
+                         ?? 0;
             return [
                 'id' => $product->id,
                 'name' => $product->name,

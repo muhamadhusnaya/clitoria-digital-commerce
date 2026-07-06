@@ -85,6 +85,22 @@ class SalesService extends BaseService
     {
         return (int) $this->repository->getSalesCount($startDate, $endDate);
     }
+    
+    public function getMonthlyRevenue(int $year): array
+    {
+        $data = $this->repository->getMonthlyRevenue($year);
+        // Fill missing months with 0
+        $result = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $result[$i] = (float) ($data[$i] ?? 0);
+        }
+        return $result;
+    }
+    
+    public function getProductRanking(?string $startDate = null, ?string $endDate = null, int $limit = 5)
+    {
+        return $this->repository->getProductRanking($startDate, $endDate, $limit);
+    }
 
     public function calculateTotal(array $items): float
     {

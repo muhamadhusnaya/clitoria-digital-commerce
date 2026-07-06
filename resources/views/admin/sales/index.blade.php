@@ -37,7 +37,7 @@
             <div class="flex justify-between items-center mb-8">
                 <div>
                     <h3 class="font-headline-sm text-[24px] font-bold text-on-surface">Pendapatan Penjualan Bulanan</h3>
-                    <p class="font-body-md text-[16px] text-on-surface-variant">Lintasan pertumbuhan untuk tahun fiskal berjalan (Simulasi)</p>
+                    <p class="font-body-md text-[16px] text-on-surface-variant">Lintasan pertumbuhan untuk tahun fiskal berjalan</p>
                 </div>
                 <div class="flex items-center gap-2 bg-tertiary-fixed/30 text-on-tertiary-fixed-variant px-3 py-1 rounded-full font-bold text-[12px]">
                     <span class="material-symbols-outlined text-[14px]">trending_up</span>
@@ -52,54 +52,29 @@
         <!-- Top Selling Products Card -->
         <div class="bg-surface-container-lowest rounded-xl p-8 ambient-shadow border border-surface-container">
             <h3 class="font-headline-sm text-[24px] font-bold text-on-surface mb-2">Produk Teratas</h3>
-            <p class="font-body-md text-[16px] text-on-surface-variant mb-8">Teh paling populer (Simulasi)</p>
+            <p class="font-body-md text-[16px] text-on-surface-variant mb-8">Teh paling populer</p>
             
             <div class="space-y-6">
-                <!-- Product 1 -->
+                @forelse($topProducts as $product)
                 <div class="flex items-center justify-between group cursor-pointer">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 rounded-xl bg-surface-container overflow-hidden group-hover:scale-105 transition-transform flex items-center justify-center text-outline">
                             <span class="material-symbols-outlined text-[24px]">local_cafe</span>
                         </div>
                         <div>
-                            <p class="font-bold text-[14px] text-on-surface">Midnight Bloom</p>
-                            <p class="text-[12px] text-on-surface-variant">1,240 terjual</p>
+                            <p class="font-bold text-[14px] text-on-surface">{{ $product->product_name ?: 'Tidak Diketahui' }}</p>
+                            <p class="text-[12px] text-on-surface-variant">{{ number_format($product->total_qty, 0, ',', '.') }} terjual</p>
                         </div>
                     </div>
                     <div class="text-right">
-                        <p class="font-bold text-[14px] text-primary">Rp 45.800.000</p>
+                        <p class="font-bold text-[14px] text-primary">Rp {{ number_format($product->total_revenue, 0, ',', '.') }}</p>
                     </div>
                 </div>
-                <!-- Product 2 -->
-                <div class="flex items-center justify-between group cursor-pointer">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-surface-container overflow-hidden group-hover:scale-105 transition-transform flex items-center justify-center text-outline">
-                            <span class="material-symbols-outlined text-[24px]">eco</span>
-                        </div>
-                        <div>
-                            <p class="font-bold text-[14px] text-on-surface">Zen Lavender</p>
-                            <p class="text-[12px] text-on-surface-variant">982 terjual</p>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="font-bold text-[14px] text-primary">Rp 32.150.000</p>
-                    </div>
+                @empty
+                <div class="text-center py-4 text-on-surface-variant text-[14px]">
+                    Belum ada data penjualan produk.
                 </div>
-                <!-- Product 3 -->
-                <div class="flex items-center justify-between group cursor-pointer">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-surface-container overflow-hidden group-hover:scale-105 transition-transform flex items-center justify-center text-outline">
-                            <span class="material-symbols-outlined text-[24px]">emoji_nature</span>
-                        </div>
-                        <div>
-                            <p class="font-bold text-[14px] text-on-surface">Citrus Aura</p>
-                            <p class="text-[12px] text-on-surface-variant">854 terjual</p>
-                        </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="font-bold text-[14px] text-primary">Rp 28.900.000</p>
-                    </div>
-                </div>
+                @endforelse
             </div>
             <button class="w-full mt-10 py-3 rounded-xl border border-primary text-primary font-bold text-[14px] hover:bg-primary/5 transition-colors">
                 Lihat Laporan Inventaris
@@ -182,10 +157,10 @@
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt'],
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'],
                     datasets: [{
                         label: 'Pendapatan (Rp)',
-                        data: [12000000, 19000000, 15000000, 25000000, 22000000, 30000000, 45000000, 38000000, 52000000, 64000000],
+                        data: {!! json_encode(array_values($monthlyRevenue)) !!},
                         borderColor: '#5B46B8',
                         borderWidth: 3,
                         pointBackgroundColor: '#ffffff',

@@ -17,8 +17,7 @@
 
         <!-- Brand Logo (Center Mobile / Left Desktop) -->
         <a href="{{ route('public.home') }}" class="font-bold text-primary flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-primary rounded-sm">
-            <span class="material-symbols-outlined" data-icon="eco">eco</span>
-            <span class="text-xl tracking-tight">Clitoria</span>
+            <img src="{{ asset('images/logo.png') }}" alt="Clitoria" class="h-8 md:h-10 object-contain">
         </a>
 
         <!-- Desktop Navigation (Center Desktop) -->

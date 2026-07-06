@@ -46,12 +46,12 @@
             @endif
             <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
                 @if($hero->button_text)
-                <a href="{{ $hero->button_link ?? route('public.products.index') }}" class="inline-block px-8 py-4 bg-primary text-on-primary rounded-full font-bold text-lg hover:bg-primary-container transition-all hover:translate-y-[-2px] shadow-xl">
+                <a href="{{ route('public.products.index') }}" class="inline-block px-8 py-4 bg-primary text-on-primary rounded-full font-bold text-lg hover:bg-primary-container transition-all hover:translate-y-[-2px] shadow-xl">
                     {{ $hero->button_text }}
                 </a>
                 @endif
                 <a href="#benefits" class="inline-block px-8 py-4 border-2 border-outline-variant text-on-surface rounded-full font-bold text-lg hover:bg-surface-container transition-all">
-                    Learn More
+                    Manfaat
                 </a>
             </div>
         </div>
@@ -72,8 +72,8 @@
 @if($benefits->count() > 0)
 <section class="py-24 px-6 lg:px-16 max-w-[1280px] mx-auto" id="benefits">
     <div class="text-center mb-16 reveal">
-        <h2 class="text-on-surface text-4xl font-bold mb-4">The Magic of Clitoria</h2>
-        <p class="text-on-surface-variant max-w-2xl mx-auto">Discover why our botanical infusions are revolutionizing the wellness ritual with scientifically backed benefits.</p>
+        <h2 class="text-on-surface text-4xl font-bold mb-4">Keajaiban Clitoria</h2>
+        <p class="text-on-surface-variant max-w-2xl mx-auto">Temukan bagaimana racikan botani kami memberikan manfaat kebugaran yang didukung secara ilmiah.</p>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
         @foreach($benefits as $index => $benefit)
@@ -98,11 +98,11 @@
     <div class="max-w-[1280px] mx-auto px-6 lg:px-16">
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 reveal">
             <div>
-                <h2 class="text-on-surface text-4xl font-bold mb-4">Curated Selections</h2>
-                <p class="text-on-surface-variant">Experience our award-winning botanical range.</p>
+                <h2 class="text-on-surface text-4xl font-bold mb-4">Pilihan Terbaik Kami</h2>
+                <p class="text-on-surface-variant">Rasakan rangkaian produk andalan dari kami.</p>
             </div>
             <a href="{{ route('public.products.index') }}" class="text-primary font-bold flex items-center gap-2 group">
-                View All Products <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+                Lihat Semua Produk <span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
             </a>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -129,8 +129,8 @@
 @if($galleries->count() > 0)
 <section class="py-24 px-6 lg:px-16 max-w-[1280px] mx-auto" id="gallery">
     <div class="text-center mb-16 reveal">
-        <h2 class="text-on-surface text-4xl font-bold mb-4">The Clitoria Lifestyle</h2>
-        <p class="text-on-surface-variant">Shared moments from our global community of enthusiasts.</p>
+        <h2 class="text-on-surface text-4xl font-bold mb-4">Galeri Clitoria</h2>
+        <p class="text-on-surface-variant">Momen kebersamaan dari komunitas pelanggan kami tercinta.</p>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
         @foreach($galleries as $index => $gallery)
@@ -146,7 +146,7 @@
 <section class="py-24 bg-surface-container-low overflow-hidden" id="testimonials">
     <div class="max-w-[1280px] mx-auto px-6 lg:px-16">
         <div class="text-center mb-16 reveal">
-            <h2 class="text-on-surface text-4xl font-bold mb-4">Loved by Thousands</h2>
+            <h2 class="text-on-surface text-4xl font-bold mb-4">Dicintai Pelanggan Kami</h2>
             <div class="flex justify-center gap-1 text-primary">
                 @for($i=0; $i<5; $i++)
                 <span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -181,7 +181,7 @@
         }">
             <div class="relative w-full" x-ref="container" style="transition: height 0.3s ease;">
                 @foreach($testimonials as $index => $testimonial)
-                <div class="t-card absolute left-1/2 top-0 w-[95%] sm:w-[90%] md:w-[85%] max-w-3xl flex flex-col justify-between bg-white p-8 md:p-12 lg:p-16 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
+                <div class="t-card absolute left-1/2 top-0 w-full sm:w-[500px] md:w-[600px] lg:w-[700px] max-w-[95vw] flex flex-col justify-between bg-white p-8 md:p-12 lg:p-16 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
                      :class="{
                          'z-20 scale-100 opacity-100 -translate-x-1/2': active === {{ $index }},
                          'z-10 scale-90 opacity-40 -translate-x-[80%] md:-translate-x-[90%]': active === ({{ $index }} + 1) % items,
@@ -261,10 +261,10 @@
             <h2 class="text-primary font-bold tracking-wider uppercase text-sm mb-3">Tentang Kami</h2>
             <h3 class="text-on-surface text-4xl lg:text-5xl font-bold mb-6 leading-tight">Mengenal Clitoria Lebih Dekat</h3>
             <p class="text-on-surface-variant text-lg leading-relaxed mb-6">
-                Clitoria lahir dari passion kami terhadap kekayaan alam dan manfaat luar biasa dari Bunga Telang (Clitoria Ternatea). Berawal dari kebun kecil yang dirawat dengan cinta, kini kami berkomitmen untuk menghadirkan teh bunga telang organik premium ke seluruh cangkir di Indonesia.
+                Clitoria lahir dari passion kami terhadap kekayaan alam dan manfaat luar biasa dari Bunga Telang (Clitoria Ternatea). Berawal dari kebun kecil yang dirawat dengan cinta, kini kami berkomitmen untuk menghadirkan produk pembuat selai dan jelly premium dari bunga telang murni ke seluruh keluarga di Indonesia.
             </p>
             <p class="text-on-surface-variant text-lg leading-relaxed mb-8">
-                Kami percaya bahwa kesehatan dan ketenangan pikiran dapat diraih melalui ritual sederhana menyeduh teh berkualitas. Setiap kelopak bunga yang kami panen dipilih secara hati-hati oleh petani lokal yang berdedikasi, memastikan Anda mendapatkan khasiat antioksidan terbaik dalam setiap tegukannya.
+                Kami percaya bahwa kesehatan dan cita rasa yang nikmat dapat diraih melalui produk selai dan jelly berkualitas. Setiap kelopak bunga yang kami panen dipilih secara hati-hati oleh petani lokal yang berdedikasi, memastikan Anda mendapatkan khasiat antioksidan terbaik dalam setiap olesannya.
             </p>
             
             <div class="flex gap-8 border-t border-outline-variant pt-8">
@@ -305,8 +305,8 @@
 <section class="py-24 px-6 lg:px-16 bg-surface" id="contact">
     <div class="max-w-[1280px] mx-auto grid lg:grid-cols-2 gap-20 items-center">
         <div class="reveal active">
-            <h2 class="text-4xl font-bold mb-8">Let's connect</h2>
-            <p class="text-on-surface-variant mb-12 text-lg">Have questions about our botanical sourcing or want to collaborate? Our tea experts are here to help you find your perfect ritual.</p>
+            <h2 class="text-4xl font-bold mb-8">Mari Berhubungan</h2>
+            <p class="text-on-surface-variant mb-12 text-lg">Ada pertanyaan seputar produk kami atau ingin berkolaborasi? Tim ahli kami siap membantu Anda menemukan pilihan yang tepat.</p>
             <div class="space-y-6">
                 @if(isset($settings['business_email']) && $settings['business_email'])
                 <div class="flex items-start gap-4">
@@ -314,7 +314,7 @@
                         <span class="material-symbols-outlined text-primary" data-icon="mail">mail</span>
                     </div>
                     <div>
-                        <h6 class="font-bold">Email us</h6>
+                        <h6 class="font-bold">Email Kami</h6>
                         <p class="text-on-surface-variant">{{ $settings['business_email'] }}</p>
                     </div>
                 </div>
@@ -325,7 +325,7 @@
                         <span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
                     </div>
                     <div>
-                        <h6 class="font-bold">Visit our Flagship</h6>
+                        <h6 class="font-bold">Kunjungi Lokasi Kami</h6>
                         <p class="text-on-surface-variant">{{ $settings['address'] }}</p>
                     </div>
                 </div>
@@ -337,8 +337,8 @@
                 <div class="w-20 h-20 bg-[#25D366]/10 text-[#25D366] rounded-full flex items-center justify-center mx-auto mb-8">
                     <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
                 </div>
-                <h4 class="text-2xl font-bold mb-4 text-on-surface">Need Instant Help?</h4>
-                <p class="text-on-surface-variant mb-10">Chat with our personal tea concierges for real-time brewing advice and order support.</p>
+                <h4 class="text-2xl font-bold mb-4 text-on-surface">Butuh Bantuan Cepat?</h4>
+                <p class="text-on-surface-variant mb-10">Hubungi tim layanan kami via WhatsApp untuk konsultasi dan bantuan pemesanan secara langsung.</p>
                 @php
                     $waNumberRaw = isset($settings['whatsapp_number']) ? preg_replace('/[^0-9]/', '', $settings['whatsapp_number']) : '';
                     if (str_starts_with($waNumberRaw, '0')) {

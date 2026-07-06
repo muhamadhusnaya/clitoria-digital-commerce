@@ -166,16 +166,22 @@
             updateHeight() {
                 setTimeout(() => {
                     let max = 0;
-                    this.$refs.container.querySelectorAll('.t-card').forEach(el => {
+                    const cards = this.$refs.container.querySelectorAll('.t-card');
+                    // Reset to auto to measure natural height
+                    cards.forEach(el => el.style.height = 'auto');
+                    // Find max height
+                    cards.forEach(el => {
                         if (el.offsetHeight > max) max = el.offsetHeight;
                     });
+                    // Apply max height to container and all cards
                     this.$refs.container.style.height = max + 'px';
+                    cards.forEach(el => el.style.height = max + 'px');
                 }, 100);
             }
         }">
             <div class="relative w-full" x-ref="container" style="transition: height 0.3s ease;">
                 @foreach($testimonials as $index => $testimonial)
-                <div class="t-card absolute left-1/2 top-0 w-[95%] sm:w-[90%] md:w-[85%] max-w-3xl bg-white p-8 md:p-12 lg:p-16 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
+                <div class="t-card absolute left-1/2 top-0 w-[95%] sm:w-[90%] md:w-[85%] max-w-3xl flex flex-col justify-between bg-white p-8 md:p-12 lg:p-16 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
                      :class="{
                          'z-20 scale-100 opacity-100 -translate-x-1/2': active === {{ $index }},
                          'z-10 scale-90 opacity-40 -translate-x-[80%] md:-translate-x-[90%]': active === ({{ $index }} + 1) % items,

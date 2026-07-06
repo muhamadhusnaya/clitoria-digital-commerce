@@ -42,24 +42,6 @@
  <p class="text-[24px] font-semibold text-[#151936] tracking-tight">{{ $teams->count() }} Aktif</p>
  </div>
  </div>
- <div class="bg-white p-6 rounded-xl card-shadow flex items-center gap-4 border border-[#c9c4d5]/10">
- <div class="w-14 h-14 rounded-full bg-[#b3f582] flex items-center justify-center">
- <span class="material-symbols-outlined text-[#224c00]" data-icon="eco">eco</span>
- </div>
- <div>
- <p class="text-[#797584] text-[14px] font-medium">Spesialis (Data Simulasi)</p>
- <p class="text-[24px] font-semibold text-[#151936] tracking-tight">8 Anggota</p>
- </div>
- </div>
- <div class="bg-white p-6 rounded-xl card-shadow flex items-center gap-4 border border-[#c9c4d5]/10">
- <div class="w-14 h-14 rounded-full bg-[#e6deff] flex items-center justify-center">
- <span class="material-symbols-outlined text-[#614cba]" data-icon="work">work</span>
- </div>
- <div>
- <p class="text-[#797584] text-[14px] font-medium">Lowongan (Data Simulasi)</p>
- <p class="text-[24px] font-semibold text-[#151936] tracking-tight">3 Terbuka</p>
- </div>
- </div>
  </div>
 
  <!-- Table Container -->

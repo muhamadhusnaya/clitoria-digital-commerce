@@ -26,7 +26,6 @@ class StoreGalleryRequest extends FormRequest
             'image' => ['required', 'image', 'max:10240'],
             'title' => ['required', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
-            'status' => ['required', 'in:active,inactive'],
         ];
     }
 }

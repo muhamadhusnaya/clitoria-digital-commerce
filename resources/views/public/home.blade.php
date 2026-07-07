@@ -183,7 +183,7 @@
         }">
             <div class="relative w-full" x-ref="container" style="transition: height 0.3s ease;">
                 @foreach($testimonials as $index => $testimonial)
-                <div class="t-card absolute left-1/2 top-0 w-[95%] sm:w-[480px] md:w-[560px] max-w-[95vw] flex flex-col justify-center gap-6 bg-white p-6 md:p-10 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
+                <div class="t-card absolute left-1/2 top-0 w-11/12 max-w-xl flex flex-col justify-center gap-6 bg-white p-6 md:p-10 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
                      :class="{
                          'z-20 scale-100 opacity-100 -translate-x-1/2': active === {{ $index }},
                          'z-10 scale-90 opacity-40 -translate-x-[80%] md:-translate-x-[90%]': active === ({{ $index }} + 1) % items,

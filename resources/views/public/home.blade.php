@@ -328,7 +328,21 @@
                     </div>
                     <div>
                         <h6 class="font-bold">Kunjungi Lokasi Kami</h6>
-                        <p class="text-on-surface-variant">{{ $settings['address'] }}</p>
+                        <p class="text-on-surface-variant mb-4">{{ $settings['address'] }}</p>
+                        
+                        @if(isset($settings['google_maps_embed']) && $settings['google_maps_embed'])
+                        <div class="mt-4 rounded-xl overflow-hidden border border-outline-variant soft-shadow w-full h-[250px]">
+                            {!! $settings['google_maps_embed'] !!}
+                        </div>
+                        <style>
+                            /* Force the iframe to fill the container nicely */
+                            .mt-4 iframe {
+                                width: 100% !important;
+                                height: 100% !important;
+                                border: none !important;
+                            }
+                        </style>
+                        @endif
                     </div>
                 </div>
                 @endif

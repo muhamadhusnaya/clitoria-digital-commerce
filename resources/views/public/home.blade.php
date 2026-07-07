@@ -145,17 +145,17 @@
 @endif
 <!-- Testimonials -->
 @if($testimonials->count() > 0)
-<section class="py-24 bg-surface-container-low overflow-hidden" id="testimonials">
+<section class="py-16 bg-surface-container-low overflow-hidden" id="testimonials">
     <div class="max-w-[1280px] mx-auto px-6 lg:px-16">
-        <div class="text-center mb-16 reveal">
-            <h2 class="text-on-surface text-4xl font-bold mb-4">Dicintai Pelanggan Kami</h2>
+        <div class="text-center mb-12 reveal">
+            <h2 class="text-on-surface text-3xl font-bold mb-3">Dicintai Pelanggan Kami</h2>
             <div class="flex justify-center gap-1 text-primary">
                 @for($i=0; $i<5; $i++)
                 <span class="material-symbols-outlined" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
                 @endfor
             </div>
         </div>
-        <div class="relative max-w-4xl mx-auto pb-20" x-data="{ 
+        <div class="relative max-w-3xl mx-auto pb-16" x-data="{ 
             active: 0, 
             items: {{ $testimonials->count() }},
             prev() { this.active = (this.active - 1 + this.items) % this.items },
@@ -183,7 +183,7 @@
         }">
             <div class="relative w-full" x-ref="container" style="transition: height 0.3s ease;">
                 @foreach($testimonials as $index => $testimonial)
-                <div class="t-card absolute left-1/2 top-0 w-full sm:w-[500px] md:w-[600px] lg:w-[700px] max-w-[95vw] flex flex-col justify-between bg-white p-8 md:p-12 lg:p-16 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
+                <div class="t-card absolute left-1/2 top-0 w-[95%] sm:w-[480px] md:w-[560px] max-w-[95vw] flex flex-col justify-center gap-6 bg-white p-6 md:p-10 rounded-xl soft-shadow text-center transition-all duration-500 ease-in-out cursor-pointer"
                      :class="{
                          'z-20 scale-100 opacity-100 -translate-x-1/2': active === {{ $index }},
                          'z-10 scale-90 opacity-40 -translate-x-[80%] md:-translate-x-[90%]': active === ({{ $index }} + 1) % items,
@@ -191,7 +191,7 @@
                          'z-0 scale-75 opacity-0 -translate-x-1/2 pointer-events-none': active !== {{ $index }} && active !== ({{ $index }} + 1) % items && active !== ({{ $index }} - 1 + items) % items
                      }"
                      @click="active = {{ $index }}">
-                    <p class="text-on-surface text-xl md:text-2xl leading-relaxed mb-8 italic relative z-10">
+                    <p class="text-on-surface text-lg md:text-xl leading-relaxed italic relative z-10">
                         "{{ $testimonial->content }}"
                     </p>
                     <div class="flex flex-col items-center relative z-10">
